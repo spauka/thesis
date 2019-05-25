@@ -178,7 +178,7 @@
 				% So we do not read this style twice
 \DeclareOption{singlespace}{		% If he explicitly wants single spacing
     \typeout{Single spaced}
-    \def\mystretch{1}}	
+    \def\mystretch{1.0}}	
 
 %% `vi' and `upcase' document style options.  Krishna Sethuraman (1990)
 \newcount\vithesis
@@ -203,6 +203,11 @@
 % If the user wants single spacing, set baselinestretch=1.
 
 \usepackage{setspace}
+
+% Load author formatting packages
+\usepackage[superscriptaddress]{ltxfront}
+\usepackage{ltxgrid}
+\usepackage[hidelinks]{hyperref}
 
 % Note - doublespace.sty has some float-related troubles in
 % combination with graphics or color, and is not officially compliant
@@ -527,6 +532,6 @@ requirements for the \@degreeword\ of \\
 \def\signature#1#2{\par\noindent#1\dotfill\null\\*
   {\raggedleft #2\par}}
 
-\def\abstract{\subsection*{Abstract}\small\def\baselinestretch{1}\@normalsize}
+\def\abstract{\subsubsection*{}\small\def\baselinestretch{1}\@normalsize}
 \def\endabstract{\par}
 

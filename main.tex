@@ -25,8 +25,38 @@
 %% Page Intentionally Left Blank'', use the ``leftblank'' option, as
 %% above. 
 
-\documentclass[12pt,a4,twoside,vi,singlespace,draft,drafthead]{mitthesis}
+\documentclass[12pt,twoside,vi,singlespace]{mitthesis}
+\usepackage{import}
+\usepackage{graphicx}
+\graphicspath{{Figures/}}
+\usepackage{siunitx}
+\usepackage{fontspec}
+\usepackage{csquotes}
+\setmainfont{Adobe Caslon Pro}[
+    %OpticalSize = 12,
+    Numbers = Lining,
+]
+\setsansfont{Candara}[
+    BoldFont = {HelveticaNeue-Bold},
+    ItalicFont = {HelveticaNeue-Italic},
+    BoldItalicFont = {HelveticaNeue-BoldItalic}
+]
+\RequirePackage[labelfont={bf,footnotesize,sf,singlespacing},
+                textfont={sf,footnotesize,singlespacing},
+                justification={justified,RaggedRight},
+                singlelinecheck=false,
+                margin=0pt,
+                figurewithin=chapter,
+                tablewithin=chapter]{caption}
 \pagestyle{plain}
+
+% Handy Commands
+\newcommand{\den}[1]{\SI{#1}{\per\square\centi\meter}}
+\newcommand{\mob}[1]{\SI[per-mode=symbol]{#1}{\square\centi\meter\per\volt\per\second}}
+\DeclareSIUnit\micron{\micro\metre}
+\DeclareSIUnit\uev{\micro\electronvolt}
+\DeclareSIUnit\mk{\milli\kelvin}
+\DeclareSIUnit\mv{\milli\volt}
 
 %% This bit allows you to either specify only the files which you wish to
 %% process, or `all' to process all files which you \include.
@@ -39,19 +69,60 @@
 
 \begin{document}
 
+\protect\setcounter{tocdepth}{-1}
 \include{cover}
+\protect\setcounter{tocdepth}{2}
 % Some departments (e.g. 5) require an additional signature page.  See
 % signature.tex for more information and uncomment the following line if
 % applicable.
 % \include{signature}
+
+\renewenvironment{abstract}{
+    \begin{center}
+    \begin{minipage}{0.9\textwidth}
+    \rule{\textwidth}{1pt}
+    \begin{center}
+        \textbf{Abstract}
+    \end{center}
+    \small
+    \begin{singlespace}
+}{
+    \par\noindent\rule{\textwidth}{1pt}
+    \end{singlespace}
+    \end{minipage}
+    \end{center}
+    \clearpage
+}
+
+\makeatletter
+\g@addto@macro{\figure}{\centering}%
+\g@addto@macro{\endfigure}{}
+\makeatother
+
+% Use "thesis-style" one-half spacing
+\onehalfspace
+
+\makeatletter
+\def\frontmatter@authorformat{\centering\singlespace\normalsize\advance\baselineskip\p@\parskip11.5\p@\let\thanks\thanks@latex\let\and\and@space}%
+\def\frontmatter@authorbelow{\vskip 1em\relax}%
+\def\frontmatter@above@affiliation@script{\vskip 1em\relax}%
+\def\frontmatter@affiliationfont{\singlespace\preprintsty@sw{}{\small}\it}%
+\def\frontmatter@finalspace{\vskip 1em\relax}
+\let\@makefnmark\frontmatter@makefnmark
+\makeatother
+
 \pagestyle{plain}
 \include{contents}
 \setcounter{chapter}{-1}
-\include{intro}
-\include{chap1}
-% \include{chap2}
+\input{intro}
+\input{chap1}
+\input{chap2}
+\input{chap3}
+\input{chap4}
+\input{chap5}
+\input{chap6}
 \appendix
-\include{appa}
-\include{biblio}
+\input{appa}
+\input{biblio}
 \end{document}
 

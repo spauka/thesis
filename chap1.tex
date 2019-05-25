@@ -1,8 +1,129 @@
-\chapter{Quantum Computing}
+\chapter{The Quest for a Quantum Computer}
+Before delving into the question of how we might build a quantum computer, it is worth taking a step
+back and exploring the question of what brought us as a scientific community to the point where
+it is seen as a priority to build one. The answer to that requires us to delve briefly into
+the world of computational complexity theory, and to examine what it means to solve problems "efficiently".
+Although the genesis of computation can be traced back to pioneering works by people such as Charles Babbage
+and Ada Lovelace in the early 1800's~\cite{Bowden:1953:FTS:1102044}, it was not until the early 1900's that
+machines we might recognize as computers were constructed. Based on delicate vacuum tubes, mechanical relays
+and often taking up full rooms, their inherent fragility and bugginess posed formidable obstacles to scaling. 
+It was not until the mid 1900's that the field really took off with two key discoveries. The first
+was the construction of the first transistor in 1947, credited to Bardeen, Brittain and Schockley and for which
+they were awarded the Nobel prize in 1956~\cite{nobel1956}. This was followed by the creation of integrated circuits by Jack Kilby
+in 1959, for which he was awarded the Nobel prize in the year 2000~\cite{nobel2000}. With these two inventions, a remarkable 
+surge in computational power occured. This surge is embodied in 'Moore's law', which described an annual
+doubling in the number of transistors that it would be possible to fit on a single integrated circuit~\cite{4785860}.
+And with this doubling came an exponential growth in the computation power that we had available to us.
 
-\section{A Quick Introduction}
+Along with this growth came an obvious question. What exactly can these computers do? What sorts of
+problems will we be able to solve with our ever growing bundle of transistors? To do this, we need to
+think about how many steps it takes to run various algorithms. Take for example the question of looking
+for a single item $x_T$, in a list $L = \{x_0, x_1, ..., x_n\}$ with $n$ items in it. Assuming the list
+is in an unknown order, to find the location of the item $x_T$, we need to look at each item in the list
+in turn. If the length of the list were doubled to $2n$ items, it would take twice as many comparisons to
+look through the list. Tripled would be three times. The amount of time it takes to find an item in the
+list is \emph{linear} in the length of the list. We can write this mathematically using big$\mathcal{O}$ 
+notation: searching for an item in a list is $\mathcal{O}(n)$. 
+
+What about a slightly more complicated problem. What if we want to check whether any item $x_i$ appears
+in the list twice? To run this algorithm, we can run the above algorithm for each item in the list, setting the
+target to $x_T = x_0$, then $x_T = x_1$ and so forth, and checking whether we find the item two or more
+times. So for $n$ items in the list, we run through the list $n$ times, so the number of steps to run
+the algorithm scales as $\mathcal{O}(n^2)$. That is, if the length of the list is doubled, it takes
+four times as long, so the scaling is \emph{quadratic}.
+In this way we can classify algorithms into various complexity classes. For example, sorting a list
+of $n$ items is in the best case $\mathcal{O}(n \log(n))$. Solving the travelling salesman problem (TSP) is
+$\mathcal{O}(n^2*2^n)$. More generally, we can group problems into those that have at worst a polynomial
+complexity, i.e. $\mathcal{O}\left(f(n)\right)$ where $f(n)$ is a polynomial. These problems are are
+in the complexity class \textsc{P} (for polynomial), and are said to be \textbf{efficiently} computable.
+Those problems that have a difficulty that grows faster than a polynomial in the size of the problem, 
+for example problems whose complexity grows exponentially, are said to be inefficcient to compute.
+
+Of course, you might say, well what sort of operations do we allow our computers to do in a single step?
+If I say that my computer can solve the TSP in a single step, then the complexity reduces trivially to
+$\mathcal{O}(1)$. The answer is not so trivial --- it is limited by the laws of physics. What sorts
+of computation do they allow? To answer this question, Alan Turing and Alonzo Church came up with the notion of 
+the Turing Machine, a universal model for a computational device, and with it stated the Church-Turing 
+hypothesis:
+
+\begin{displayquote}[\cite{turingthesis}]
+  "a function is effectively calculable if its values can be found by some purely mechanical process". 
+  We may take this literally, understanding that by a purely mechanical process one which could be carried out by a machine.
+\end{displayquote}
+
+To paraphrase, this stated that anything a Turing machine could do, a computer could do too, and anything
+it \textsc{can't} do, no computer can. It wasn't long before this was extended to the strong Church-Turing
+hypothesis, which states \textquote[\cite{kaye2007an}]{A probabilistic Turing machine can efficiently simulate any 
+realistic model of computation}.
+\footnote{In fact, we have to make an addition to the class of algorithms that our Turing machine can run efficiently,
+ due to the discovery of probabilistic algorithms, which can solve some problems with $> 2/3$ chance in
+ poynomial time. Thus the class of efficiently computable functions is defined as \textsc{BPP} - 
+ bounded-error probabilistic polynomial.}
+Note the addition of the \textbf{efficiently}, which means that for any
+operation we could add to any hypothetical computer, we can get at most a polynomial speedup. Since
+a polynomial $P(n)$ divided by another polynomial $Q(n)$ is a polynomial, and anything that grows faster
+than a polynomial $E(n)$ divided by a polynomial $Q(n)$ still grows faster than a polynomial, we have
+have a universal definition for problems that are efficient to solve and those that aren't.
+\footnote{Of course, since we're constantly coming up with better algorithms to solve hard problems,
+the set of problems that are efficient to solve seems to keep growing!}
+
+
+\begin{figure}
+  \includegraphics[width=0.7\linewidth]{MooresLaw}
+  \caption{Graph of the number of transistors per chip, their clock speed, and their
+  thermal design power plotted on a log scale against time. Although the number of transistors per chip
+  continues to grow exponentially, the clock speed and power per chip has plateaued in the early 2000s.
+  Reproduced with permission from~\cite{cross_2016}.}
+  \label{fig:mooreslaw}
+\end{figure}
+
+So we've established what sorts of problems a computer can solve efficiently, and we've also noted the
+expoential growth in the number of transistors on chip. As long as both of these facts remain true, we
+should only have to wait a few years before our computers became twice as powerful and problems that were
+previously intractable fall within our grasp. But of course, any exponential scaling must eventually fail
+and so it was for ICs for two key reasons: power and transistor size. As we made our transistors smaller,
+we stopped seeing a concomitant efficiency increase, and all of a sudden, the power density of our ICs 
+became a limiting factor. In order to halt this increase we had to reduce power dissipation, and the
+only way we saw how was by capping the speed of our computers, which we can see in figure~\ref{fig:mooreslaw}
+has plateaued since the early 2000s. And the smaller our transistors became, the more costly they became 
+to make. Even Moore's law, which has stubbornly held past the expectations of most scientists, must eventually
+end as we bump up against the sizes of atoms. It seems unlikely that there is much room below Samsung's 
+recently announced \SI{3}{\nano\meter} node, so if we want to bring more problems into the fold of the
+possible, it seems like the strong Church-Turing hypothesis must give.
+
+It was in this context that Feynmann gave his seminal address, noting that as far as we can tell, simulating
+quantum systems falls outside of the set of problems that are efficient on classical computers\cite{Feynman1982}. 
+However, as long as we are able to manipulate quantum systems, we should also be able to set up a "quantum
+simulator" to see how a quantum system behaves. If this turned out to be the case, then the strong 
+Church-Turing hypothesis would be violated!\footnote{Despite this violation, as far as we know the original
+Church-Turing hypothesis still holds. No previously uncomputable function became computable with the addition
+of quantum physics.} Here was nature efficiently simulating a system that as far as we know a Turing machine 
+can't. It was David Deutsch who in 1985 formalized the idea of a quantum Turing machine\cite{doi:10.1098/rspa.1985.0070}, 
+and laid out the Deutsch-Church-Turing hypothesis, which as far as we know holds to this day:
+
+\begin{displayquote}
+  A quantum Turing machine can efficiently simulate any realistic model of computation.
+\end{displayquote}
+
+And with that we finally define the class of problems that we might be able to solve efficiently if we 
+can build a quantum computer --- Bounded-Error Quantum Polynomial Time or \textsc{BQP}. As far as we know
+this class includes interesting problems that a classical computer could not efficiently solve. Problems
+such as Shor's algorithm for prime factorization\cite{Shor} or estimating the ground state of molecules with
+the Variational Quantum Eigensolver algorithm\cite{ncomms5213} have no known efficient classical algorithm
+but could profoundly impact society if they are solveable. It is the promise of solutions to these problems
+that drive the search for a quantum computer, however the challenges of realizing one remain formidable. 
+
+The remainder of this chapter aims to lay out the fundamentals of quantum computing, and how we might realize
+them in a semiconductor system. In \textbf{section~\ref{sec:qc}} I go through a quick introduction to the concepts
+underlying quantum computation. In \textbf{section~\ref{sec:qcinsm}} I will detail several metods by which we might
+realize a qubit in a semiconductor. Finally in \textbf{section~\ref{sec:arch}} I will examine the architectural
+challenges of realizing a useful, scaleable quantum computer.
+
+\section{A Quick Introduction to Quantum Computing}
+\label{sec:qc}
 
 \section{Making Qubits in Semiconductors}
+\label{sec:qcinsm}
   \subsection{The 2 Dimensional Electron Gas}
   \subsubsection{The Quantum Hall Effect}
   \subsubsection{Spin Orbit Interaction}
@@ -10,5 +131,6 @@
   \subsection{Majorana Zero Modes}
 
 \section{Architecture of a Quantum Computer}
+\label{sec:arch}
   \subsection{Control Plane}
   \subsection{Readout}

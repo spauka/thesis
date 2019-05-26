@@ -70,7 +70,8 @@ the set of problems that are efficient to solve seems to keep growing!}
 
 \begin{figure}
   \includegraphics[width=0.7\linewidth]{MooresLaw}
-  \caption{Graph of the number of transistors per chip, their clock speed, and their
+  \caption[Moore's Law and the end of exponential scaling]
+  {Graph of the number of transistors per chip, their clock speed, and their
   thermal design power plotted on a log scale against time. Although the number of transistors per chip
   continues to grow exponentially, the clock speed and power per chip has plateaued in the early 2000s.
   Reproduced with permission from~\cite{cross_2016}.}
@@ -105,13 +106,32 @@ and laid out the Deutsch-Church-Turing hypothesis, which as far as we know holds
   A quantum Turing machine can efficiently simulate any realistic model of computation.
 \end{displayquote}
 
+\begin{figure}
+  \includegraphics[width=0.85\linewidth]{ComplexityClasses}
+  \caption[Relationship between various complexity classes]
+  {Relationship between the various complexity classes that we've discussed. The class
+  \textsc{BPP} includes all problems that a classical computer can solve efficiently (including
+  everything that can be calculated in polynomial time), \textsc{BQP} is all problems a quantum computer can solve
+  efficiently (which includes everything a classical computer can do). Finally, problems that scale exponentially
+  with input size, labelled \textsc{EXP}, is (almost) all other problems that are computable. The class
+  \textsc{NP} is also included on this figure as it is one that often comes up in the context of complexity,
+  if for no other reason than to emphasize that a quantum computer \emph{cannot} solve all problems in
+  this class.}
+  \label{fig:complexity}
+\end{figure}
+
 And with that we finally define the class of problems that we might be able to solve efficiently if we 
 can build a quantum computer --- Bounded-Error Quantum Polynomial Time or \textsc{BQP}. As far as we know
 this class includes interesting problems that a classical computer could not efficiently solve. Problems
 such as Shor's algorithm for prime factorization\cite{Shor} or estimating the ground state of molecules with
 the Variational Quantum Eigensolver algorithm\cite{ncomms5213} have no known efficient classical algorithm
 but could profoundly impact society if they are solveable. It is the promise of solutions to these problems
-that drive the search for a quantum computer, however the challenges of realizing one remain formidable. 
+that drive the search for a quantum computer, however the challenges of realizing one remain formidable. To close
+out our discussion of complexity classes, I've summarized the relationship between complexity classes in 
+figure~\ref{fig:complexity}. To emphasize this point, note that although \textsc{BQP} is larger than \textsc{P}
+or \textsc{BPP}, it certainly does not inclose all problems, especially those in \textsc{EXP}. Although a
+quantum computer may offer an exponential speedup on a subset of algorithms, it will not give us an exponential
+speedup in the general case.
 
 The remainder of this chapter aims to lay out the fundamentals of quantum computing, and how we might realize
 them in a semiconductor system. In \textbf{section~\ref{sec:qc}} I go through a quick introduction to the concepts

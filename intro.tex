@@ -2,39 +2,39 @@
 
 The invention of quantum mechanics early in the twentieth century created the most complete and accurate
 theory of reality that has been discovered so far. It was Richard Feynmann who theorized in his 
-seminal 1981 keynote\cite{Feynman1982} that with quantum physics we could build a quantum simulator --- 
+seminal 1981 keynote \cite{Feynman1982} that with quantum physics we could build a quantum simulator --- 
 a machine that would be able to solve a class of problem that we simply couldn't solve with a
-classical computer (an idea we will expand on in~\ref{sec:qc}). Since he delivered this keynote, the
+classical computer (an idea we will expand on in section~\ref{sec:qc}). Since he delivered this keynote, the
 field of quantum computing has exploded. First came theoretical demonstrations of algorithms
-with a quantum speedup; Deutsch's Algorithm in 1992~\cite{Deutsch} and Shor's Algorithm in 1994. 
+with a quantum speedup; Deutsch's Algorithm in 1992 \cite{Deutsch} and Shor's Algorithm in 1994 \cite{Shor}. 
 Despite these advances, many suspected that it was only a matter of time before a "no-go" result would
 be found; a result that would say that quantum computers simply could not scale, or that errors in a 
 quantum system would be uncorrectable.
-However, with the formulation of the quantum fault-tolerance theorem~\cite{1996quant.ph.11025A}, which
+However, with the formulation of the quantum fault-tolerance theorem \cite{1996quant.ph.11025A}, which
 showed that for a small error rate it is possible to correct errors faster than they occur, the last
 reasonable objection to quantum computing was overcome (my favourite reference as to why this seems true
-is in chapter 14 of Scott Aaronson's book~\cite{Aaronson:skepticism}). Since then, a plethora of physical
+is in chapter 14 of Scott Aaronson's book \cite{Aaronson:skepticism}). Since then, a plethora of physical
 % TODO: add references to implementations here
 systems have emerged that seem like contenders for building a quantum computer, such as trapped 
 ions, nuclear spins, electron spins in semiconductors, excitations in superconductors, single photons
 or a large number of other systems that are too numerous to list here. Each of them aims to realize a qubit,
 the quantum equivalent of a bit, which rather than being described as a single number taking the value of
 0 or 1, is described by a two-dimensional vector that evolves under the rules of quantum physics. Today,
-many of these systems are realizing larger and larger systems and are butting up against the fault tolerance 
-threshold, raising the specter of large quantum computers in the near future. 
+many of these qubits are being realized in larger and larger numbers with error rates that are butting up 
+against the fault tolerance threshold, raising the specter of large quantum computers in the near future. 
 
 The rapid progress made in the field, while no doubt exciting, also highlights a difficulty I have in
 preparing this thesis. Between when I started my PhD in 2014 and now, the community underwent a seismic
-shift in ambition, moving from trying to work on one or few qubit systems~\cite{iarpa_mqco} to trying 
-to implement useful machines with hundreds of qubits~\cite{Monroe440}, with a concomitant increase in
+shift in ambition, moving from trying to work on one or few qubit systems \cite{iarpa_mqco} to trying 
+to implement useful machines with hundreds of qubits \cite{Monroe440}, with a concomitant increase in
 funding. Industrial players have also
 entered the ring trying to build viable commercial quantum machines, including IBM, Intel, Google, Rigetti, 
 DWave and Microsoft. Over the same period, our lab grew from one with a single dilution refridgerator (DR) 
 and four other PhD students, to one with 7 DRs, 2 cryostats, close to 50 people and substantial backing
 from industry (Microsoft). It is in that context that this thesis is written. All the topics presented have the
-same aim: to build a useful quantum computer, but experiments span from low level materials challenges
-for building qubits, to designing individual qubits, to scalable instrumentation design, and finally architecture
-design for building large scale quantum machines. 
+same aim: to build a useful quantum computer, but experiments span from exploring low level materials challenges,
+to designing individual qubits, to scalable instrumentation design, and finally to architecture
+designs for building large scale quantum machines. 
 
 I've grouped results into these four broad sections, each of which present a number of papers dealing 
 with these results, with the aim of creating a coherent storyline around my work, starting from the top
@@ -42,7 +42,12 @@ level architecture and working my way down to materials science. The structure o
 thesis then is as follows:
 
 \subsubsection{Chapter 1}
-General Outline
+Chapter 1 provides a brief introduction to the key concepts and background that is required to understand
+the experiments that are presented in this thesis. We will start off by motivating the quest to build a quantum
+computer and explore the theory that underlies the experiments. We will then look at building qubits,
+the fundamental building block of a quantum computer, in various semiconductor systems, as well as exploring
+the challenges of controlling them and reading them out. Finally we'll take a look at how we might put
+together these fundamental building blocks in order to build a scaleable quantum computer.
 
 \subsubsection{Chapter 2}
 Architecture

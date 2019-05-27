@@ -32,6 +32,8 @@
 \usepackage{siunitx}
 \usepackage{fontspec}
 \usepackage{csquotes}
+\usepackage{braket}
+\usepackage{amsmath}
 \setmainfont{Adobe Caslon Pro}[
     %OpticalSize = 12,
     Numbers = Lining,
@@ -53,6 +55,8 @@
 % Handy Commands
 \newcommand{\den}[1]{\SI{#1}{\per\square\centi\meter}}
 \newcommand{\mob}[1]{\SI[per-mode=symbol]{#1}{\square\centi\meter\per\volt\per\second}}
+\newcommand{\svec}[1]{\ensuremath{\begin{bmatrix}#1\end{bmatrix}}}
+\newcommand{\cc}[1]{\textsc{\MakeLowercase{#1}}}
 \DeclareSIUnit\micron{\micro\metre}
 \DeclareSIUnit\uev{\micro\electronvolt}
 \DeclareSIUnit\mk{\milli\kelvin}

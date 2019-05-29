@@ -161,6 +161,7 @@ decimal points (such as IEEE floating point), complex numbers and so on.
   \label{fig:binary}
 \end{figure}
 
+\subsubsection{The Qubit}
 A \textbf{qubit} is similar to a bit in that it has two states, $\ket{0}$ and $\ket{1}$, except unlike a bit, it is specified
 by a 2-dimensional vector, and evolves according to the rules of quantum mechanics. Due to the uniquely quantum
 mechanical property of \emph{superposition}, we can no longer write the state of a single qubit (which we will
@@ -171,7 +172,7 @@ which we define as follows:
   \ket{0} = \svec{1\\0} && \ket{1} = \svec{0\\1}
 \end{align}
 \begin{equation}
-  \ket{\psi} = \alpha \ket{0} + \beta \ket{1}
+  \ket{\psi} = \alpha \ket{0} + \beta \ket{1} = \svec{\alpha\\\beta}
 \end{equation}
 where $\alpha$ and $\beta$ are complex numbers. If we were to take a measurement of this quantum state,
 rather than getting back the value of this vector sum, we would measure the $\ket{0}$ state with probability
@@ -236,18 +237,117 @@ They have the values:
 \end{align}
 
 We can build up arbitrary rotations from these unit vectors by taking various powers of these vectors
-and multiplying them together. For example to apply a $\pi/2$ rotation around the y-axis to state $\ket{\psi}$
-we would perform $\sqrt{\sigma_Y}\ket{\psi}$. A $2\pi$ rotation around the x-axis would be $\sigma_X\sigma_X\ket{\psi}$.
+and multiplying them together. For example to apply a $\pi/2$ rotation around the y-axis applied to the state $\ket{\psi}$
+we would perform $\sqrt{\sigma_Y}\ket{\psi}$. \footnote{For those familiar with the rotation operators,
+this is more commonly written with a phase factor to make the solution purely real: $R_Y(\tfrac{\theta}{2})
+= \exp(-i\pi/4)\sqrt{\sigma_Y}$}
+A $2\pi$ rotation around the x-axis would be $\sigma_X\sigma_X\ket{\psi}$. It is possible to generalize this 
+to arbitrary rotations, giving us the rotation operators\cite{Nielsen:rot}:
+\begin{align}
+  R_X(\theta) = e^{-i \theta X/2} = \cos\left(\frac{\theta}{2}\right)\boldsymbol{I} - i \sin\left(\frac{\theta}{2}\right)\boldsymbol{X} \\
+  R_Y(\theta) = e^{-i \theta Y/2} = \cos\left(\frac{\theta}{2}\right)\boldsymbol{I} - i \sin\left(\frac{\theta}{2}\right)\boldsymbol{Y} \\
+  R_Z(\theta) = e^{-i \theta Z/2} = \cos\left(\frac{\theta}{2}\right)\boldsymbol{I} - i \sin\left(\frac{\theta}{2}\right)\boldsymbol{Z}
+\end{align}
+These three rotations (and often a global phase factor to simplify our result) are sufficient to express
+any single qubit operation. For completeness, we can also define some other gates that often come up in
+the context of quantum computation:
+\begin{alignat}{4}
+    H &=& \frac{1}{\sqrt{2}}\svec{1&1\\1&-1} &=& e^{\tfrac{i\pi}{2}} R_Y\left(\frac{\pi}{2}\right) R_Z(\pi)            &=& \frac{\sigma_X+\sigma_Z}{\sqrt{2}} \\
+    T &=& \svec{1&0\\0&e^{\tfrac{i\pi}{4}}}  &=& e^{\tfrac{i\pi}{8}} R_Z\left(\frac{\pi}{4}\right) &=& \sqrt[4]{\sigma_Z} \\
+    S &=& \svec{1&0\\0&i}                    &=& e^{\frac{i \pi}{4}} R_Z\left(\frac{\pi}{2}\right) &=& \sqrt{\sigma_Z}
+\end{alignat}
+These are the Hadamard gate, the T gate (or $pi/8$ gate)\footnote{The $T$-gate is often 
+referred to as the $\pi/8$ gate, even though it represents a $\pi/4$ rotation, a name that is derived from
+the phase factor for historical reasons.} and the phase gate respectively.
+As is common, phase factors are usually dropped (something I did not do in the above), hence it is
+common to see variations of these equations in the literature. 
 
-For example, starting from the $\ket{0}$ state, we might
-perform a $\pi/2$ rotation around the y-axis, which, looking at the bloch sphere representation, ends up 
-bringing the qubit down to the following state, which we will call $\ket{+}$:
+As a final example, let's take a concrete look at where interfering probabilities leads to a thoroughly
+non-classical result. To start off with, let's define two additional states:
+\begin{align}
+  \ket{+} = \frac{\ket{0} + \ket{1}}{\sqrt{2}} && \ket{-} = \frac{\ket{0} - \ket{1}}{\sqrt{2}}
+\end{align}
+We can get these states by starting from $\ket{0}$ and rotating $\pi/2$ or $-\pi/2$ around the Y-axis. You can
+reasonably easily confirm that they are properly normalized, and that if we were to measure each state, the
+probability of measuring a $\ket{0}$ or a $\ket{1}$ are equal for both states: $\mathrm{P}\left(\ket{0}\right) = 
+\mathrm{P}\left(\ket{1}\right) = 0.5$. So a direct measurement would be unable to distinguish these two states.
+However, if we were to apply the Hadamard gate to each of those two states, we surprisingly end up with two
+different output:
+\begin{align}
+  H\ket{+} = \ket{0} && H\ket{-} = \ket{1}
+\end{align}
+In this case, the complex probability amplitudes can interfere with each other causing the two states to
+become distinguishable, something that a classical bit could not replicate. What you see is what you get.
+
+\subsubsection{Multi-Qubit States (Qubit Registers)}
+The next additional computational resource that quantum physics gives us is \emph{entanglement}. This 
+resource rears it's head when we try to combine multiple qubits together into a register. Formally,
+we can define entanglement as a correlation between the states of qubits after they have interacted
+with each other. Due to this correlation, the state of a qubit that has been entangled with it's partner
+can no longer be described independantly, the states of the two qubits become linked. Perhaps the easiest
+way to grok the consequences of this is to give an example of how this correlation might play out.
+
+Let's start off with two qubits, one of which starts in the $\ket{+}$ state, the other which starts in
+the $\ket{0}$ state. If we were to apply a gate that flips the state of the second qubit if the state of
+the first qubit is $\ket{1}$ then we might expect to end up with something like $\ket{+}$ in the second
+qubit. If we measure the first qubit and get the result $\ket{0}$, the state of the second qubit must also
+be zero, so the state of the second qubit can't have just been described by $\ket{+}$. The state of the two
+qubits are correlated and depend on each other. In fact, the operation we described above is called the 
+controlled-NOT ($CNOT$) gate, and creates a state that looks like:
 \begin{equation}
-  \ket{\psi} = \cos\left(\frac{\pi}{4}\right)\ket{0} + e^{0 i}\sin\left(\frac{\pi}{4}\right)\ket{1}
-             = \frac{\ket{0} + \ket{1}}{\sqrt{2}} = \ket{+}
+  \ket{\psi} = \frac{\ket{00} + \ket{11}}{\sqrt{2}}
+\end{equation}
+To describe a generalized two-qubit state, we must give coefficients to each possible state the qubits
+can take:
+\begin{equation}
+  \ket{\psi} = \alpha\ket{00} + \beta\ket{01} + \gamma\ket{10} + \delta\ket{11} = 
+    \svec{\alpha\\\beta\\\gamma\\\delta}
+\end{equation}
+So to combine two qubits together, we cannot just list the states of the two qubits one after another,
+they are described by the tensor product of the two individual states: $\ket{\psi} = \ket{\psi_1}\otimes\ket{\psi_2}$.
+For a three qubit register, the total number of states we must give coefficients to is 8. For a $N$ qubit
+register, the total number of coefficients is $2^N$. Note the distinction between a classical register
+and a quantum register, to describe a classical register, we can just list the states of the individual
+bits one after another, whereas the quantum register requires $2^N$ complex numbers to fully describe.
+
+Much like a single qubit we require new matrices that are able to operate on quantum regsisters. As one 
+might expect, the size of these matrices is exponential in the number of qubits that we must operate on.
+For example, on a two-qubit register, we require a $4 \times 4$ matrix to describe operations. The $CNOT$
+gate that we used above for example is defined as:
+\begin{equation}
+  CNOT = \svec{1&0&0&0\\0&1&0&0\\0&0&0&1\\0&0&1&0}
+\end{equation}
+Unfortunately the potential presence of entanglement means applying single or two qubit gates to a subset
+of qubits in the register is no longer a matter of applying a $2 \times 2$ or $4 \times 4$ matrix, we must
+construct a $2^N \times 2^N$ matrix and apply that to the full quantum register. This construction is achieved
+by taking the Kronecker product of identity matrices and the matrix we want to apply. For example, to apply
+an $\sigma_X$ gate to the 2nd qubit in a 3 qubit register, we construct the operator as follows:
+\begin{equation}
+  \sigma_{X,2} = I \otimes \sigma_X \otimes I
 \end{equation}
 
-We can also perform a rot
+The consequences of the twin effects of superposition and entanglement lead to the extra computational
+power of a quantum computer, while also hinting at the difficulty of writing quantum algorithms. As we
+are able to prepare arbitrary superposition states, we can encode an exponentially large
+state into a quantum register, for example representing every number between 0 and $2^N-1$ in a $N$ qubit
+register, and operate on all of these states in parallel. However, once we measure the register, we end up 
+with only one of the possible states in the register (i.e. the state collapses), and the quantum information
+that was prepared in the state is lost. Quantum algorithms must therefore have three properties to be useful:
+\begin{enumerate}
+  \item An efficient way of preparing a state. If we have want to perform computations on a quantum register storing
+        $2^N$ values, we lose any exponential speedup if we need to load each of these values one-by-one. For example, Shor's 
+        algorithm relies on being able to prepare an equal superposition of all states in the register with $N$
+        single qubit gates\cite{PhysRevA.54.1034}.
+  \item Creation of a large entangled state. Without entanglement, a quantum algorithm can be efficiently simulated
+        on a classical computer. The exact role that entanglement plays in computation is not yet known, however without 
+        using it, we know that quantum computation lose their advantage\cite{doi:10.1098/rspa.2002.1097}.
+  \item A way of whittling down the quantum state to make the "answer" the likely outcome of any readout. Since
+        coefficients in a quantum register represent probability amplitudes that a measurement will yield a given
+        outcome, we can get at most $N$ bits of data per measurement\cite{651037}, as our register immediately collapses
+        into one state upon measurement. To get another value out of the register, we must repeat the whole computation
+        including loading the state.
+\end{enumerate}
+
 
 
 \section{Making Qubits in Semiconductors}

@@ -7,16 +7,16 @@ Although the genesis of computation can be traced back to pioneering works by pe
 and Ada Lovelace in the early 1800's~\cite{Bowden:1953:FTS:1102044}, it was not until the early 1900's that
 machines we might recognize as computers were constructed. Based on delicate vacuum tubes, mechanical relays
 and often taking up full rooms, their inherent fragility and bugginess posed formidable obstacles to scaling. 
-It was not until the mid 1900's that the field really took off with two key discoveries. The first
+It was not until the mid-1900's that the field took off with two pivotal discoveries. The first
 was the construction of the first transistor in 1947, credited to Bardeen, Brittain and Schockley and for which
 they were awarded the Nobel prize in 1956~\cite{nobel1956}. This was followed by the creation of integrated circuits by Jack Kilby
 in 1959, for which he was awarded the Nobel prize in the year 2000~\cite{nobel2000}. With these two inventions, a remarkable 
-surge in computational power occured. This surge is embodied in 'Moore's law', which described an annual
+surge in computational power occurred. This surge is embodied in 'Moore's law', which described an annual
 doubling in the number of transistors that it would be possible to fit on a single integrated circuit~\cite{4785860}.
 And with this doubling came an exponential growth in the computation power that we had available to us.
 
 Along with this growth came an obvious question. What exactly can these computers do? What sorts of
-problems will we be able to solve with our ever growing bundle of transistors? To do this, we need to
+problems will we be able to solve with our ever-growing bundle of transistors? To do this, we need to
 think about how many steps it takes to run various algorithms. Take for example the question of looking
 for a single item $x_T$, in a list $L = \{x_0, x_1, ..., x_n\}$ with $n$ items in it. Assuming the list
 is in an unknown order, to find the location of the item $x_T$, we need to look at each item in the list
@@ -31,13 +31,13 @@ target to $x_T = x_0$, then $x_T = x_1$ and so forth, and checking whether we fi
 times. So for $n$ items in the list, we run through the list $n$ times, so the number of steps to run
 the algorithm scales as $\mathcal{O}(n^2)$. That is, if the length of the list is doubled, it takes
 four times as long, so the scaling is \emph{quadratic}.
-In this way we can classify algorithms into various complexity classes. For example, sorting a list
+In this way, we can classify algorithms into various complexity classes. For example, sorting a list
 of $n$ items is in the best case $\mathcal{O}(n \log(n))$. Solving the travelling salesman problem (TSP) is
 $\mathcal{O}(n^2*2^n)$. More generally, we can group problems into those that have at worst a polynomial
-complexity, i.e. $\mathcal{O}\left(f(n)\right)$ where $f(n)$ is a polynomial. These problems are are
+complexity, i.e. $\mathcal{O}\left(f(n)\right)$ where $f(n)$ is a polynomial. These problems are 
 in the complexity class \cc{P} (for polynomial), and are said to be \textbf{efficiently} computable.
 Those problems that have a difficulty that grows faster than a polynomial in the size of the problem, 
-for example problems whose complexity grows exponentially, are said to be inefficcient to compute.
+for example, problems whose complexity grows exponentially, are said to be inefficient to compute.
 
 Of course, you might say, well what sort of operations do we allow our computers to do in a single step?
 If I say that my computer can solve the TSP in a single step, then the complexity reduces trivially to
@@ -55,17 +55,17 @@ To paraphrase, this stated that anything a Turing machine could do, a computer c
 it \emph{can't} do, no computer can. It wasn't long before this was extended to the strong Church-Turing
 hypothesis, which states \textquote[\cite{kaye2007an}]{A probabilistic Turing machine can efficiently simulate any 
 realistic model of computation}.
-\footnote{In fact, we have to make an addition to the class of algorithms that our Turing machine can run efficiently,
+\footnote{In fact, we have to make an addition to the class of algorithms that a Turing machine can run efficiently
  due to the discovery of probabilistic algorithms, which can solve some problems with $> 2/3$ chance in
- poynomial time. By running these algorithms repeatedly we can solve problems to within an arbitrarily small 
+ polynomial time. By running these algorithms repeatedly, we can solve problems to within an arbitrarily small 
  error $\epsilon$. This class of efficiently computable functions is called bounded-error probabilistic polynomial (\cc{BPP}).}
-Note the addition of the \textbf{efficiently}, which means that for any
+Note the addition of the term \textbf{efficiently}. This implies that for any
 operation we could add to any hypothetical computer, we can get at most a polynomial speedup. Since
-a polynomial $P(n)$ divided by another polynomial $Q(n)$ is a polynomial, and anything that grows faster
+a polynomial $P(n)$ divided by another polynomial $Q(n)$ is still a polynomial, and anything that grows faster
 than a polynomial $E(n)$ divided by a polynomial $Q(n)$ still grows faster than a polynomial, we have
-have a universal definition for problems that are efficient to solve and those that aren't.
-\footnote{Of course, since we're constantly coming up with better algorithms to solve hard problems,
-the set of problems that are efficient to solve seems to keep growing!}
+a universal definition for problems that are efficient to solve and those that aren't.
+\footnote{Of course, since we're continually coming up with better algorithms to solve hard problems,
+the set of algorithms that are efficient to solve seems to keep growing!}
 
 
 \begin{figure}
@@ -73,20 +73,19 @@ the set of problems that are efficient to solve seems to keep growing!}
   \caption[Moore's Law and the end of exponential scaling]
   {Graph of the number of transistors per chip, their clock speed, and their
   thermal design power plotted on a log scale against time. Although the number of transistors per chip
-  continues to grow exponentially, the clock speed and power per chip has plateaued in the early 2000s.
+  continues to grow exponentially, the clock speed and power per chip have plateaued in the early 2000s.
   Reproduced with permission from~\cite{cross_2016}.}
   \label{fig:mooreslaw}
 \end{figure}
 
 So we've established what sorts of problems a computer can solve efficiently, and we've also noted the
-expoential growth in the number of transistors on chip. As long as both of these facts remain true, we
-should only have to wait a few years before our computers became twice as powerful and problems that were
-previously intractable fall within our grasp. But of course, any exponential scaling must eventually fail
+exponential growth in the number of transistors on a chip. As long as both of these facts remain true, we
+should only have to wait a few years before our computers become twice as powerful and problems that were
+previously intractable fall within our grasp. Unfortunately, any exponential scaling must eventually fail,
 and so it was for ICs for two key reasons: power and transistor size. As we made our transistors smaller,
 we stopped seeing a concomitant efficiency increase, and all of a sudden, the power density of our ICs 
-became a limiting factor. In order to halt this increase we had to reduce power dissipation, and the
-only way we saw how was by capping the speed of our computers, which we can see in figure~\ref{fig:mooreslaw}
-has plateaued since the early 2000s. And the smaller our transistors became, the more costly they became 
+became a limiting factor. To halt this increase, we had to reduce power dissipation, and the
+only way we saw how was by capping the speed of our computers, which we can see in figure~\ref{fig:mooreslaw} has plateaued since the early 2000s. Moreover, the smaller our transistors became, the more costly they became 
 to make. Even Moore's law, which has stubbornly held past the expectations of most scientists, must eventually
 end as we bump up against the sizes of atoms. It seems unlikely that there is much room below Samsung's 
 recently announced \SI{3}{\nano\meter} node, so if we want to bring more problems into the fold of the
@@ -94,11 +93,11 @@ possible, it seems like the strong Church-Turing hypothesis must give.
 
 It was in this context that Feynmann gave his seminal address, noting that as far as we can tell, simulating
 quantum systems falls outside of the set of problems that are efficient on classical computers\cite{Feynman1982}. 
-However, as long as we are able to manipulate quantum systems, we should also be able to set up a "quantum
+However, as long as we can manipulate quantum systems, we should also be able to set up a "quantum
 simulator" to see how a quantum system behaves. If this turned out to be the case, then the strong 
 Church-Turing hypothesis would be violated!\footnote{Despite this violation, as far as we know the original
 Church-Turing hypothesis still holds. No previously uncomputable function became computable with the addition
-of quantum physics.} Here was nature efficiently simulating a system that as far as we know a Turing machine 
+of quantum physics.} Here was nature efficiently simulating a system that as far as we know, a Turing machine 
 can't. It was David Deutsch who in 1985 formalized the idea of a quantum Turing machine\cite{doi:10.1098/rspa.1985.0070}, 
 and laid out the Deutsch-Church-Turing hypothesis, which as far as we know holds to this day:
 
@@ -111,47 +110,46 @@ and laid out the Deutsch-Church-Turing hypothesis, which as far as we know holds
   \caption[Relationship between various complexity classes]
   {Relationship between the various complexity classes that we've discussed. The class
   \cc{BPP} includes all problems that a classical computer can solve efficiently (including
-  everything that can be calculated in polynomial time), \cc{BQP} is all problems a quantum computer can solve
-  efficiently (which includes everything a classical computer can do). Finally, problems that scale exponentially
-  with input size, labelled \cc{EXP}, is (almost) all other problems that are computable. The class
+  everything that can be calculated in polynomial time). \cc{BQP} are all problems a quantum computer can solve efficiently (which includes everything a classical computer can do). Finally, problems that scale exponentially
+  with input size, labelled \cc{EXP}, are (almost) all other problems that are computable. The class
   \cc{NP} is also included on this figure as it is one that often comes up in the context of complexity,
   if for no other reason than to emphasize that a quantum computer \emph{cannot} solve all problems in
   this class.}
   \label{fig:complexity}
 \end{figure}
 
-And with that we finally define the class of problems that we might be able to solve efficiently if we 
-can build a quantum computer --- Bounded-Error Quantum Polynomial Time or \cc{BQP}. As far as we know
+With that, we finally define the class of problems that we might be able to solve efficiently if we 
+can build a quantum computer --- Bounded-Error Quantum Polynomial-Time or \cc{BQP}. As far as we know,
 this class includes interesting problems that a classical computer could not efficiently solve. Problems
 such as Shor's algorithm for prime factorization\cite{Shor} or estimating the ground state of molecules with
 the Variational Quantum Eigensolver algorithm\cite{ncomms5213} have no known efficient classical algorithm
-but could profoundly impact society if they are solveable. It is the promise of solutions to these problems
-that drive the search for a quantum computer, however the challenges of realizing one remain formidable. To close
+but could profoundly impact society if they are solvable. It is the promise of solutions to these problems
+that drive the search for a quantum computer; however, the challenges of realizing one remain formidable. To close
 out our discussion of complexity classes, I've summarized the relationship between complexity classes in 
 figure~\ref{fig:complexity}. To emphasize this point, note that although \cc{BQP} is larger than \cc{P}
-or \cc{BPP}, it certainly does not inclose all problems, especially those in \cc{EXP}. Although a
+or \cc{BPP}, it certainly does not enclose all problems, especially those in \cc{EXP}. Although a
 quantum computer may offer an exponential speedup on a subset of algorithms, it will not give us an exponential
 speedup in the general case.
 
-The remainder of this chapter aims to lay out the fundamentals of quantum computing, and how we might realize
+The remainder of this chapter aims to lay out the fundamentals of quantum computing and how we might realize
 them in a semiconductor system. In \textbf{section~\ref{sec:qc}} I go through a quick introduction to the concepts
-underlying quantum computation. In \textbf{section~\ref{sec:qcinsm}} I will detail several metods by which we might
-realize a qubit in a semiconductor. Finally in \textbf{section~\ref{sec:arch}} I will examine the architectural
-challenges of realizing a useful, scaleable quantum computer.
+underlying quantum computation. In \textbf{section~\ref{sec:qcinsm}} I will detail several methods by which we might
+realize a qubit in a semiconductor. Finally, in \textbf{section~\ref{sec:arch}} I will examine the architectural
+challenges of realizing a useful, scalable quantum computer.
 
 \section{A Quick Introduction to Quantum Computing}
 \label{sec:qc}
-In order to build a quantum computer, we start off by defining the notion of a quantum bit (qubit), which
+To build a quantum computer, we start by defining the notion of a quantum bit (qubit), which
 serves as the quantum analog to the classical bit. To review, a classical \textbf{bit} is a "piece" of information
 that can take either the value 0 or 1. It represents the fundamental unit of computation in digital computers.
-We can take individual bits, and combine them together to form a \textbf{register}, whose state is defined as 
+We can take individual bits, and combine them to form a \textbf{register}, whose state is defined as 
 the state of each bit in the register. For example, two bits can take up to 4 different
 values: 00, 01, 10, 11. Three bits can take up to 9 values, and $N$ bits can take up to $2^N$ values. 
 By choosing various encodings of values, we can map numbers, letters, and other symbols onto these registers
 and perform computations on them. For example, we can map positive integers onto registers using a base-2 number 
-system, as in figure~\ref{fig:binary}, or letters using a mapping such as ASCII, which maps letters to 8-bit registers.
+system, as in figure~\ref{fig:binary}, or letters using a mapping such as ASCII, which assigns letters to 8-bit registers.
 Other mappings exist for negative numbers (such as a mapping called two's complement), numbers with
-decimal points (such as IEEE floating point), complex numbers and so on. 
+decimal points (such as IEEE floating point), complex numbers and so forth. 
 
 \begin{figure}
   \includegraphics[width=0.75\linewidth]{Binary}
@@ -165,7 +163,7 @@ decimal points (such as IEEE floating point), complex numbers and so on.
 A \textbf{qubit} is similar to a bit in that it has two states, $\ket{0}$ and $\ket{1}$, except unlike a bit, it is specified
 by a 2-dimensional vector, and evolves according to the rules of quantum mechanics. Due to the uniquely quantum
 mechanical property of \emph{superposition}, we can no longer write the state of a single qubit (which we will
-denote $\psi$) as either $\ket{0}$ or $\ket{1}$. Instead, we must write a down the vector sum of the two states,
+denote $\psi$) as either $\ket{0}$ or $\ket{1}$. Instead, we must write down the vector sum of the two states,
 which we define as follows:
 \begin{align}
   \label{eqn:basisstates}
@@ -180,10 +178,10 @@ $|\alpha|^2$ and the $\ket{1}$ state with probability $|\beta|^2$. Since probabi
 get a normalization condition: $|\alpha|^2 + |\beta|^2 = 1$. The quantities $\alpha$ and $\beta$ are called
 probability amplitudes, and they can take both positive and negative complex values
 \footnote{Interestingly, the "complex" part of that state is unnessecary to get the extra computing power
-  of a quantum computer\cite{doi:10.1142/S0219749913500019}. There's good reason that quantum mechanics 
+  of a quantum computer\cite{doi:10.1142/S0219749913500019}. There's a good reason that quantum mechanics 
   uses complex probability amplitudes\cite{2004quant.ph..1062A}, but if they were real, it turns out
   we can still do computations in \textsc{BQP} efficiently.} 
-as long as their squared magnitudes sum to one. This gives us the first hint as to why quantum computing
+as long as the sum of their squared magnitudes to one. This gives us the first hint as to why quantum computing
 might give us more power than a classical computer: their states can interact in a manner which mirrors
 interference!
 
@@ -217,15 +215,15 @@ of a qubit.
 
 Given this description, we can now start to think about what operations on a single qubit might look like.
 While on a single bit, the only non-trivial operation we can perform is a flip ($0 \leftarrow 1$ and $1 \leftarrow 0$),
-on a qubit we have whole host of operations that we can perform. The only limits we put on ourselves is that these operations
-must leave us on the surface of the bloch sphere. In other words, after applying an operation, we must still
+on a qubit we have a whole host of operations that we can perform. The only limits we put on ourselves is that these operations
+must leave us on the surface of the Bloch sphere. In other words, after applying an operation, we must still
 have a normalized state. From the Bloch representation, you may have already guessed that this means we
-can only perform rotations... 
+can only perform rotations.
 
 Switching back to the 2D vector representation of a qubit, then it's also clear that these operations
 must correspond to $2\times2$ matrices. The act of performing an operation corresponds to multiplying
-the qubit state by one of these matrices. In order to ensure that the length of the qubit vector $\ket{\psi}$
-remains 1 at all times, the matrices we can use on our qubit must be unitary. That is, given the matrix $\boldsymbol{M}$,
+the qubit state by one of these matrices. To ensure that the length of the qubit vector $\ket{\psi}$
+remains one at all times, the matrices we can use on our qubit must be unitary. That is, given the matrix $\boldsymbol{M}$,
 its complex conjugate transpose $\boldsymbol{M}^\dagger = (\boldsymbol{M^{*}})^\mathrm{T}$ times itself is equal to 
 the identity matrix: $\boldsymbol{M}^\dagger\boldsymbol{M} = \boldsymbol{I}$.
 
@@ -259,11 +257,11 @@ the context of quantum computation:
 These are the Hadamard gate, the T gate (or $pi/8$ gate)\footnote{The $T$-gate is often 
 referred to as the $\pi/8$ gate, even though it represents a $\pi/4$ rotation, a name that is derived from
 the phase factor for historical reasons.} and the phase gate respectively.
-As is common, phase factors are usually dropped (something I did not do in the above), hence it is
+As is typical, phase factors are usually dropped (something I did not do in the above), hence it is
 common to see variations of these equations in the literature. 
 
-As a final example, let's take a concrete look at where interfering probabilities leads to a thoroughly
-non-classical result. To start off with, let's define two additional states:
+As a final example, let's take a detailed look at where interfering probabilities leads to a thoroughly
+non-classical result. To start with, let's define two additional states:
 \begin{align}
   \ket{+} = \frac{\ket{0} + \ket{1}}{\sqrt{2}} && \ket{-} = \frac{\ket{0} - \ket{1}}{\sqrt{2}}
 \end{align}
@@ -281,18 +279,18 @@ become distinguishable, something that a classical bit could not replicate. What
 
 \subsubsection{Multi-Qubit States (Qubit Registers)}
 The next additional computational resource that quantum physics gives us is \emph{entanglement}. This 
-resource rears it's head when we try to combine multiple qubits together into a register. Formally,
+resource rears it's head when we try to combine multiple qubits into a register. Formally,
 we can define entanglement as a correlation between the states of qubits after they have interacted
-with each other. Due to this correlation, the state of a qubit that has been entangled with it's partner
-can no longer be described independantly, the states of the two qubits become linked. Perhaps the easiest
+with each other. Due to this correlation, the state of a qubit that has been entangled with its partner
+can no longer be described independently, the states of the two qubits become linked. Perhaps the easiest
 way to grok the consequences of this is to give an example of how this correlation might play out.
 
-Let's start off with two qubits, one of which starts in the $\ket{+}$ state, the other which starts in
+Let's start with two qubits, one of which starts in the $\ket{+}$ state, the other which starts in
 the $\ket{0}$ state. If we were to apply a gate that flips the state of the second qubit if the state of
-the first qubit is $\ket{1}$ then we might expect to end up with something like $\ket{+}$ in the second
+the first qubit is $\ket{1}$, then we might expect to end up with something like $\ket{+}$ in the second
 qubit. If we measure the first qubit and get the result $\ket{0}$, the state of the second qubit must also
-be zero, so the state of the second qubit can't have just been described by $\ket{+}$. The state of the two
-qubits are correlated and depend on each other. In fact, the operation we described above is called the 
+be zero, so the state of the second qubit can't have been described by $\ket{+}$. The state of the two
+qubits is correlated and depend on each other. The operation we described above is called the 
 controlled-NOT ($CNOT$) gate, and creates a state that looks like:
 \begin{equation}
   \ket{\psi} = \frac{\ket{00} + \ket{11}}{\sqrt{2}}
@@ -305,53 +303,58 @@ can take:
 \end{equation}
 So to combine two qubits together, we cannot just list the states of the two qubits one after another,
 they are described by the tensor product of the two individual states: $\ket{\psi} = \ket{\psi_1}\otimes\ket{\psi_2}$.
-For a three qubit register, the total number of states we must give coefficients to is 8. For a $N$ qubit
+For a three-qubit register, the total number of states we must give coefficients to is 8. For a $N$ qubit
 register, the total number of coefficients is $2^N$. Note the distinction between a classical register
-and a quantum register, to describe a classical register, we can just list the states of the individual
-bits one after another, whereas the quantum register requires $2^N$ complex numbers to fully describe.
+and a quantum register, to describe a classical register, we can list the states of the individual
+bits one after another, whereas the quantum register requires $2^N$ complex numbers to express fully.
 
-Much like a single qubit we require new matrices that are able to operate on quantum regsisters. As one 
+Much like a single qubit, we require new matrices that can operate on quantum registers. As one 
 might expect, the size of these matrices is exponential in the number of qubits that we must operate on.
-For example, on a two-qubit register, we require a $4 \times 4$ matrix to describe operations. The $CNOT$
-gate that we used above for example is defined as:
+For example, on a two-qubit register, we require a $4 \times 4$ matrix to describe operations. The 
+$CNOT$-gate that we used above is defined as:
 \begin{equation}
   CNOT = \svec{1&0&0&0\\0&1&0&0\\0&0&0&1\\0&0&1&0}
 \end{equation}
-Unfortunately the potential presence of entanglement means applying single or two qubit gates to a subset
+Unfortunately, the potential presence of entanglement means applying single or two-qubit gates to a subset
 of qubits in the register is no longer a matter of applying a $2 \times 2$ or $4 \times 4$ matrix, we must
 construct a $2^N \times 2^N$ matrix and apply that to the full quantum register. This construction is achieved
 by taking the Kronecker product of identity matrices and the matrix we want to apply. For example, to apply
-an $\sigma_X$ gate to the 2nd qubit in a 3 qubit register, we construct the operator as follows:
+a $\sigma_X$ gate to the 2nd qubit in a three-qubit register, we construct the operator as follows:
 \begin{equation}
   \sigma_{X,2} = I \otimes \sigma_X \otimes I
 \end{equation}
 
 The consequences of the twin effects of superposition and entanglement lead to the extra computational
 power of a quantum computer, while also hinting at the difficulty of writing quantum algorithms. As we
-are able to prepare arbitrary superposition states, we can encode an exponentially large
+can prepare arbitrary superposition states, we can encode an exponentially large
 state into a quantum register, for example representing every number between 0 and $2^N-1$ in a $N$ qubit
 register, and operate on all of these states in parallel. However, once we measure the register, we end up 
 with only one of the possible states in the register (i.e. the state collapses), and the quantum information
-that was prepared in the state is lost. Quantum algorithms must therefore have three properties to be useful:
+that was prepared in the state is lost. Quantum algorithms must, therefore, have three properties to be useful:
 \begin{enumerate}
-  \item An efficient way of preparing a state. If we have want to perform computations on a quantum register storing
-        $2^N$ values, we lose any exponential speedup if we need to load each of these values one-by-one. For example, Shor's 
-        algorithm relies on being able to prepare an equal superposition of all states in the register with $N$
-        single qubit gates\cite{PhysRevA.54.1034}.
-  \item Creation of a large entangled state. Without entanglement, a quantum algorithm can be efficiently simulated
-        on a classical computer. The exact role that entanglement plays in computation is not yet known, however without 
-        using it, we know that quantum computation lose their advantage\cite{doi:10.1098/rspa.2002.1097}.
-  \item A way of whittling down the quantum state to make the "answer" the likely outcome of any readout. Since
-        coefficients in a quantum register represent probability amplitudes that a measurement will yield a given
-        outcome, we can get at most $N$ bits of data per measurement\cite{651037}, as our register immediately collapses
-        into one state upon measurement. To get another value out of the register, we must repeat the whole computation
-        including loading the state.
+  \item An efficient way of preparing a state. If we want to perform computations on a quantum register 
+    storing $2^N$ values, we lose any exponential speedup if we need to load each of these values one-by-one. 
+    For example, Shor's algorithm relies on being able to prepare an equal superposition of all states 
+    in the register with $N$ single qubit gates\cite{PhysRevA.54.1034}.
+  \item Creation of a large entangled state. Without entanglement, a quantum algorithm can be efficiently 
+    simulated on a classical computer. The exact role that entanglement plays in computation is not yet known; 
+    however, without using it, we know that quantum computers lose their advantage\cite{doi:10.1098/rspa.2002.1097}.
+  \item A way of whittling down the quantum state to make the "answer" the likely outcome of any readout. 
+    Since coefficients in a quantum register represent probability amplitudes that measurement will yield 
+    a given outcome, we can get at most $N$ bits of data per measurement\cite{651037}, as our register 
+    immediately collapses into one state upon measurement. To get another value out of the register, 
+    we must repeat the whole computation, including loading the state.
 \end{enumerate}
 
 
+% Possible TODO: Circuit notation?
 
 \section{Making Qubits in Semiconductors}
 \label{sec:qcinsm}
+Having described the basic ideas of quantum computing, our next challenge is to find a physical system that
+is able to implement the operations that we discussed above. Essentially this comes down to the challenge
+of finding a quantum two 
+
   \subsection{The 2 Dimensional Electron Gas}
   \subsubsection{The Quantum Hall Effect}
   \subsubsection{Spin Orbit Interaction}

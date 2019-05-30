@@ -31,7 +31,9 @@
 \graphicspath{{Figures/}}
 \usepackage{siunitx}
 \usepackage{fontspec}
-\usepackage{csquotes}
+\usepackage[english]{babel}
+\usepackage[autostyle,english=american]{csquotes}
+\MakeOuterQuote{"}
 \usepackage{braket}
 \usepackage{amsmath}
 \setmainfont{Adobe Caslon Pro}[
@@ -40,7 +42,7 @@
 ]
 \setsansfont{Candara}[
     BoldFont = {HelveticaNeue-Bold},
-    ItalicFont = {HelveticaNeue-Italic},
+    ItalicFont = {Candara-Italic},
     BoldItalicFont = {HelveticaNeue-BoldItalic}
 ]
 \RequirePackage[labelfont={bf,footnotesize,sf,singlespacing},
@@ -57,6 +59,10 @@
 \newcommand{\mob}[1]{\SI[per-mode=symbol]{#1}{\square\centi\meter\per\volt\per\second}}
 \newcommand{\svec}[1]{\ensuremath{\begin{bmatrix}#1\end{bmatrix}}}
 \newcommand{\cc}[1]{\textsc{\MakeLowercase{#1}}}
+\sisetup{
+    math-ohm  = \char"2126
+}
+\DeclareSIUnit{\dBm}{dBm}
 \DeclareSIUnit\micron{\micro\metre}
 \DeclareSIUnit\uev{\micro\electronvolt}
 \DeclareSIUnit\mk{\milli\kelvin}
@@ -74,6 +80,7 @@
 \begin{document}
 
 \protect\setcounter{tocdepth}{-1}
+\pagenumbering{roman} % Start roman numbering
 \include{cover}
 \protect\setcounter{tocdepth}{2}
 % Some departments (e.g. 5) require an additional signature page.  See
@@ -116,7 +123,10 @@
 \makeatother
 
 \pagestyle{plain}
-\include{contents}
+\input{contents}
+
+\pagenumbering{arabic} 
+
 \setcounter{chapter}{-1}
 \input{intro}
 \input{chap1}

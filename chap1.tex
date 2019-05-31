@@ -252,9 +252,9 @@ These three rotations (and often a global phase factor to simplify our result) a
 any single qubit operation. For completeness, we can also define some other gates that often come up in
 the context of quantum computation:
 \begin{alignat}{4}
-    H &=& \frac{1}{\sqrt{2}}\svec{1&1\\1&-1} &=& e^{\tfrac{i\pi}{2}} R_Y\left(\frac{\pi}{2}\right) R_Z(\pi)            &=& \frac{\sigma_X+\sigma_Z}{\sqrt{2}} \\
-    T &=& \svec{1&0\\0&e^{\tfrac{i\pi}{4}}}  &=& e^{\tfrac{i\pi}{8}} R_Z\left(\frac{\pi}{4}\right) &=& \sqrt[4]{\sigma_Z} \\
-    S &=& \svec{1&0\\0&i}                    &=& e^{\frac{i \pi}{4}} R_Z\left(\frac{\pi}{2}\right) &=& \sqrt{\sigma_Z}
+    H &=& \frac{1}{\sqrt{2}}\svec{1&1\\1&-1} &=& e^{\tfrac{i\pi}{2}} R_Y\left(\frac{\pi}{2}\right) R_Z(\pi) &=& \frac{\sigma_X+\sigma_Z}{\sqrt{2}} \\
+    T &=& \svec{1&0\\0&e^{\tfrac{i\pi}{4}}}  &=& e^{\tfrac{i\pi}{8}} R_Z\left(\frac{\pi}{4}\right)          &=& \sqrt[4]{\sigma_Z} \\
+    S &=& \svec{1&0\\0&i}                    &=& e^{\frac{i \pi}{4}} R_Z\left(\frac{\pi}{2}\right)          &=& \sqrt{\sigma_Z}
 \end{alignat}
 These are the Hadamard gate, the T gate (or $\pi/8$ gate)\footnote{The $T$-gate is often 
 referred to as the $\pi/8$ gate, even though it represents a $\pi/4$ rotation, a name that is derived from
@@ -349,6 +349,7 @@ that was prepared in the state is lost. Quantum algorithms must, therefore, have
 \end{enumerate}
 
 % Possible TODO: Circuit notation?
+% TODO: Relaxation and Decoherence?
 
 \section{Making Qubits in Semiconductors}
 \label{sec:qcinsm}
@@ -380,6 +381,198 @@ I present here. Before we begin a detailed discussion of qubits in semiconductor
 at the physics that underlie most of these implementations; the 2-dimensional electron gas (2DEG).
 
 \subsection{The 2-Dimensional Electron Gas}
+The 2-dimensional electron gas (2DEG) is the foundation for many of the experiments and qubit-realizations
+that follow, and is a way of confining electrons in a semiconductor to a single plane. In order to fully
+appreciate what this means, we first have to discuss what it means to confine an electron in one of the three dimensions.
+How big does this confining potential have to be? To answer this question, we must first look at the solutions
+to Schr\"odinger's equation in a semiconductor. This will give us the form of the electron wavefunction, and
+an idea of its "size". The following introduction is based on material taken from~\cite{delftbook,ihnbook,Ashcroft}. 
+
+\begin{figure}
+  \includegraphics[width=0.9\linewidth]{BlochWaves}
+  \caption[Bloch Waves on a regular lattice]
+  {(a) Given a periodic lattice that creates a set of potential wells, the valid solutions for unbound
+   electrons (conduction band) are plane waves with a period proportional to the lattice spacing ($a$),
+   while bound electrons (valence band) are proportional to the binding material. (b) Assuming there are no 
+   electron-electron interactions ($E_\textrm{F}$).}
+  \label{fig:blochwaves}
+\end{figure}
+
+In a crystalline material, such as a metal or a semiconductor lattice, we can think
+about electrons as travelling along a periodic potential, caused by the periodic spacing of nuclei in the lattice, as
+is shown in figure~\ref{fig:blochwaves}~(a) for a 1D lattice. There will be two sets of solutions, the first will be for electrons
+that are tightly bound around nuclei, which will form the valence band, and free electron solutions which
+will form the conduction band. The gap between these two solutions forms a band gap of size $(E_G)$, a range
+of energies for which there are no available states. As we are looking at the 2DEG, let's focus on free electron solutions for now.
+These will take the form of Bloch waves, expressed as a function of lattice position $r$ and wave vector $k$:
+\begin{equation}
+  \psi_{\vec{k}}(\vec{r}) = e^{i\vec{k} \cdot \vec{r}}u_k(\vec{r})
+\end{equation}
+where $u_k$ is a periodic function with the same periodicity as the crystal lattice and $\exp\left(i\vec{k} \cdot \vec{r}\right)$ are
+plane wave solutions. What this equation effectively says is that if we are able to solve around boundary conditions for
+a single unit cell, we can extract a band structure for the entire lattice.
+
+Electrons in this system begin to fill the available states from the lowest energy up, obeying the Pauli exclusion principle which limits
+each available state to two electrons with opposite spins. For conduction band electrons in regular crystals we can make
+two additional assumptions that aid in the interpretation of the solutions to the bloch equation. First, let's assume that
+there are no electron-electron interactions. Although this assumption may at first be unintuitive, it appears
+to be sufficient to describe much of the physics that follows. Second, we assume that the potential due to the
+lattice is screened by valence band electrons, and can be treated as a peturbation to a free electron. Solving
+this model leads to bands which are similar to free electron plane waves up to the edge of the Brouillin zone, i.e.
+up to the top of the band. In the conduction band of a semiconductor, we deal with largely empty bands, as such
+the dispersion relation, i.e. theenergy of electrons as a function of wave vector, can be approximated as that of free electrons:
+\begin{equation}
+  E\left(\vec{k}\right) = \frac{\hbar^2 |\vec{k}|^2}{2m^*}
+\end{equation}
+where $\vec{k}$ is the electron wave vector and $m^*$ is the effective electron mass. From this, we can also give the
+formal definition for the Fermi energy. The \textbf{Fermi energy} ($E_F$) is the highest filled electronic state
+at zero temperature. This situation is represented schematically in figure~\ref{fig:blochwaves}~(b) for a single dimension.
+In 3D, the Fermi energy forms a sphere in momentum space dilineating the region where electron states are filled, the surface
+of which we call the Fermi surface. From this, we can define the Fermi wavelength $\lambda_F$ of an electron at the Fermi
+surface, effectively the size of an electron in our semiconductor. Using $k = 2\pi/\lambda$ we find:
+\begin{equation}
+  \lambda_F = \frac{h}{\sqrt{2m^*E_F}}
+\end{equation}
+
+\begin{table}
+  \centering
+  \begin{tabular}{|l|l|l|} 
+   \hline
+   Crystal & Lattice Constant (\si{\angstrom}) & Electron Effective Mass$(m^*/m_e)$ \\ 
+   \hline
+   Si & 5.43 & - \\
+   Ge & 5.658 & - \\
+   GaAs & 5.65 & 0.066 \\ 
+   InAs & 6.06 & 0.026 \\ 
+   InSb & 6.48 & 0.015 \\
+   \hline
+  \end{tabular}
+  \caption[Properties of some common Semiconductors]
+  {Lattice constants and effective electron masses for some common semiconductors. For Si and Ge semiconductors, which are
+  indirect band gap semiconductors, the effective mass for electrons is not trivial and will vary based
+  on direction and valley state, hence values are not given above. Values are taken from~\cite{Kittel2004,InSbParam}.}
+  \label{tab:semiprop}
+\end{table}
+
+If we wish to confine electrons in a given dimension, this gives us the relevant length-scale over which it must became
+done. For metals, the large number of free electrons means the Fermi energy is large, and as such we end up with a
+Fermi wavelength on the order of a few Ångström (where $\SI{1}{\angstrom} = \SI{1e-10}{\meter}$). In semiconductors, as 
+the number of free electrons, and hence the Fermi energy, is set by the doping and is generally small, the Fermi
+wavelength can be on the order of a few 10s of nanometers. Paramters for some common semiconductors are given 
+in table~\ref{tab:semiprop}. Given these values, if we can make a potential well with a width $W$ that's on
+the order of the Fermi wavelength, we are able to confine electrons to a few subbands. The next question is: how 
+do we create a narrow quantum well?
+
+\begin{figure}
+  \includegraphics[width=1\linewidth]{GaAs}
+  \caption[Band bending in a straddling type heterojunction, and the GaAs/AlGaAs heterostructure]
+  {\label{fig:heterostructure}(a) Shows a straddling type heterojunction between \ce{Al_{0.3}Ga_{0.7}As} and GaAs with two
+  differing bandgaps $E_{G1}$ and $E_{G2}$, where the smaller gap ($E_{G2}$) is fully enclosed in the larger gap $E_{G1}$.
+  (b) When the two semiconductors are equalized, their bands bend near the heterojunction to ensure a continuous Fermi
+  energy. Far from the junction, the unmodified band structure is restored. (c) The layer stack of a GaAs/(Al,Ga)As heterostructure,
+  with TiAu surface gates that can locally modify the density of the 2DEG.}
+  
+\end{figure}
+
+The answer is to create a heterojunction; an interface between two dissimilar semiconductors with different band-gaps. The
+simplest type of heterojunction we can form is a straddling (type I) junction, where one semiconductor has a smaller band-gap
+that is contained within the band gap of the other, a situation that is represented schematically in fig.~\ref{fig:heterostructure}. 
+In the case that the Fermi levels of the two semiconductors is unequal, electrons tunnel between the two junctions in order to align 
+their levels, leading to band bending at the interface. Careful choice of semiconductors can cause a well to appear at the interface, 
+where the width of the well can be designed to be on the order of the Fermi wavelength in the semiconductor. GaAs and (Al,Ga)As are 
+an ideal choice for this type of heterojunction as  they are almost perfectly lattice matched (their lattice constants differ by 0.14\%), 
+while also forming a straddling-gap heterojunction with a gap in GaAs $E_{G1} = \SI{1.424}{\electronvolt}$ and a gap in
+\ce{Al_{1-x}Ga_{x}As} that can be continuously varied, taking the value $E_{G2} = 1.424 + 1.225x$ \si{\electronvolt}, by
+changing the ratio of Al and Ga in the semiconductor. Furthermore, up to $x = 0.44$, the ratio of the step in the conductance
+band ($\Delta E_C$) to the step in valence band ($\Delta E_V$) is a constant: $\Delta E_C/\Delta E_V = 1.5$\cite{adachi1993properties}
+[see steps in figure~\ref{fig:heterostructure}~(b)], allowing the depth of the well to be easily varied.
+Finally, by doping the semiconductor with Si, we are able to move the Fermi energy up to populate a single subband, leading to a 
+2-dimensional plane of electrons, where there is only a single wavevector in the Z direction ($k_z$) that electrons can take. As long
+as the electron temperature is far below the energy, only this subband will be populated.
+
+The structure of a typical GaAs/\ce{Al_{0.3}Ga_{0.7}As} heterostructure is shown in Fig.~\ref{fig:heterostructure}~(c). Such structures
+are normally grown by molecular-beam epitaxy (MBE) which allows atomically smooth layers to be grown a single monolayer
+at a time. Heterostructures are grown on a semi-insulating GaAs substrate, ober which a large buffer is grown.
+Repeated thin layers of GaAs/\ce{Al_{0.3}Ga_{0.7}As} are grown in order to reduce the dislocation density
+and create a continuous, smooth single crystal at the heterojunction. The 2DEG itself is represented by the red line
+on the schematic, where it is followed by a region of Si $\delta$-doping, used to pin the Fermi level in the substrate, and
+a \SI{10}{\nano\meter} GaAs cap to protect against oxidation. During processing, a protective oxide barrier (either \ce{HfO2}
+or \ce{Al2O3}) is grown, followed by surface gates which allow the density of states to be locally modified, or even depleted,
+in order to form structures in the 2DEG. The oxide layer, apart from serving as a passivation barrier, is also necessary to 
+prevent tunneling of electrons from the surface gates into the donor layer, where movement of electrons is known to be a significant
+source of charge noise~\cite{PhysRevB.72.115331,PhysRevApplied.9.034008}.
+
+Having strongly confined electrons into 2-dimensions, we can now redefine several of the parameters that we had above. First, our
+dispersion relation becomes that of free electrons in two-dimensions:
+\begin{align}
+  E(\vec{k}) = \frac{\hbar^2 |\vec{k}|^2}{2m^*} && |\vec{k}|^2 = k_x^2 + k_y^2
+  \label{eq:k2d}
+\end{align}
+
+We can also define the density of states (DOS) in 2-dimensions as the number of states $n(E)$ per unit energy $(E)$:
+\begin{equation}
+  \rho_{2D} = \frac{d n(E)}{d E}
+\end{equation}
+
+For free electrons in 2D, the states fill an area in momentum-space up to k-vector $k$:
+\begin{equation}
+  A = \pi k^2 = \frac{2 \pi m^* E}{\hbar^2}
+\end{equation}
+where we've substituted equation~\ref{eq:k2d} for $k$. The spacing of states in a crystal of size $L \times L$ is given
+by $\pi^2/4 L^2$, so for a unit area, the area of a single state is $A_{\textrm{single}} = \pi^2/4$. Putting this together, 
+the number of states up to energy $E$ is therefore:
+\begin{equation}
+  n(E) = g_s g_v \frac{A}{A_{\textrm{single}}} = g_s g_v \frac{m^* E}{2 \pi \hbar^2}
+\end{equation}
+and giving a density of states:
+\begin{equation}
+  \rho_{2D} = g_s g_v \frac{m}{2 \pi \hbar^2}
+\end{equation}
+where $g_s$ is the spin degeneracy (almost always 2), and $g_v$ is the valley degeneracy (1 for III-V semiconductors, 3 for Si).
+Importantly we note that the density of states is independant of energy, a situation which is unique to 2-dimensions. This allows
+us to redefine the Fermi energy, wave-vector and wavelength in terms of the total electron density ($n_s$) rather simply:
+\begin{align}
+  E_F = \frac{n_s}{\rho_{2D}} = \frac{2 \pi \hbar^2 n_s}{m^* g_s g_v} && 
+  k_F = \sqrt{\frac{4 \pi n_s}{g_v g_s}} && 
+  \lambda_F = \sqrt{\frac{\pi g_s g_v}{n_s}}
+\end{align}
+
+Up till now, we've been focused on systems at zero temperature and without the effects of scattering. We can modify our above
+descriptions of various effects while accounting for temperature and scattering without a huge amount of extra effort.
+First, the main effect of temperature will be to create s distribution of filled states around the Fermi energy, rather
+than a sharp cut-off as we had previously assumed. This distribution takes the form:
+\begin{equation}
+  f(E - E_F) = \left[1 + \exp\left(\frac{E - E_F}{k_B T}\right)\right]^-1
+\end{equation}
+This places an additional constraint on 2DEG formation, namely that the thermal energy $k_B T$ should be much less than the
+2D subband spacing, a requirement that is easily met for most heterostructures below a few Kelvin. Second, we account for the
+effect of scattering. This is commonly captured in a length that an electron can travel before scattering. Depending on the scattering
+mechanism this can either be inelastic, normally due to scattering of phonons (thermal scattering), or elastic, normally due to 
+scattering off lattice defects or impurities. We therefore define two length scales, $l_\psi$ being the inelastic scattering length,
+which gives us the length scale over which total kinetic energy and momentum are conserved, and $l_e$ being the elastic scattering
+length, which gives the length of time an electron will travel before any collision. This also sets a momentum relaxation time, the
+amount of time between electron collusions given by $\tau = l_e/v_F$.
+
+In general, we are more interested in the effect of scattering on conductivity, an easily measured bulk property of
+the semiconductor. We can reframe the scattering time into a conductivity by considering the motion of an electron
+through a lattice. Let's define a quantity called the drift velocity $v_d$ as the average speed an electron moves through
+the lattice under an accelerating field $E$. Then, by Newton's second law:
+\begin{equation}
+  eE = \frac{m^* v_d}{\tau}
+\end{equation}
+If we rearrange for $v_d$ we find:
+\begin{align}
+  v_d = \mu E && (\textrm{where~} \mu = \frac{e \tau}{m^*})
+\end{align}
+where $\mu$ is a quantity called mobility, with units \si{\square\centi\meter\per\volt\per\second}.
+Then to find the conductivity, we remember the definition for current
+density, which will be given by the number of electrons that pass a point per second, $J = n_s e v_d$, and the definition
+of conductivity, which is simply current density per electric field, $\sigma = J/E$. This gives and equation for conductivity
+in terms of electron density and mobility as:
+\begin{equation}
+  \sigma = n_s e \mu
+\end{equation}
+
 \subsubsection{The Quantum Hall Effect}
 \subsubsection{Spin Orbit Interaction}
 \subsection{Quantum Dots}

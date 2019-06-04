@@ -537,7 +537,6 @@ do we create a narrow quantum well?
   (b) When the two semiconductors are equalized, their bands bend near the heterojunction to ensure a continuous Fermi
   energy. Far from the junction, the unmodified band structure is restored. (c) The layer stack of a GaAs/(Al,Ga)As heterostructure,
   with TiAu surface gates that can locally modify the density of the 2DEG.}
-
 \end{figure}
 
 The answer is to create a heterojunction; an interface between two dissimilar semiconductors with different band-gaps. The
@@ -662,6 +661,19 @@ stuck in the middle of your 2DEG\cite{PhysRevLett.77.3613}. Before considering a
 start off by looking at a small metal island, which will not have well resolved orbital modes but can still contain a discrete,
 well defined number of electrons.
 
+\begin{figure}
+  \includegraphics[width=0.8\linewidth]{Dot}
+  \caption[Schematic of a Single Quantum Dot]
+  {\label{fig:QD}(a) We define a tunnel junction as a combination of a resistor and a capacitor in parallel,
+  since for a quantum dot the geometric capacitance of the junction is significant. (b) Equivalent circuit
+  model of a quantum dot. The dot is connected to reservoirs by a source and drain tunnel junction, where
+  we define the drain as ground. A voltage $V_SD$ may be applied across the quantum dot, which may cause current
+  to flow. The levels of the quantum dot can be tuned by a gate voltage $V_G$ that is capacitively coupled to the
+  quantum dot. (c) Schematic of a quantum dot showing a "ladder" of states, and orbital energy level. When a level
+  falls within the source-drain bias window, current may flow across the dot, otherwise current is blocked, an
+  effect termed Coulomb blockade.}
+\end{figure}
+
 To understand how this is possible, let's start off with the formula for the energy on a capacitor, the same one that
 we initially give for a classical capacitor. This is given by: $E = Q^2/2C$. The energy to add a single extra electron
 to this island is the \textbf{charging energy}:
@@ -670,17 +682,19 @@ to this island is the \textbf{charging energy}:
 \end{equation}
 where $C_\Sigma$ is the total capacitance to the dot. Let's then couple this island to two reservoirs, say a source
 and a drain, both with resistance $R_t$. Realistically, these couplings add an additional capacitance term, which
-we must consider in our $C_\Sigma$ term. We can also add a gate nearby that we can use to pull electrons on and off
+we must consider in our $C_\Sigma$ term, as shown in Fig.~\ref{fig:QD} (a). We can also add a gate nearby that we can use to pull electrons on and off
 % TODO: QD Figure
-the island. This situation is represented schematically in figure~\ref{Fig:QD}. Given this system, when is the number
-of electrons on the dot well defined? First off, we want the thermal energy in the system to be much smaller than
-the charging energy, otherwise we don't have a well defined ground state:
+the island. This situation is represented schematically in Fig.~\ref{fig:QD} (b). You might ask what differentiates
+this system from a circuit I could make on my bench with three capacitors and two resistor. In other words, what are
+the conditions for the number of electrons on the dot to be well defined? First off, we want the thermal energy
+in the system to be much smaller than the charging energy, otherwise we won't have a well defined ground state:
 \begin{equation}
   k_B T \ll E_C
 \end{equation}
 Next, we want to ensure that tunneling occurs at a slow rate relative to the Heisenberg uncertainty relation
-$\Delta E_C \Delta t \geq h/2$. The tunneling time is given by $\tau = R_t C$, the time constant of the
-system. Combining $\tau$ and $E_C$, we find our second restriction:
+$\Delta E_C \Delta t \geq h/2$, otherwise dots can hop on and off the dot faster than we could resolve them.
+The tunneling time is given by $\tau = R_t C$, the time constant of the system. Combining $\tau$ and $E_C$,
+we find our second restriction:
 \begin{equation}
   R_t \gg h/e^2
 \end{equation}
@@ -689,9 +703,9 @@ throughout this thesis in a number of contexts; as the resistance of a 1D channe
 state in the quantum Hall and spin quantum Hall effect and the tunnel rate through coupled Majorana zero modes,
 and has the value $R_K = \SI{25812.807}{\ohm}$.
 
-From here, we can define the total energy of the quantum dot with $N$ electrons in terms of the background charge $N_0|e|$,
+From here, we can define the total energy of the quantum dot with $N$ electrons in terms of the background charge $N_0|e|$
 \footnote{We can think of the background charge $N_0$ as the quantized equivalent of the Fermi energy. It is equivalent
-to $E_F = N_0^2 e^2/2 C_\Sigma$}
+to $E_F = N_0^2 E_C$, and tells us how many electrons are in the dot at zero gate voltage.},
 the voltage and capacitance of the source, drain and gate, and, if we include orbital energies again, i.e. we once again works
 in the limit of a small size relative to the Fermi wavelength, the sum of the orbital energies $E_n(B)$, where
 $E_n(B)$ is the energy of the $n$-th orbital under a magnetic field B:
@@ -706,10 +720,22 @@ Note that we've made the assumption that we are tunneling into the ground state 
 simple modification to the above to calculate the chemical potential of tunnneling into an excited orbital
 state. The most important difference here is a linear dependance on gate voltage, which allows us to draw
 a "ladder" of states where the gap between each state is fixed at a value $E_{\textrm{add}}(N) = \mu(N+1) - \mu(N) = E_C + \Delta E_N$,
-a situation depicted schematically in Fig.~\ref{fig:qd}. Note that the spin degeneracy of orbital states,
+a situation depicted schematically in Fig.~\ref{fig:qd} (c). Note that the spin degeneracy of orbital states,
 leads to a doublet structure in the level spacing. This equation also shows us that the electrochemical potential
 of the dot can be swept linearly by varying the gate voltage.
-% TODO: QD Figure
+
+\begin{figure}
+  \includegraphics[width=1.0\linewidth]{CB}
+  \caption[Coulomb Blockade in a Single Quantum Dot]
+  {\label{fig:cbtrans}(a) Coulomb Blockade through a single quantum dot. Current can only flow at points
+  where the energy levels in the dot are in alignment with the reservoirs, which occurs as the gate voltage
+  is swept. (b) Sweeping bias as well as the gate, we get diamond-like features as the levels move into
+  and out of the bias window. The charging energy can be extracted by looking at the width of a diamond, as
+  shown in red, and increases as the size of the dot is reduced by a more negative confining potential. We can
+  also see excited states within each diamond, highlighted in yellow on a single diamond. These correspond to orbital
+  modes within the quantum dot.
+  }
+\end{figure}
 
 The next question we might ask is how can we flow current through the dot. This can only occur via the addition of an electron
 from the source ($N \rightarrow N+1$) and the removal of an electron to the drain ($N+1 \rightarrow N$), which only occurs
@@ -725,6 +751,57 @@ peaks also reveals information about the temperature of the electron back, as hi
 the source and drain reservoirs. A derivation of this is not given here, however we point the curious reader to~\cite{grabert2013single},
 and note that this is the method by which electron temperatures are extracted in section~\ref{sec:gb_paper}.
 
+\subsubsection{Double Quantum Dots}
+\begin{figure}
+  \includegraphics[width=0.8\linewidth]{DoubleDot}
+  \caption[Schematic of a Double Quantum Dot]
+  {\label{fig:dqd}(a) Equivalent circuit model for a double quantum dot. The circuit is very similar to that of
+  two single quantum dots in series, except that we must also account for cross capacitances between adjacent gates
+  (the terms $C_{G1D2}$ and $C_{G2D1}$), as well as the contribution of the tunnel junction between the left and
+  right dots (the term $R_D$ and $C_{D1D2}$). (b) Energy levels in a double quantum dot system. For current to flow
+  through this circuit, there must be an available level in both the left and right quantum dots. (c) Here we map
+  out the effect of cross capacitance and inter-dot capacitance on the charge stability diagrams of a double quantum
+  dot system as $V_{G1}$ and $V_{G2}$ are varied. As each $V_{G1}$ ($V_{G2}$) becomes more positive, more dots are
+  pulled onto the left (right) quantum dot. If gate capacitance is turned on the lines take on a slope. If inter-dot
+  capacitance is turned on, each stable configuration splits into a hexagonal cell. Note that these drawings do
+  not include the effects of tunnelling between dots. (d) Effect of varying $R_D$, the tunnel rate between the two
+  dots. At low resistance the dot effectively reverts to a single quantum dot. As the resistance is increased towards
+  $e^2/h$, two separated dots begin to form, although the transition between them is tunnel broadened.
+  Finally, if the resistance is much larger than $e^2/h$, there are well defined transitions between left and right
+  dot.
+  }
+\end{figure}
+
+Having defined a single quantum dot and before we move onto a discussion of how we might use these to form qubits,
+we also cover the effect of coupling two single dots together. Much like we can consider a single quantum dot an
+artificial atom, so too we can consider two quantum dots that allow tunnelling of electrons between each side as
+an artificial molecule. The extension of the single quantum dot picture to a double quantum dot picture occurs by
+adding an additional tunnel junction between the left and right dots, and adding an additional gate to control the
+electrochemical potential of the second quantum dot, as shown in the schematic in Fig.~\ref{fig:dqd} (a). In order
+to fully model the effect of a double quantum dot, we must account for two additional sources of capacitance, first
+a cross capacitance between the left (right) gate and the right (left) quantum dot, and second the capacitance between
+the left and right dot. Intuitively we can understand the capacitance between dots as a new electron on the left dot
+pushing an electron off the right dot or vice-versa, leading to a shift in the ground charge state as electrons are
+pulled on and off each quantum dot. In order to characterize the effect of the two gates on a double quantum dot, we
+can plot the ground state occupancy of the quantum dots as each of the gate voltages is swept. A mockup of a charge
+stability diagram is shown in Fig.~\ref{fig:dqd} (c) for as both interdot capacitance and gate cross-capacitance
+is turned on and off. The occupancy of the double quantum dots is labelled $(N, M)$ where $N$ represents the
+occupancy of the left double quantum dot and $M$ represents the occupancy of the right double quantum dot.
+
+As with a single quantum dot we can define the energy of the double quantum dot system using the constant
+interaction model:
+\begin{multline}
+  U(N, M) = \frac{[-|e|(N-N_{0}) + C_SV_S + C_{G1D1}V_{G1} + C_{G2D1}V_{G2} - |e|MC_{D1D2}]^2}{C_{\Sigma,1}} \\
+          + \frac{[-|e|(M-M_{0}) + C_DV_D + C_{G1D2}V_{G1} + C_{G2D2}V_{G2} - |e|NC_{D1D2}]^2}{C_{\Sigma,2}} \\
+          + \sum_{n=1}^N E_{n,1}(B) + \sum_{m=1}^M E_{m,2}(B)
+\end{multline}
+where we have added terms $C_{G1D2}$ and $C_{G2D1}$ to represent the cross capacitance between opposite
+gates and dots, and $C_{D1D2}$ is the capacitance between dots. The electrochemical potential for each dot
+can also be defined in a similar way:
+\begin{align}
+  \mu_1(N, M) = U(N, M) - U(N-1, M) \\
+  \mu_2(N, M) = U(N, M) - U(N, M-1)
+\end{align}
 
 \subsection{Majorana Zero Modes}
 \label{sec:majo}

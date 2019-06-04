@@ -348,8 +348,10 @@ that was prepared in the state is lost. Quantum algorithms must, therefore, have
     we must repeat the whole computation, including loading the state.
 \end{enumerate}
 
+\subsubsection{Noise}
+
 \begin{figure}
-  \includegraphics[width=0.95\linewidth]{Noise}
+  \includegraphics[width=\linewidth]{Noise}
   \caption[Noise affecting pure states]
   {(a)We can think of noise as uncontrolled interactions with an environment. However since we can't measure
   information that is transferred into the environment, we end up with an incomplete representation of our qubit.
@@ -378,8 +380,8 @@ to describe a subsystem of a composite quantum system, i.e. to ignore the portio
 Indeed this is the most complete way to describe noise processes and information loss of our state, however rather
 than introduce a more powerful, but otherwise equivalent, description of quantum mechanics, we can instead model
 noise processes as interactions with a controlled environment, such as another qubit, as in figs.~\ref{fig:noise} (b) and (c).
-We can categorize interactions of our qubits into two general classes: \textbf{relaxation} (sometimes called amplitude
-damping), and \textbf{dephasing} (sometimes called phase damping).
+We can categorize interactions of our qubits into two general classes: relaxation (sometimes called amplitude
+damping), and dephasing (sometimes called phase damping).
 
 The first class of error, \textbf{relaxation}, causes our population to decay towards the ground state $\ket{0}$ each time it is
 applied with probability $\gamma$. We can think about this sort of process as a loss of energy from the qubit system, and
@@ -548,7 +550,7 @@ an ideal choice for this type of heterojunction as  they are almost perfectly la
 while also forming a straddling-gap heterojunction with a gap in GaAs $E_{G1} = \SI{1.424}{\electronvolt}$ and a gap in
 \ce{Al_{1-x}Ga_{x}As} that can be continuously varied, taking the value $E_{G2} = 1.424 + 1.225x$ \si{\electronvolt}, by
 changing the ratio of Al and Ga in the semiconductor. Furthermore, up to $x = 0.44$, the ratio of the step in the conductance
-band ($\Delta E_C$) to the step in valence band ($\Delta E_V$) is a constant: $\Delta E_C/\Delta E_V = 1.5$\cite{adachi1993properties}
+band ($\Delta E_C$) to the step in valence band ($\Delta E_V$) is a constant: $\Delta E_C/\Delta E_V = 1.5$~\cite{adachi1993properties}
 [see steps in figure~\ref{fig:heterostructure}~(b)], allowing the depth of the well to be easily varied.
 Finally, by doping the semiconductor with Si, we are able to move the Fermi energy up to populate a single subband, leading to a
 2-dimensional plane of electrons, where there is only a single wavevector in the Z direction ($k_z$) that electrons can take. As long
@@ -654,7 +656,74 @@ energy~\cite{karl-gatemon} or in Majorana zero modes\cite{PhysRevLett.119.136803
 point, a topic we shall explore in section~\ref{sec:majo}. By far the most well studied is to use a 2DEG to confine
 electrons in a zero-dimensional quantum dot, using surface gates to define zero-dimensional "puddles" of electrons
 ~\cite{RevModPhys.79.1217,RevModPhys.75.1}.
-Thes
+These puddles of electrons, which in a semiconductor have dimensions on the order of the Fermi wavelength $\lambda_F$,
+creates a discrete spectrum of available states, a situation akin to having an atom with a set of orbital modes
+stuck in the middle of your 2DEG\cite{PhysRevLett.77.3613}. Before considering a quantum dot in a semiconductor, let's
+start off by looking at a small metal island, which will not have well resolved orbital modes but can still contain a discrete,
+well defined number of electrons.
+
+To understand how this is possible, let's start off with the formula for the energy on a capacitor, the same one that
+we initially give for a classical capacitor. This is given by: $E = Q^2/2C$. The energy to add a single extra electron
+to this island is the \textbf{charging energy}:
+\begin{equation}
+  E_C = \frac{e^2}{2 C_{\Sigma}}
+\end{equation}
+where $C_\Sigma$ is the total capacitance to the dot. Let's then couple this island to two reservoirs, say a source
+and a drain, both with resistance $R_t$. Realistically, these couplings add an additional capacitance term, which
+we must consider in our $C_\Sigma$ term. We can also add a gate nearby that we can use to pull electrons on and off
+% TODO: QD Figure
+the island. This situation is represented schematically in figure~\ref{Fig:QD}. Given this system, when is the number
+of electrons on the dot well defined? First off, we want the thermal energy in the system to be much smaller than
+the charging energy, otherwise we don't have a well defined ground state:
+\begin{equation}
+  k_B T \ll E_C
+\end{equation}
+Next, we want to ensure that tunneling occurs at a slow rate relative to the Heisenberg uncertainty relation
+$\Delta E_C \Delta t \geq h/2$. The tunneling time is given by $\tau = R_t C$, the time constant of the
+system. Combining $\tau$ and $E_C$, we find our second restriction:
+\begin{equation}
+  R_t \gg h/e^2
+\end{equation}
+This quantity $h/e^2$ is called the von-Klitzing constant, or the quantum or resistance, and will show up
+throughout this thesis in a number of contexts; as the resistance of a 1D channel, the resistance of an edge
+state in the quantum Hall and spin quantum Hall effect and the tunnel rate through coupled Majorana zero modes,
+and has the value $R_K = \SI{25812.807}{\ohm}$.
+
+From here, we can define the total energy of the quantum dot with $N$ electrons in terms of the background charge $N_0|e|$,
+\footnote{We can think of the background charge $N_0$ as the quantized equivalent of the Fermi energy. It is equivalent
+to $E_F = N_0^2 e^2/2 C_\Sigma$}
+the voltage and capacitance of the source, drain and gate, and, if we include orbital energies again, i.e. we once again works
+in the limit of a small size relative to the Fermi wavelength, the sum of the orbital energies $E_n(B)$, where
+$E_n(B)$ is the energy of the $n$-th orbital under a magnetic field B:
+\begin{equation}
+  U(N) = \frac{[-|e|(N-N_0) + C_SV_S + C_DV_D + C_GV_G]^2}{C_\Sigma} + \sum_{n=1}^N E_n(B)
+\end{equation}
+We can also define the electrochemical potential $\mu(N)$ of the dot:
+\begin{equation}
+  \mu(N) \equiv U(N) - U(N-1) = \left(N - N_0 - \tfrac{1}{2}\right)E_C - \frac{E_C}{|e|}\left(C_SV_S + C_DV_D + C_GV_G\right) + E_N(B)
+\end{equation}
+Note that we've made the assumption that we are tunneling into the ground state each time, it is a reasonably
+simple modification to the above to calculate the chemical potential of tunnneling into an excited orbital
+state. The most important difference here is a linear dependance on gate voltage, which allows us to draw
+a "ladder" of states where the gap between each state is fixed at a value $E_{\textrm{add}}(N) = \mu(N+1) - \mu(N) = E_C + \Delta E_N$,
+a situation depicted schematically in Fig.~\ref{fig:qd}. Note that the spin degeneracy of orbital states,
+leads to a doublet structure in the level spacing. This equation also shows us that the electrochemical potential
+of the dot can be swept linearly by varying the gate voltage.
+% TODO: QD Figure
+
+The next question we might ask is how can we flow current through the dot. This can only occur via the addition of an electron
+from the source ($N \rightarrow N+1$) and the removal of an electron to the drain ($N+1 \rightarrow N$), which only occurs
+when the electrochemical potential $\mu(N)$ is aligned with the potential of the reservoirs for some N:
+\begin{equation}
+  E_F - \frac{|eV_{SD}|}{2} \leq \mu(N) \leq E_F + \frac{|eV_{SD}|}{2}
+\end{equation}
+This leads to a peaked conductance spectrum at low source-drain bias as a gate voltage is swept (as in Fig~\ref{fig:cbtrans} (a)), or
+diamond-like regions of blocked conductance as source-drain bias is swept as a function of gate voltage (as in Fig~\ref{fig:cbtrans} (b)),
+an effect termed Coulomb blockade. The spacing of coulomb diamonds allows the extraction of charging energies and addition energies, as
+well as the lever arm, that is the ratio of gate capacitance to total capacitance, for each gate that is swept. The width of Coulomb
+peaks also reveals information about the temperature of the electron back, as high electron temperatures smears the population in
+the source and drain reservoirs. A derivation of this is not given here, however we point the curious reader to~\cite{grabert2013single},
+and note that this is the method by which electron temperatures are extracted in section~\ref{sec:gb_paper}.
 
 
 \subsection{Majorana Zero Modes}

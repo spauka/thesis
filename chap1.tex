@@ -683,7 +683,6 @@ to this island is the \textbf{charging energy}:
 where $C_\Sigma$ is the total capacitance to the dot. Let's then couple this island to two reservoirs, say a source
 and a drain, both with resistance $R_t$. Realistically, these couplings add an additional capacitance term, which
 we must consider in our $C_\Sigma$ term, as shown in Fig.~\ref{fig:QD} (a). We can also add a gate nearby that we can use to pull electrons on and off
-% TODO: QD Figure
 the island. This situation is represented schematically in Fig.~\ref{fig:QD} (b). You might ask what differentiates
 this system from a circuit I could make on my bench with three capacitors and two resistor. In other words, what are
 the conditions for the number of electrons on the dot to be well defined? First off, we want the thermal energy
@@ -703,11 +702,12 @@ throughout this thesis in a number of contexts; as the resistance of a 1D channe
 state in the quantum Hall and spin quantum Hall effect and the tunnel rate through coupled Majorana zero modes,
 and has the value $R_K = \SI{25812.807}{\ohm}$.
 
-From here, we can define the total energy of the quantum dot with $N$ electrons in terms of the background charge $N_0|e|$
+From here, we can define the total energy of the quantum dot with $N$ electrons. To do this we will use a
+semi-classical model called the constant-interaction model. This defines the energy in terms of the background charge $N_0|e|$
 \footnote{We can think of the background charge $N_0$ as the quantized equivalent of the Fermi energy. It is equivalent
 to $E_F = N_0^2 E_C$, and tells us how many electrons are in the dot at zero gate voltage.},
-the voltage and capacitance of the source, drain and gate, and, if we include orbital energies again, i.e. we once again works
-in the limit of a small size relative to the Fermi wavelength, the sum of the orbital energies $E_n(B)$, where
+the voltage and capacitance of the source, drain and gate, and, if we include orbital energies again, i.e. we once again work
+in the limit of a small sized dot relative to the Fermi wavelength, the sum of the orbital energies $E_n(B)$, where
 $E_n(B)$ is the energy of the $n$-th orbital under a magnetic field B:
 \begin{equation}
   U(N) = \frac{[-|e|(N-N_0) + C_SV_S + C_DV_D + C_GV_G]^2}{C_\Sigma} + \sum_{n=1}^N E_n(B)
@@ -716,11 +716,11 @@ We can also define the electrochemical potential $\mu(N)$ of the dot:
 \begin{equation}
   \mu(N) \equiv U(N) - U(N-1) = \left(N - N_0 - \tfrac{1}{2}\right)E_C - \frac{E_C}{|e|}\left(C_SV_S + C_DV_D + C_GV_G\right) + E_N(B)
 \end{equation}
-Note that we've made the assumption that we are tunneling into the ground state each time, it is a reasonably
+Note that we've made the assumption that we are tunneling into the ground state of each level, it is a reasonably
 simple modification to the above to calculate the chemical potential of tunnneling into an excited orbital
 state. The most important difference here is a linear dependance on gate voltage, which allows us to draw
 a "ladder" of states where the gap between each state is fixed at a value $E_{\textrm{add}}(N) = \mu(N+1) - \mu(N) = E_C + \Delta E_N$,
-a situation depicted schematically in Fig.~\ref{fig:qd} (c). Note that the spin degeneracy of orbital states,
+a situation depicted schematically in Fig.~\ref{fig:QD} (c). Note that the spin degeneracy of orbital states,
 leads to a doublet structure in the level spacing. This equation also shows us that the electrochemical potential
 of the dot can be swept linearly by varying the gate voltage.
 
@@ -753,7 +753,7 @@ and note that this is the method by which electron temperatures are extracted in
 
 \subsubsection{Double Quantum Dots}
 \begin{figure}
-  \includegraphics[width=0.8\linewidth]{DoubleDot}
+  \includegraphics[width=1.0\linewidth]{DoubleDot}
   \caption[Schematic of a Double Quantum Dot]
   {\label{fig:dqd}(a) Equivalent circuit model for a double quantum dot. The circuit is very similar to that of
   two single quantum dots in series, except that we must also account for cross capacitances between adjacent gates
@@ -764,12 +764,7 @@ and note that this is the method by which electron temperatures are extracted in
   dot system as $V_{G1}$ and $V_{G2}$ are varied. As each $V_{G1}$ ($V_{G2}$) becomes more positive, more dots are
   pulled onto the left (right) quantum dot. If gate capacitance is turned on the lines take on a slope. If inter-dot
   capacitance is turned on, each stable configuration splits into a hexagonal cell. Note that these drawings do
-  not include the effects of tunnelling between dots. (d) Effect of varying $R_D$, the tunnel rate between the two
-  dots. At low resistance the dot effectively reverts to a single quantum dot. As the resistance is increased towards
-  $e^2/h$, two separated dots begin to form, although the transition between them is tunnel broadened.
-  Finally, if the resistance is much larger than $e^2/h$, there are well defined transitions between left and right
-  dot.
-  }
+  not include the effects of tunnelling between dots.}
 \end{figure}
 
 Having defined a single quantum dot and before we move onto a discussion of how we might use these to form qubits,
@@ -802,6 +797,70 @@ can also be defined in a similar way:
   \mu_1(N, M) = U(N, M) - U(N-1, M) \\
   \mu_2(N, M) = U(N, M) - U(N, M-1)
 \end{align}
+
+\begin{figure}
+  \includegraphics[width=0.9\linewidth]{ddenergy}
+  \caption[Energy levels and spin in a double quantum dot]
+  {\label{fig:dqdenergy}(a) Effect of varying $R_D$, the tunnel rate between the two
+  dots. At low resistance the dot effectively reverts to a single quantum dot. As the resistance is increased towards
+  $e^2/h$, two separated dots begin to form, although the transition between them is tunnel broadened.
+  Finally, if the resistance is much larger than $e^2/h$, there are well defined transitions between left and right
+  dot. (b) Zoom up of a single honeycomb cell around the $(0, 0)$, $(1, 0)$, $(0, 1)$ and $(1, 1)$ charge transitions.
+  Insets show energy levels $\mu_1(N, M)$ of the left quantum dot and $\mu_2(N, M)$ of the right quantum dot where backeted
+  numbers indicate the charge occupancies of both dots. We define the tilt (offset) axes perpendicular (parallel) to the
+  inter-dot transition in red (green). (c) Calculated energy levels along the $(0,1) \rightarrow (1,0)$ charge transition according
+  to a full quantum model. For finite tunnel coupling, an avoided crossing is formed. (d) Calculated energies of singlet and
+  triplet spin configurations for a two-electron double quantum dot. Due to the Pauli exclusion principle, the $(2, 0)T$
+  state is not accessible until we reach the first excited orbital state, such that the $(2, 0)T$ level is energetically
+  inaccessible at zero detuning. We define the exchange energy $J(\varepsilon)$ as the energy between the $(1, 1)S$ and $(1, 1)T$
+  states. (e) Current through a double quantum dot at $V_{SD} = \SI{0.5}{\milli\volt}$. Charge transitions split into finite bias triangles
+  which reveal the presence of excited orbital states in the dot, as well as the effects of spin, which blocks transport through the ground
+  orbital state of the dot.}
+\end{figure}
+
+The constant interaction model is limited however in describing the effect of tunelling between two dots, as the constant
+interaction model assumes that the occupancy of each dot is a good quantum number, a situation which will not hold near
+charge degeneracy points particularly when tunneling rates between the two dots is large. If we wish to include a finite tunnel
+conductance, we must move to a Hubbard model that includes the effects quantum fluctuations, spin and orbital effects on each
+dot~\cite{PhysRevB.84.115301}. In this model, and indeed in most descriptions of double quantum dot descriptions, we
+describe the strength of tunnelling between the two quantum dots as a \textbf{tunnel coupling}. This model allows us to draw a schematic
+of the continuous evolution from single quantum dot to double quantum dot as the strength of the inter-dot tunnel coupling
+is increased. For example, Fig.~\ref{fig:dqdenergy} (a) we see evolution from the case with zero tunnel resistance i.e. a single
+quantum dot in (a), to a region of intermediate tunnel resistance in ii., and finally a completely separated quantum dot in iii. Moving
+towards the limit of smaller tunnel couplings (larger tunnel resistance), the bending of charge transitions will continue to be visible
+in single charge transitions as in Fig~\ref{fig:dqdenergy} (b), where the constant interaction model (grey) is compared to a full quantum
+treatment (black).
+
+Examining in further detail this single honeycomb
+cell in the charge stability diagrom of a dot that includes both a cross capacitance and an inter-dot capacitance, we map
+out the energy levels of a quantum dot at various points according to the constant interaction model in the insets of Fig~\ref{fig:dqdenergy} (b).
+In this case, looking at the $(0, 0), (0, 1), (1, 0), (1, 1)$ transition, we find two points where
+three charge transitions meet, so called triple points, where energy levels within both the left and right dot are aligned
+with the reservoirs. If we were to try and pass a current through such a system, it would only be at these points that a
+current would flow. In between these triple points we find a new inter-dot transition, which comes from the fact that $\mu_{(1 \textrm{and} 2)}$
+is now a function of gate voltage \emph{and} the occupancy of dot $(2 \textrm{and} 1)$. This leads to an additional penalty that must be
+overcome to load an electron on both left and right dots, hence the point where we move from $(0, 0) \rightarrow (1, 1)$ is
+pushed up in both $V_{G1}$ and $V_{G2}$. In order to further analyze this charge transition, we rotate ourselves to align with
+the inter-dot transition and define two new perpendicular axes.
+Tilt ($\varepsilon$) is defined as movement perpendicular to the interdot charge transition and is shown in red. It measures the relative
+charge configuration of the dots ($\varepsilon = \mu_1 - \mu_2$) while keeping the overall charge of the two dots constant.
+Offset ($\Delta$) is defined as movement parallel to the interdot charge transition and is shown in green.
+It measures the total charge offset $\Delta = \mu_1 + \mu_2$ without modifying the relative distance between levels in the left
+and right dot. In this way we can move through the charge stability diagram in a way that ignores the effects of cross capacitances~\cite{qubyte}.
+
+Having defined the tilt axis, we can analyze in detail the inter-dot charge transition, which for moderate tunnel couplings will show
+charge hybridization near the interdot charge transition. At these points, charge becomes a bad quantum number and charge becomes delocalized
+across the two quantum dots, leading to a blurred charge transition [as sketched in Fig~\ref{fig:dqdenergy} (a) ii.]. If we calculate the energy
+of the two charge states along the tilt axis, plotted in Fig.~\ref{fig:dqdenergy} (c), we find that a finite tunnel coupling leads to the
+formation of an avoided crossing (blue), compared to no tunnel coupling (green), which at the center will have a gap of $2t$. As a function of
+tilt, we find the difference in the gap between the two states is:
+\begin{equation}
+  \delta(\epsilon) = \sqrt{\varepsilon^2 + (2 t)^2}
+\end{equation}
+The charge hybridization also allows the measurement of tunnel coupling by measurement of the charge state near zero tilt,
+which for intermediate tunnel couplings will vary smoothly between $(0, 1)$ and $(1, 0)$~\cite{PhysRevLett.92.226801}.
+
+% Effects of spin
 
 \subsection{Majorana Zero Modes}
 \label{sec:majo}

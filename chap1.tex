@@ -489,12 +489,22 @@ up to the top of the band. In the conduction band of a semiconductor, we deal wi
 the dispersion relation, i.e. the energy of electrons as a function of the wave-vector, can be approximated as that of free electrons:
 \begin{equation}
   E\left(\vec{k}\right) = \frac{\hbar^2 |\vec{k}|^2}{2m^*}
+  \label{eqn:3ddisp}
 \end{equation}
-where $\vec{k}$ is the electron wave-vector and $m^*$ is the effective electron mass. From this, we can also give the
-formal definition for the Fermi energy. The \textbf{Fermi energy} ($E_F$) is the highest filled electronic state
+where $\vec{k}$ is the electron wave-vector and $m^*$ is the effective electron mass. The effective electron mass in this
+instance is a scaling factor on the increase in energy as wave-vector changes and is defined as the curvature of the conduction
+or valence band of the semiconductor:
+\begin{equation}
+  m^* = \hbar^2 \left(\diff[2]{E}{k}\right)^{-1}
+\end{equation}
+Intuitively we can think of it as describing a change in momentum for a given energy "kick". For a parabolic
+band, such as for the bottom of the conduction band in a III-V semiconductor, it's value is constant, however
+it's form will be more complex for materials that have directional dependences (such as Si), or more complex bands
+such as graphene, which has a locally linear band at the bottom of the conduction band. From Eqn.~\ref{eqn:3ddisp}, we can also give the
+formal definition for the Fermi energy. The \textbf{Fermi energy} ($E_F$) is the energy of the highest filled electronic state
 at zero temperature. This situation is represented schematically in figure~\ref{fig:blochwaves}~(b) for a single dimension.
 In 3D, the Fermi energy forms a sphere in momentum space delineating the region where electron states are filled, the surface
-of which we call the Fermi surface. From this, we can define the Fermi wavelength $\lambda_F$ of an electron at the Fermi
+of which we call the Fermi surface. Finally, we can define the \textbf{Fermi wavelength} $\lambda_F$ of an electron at the Fermi
 surface, effectively the size of an electron in our semiconductor. Using $k = 2\pi/\lambda$ we find:
 \begin{equation}
   \lambda_F = \frac{h}{\sqrt{2m^*E_F}}
@@ -577,7 +587,7 @@ dispersion relation becomes that of free electrons in two-dimensions:
 
 We can also define the density of states (DOS) in 2-dimensions as the number of states $n(E)$ per unit energy $(E)$:
 \begin{equation}
-  \rho_{2D} = \frac{d n(E)}{d E}
+  \rho_{2D} = \diff{n(E)}{E}
 \end{equation}
 
 For free electrons in 2D, the states fill an area in momentum-space up to k-vector $k$:
@@ -811,7 +821,7 @@ can also be defined in a similar way:
   to a full quantum model. For finite tunnel coupling, an avoided crossing is formed. (d) Calculated energies of singlet and
   triplet spin configurations for a two-electron double quantum dot. Due to the Pauli exclusion principle, the $(2, 0)T$
   state is not accessible until we reach the first excited orbital state, such that the $(2, 0)T$ level is energetically
-  inaccessible at zero detuning. We define the exchange energy $J(\varepsilon)$ as the energy between the $(1, 1)S$ and $(1, 1)T$
+  inaccessible at zero tilt. We define the exchange energy $J(\varepsilon)$ as the energy between the $(1, 1)S$ and $(1, 1)T$
   states. (e) Current through a double quantum dot at $V_{SD} = \SI{0.5}{\milli\volt}$. Charge transitions split into finite bias triangles
   which reveal the presence of excited orbital states in the dot, as well as the effects of spin, which blocks transport through the orbital ground state of the dot.}
 \end{figure}
@@ -910,7 +920,7 @@ occupy a single dot, where electrons are not separable. In the latter case, the 
 us that two equal spins cannot occupy the same orbital state (position) leads to the $(2, 0)T$ state having a higher
 energy than the $(2, 0)S$ state with a gap set by the orbital states of the quantum dot $\Delta E_N$. This is
 represented schematically in Fig.~\ref{fig:dqdenergy} (d), which shows the energy levels of a quantum dot around the
-$(1, 1) \rightarrow (2, 0)$ charge transition as a function of detuning. Note that although the singlet state can freely
+$(1, 1) \rightarrow (2, 0)$ charge transition as a function of tilt. Note that although the singlet state can freely
 change state around zero tilt, a qubit in the triplet state will not transition into the $(2, 0)$ charge configuration
 until we can populate an excited orbital mode off to the right. This effect is visible in the current through a double
 quantum dot, which will undergo a rectification due to this spin blockade, as shown in Fig~\ref{fig:dqdenergy} (e).
@@ -926,7 +936,7 @@ electron, until the second orbital energy level is accessible, a situation depic
 The prevented transition leads to a region of blocked current near the base of the triangle and a reemergence of current once the second orbital
 becomes accessible.
 
-As with single spins, away from any charge degeneracy points, these four states are all degenerate. Near zero detuning we get an
+As with single spins, away from any charge degeneracy points, these four states are all degenerate. Near zero tilt we get an
 energy difference that opens between the singlet and triplet states called the exchange energy $J(\varepsilon)$. At this
 point, the triplet state is doubly degenerate between the $T_-$, $T_0$ and $T_+$ states. Application of a magnetic field creates
 a splitting between these three levels given by $\Delta E = g^* \mu_B B S_z$, which causes no change to the $S$ and $T_0$ state,

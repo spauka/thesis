@@ -85,7 +85,7 @@ previously intractable fall within our grasp. Unfortunately, any exponential sca
 and so it was for ICs for two key reasons: power and transistor size. As we made our transistors smaller,
 we stopped seeing a concomitant efficiency increase, and all of a sudden, the power density of our ICs
 became a limiting factor. To halt this increase, we had to reduce power dissipation, and the
-only way we saw how was by capping the speed of our computers, which we can see in figure~\ref{fig:mooreslaw}
+only way we saw how was by capping the speed of our computers, which we can see in Fig.~\ref{fig:mooreslaw}
 has plateaued since the early 2000s. Moreover, the smaller our transistors became, the more costly they became
 to make. Even Moore's law, which has stubbornly held past the expectations of most scientists, must eventually
 end as we bump up against the sizes of atoms. It seems unlikely that there is much room below Samsung's
@@ -128,7 +128,7 @@ the Variational Quantum Eigensolver algorithm\cite{ncomms5213} have no known eff
 but could profoundly impact society if they are solvable. It is the promise of solutions to these problems
 that drive the search for a quantum computer; however, the challenges of realizing one remain formidable. To close
 out our discussion of complexity classes, I've summarized the relationship between complexity classes in
-figure~\ref{fig:complexity}. To emphasize this point, note that although \cc{BQP} is larger than \cc{P}
+Fig.~\ref{fig:complexity}. To emphasize this point, note that although \cc{BQP} is larger than \cc{P}
 or \cc{BPP}, it certainly does not enclose all problems, especially those in \cc{EXP}. Although a
 quantum computer may offer an exponential speedup on a subset of algorithms, it will not give us an exponential
 speedup in the general case.
@@ -149,7 +149,7 @@ the state of each bit in the register. For example, two bits can take up to 4 di
 values: 00, 01, 10, 11. Three bits can take up to 9 values, and $N$ bits can take up to $2^N$ values.
 By choosing various encodings of values, we can map numbers, letters, and other symbols onto these registers
 and perform computations on them. For example, we can map positive integers onto registers using a base-2 number
-system, as in figure~\ref{fig:binary}, or letters using a mapping such as ASCII, which assigns letters to 8-bit registers.
+system, as in Fig.~\ref{fig:binary}, or letters using a mapping such as ASCII, which assigns letters to 8-bit registers.
 Other mappings exist for negative numbers (such as a mapping called two's complement), numbers with
 decimal points (such as IEEE floating point), complex numbers and so forth.
 
@@ -212,8 +212,8 @@ the global phase factor, which gives us the state:
 \begin{equation}
   \ket{\psi} = \cos\left(\frac{\theta}{2}\right)\ket{0} + e^{-i\phi}\sin\left(\frac{\theta}{2}\right)\ket{1}
 \end{equation}
-This representation is shown visially in figure~\ref{fig:bloch} and is called the Bloch sphere representation
-of a qubit.
+This representation is shown visially in Fig.~\ref{fig:bloch} and is called the Bloch sphere representation
+of a qubit.\footnote{For mathematicians, this is a description of the qubit in Complex Projective Space}
 
 Given this description, we can now start to think about what operations on a single qubit might look like.
 While on a single bit, the only non-trivial operation we can perform is a flip ($0 \rightarrow 1$ and $1 \rightarrow 0$),
@@ -234,6 +234,7 @@ $\sigma_X, \sigma_Y, \sigma_Z$ respectively, and are called the Pauli matrices.
 They have the values:
 \begin{align}
   \sigma_X = \svec{0&1\\1&0} && \sigma_Y = \svec{0&-i\\i&0} && \sigma_Z = \svec{1&0\\0&-1}
+  \label{eq:pauli}
 \end{align}
 
 We can build up arbitrary rotations from these unit vectors by taking various powers of these vectors
@@ -369,7 +370,7 @@ qubit implementations. Unfortunately, reality is not so kind, and as has been di
 fragility of a quantum state that remains the main challenge of implementing a large scale quantum computing.
 Another way of stating the same thing is to say uncontrolled coupling to the environment, either through
 energy loss or uncontrolled rotations, leads to loss of information from our quantum computing, shown schematically
-in figure~\ref{fig:noise}. As we are unable to make a good projective measurement of the environment, the output
+in Fig.~\ref{fig:noise}. As we are unable to make a good projective measurement of the environment, the output
 state after the unitary interaction $U$ with the environment cannot be well described in the vector notation we
 described above, and some information about the state is irreversibly lost. As such, the challenge of including
 these sources of noise into our model of quantum computing is to figure out how to model an uncontrolled environment.
@@ -466,7 +467,7 @@ an idea of its "size". The following introduction is based on material that is t
 
 In a crystalline material, such as a metal or a semiconductor lattice, we can think
 about electrons as travelling through a periodic potential, caused by the periodic spacing of nuclei in the lattice, as
-is shown in figure~\ref{fig:blochwaves}~(a) for a 1D lattice. There will be two sets of solutions; the first will be for electrons
+is shown in Fig.~\ref{fig:blochwaves}~(a) for a 1D lattice. There will be two sets of solutions; the first will be for electrons
 that are bound around nuclei which will form the valence band, and free electron solutions which
 will form the conduction band. The gap between these two solutions forms a band gap of size $(E_G)$, a range
 of energies for which there are no available states. As we are looking at the 2DEG, let's focus on free electron solutions for now.
@@ -488,7 +489,7 @@ this model leads to bands which are similar to free electron plane waves up to t
 up to the top of the band. In the conduction band of a semiconductor, we deal with largely empty bands, as such
 the dispersion relation, i.e. the energy of electrons as a function of the wave-vector, can be approximated as that of free electrons:
 \begin{equation}
-  E\left(\vec{k}\right) = \frac{\hbar^2 |\vec{k}|^2}{2m^*}
+  E(\vec{k}) = \frac{\hbar^2 |\vec{k}|^2}{2m^*}
   \label{eqn:3ddisp}
 \end{equation}
 where $\vec{k}$ is the electron wave-vector and $m^*$ is the effective electron mass. The effective electron mass in this
@@ -502,7 +503,7 @@ band, such as for the bottom of the conduction band in a III-V semiconductor, it
 it's form will be more complex for materials that have directional dependences (such as Si), or more complex bands
 such as graphene, which has a locally linear band at the bottom of the conduction band. From Eqn.~\ref{eqn:3ddisp}, we can also give the
 formal definition for the Fermi energy. The \textbf{Fermi energy} ($E_F$) is the energy of the highest filled electronic state
-at zero temperature. This situation is represented schematically in figure~\ref{fig:blochwaves}~(b) for a single dimension.
+at zero temperature. This situation is represented schematically in Fig.~\ref{fig:blochwaves}~(b) for a single dimension.
 In 3D, the Fermi energy forms a sphere in momentum space delineating the region where electron states are filled, the surface
 of which we call the Fermi surface. Finally, we can define the \textbf{Fermi wavelength} $\lambda_F$ of an electron at the Fermi
 surface, effectively the size of an electron in our semiconductor. Using $k = 2\pi/\lambda$ we find:
@@ -561,7 +562,7 @@ while also forming a straddling-gap heterojunction. The gap in GaAs is $E_{G1} =
 changing the ratio of Al and Ga in the semiconductor, taking the value $E_{G2} = 1.424 + 1.225x$ \si{\electronvolt}.
 Furthermore, up to $x = 0.44$, the ratio of the step in the conductance
 band ($\Delta E_C$) to the step in valence band ($\Delta E_V$) is a constant: $\Delta E_C/\Delta E_V = 1.5$~\cite{adachi1993properties}
-[see steps in figure~\ref{fig:heterostructure}~(b)], allowing the depth of the well to be easily varied.
+[see steps in Fig.~\ref{fig:heterostructure}~(b)], allowing the depth of the well to be easily varied.
 Finally, by doping the semiconductor with Si, we can move the Fermi energy up to populate a single subband, leading to a
 2-dimensional plane of electrons, where there is only a single wave-vector in the Z direction ($k_z$) that electrons can take. As long
 as the electron temperature is far below the energy, only this subband will be populated.
@@ -722,9 +723,10 @@ $E_n(B)$ is the energy of the $n$-th orbital under a magnetic field B:
   U(N) = \frac{[-|e|(N-N_0) + C_SV_S + C_DV_D + C_GV_G]^2}{C_\Sigma} + \sum_{n=1}^N E_n(B)
 \end{equation}
 We can also define the electrochemical potential $\mu(N)$ of the dot:
-\begin{equation}
-  \mu(N) \equiv U(N) - U(N-1) = \left(N - N_0 - \tfrac{1}{2}\right)E_C - \frac{E_C}{|e|}\left(C_SV_S + C_DV_D + C_GV_G\right) + E_N(B)
-\end{equation}
+\begin{multline}
+  \mu(N) \equiv U(N) - U(N-1) \\
+    = \left(N - N_0 - \tfrac{1}{2}\right)E_C - \frac{E_C}{|e|}\left(C_SV_S + C_DV_D + C_GV_G\right) + E_N(B)
+\end{multline}
 Note that we've assumed that we are tunnelling into the ground state of each level, it is a reasonably
 simple modification to the above to calculate the chemical potential of tunnelling into an excited orbital
 state. The most important difference here is a linear dependence on gate voltage, which allows us to draw
@@ -844,8 +846,8 @@ out the energy levels of a quantum dot at various points according to the consta
 In this case, looking at the $(0, 0), (0, 1), (1, 0), (1, 1)$ transition, we find two points where
 three charge transitions meet, so-called triple points, where energy levels within both the left and right dot are aligned
 with the reservoirs. If we were to try and pass a current through such a system, it would only be at these points that a
-current would flow. In between these triple points we find a new inter-dot transition, which comes from the fact that $\mu_{(1 \textrm{and} 2)}$
-is now a function of gate voltage \emph{and} the occupancy of dot $(2 \textrm{and} 1)$. This dependence on the
+current would flow. In between these triple points we find a new inter-dot transition, which comes from the fact that $\mu_{(1 \textrm{~and~} 2)}$
+is now a function of gate voltage \emph{and} the occupancy of dot $(2 \textrm{~and~} 1)$. This dependence on the
 occupancy is a result of the inter-dot capacitance and leads to an additional penalty that must be
 overcome to load an electron on both left and right dots; hence the point where we move from $(0, 0) \rightarrow (1, 1)$ is
 pushed up in both $V_{G1}$ and $V_{G2}$. To further analyze this charge transition, we rotate ourselves to align with
@@ -942,8 +944,107 @@ point, the triplet state is doubly degenerate between the $T_-$, $T_0$ and $T_+$
 a splitting between these three levels given by $\Delta E = g^* \mu_B B S_z$, which causes no change to the $S$ and $T_0$ state,
 and causes the $T_+$ and $T_-$ states to split off around the $T_0$ state.
 
+\subsubsection{Defining Double Quantum Dots on GaAs}
+
+\begin{table}
+  \centering
+  \begin{tabular}{|l|c|l|}
+   \hline
+   Lattice Constant (\si{\angstrom}) & $a$ & 5.65 \\ \hline
+   Dielectric Constant & $\epsilon_r = \tfrac{\epsilon}{\epsilon_0}$ & 12.9 \\ \hline
+   Land\'e g-factor & $g^*$ & -0.44 \\ \hline
+   Electron Effective Mass & $(m^*/m_e) $ & 0.066 \\ \hline
+   2DEG Depth (\si{\nano\meter}) & $d$ & 91 \\ \hline
+   Density (\si{\per\square\centi\meter}) & $n_s$ & $1.30 \times 10^{11}$ \\ \hline
+   Mobility (\si{\square\centi\meter\per\volt\per\second}) & $\mu$ & $4.8 \times 10^6$ \\ \hline
+   Fermi Wavelength (\si{\nano\meter}) & $\lambda_F = \sqrt{\frac{2 \pi}{n_s}}$ & 70 \\
+   \hline
+  \end{tabular}
+  \caption[Representative properties of a GaAs 2DEG used for forming Quantum Dots]
+  {Representative properties of a GaAs 2DEG used for forming quantum dots, based on material
+  grown by the group of Mike Manfra at Purdue University.}
+  \label{tab:gaas2deg}
+\end{table}
+
+Having covered the theoretical description of a Quantum Dot as well as the physics behind the 2DEG, we can
+describe the formation of a quantum dot in GaAs. Typical parameters for a 2DEG in GaAs are given in table~\ref{tab:gaas2deg}, however
+the key properties for the formation of a 2DEG are the Fermi wavelength, which will set the approximate size of the dot we wish
+to form, and the depth, which will set the sharpness of the potential that the gates provide at the 2DEG. For samples that are
+doped and have an intrinsic density of electrons, we can form quantum dots by evaporating surface gates on top of an insulating
+dielectric [usually TiAu on top of $\approx \SI{10}{\nano\meter}$ \ce{HfO2} or \ce{Al2O3}, as shown in Fig.~\ref{fig:heterostructure} (c)],
+and applying negative voltages to deplete electrons below the gate in the 2DEG. Initially we expect the gate to change
+the density at the 2DEG as per that of a parallel plate capacitor:
+\begin{equation}
+  \Delta n_s = \frac{\epsilon_r \epsilon_0 \Delta V_g}{e d}
+\end{equation}
+For a gate at depth $d = \SI{101}{\nano\meter}$ from a 2DEG with density $n_s = \den{1.3e11}$ we expect depletion at around $V_g = \SI{-180}{\mv}$.
+After this, increasingly negative gate voltages deplete the 2DEG in a halo around the gate.
+
+\begin{figure}
+  \includegraphics[width=0.9\linewidth]{Device}
+  \caption[SEM Image of a Double Quantum Dot on GaAs]
+  {\label{fig:dd_design}(a) False color SEM of a double quantum dot design on GaAs. Surface gates (highlighted in gold) are
+  12nm TiAu onto which negative voltages are applied to deplete the 2DEG 101nm underneath. The location of quantum dots are
+  highlighted with red circles, and ohmic contacts to the 2DEG in yellow boxes. Descriptions of the gates are given in the
+  main text. The width of the double quantum dot at the surface is 970nm. (b) The Left Wall going through depletion while
+  pinching off with the Nose (set to -800mV), at the location marked with the arrow. All other gates are at zero. (c)
+  A full pinch-off curve of the Left Wall against the nose. As the undepleted region of the 2DEG shrinks towards the Fermi
+  wavelength, a 1D channel is formed, causing the appearance of quantized conductance plateaus.}
+\end{figure}
+
+Contact is made to the 2DEG via metallic ohmic contacts formed using a eutectic alloy of AuGe, which after evaporation is annealed
+at approximately \SI{450}{\celsius}. A full description of the fabrication process which gives ratios and thicknesses is given
+in Appendix~\ref{sec:fab}, for now all we need to know is this n-dopes the semiconductor directly under the contact with Germanium
+causing contact to the 2DEG with a resistance of between \SI{20}{\ohm} and a few \si{\kilo\ohm} depending on the size and quality
+of the ohmic contact.
+
+The design of gate structures that are able to confine electrons into quantum dots is an area of continued and fruitful research (see for
+example section~\ref{sec:5dot} of this thesis), however a common and well-tested pattern for a double quantum dot is shown in Fig.~\ref{fig:dd_design} (a).
+Gates are chosen to roughly correspond to the various parameters we described in section~\ref{sec:qd}; with the gates labelled LW (left wall)
+and RW (right wall) controlling the tunnel rates from the reservoirs to the dots, the gate labelled C (center) controlling the tunnel coupling
+$t_c$, and LP (left plunger) and RP (right plunger) controlling the chemical potential of the left dot ($\mu_1$) and right dot ($\mu_2$) respectively.
+The N (nose) gate acts as a global control, and a charge sensor (discussed in section~\ref{sec:readout}) which in this case is a third quantum dot formed
+against the left wall is placed to the left of the device. The location of ohmic contacts is marked by crosses, and allows us to measure both current
+through the device and through the sensor. The left wall of the quantum dot passing through depletion is shown in Fig.~\ref{fig:dd_design} (b) at the
+location marked by the arrow. A full pinch-off trace for the gate is given in Fig.~\ref{fig:dd_design} (c), showing the appearance of quantized
+conductance steps as the undepleted region of 2DEG shrinks to towards the Fermi wavelength. These steps appear in units of the spin degenerate conductance quantum,
+$R = 2 n e^2/h$, the physics of which we discuss in more detail in section~\ref{sec:char}.
+
 \subsection{Qubits from Quantum Dots}
-Having described the formation of quantum dots in a 2DEG, we now turn our attention to
+As we discussed at the beginning of this section, one of the challenges of quantum computing is finding physical systems
+that we can express as a two-level system, are isolated enough that the quantum state is preserved during operations,
+that we can easily initialize and read-out and are controllable. The last of these requirements is effectively the
+same as finding a system whose Hamiltonian ($H$) can express the operations that we defined in section~\ref{sec:qc}. We use
+Schr\"odinger's equation to describe this evolution:
+\begin{equation}
+  i \hbar \diff{\ket{\psi(t)}}{t} = H \ket{\psi(t)}
+\end{equation}
+For this reason, Hamiltonians describing two level systems used in quantum computers are often explicitly defined in terms of
+the Pauli matrices we defined in equation~\ref{eq:pauli}. For example, a model qubit Hamiltonian may be given by:
+\begin{equation}
+  H = A \sigma_X + B \sigma_Z = \svec{B&A\\A&-B}
+\end{equation}
+which describes rotations around an axis of the Bloch sphere at angle $\theta = \tan^{-1}\tfrac{A}{B}$ and with a rate
+$\omega_r = \tfrac{\sqrt{A^2 + B^2}}{\hbar}$. By varying the values of $A$ and $B$, we are able to construct arbitrary
+rotations around the Bloch sphere. Alternatively, the application of photons at the frequency
+$\omega_e = 2\sqrt{A^2 + B^2}$ is able to drive transitions between the eigenstates of this Hamiltonian.
+
+\subsubsection{The Charge Qubit}
+Perhaps the simplest form of qubit we can form with a double quantum dot system is a charge qubit. Here we define
+the logical subspace of the qubit as spanned by two charge states, typically the $(0, 1)$ and $(1, 0)$ charge states,
+with the basis $\ket{0} = (0, 1)$ and $\ket{1} = (1, 0)$. The qubit Hamiltonian is given by:
+\begin{equation}
+  H_{\textrm{charge}} = \frac{1}{2}\varepsilon\sigma_Z + t_c\sigma_X
+\end{equation}
+which is represented by the energy level diagram in Fig.~\ref{fig:dqdenergy}. The qubit is typically operated by the application
+of microwave pulses with frequency $\Omega = \sqrt{\varepsilon^2 + (2 t_c)^2}$ in order to drive transitions between the ground and
+excited charge configurations, and the state is read out via a proximal charge sensor (discussed in section~\ref{sec:readout}).
+
+Such a qubit, while conceptually simple is highly sensitive to charge noise in the semiconductor, such that the qubit lifetime $T_1$ and
+coherence times $T_2$ are both on the order of \SI{10}{\nano\second}~\cite{PhysRevLett.105.246804}. As such the usefulness of such a qubit
+is limited.
+
+\subsubsection{The Loss-Divincenzo Qubit}
 
 \subsection{Majorana Zero Modes}
 \label{sec:majo}
@@ -958,3 +1059,4 @@ Having described the formation of quantum dots in a 2DEG, we now turn our attent
 \label{sec:arch}
   \subsection{Control Plane}
   \subsection{Readout}
+  \label{sec:readout}

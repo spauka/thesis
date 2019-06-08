@@ -155,7 +155,7 @@ decimal points (such as IEEE floating point), complex numbers and so forth.
 
 \begin{figure}
   \includegraphics[width=0.75\linewidth]{Binary}
-  \caption[Binary Coding]
+  \caption[Binary coding]
   {We can encode information in a register in many ways. One encoding for positive numbers is to use a base-2
   positional system, like above, where the binary register \texttt{01011010} is mapped to the number 90.}
   \label{fig:binary}
@@ -164,7 +164,7 @@ decimal points (such as IEEE floating point), complex numbers and so forth.
 \subsubsection{The Qubit}
 A \textbf{qubit} is similar to a bit in that it has two states, $\ket{0}$ and $\ket{1}$, except unlike a bit, it is specified
 by a 2-dimensional vector, and evolves according to the rules of quantum mechanics. Due to the uniquely quantum
-mechanical property of \emph{superposition}, we can no longer write the state of a single qubit (which we will
+mechanical property of \textbf{superposition}, we can no longer write the state of a single qubit (which we will
 denote $\psi$) as either $\ket{0}$ or $\ket{1}$. Instead, we must write down the vector sum of the two states,
 which we define as follows:
 \begin{align}
@@ -281,7 +281,7 @@ In this case, the complex probability amplitudes can interfere with each other c
 become distinguishable, something that a classical bit could not replicate. What you see is what you get.
 
 \subsubsection{Multi-Qubit States (Qubit Registers)}
-The next additional computational resource that quantum physics gives us is \emph{entanglement}. This
+The next additional computational resource that quantum physics gives us is \textbf{entanglement}. This
 resource rears it's head when we try to combine multiple qubits into a register. Formally,
 we can define entanglement as a correlation between the states of qubits after they have interacted
 with each other. Due to this correlation, the state of a qubit that has been entangled with its partner
@@ -671,7 +671,7 @@ start by looking at a small metal island, which will not have well resolved orbi
 
 \begin{figure}
   \includegraphics[width=0.8\linewidth]{Dot}
-  \caption[Schematic of a Single Quantum Dot]
+  \caption[Schematic of a single quantum dot]
   {\label{fig:QD}(a) We define a tunnel junction as a combination of a resistor and a capacitor in parallel
   since for a quantum dot the geometric capacitance of the junction is significant. (b) Equivalent circuit
   model of a quantum dot. The dot is connected to reservoirs by a source and drain tunnel junction, where
@@ -735,7 +735,7 @@ of the dot can be swept linearly by varying the gate voltage.
 
 \begin{figure}
   \includegraphics[width=1.0\linewidth]{CB}
-  \caption[Coulomb Blockade in a Single Quantum Dot]
+  \caption[Coulomb Blockade in a single quantum dot]
   {\label{fig:cbtrans}(a) Coulomb Blockade through a single quantum dot. Current can only flow at points
   where the energy levels in the dot are in alignment with the reservoirs, which occurs as the gate voltage
   is swept. (b) Sweeping bias as well as the gate, we get diamond-like features as the levels move into
@@ -763,7 +763,7 @@ and note that this is the method by which we extract electron temperatures in se
 \subsubsection{Double Quantum Dots}
 \begin{figure}
   \includegraphics[width=1.0\linewidth]{DoubleDot}
-  \caption[Schematic of a Double Quantum Dot]
+  \caption[Schematic of a double quantum dot]
   {\label{fig:dqd}(a) Equivalent circuit model for a double quantum dot. The circuit is very similar to that of
   two single quantum dots in series, except that we must also account for cross capacitances between adjacent gates
   (the terms $C_{G1D2}$ and $C_{G2D1}$), as well as the contribution of the tunnel junction between the left and
@@ -978,9 +978,15 @@ the density at the 2DEG as per that of a parallel plate capacitor:
 For a gate at depth $d = \SI{101}{\nano\meter}$ from a 2DEG with density $n_s = \den{1.3e11}$ we expect depletion at around $V_g = \SI{-180}{\mv}$.
 After this, increasingly negative gate voltages deplete the 2DEG in a halo around the gate.
 
+Contact is made to the 2DEG via metallic ohmic contacts formed using a eutectic alloy of AuGe, which after evaporation is annealed
+at approximately \SI{450}{\celsius}. A full description of the fabrication process which gives ratios and thicknesses is given
+in Appendix~\ref{sec:fab}, for now, all we need to know is this n-dopes the semiconductor directly under the contact with Germanium
+causing a contact to be formed to the 2DEG with a resistance of between \SI{20}{\ohm} and a few \si{\kilo\ohm} depending on the size and quality
+of the ohmic contact.
+
 \begin{figure}
-  \includegraphics[width=0.9\linewidth]{Device}
-  \caption[SEM Image of a Double Quantum Dot on GaAs]
+  \includegraphics[width=0.85\linewidth]{Device}
+  \caption[SEM image of a double quantum dot on GaAs]
   {\label{fig:dd_design}(a) False color SEM of a double quantum dot design on GaAs. Surface gates (highlighted in gold) are
   12nm TiAu onto which negative voltages are applied to deplete the 2DEG 101nm underneath. The locations of the quantum dots are
   highlighted with red circles and the ohmic contacts to the 2DEG in yellow boxes. Descriptions of the gates are given in the
@@ -990,12 +996,6 @@ After this, increasingly negative gate voltages deplete the 2DEG in a halo aroun
   wavelength, a 1D channel is formed, causing the appearance of quantized conductance plateaus.}
 \end{figure}
 
-Contact is made to the 2DEG via metallic ohmic contacts formed using a eutectic alloy of AuGe, which after evaporation is annealed
-at approximately \SI{450}{\celsius}. A full description of the fabrication process which gives ratios and thicknesses is given
-in Appendix~\ref{sec:fab}, for now, all we need to know is this n-dopes the semiconductor directly under the contact with Germanium
-causing a contact to be formed to the 2DEG with a resistance of between \SI{20}{\ohm} and a few \si{\kilo\ohm} depending on the size and quality
-of the ohmic contact.
-
 The design of gate structures that can confine electrons into quantum dots is an area of continued and fruitful research (see for
 example section~\ref{sec:5dot} of this thesis), however a common and well-tested pattern for a double quantum dot is shown in Fig.~\ref{fig:dd_design} (a).
 Gates are designed to correspond to the various parameters we described in section~\ref{sec:qd}; with the gates labelled LW (left wall)
@@ -1003,7 +1003,9 @@ and RW (right wall) controlling the tunnel rates from the reservoirs to the dots
 $t_c$, and LP (left plunger) and RP (right plunger) controlling the chemical potential of the left dot ($\mu_1$) and right dot ($\mu_2$) respectively.
 The N (nose) gate acts as a global control, and a charge sensor (discussed in section~\ref{sec:readout}) which in this case is a third quantum dot formed
 against the left wall is placed to the left of the device. The location of ohmic contacts is marked by crosses and allows us to measure current both
-through the device and through the sensor. The left wall of the quantum dot passing through depletion is shown in Fig.~\ref{fig:dd_design} (b) at the
+through the device and through the sensor.
+
+The left wall of the quantum dot passing through depletion is shown in Fig.~\ref{fig:dd_design} (b) at the
 location marked by the arrow. A full pinch-off trace for the gate is given in Fig.~\ref{fig:dd_design} (c), showing the appearance of quantized
 conductance steps as the undepleted region of 2DEG shrinks to towards the Fermi wavelength. These steps appear in units of the spin-degenerate conductance quantum,
 $R = 2 n e^2/h$ for integer $n$, the physics of which we discuss in more detail in section~\ref{sec:char}. Several gates on the device
@@ -1106,7 +1108,7 @@ we only operate in the $S-T_0$ states. Any leakage into the $T_-$ or $T_+$ state
 
 \begin{figure}
 \includegraphics[width=0.9\linewidth]{st0}
-\caption[Energy Levels and Eigenstates of a Singlet-Triplet Qubit]
+\caption[Energy levels and eigenstates of a Singlet-Triplet qubit]
 {\label{fig:st0}(a) The energy levels of a Singlet-Triplet Qubit. The three triplet states are split by the application of a
 uniform magnetic field $B$. At a large negative detuning, i.e. $J(\epsilon) \approx 0$, the gradient magnetic field $\Delta B_X$ leads to a
 change in basis, such that the energy eigenstates are described by $\ket{\uparrow_1\downarrow_2}$ and $\ket{\downarrow_1\uparrow_2}$,
@@ -1140,13 +1142,13 @@ improved materials growth, which is expected to improve qubit coherence further~
 
 \begin{figure}
   \includegraphics[width=0.85\linewidth]{eo}
-  \caption[Energy Levels and Eigenstates of an Exchange Only Qubit]
+  \caption[Energy levels and eigenstates of an Exchange-Only qubit]
   {\label{fig:eo}(a) Schematic of a triple quantum dot, with tunable tunnel couplings between the left and centre quantum dots, and the
   right and centre quantum dots. (b) Charge stability diagram for a triple quantum dot when sweeping the $V_{G1}$ and $V_{G3}$ around the
   $(1,1,1)$ charge configuration. The tilt axis is marked in red and sweeps from the $(2,0,1) \rightarrow (1,1,1) \rightarrow (1,0,2)$
-  charge configurations. (c) Energy levels of the exchange only qubit. Quadruplet states or excited doublet states are not shown. The Exchange energies
+  charge configurations. (c) Energy levels of the exchange-only qubit. Quadruplet states or excited doublet states are not shown. The Exchange energies
   between the left (right) and centre dots are swept as a function of tilt. The energy eigenstates change between $\ket{S/T_l}$ and $ket{S/T_r}$
-  at the extremes of tilt. (d) Bloch state representation of the exchange only qubit. The exchange interaction drives rotation around two
+  at the extremes of tilt. (d) Bloch state representation of the exchange-only qubit. The exchange interaction drives rotation around two
   axes of the Bloch sphere separated by \SI{120}{\degree}.}
 \end{figure}
 
@@ -1175,14 +1177,14 @@ I arbitrarily choose to be the $-1/2$ states here:
   \ket{1} &=& \ket{\textrm{D}_{-1/2}} &= \ket{T_{l,r}}
 \end{alignat}
 
-Focussing on this subspace, the energy level diagram of the exchange only qubit is given in Fig.~\ref{fig:eo} (c). We are able to change the exchange
+Focussing on this subspace, the energy level diagram of the exchange-only qubit is given in Fig.~\ref{fig:eo} (c). We are able to change the exchange
 energy between the left (right) and center dots by sweeping tilt ($\varepsilon$). We can largely ignore leakage states as the set of four quadruplet
 states have different principal spin, and the two remaining doublet states are rendered inaccessible by the applied Zeeman field. The exchange-only
 qubit was first experimentally realized in~\cite{PhysRevB.82.075403}. In GaAs systems, rotations at rates of up to \SI{47.4}{\giga\hertz} have been measured,
 with a lower bound of $T_2 = \SI{100}{\nano\second}$, limited by nuclear spins in GaAs~\cite{nnano.2013.168}.
 
 The fast rotation rate also leads to increased sensitivity
-to exchange (charge) noise, however improved schemes building on the ideas of the exchange only qubit~\cite{Russ_2017}, such as the Resonant Exchange Qubit~\cite{PhysRevLett.111.050501},
+to exchange (charge) noise, however improved schemes building on the ideas of the exchange-only qubit~\cite{Russ_2017}, such as the Resonant Exchange Qubit~\cite{PhysRevLett.111.050501},
 the Always-On Exchange-Only (AEON) qubit~\cite{PhysRevB.93.121410} or the Quadrupolar Exchange-Only Qubit~\cite{PhysRevLett.121.177701,Kornich_2018},
 which can trade off the number of electrons or continuous driving for insensitivity to certain forms of noise. Additional work with double
 quantum dots with higher electron occupancies and hence higher principal spin quantum numbers are also predicted to have desirable noise rejection,

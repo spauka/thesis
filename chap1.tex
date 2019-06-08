@@ -367,22 +367,22 @@ that was prepared in the state is lost. Quantum algorithms must, therefore, have
 
 Up to this point we have assumed that there are no noise sources or sources of information loss in our
 qubit implementations. Unfortunately, reality is not so kind, and as has been discussed before, it is the
-fragility of a quantum state that remains the main challenge of implementing a large scale quantum computing.
-Another way of stating the same thing is to say uncontrolled coupling to the environment, either through
-energy loss or uncontrolled rotations, leads to loss of information from our quantum computing, shown schematically
+fragility of a quantum state that remains the main challenge of implementing a large scale quantum computing,
+an effect called~\textbf{decoherence}. Equivalently, we can describe this effect as uncontrolled coupling to the environment, either through
+energy loss or uncontrolled rotations, which leads to loss of information from our quantum computing, shown schematically
 in Fig.~\ref{fig:noise}. As we are unable to make a good projective measurement of the environment, the output
-state after the unitary interaction $U$ with the environment cannot be well described in the vector notation we
-described above, and some information about the state is irreversibly lost. As such, the challenge of including
-these sources of noise into our model of quantum computing is to figure out how to model an uncontrolled environment.
+state after the unitary interaction $U$ with the environment cannot be well described in the vector notation we have been using
+this far, and some information about the state is irreversibly lost. The challenge of including
+these sources of noise into our view of quantum computing is to figure out how to model the uncontrolled environment.
 \footnote{Or, we could replace the environment with something we CAN control and measure, an approach attempted
 in~\cite{2018arXiv180300545M}.}
-To model this sort of interaction, we could switch to a density matrix representation of our state, which allows us
+The primary way to describe such an interaction is to switch to a density matrix representation of our state, which allows us
 to describe a subsystem of a composite quantum system, i.e. to ignore the portion of the state lost to the environment.
 Indeed this is the most complete way to describe noise processes and information loss of our state, however rather
-than introduce a more powerful, but otherwise equivalent, description of quantum mechanics, we can instead model
-noise processes as interactions with a controlled environment, such as another qubit, as in figs.~\ref{fig:noise} (b) and (c).
+than introduce a more powerful and complex, but otherwise equivalent, description of quantum mechanics, we can instead model
+noise processes as interactions with a controlled and known environment, such as another qubit, as in figs.~\ref{fig:noise} (b) and (c).
 We can categorize interactions of our qubits into two general classes: relaxation (sometimes called amplitude
-damping), and dephasing (sometimes called phase damping).
+damping), and dephasing (sometimes called phase damping), which collectively lead to decoherence.
 
 The first class of error, \textbf{relaxation}, causes our population to decay towards the ground state $\ket{0}$ each time it is
 applied with probability $\gamma$. We can think about this sort of process as a loss of energy from the qubit system, and
@@ -411,12 +411,10 @@ we can define it as non-markovian noise, that is there is some correlation in th
 by appriate application of dynamical decoupling.} or multi-qubit systems that operate
 under an inhomogeneous background, we can use correlations in the noise or the static nature of the inhomogeneous background
 to "rephase" our qubits~\cite{PhysRev.80.580,dynamic-decoupling-biercuk}. We can think of this effect as coming from the
-fact that the phase evolves at a constant rate over the timescale of operations, such that by applying an $X$ gate to our
-qubit/qubits, we can unroll whatever phase was accumulated.  In this case, the $T_2$ time becomes the relaxation rate after
+fact that the phase evolves at a predictable rate over the timescale of operations, such that by applying an appropriate sequence
+of gates, we can unroll whatever phase was accumulated.  In this case, the $T_2$ time becomes the dephasing time after
 application of rephasing gates, while $T_2^*$ is the ensemble dephasing time, assuming measurement over a longer timescale
 than the correlation time and without correcting for inhomogeneities.
-
-% Possible TODO: Circuit notation?
 
 \section{Making Qubits in Semiconductors}
 \label{sec:qcinsm}
@@ -433,15 +431,15 @@ DiVincenzo, criteria that are widely considered to be the standard checklist for
   \item The ability to perform measurements on individual qubits.
 \end{enumerate}
 Although these criteria set out some requirements for useful qubits, they are certainly not so prescriptive
-that there is a dearth of systems that could fulfil them. It is in this context that ion-traps, photonic,
-NMR based qubits, superconducting and semiconductor-based qubits are being investigated, each with advantages
+that there is a dearth of systems that could fulfil them. It is in this context that ion-trap qubits, photonic qubits,
+NMR based qubits, superconducting qubits and semiconductor-based qubits are being investigated, each with advantages
 and disadvantages for each criterion. Apart from a brief discussion of the scalability prospects of each of these systems
 in section~\ref{sec:arch}, I will focus on semiconductor-based qubits for the remainder of this thesis. This type
 of qubit has the potential to utilize the extraordinary processing capabilities of modern semiconductor manufacturing,
 although, even within this subset of possible qubit systems, there are still many different
-choices of two-level subspace. As a result, I will not attempt to comprehensively cover all the variations
-of qubit that exist; rather I will focus specifically on two general designs, quantum dots and Majorana zero modes,
-which in many ways share similar control and readout. As such the discussion of physics in this section will
+choices of two-level subspace. As a result, I will not attempt to cover all the variations
+of qubit that exist comprehensively; rather I will focus specifically on two general designs, quantum dots and Majorana zero modes,
+which in many ways share similar control and read-out. As such the discussion of physics in this section will
 largely be confined to III-V materials, although I will point out that as my thesis is aimed at the general
 problem of architecting a quantum computer, many of the results presented may find use outside the subset of physics
 I present here. Before we begin a detailed discussion of qubits in semiconductors, let's first take a look
@@ -467,8 +465,8 @@ an idea of its "size". The following introduction is based on material that is t
 
 In a crystalline material, such as a metal or a semiconductor lattice, we can think
 about electrons as travelling through a periodic potential, caused by the periodic spacing of nuclei in the lattice, as
-is shown in Fig.~\ref{fig:blochwaves}~(a) for a 1D lattice. There will be two sets of solutions; the first will be for electrons
-that are bound around nuclei which will form the valence band, and free electron solutions which
+is shown in Fig.~\ref{fig:blochwaves}~(a) for a 1D lattice. There will be two sets of solutions; one for electrons
+that are bound around nuclei which will form the valence band and one for free electron solutions which
 will form the conduction band. The gap between these two solutions forms a band gap of size $(E_G)$, a range
 of energies for which there are no available states. As we are looking at the 2DEG, let's focus on free electron solutions for now.
 These solutions will take the form of Bloch waves, expressed as a function of lattice position $r$ and wave-vector $k$:
@@ -499,10 +497,10 @@ or valence band of the semiconductor:
   m^* = \hbar^2 \left(\diff[2]{E}{k}\right)^{-1}
 \end{equation}
 Intuitively we can think of it as describing a change in momentum for a given energy "kick". For a parabolic
-band, such as for the bottom of the conduction band in a III-V semiconductor, it's value is constant, however
-it's form will be more complex for materials that have directional dependences (such as Si), or more complex bands
-such as graphene, which has a locally linear band at the bottom of the conduction band. From Eqn.~\ref{eqn:3ddisp}, we can also give the
-formal definition for the Fermi energy. The \textbf{Fermi energy} ($E_F$) is the energy of the highest filled electronic state
+band, such as for the bottom of the conduction band in a III-V semiconductor, its value is constant, however
+the form of the effective mass will be more complex for materials that have directional dependences (such as Si), or more complex band structures
+such as graphene. From Eqn.~\ref{eqn:3ddisp}, we can also give the
+formal definition for the Fermi energy. The \textbf{Fermi energy} ($E_F$) is the energy of the highest filled electron state
 at zero temperature. This situation is represented schematically in Fig.~\ref{fig:blochwaves}~(b) for a single dimension.
 In 3D, the Fermi energy forms a sphere in momentum space delineating the region where electron states are filled, the surface
 of which we call the Fermi surface. Finally, we can define the \textbf{Fermi wavelength} $\lambda_F$ of an electron at the Fermi
@@ -573,8 +571,8 @@ at a time. We start with a semi-insulating GaAs substrate, over which a large bu
 Repeated thin layers of GaAs/\ce{Al_{0.3}Ga_{0.7}As} are grown to reduce the dislocation density
 and create a continuous, smooth single crystal at the heterojunction. The red line represents the 2DEG itself on the schematic,
 followed by a region of Si $\delta$-doping, used to pin the Fermi level in the substrate, and
-a \SI{10}{\nano\meter} GaAs cap to protect against oxidation. During processing, a protective oxide barrier (either \ce{HfO2}
-or \ce{Al2O3}) is grown, followed by surface gates which allow the density of states to be locally modified, or even depleted,
+a \SI{10}{\nano\meter} GaAs cap to protect against oxidation. During processing, a protective oxide barrier
+(either \ce{HfO2} or \ce{Al2O3}) is grown, followed by surface gates which allow the density of states to be locally modified, or even depleted,
 to form structures in the 2DEG. The oxide layer, apart from serving as a passivation barrier, is also necessary to
 prevent tunnelling of electrons from the surface gates into the donor layer, where the movement of electrons is known to be a significant
 source of charge noise~\cite{PhysRevB.72.115331, PhysRevApplied.9.034008}.
@@ -643,8 +641,8 @@ If we rearrange for $v_d$ we find:
 \end{align}
 where $\mu$ is a quantity called mobility, with units \si{\square\centi\meter\per\volt\per\second}.
 Then to find the conductivity, we remember the definition for current
-density, which will be given by the number of electrons that pass an area per second, $J = n_s e v_d$, and the
-definition of conductivity, which is simply the current density per electric field, $\sigma = J/E$. From here,
+density, which will be given by the number of electrons that pass an area per second, $J = n_s e v_d$,
+and the definition of conductivity, which is simply the current density per electric field, $\sigma = J/E$. From here,
 we find the equation for conductivity in terms of electron density and mobility to be:
 \begin{equation}
   \sigma = n_s e \mu
@@ -652,11 +650,11 @@ we find the equation for conductivity in terms of electron density and mobility 
 
 At this point, our discussion splits into two streams.
 The first deals with the formation of quantum dots, structures with tight confinement in all three dimensions,
-and is covered in section~\ref{sec:qd}.
-The second deals with the characterization of 2DEGs, extracting
-the mobility, density, strength of the spin-orbit interaction and so forth, and is covered in section~\ref{sec:char}.
-Both of these are crucially important for building a variety of qubits in semiconductors,
-and many of the advances in the construction of both spin qubits and topological qubits stem from improvements in materials science that have led to higher quality 2DEGs and the availability of exotic material systems.
+and is covered in section~\ref{sec:qd}. The second deals with the characterization of 2DEGs, extracting
+the mobility, density, strength of the spin-orbit interaction, via weak (anti-)localization measurements and the quantum
+Hall effect, and is covered in section~\ref{sec:char}. Both of these are crucially important for building a variety of
+qubits in semiconductors, and many of the advances in the construction of both spin qubits and topological qubits stem
+from improvements in materials science that have led to higher quality 2DEGs and the availability of exotic material systems.
 
 \subsection{Quantum Dots}
 \label{sec:qd}
@@ -666,7 +664,7 @@ energy~\cite{karl-gatemon} or in Majorana zero modes\cite{PhysRevLett.119.136803
 point, a topic we shall explore in section~\ref{sec:majo}. By far the most well studied is to use a 2DEG to confine
 electrons in a zero-dimensional quantum dot, using surface gates to define zero-dimensional "puddles" of electrons
 ~\cite{RevModPhys.79.1217,RevModPhys.75.1}.
-These puddles of electrons, which in a semiconductor have dimensions on the order of the Fermi wavelength $\lambda_F$,
+These puddles of electrons which in a semiconductor have dimensions on the order of the Fermi wavelength $\lambda_F$
 creates a discrete spectrum of available states, a situation akin to having an atom with a set of orbital modes
 stuck in the middle of your 2DEG\cite{PhysRevLett.77.3613}. Before considering a quantum dot in a semiconductor, let's
 start by looking at a small metal island, which will not have well resolved orbital modes but can still contain a discrete, well defined, number of electrons.
@@ -821,22 +819,22 @@ can also be defined in a similar way:
   numbers indicate the charge occupancies of both dots. We define the tilt (offset) axes perpendicular (parallel) to the
   inter-dot transition in red (green). (c) Calculated energy levels along the $(0,1) \rightarrow (1,0)$ charge transition according
   to a full quantum model. For finite tunnel coupling, an avoided crossing is formed. (d) Calculated energies of singlet and
-  triplet spin configurations for a two-electron double quantum dot. Due to the Pauli exclusion principle, the $(2, 0)T$
-  state is not accessible until we reach the first excited orbital state, such that the $(2, 0)T$ level is energetically
+  triplet spin configurations for a two-electron double quantum dot. Due to the Pauli exclusion principle,
+  the $(2, 0)T$ state is not accessible until we reach the first excited orbital state, such that the $(2, 0)T$ level is energetically
   inaccessible at zero tilt. We define the exchange energy $J(\varepsilon)$ as the energy between the $(1, 1)S$ and $(1, 1)T$
   states. (e) Current through a double quantum dot at $V_{SD} = \SI{0.5}{\milli\volt}$. Charge transitions split into finite bias triangles
   which reveal the presence of excited orbital states in the dot, as well as the effects of spin, which blocks transport through the orbital ground state of the dot.}
 \end{figure}
 
-The constant interaction model is limited however in describing the effect of tunnelling between two dots, as the constant
-interaction model assumes that the occupancy of each dot is a good quantum number, a situation which will not hold near
-charge degeneracy points particularly when tunnelling rates between the two dots is significant. If we wish to include a finite tunnel
+The constant interaction model is limited however in describing the effect of tunnelling between two dots,
+as it assumes that the occupancy of each dot is a good quantum number, a situation which will not hold near
+charge degeneracy points, specifically when tunnelling rates between the two dots is significant. If we wish to include a finite tunnel
 conductance, we must move to a Hubbard model that includes the effects of quantum fluctuations, spin and orbital states on each
 dot~\cite{PhysRevB.84.115301}. In this model, and indeed in most descriptions of double quantum dot descriptions, we
 describe the strength of tunnelling between the two quantum dots as a \textbf{tunnel coupling}. This model allows us to draw a schematic
 of the continuous evolution from a single quantum dot to a double quantum dot as the strength of the inter-dot tunnel coupling
 is increased. For example, in Fig.~\ref{fig:dqdenergy} (a) we see the evolution from the case with zero tunnel resistance, i.e. a single
-quantum dot in (a), to a region of intermediate tunnel resistance in ii., and finally a completely separated quantum dot in iii. Moving
+quantum dot in (a), to a region of intermediate tunnel resistance in ii., and finally a wholly separated quantum dot in iii. Moving
 towards the limit of smaller tunnel couplings (larger tunnel resistance), the bending of charge transitions will continue to be visible
 in single charge transitions as in Fig~\ref{fig:dqdenergy} (b), where the constant interaction model (grey) is compared to a full quantum
 treatment (black).
@@ -909,10 +907,10 @@ azimuthal spin for the joint system, which we define in the following way:
 \end{eqnarray}
 Combining the spins, we find these four states are:
 \begin{alignat}{2}
-  \ket{S} &=&   \ket{s = 0, m_s = 0} &= \frac{\ket{\uparrow\downarrow} + \ket{\downarrow\uparrow}}{\sqrt{2}} \\
-  \ket{T_-} &=& \ket{s = 1, m_s = -1} &= \ket{\downarrow\downarrow} \\
-  \ket{T_0} &=& \ket{s = 1, m_s = 0} &= \frac{\ket{\uparrow\downarrow} - \ket{\downarrow\uparrow}}{\sqrt{2}} \\
-  \ket{T_+} &=& \ket{s = 1, m_s = +1} &= \ket{\uparrow\uparrow}
+  \ket{S}   &= &\ket{s = 0, m_s = 0}   &= \frac{\ket{\uparrow\downarrow} + \ket{\downarrow\uparrow}}{\sqrt{2}} \\
+  \ket{T_-} &= &\ket{s = 1, m_s = -1}  &= \ket{\downarrow\downarrow} \\
+  \ket{T_0} &= &\ket{s = 1, m_s = 0}   &= \frac{\ket{\uparrow\downarrow} - \ket{\downarrow\uparrow}}{\sqrt{2}} \\
+  \ket{T_+} &= &\ket{s = 1, m_s = +1}  &= \ket{\uparrow\uparrow}
 \end{alignat}
 In other words, we have a single state (the \textbf{singlet} state), where the two spins are opposite and hence
 the total spin is zero, and three states (the \textbf{triplet} states), where the two spins are equal and have
@@ -967,12 +965,12 @@ and causes the $T_+$ and $T_-$ states to split off around the $T_0$ state.
 \end{table}
 
 Having covered the theoretical description of a Quantum Dot as well as the physics behind the 2DEG, we can
-describe the formation of a quantum dot in GaAs. Typical parameters for a 2DEG in GaAs are given in table~\ref{tab:gaas2deg}, however
-the key properties for the formation of a 2DEG are the Fermi wavelength, which will set the approximate size of the dot we wish
+describe the formation of a quantum dot in GaAs. Typical parameters for a 2DEG in GaAs are given in table~\ref{tab:gaas2deg}, however,
+the key properties we require are the Fermi wavelength, which will set the approximate size of the dot we wish
 to form, and the depth, which will set the sharpness of the potential that the gates provide at the 2DEG. For samples that are
 doped and have an intrinsic density of electrons, we can form quantum dots by evaporating surface gates on top of an insulating
 dielectric [usually TiAu on top of $\approx \SI{10}{\nano\meter}$ \ce{HfO2} or \ce{Al2O3}, as shown in Fig.~\ref{fig:heterostructure} (c)],
-and applying negative voltages to deplete electrons below the gate in the 2DEG. Initially we expect the gate to change
+and applying negative voltages to deplete electrons below the gate in the 2DEG. Initially, we expect the gate to change
 the density at the 2DEG as per that of a parallel plate capacitor:
 \begin{equation}
   \Delta n_s = \frac{\epsilon_r \epsilon_0 \Delta V_g}{e d}
@@ -984,38 +982,40 @@ After this, increasingly negative gate voltages deplete the 2DEG in a halo aroun
   \includegraphics[width=0.9\linewidth]{Device}
   \caption[SEM Image of a Double Quantum Dot on GaAs]
   {\label{fig:dd_design}(a) False color SEM of a double quantum dot design on GaAs. Surface gates (highlighted in gold) are
-  12nm TiAu onto which negative voltages are applied to deplete the 2DEG 101nm underneath. The location of quantum dots are
-  highlighted with red circles, and ohmic contacts to the 2DEG in yellow boxes. Descriptions of the gates are given in the
-  main text. The width of the double quantum dot at the surface is 970nm. (b) The Left Wall going through depletion while
-  pinching off with the Nose (set to -800mV), at the location marked with the arrow. All other gates are at zero. (c)
-  A full pinch-off curve of the Left Wall against the nose. As the undepleted region of the 2DEG shrinks towards the Fermi
+  12nm TiAu onto which negative voltages are applied to deplete the 2DEG 101nm underneath. The locations of the quantum dots are
+  highlighted with red circles and the ohmic contacts to the 2DEG in yellow boxes. Descriptions of the gates are given in the
+  main text. The width of the double quantum dot at the surface is 970nm. (b) The left wall passing through depletion while
+  pinching off with the nose (set to -800mV), at the location marked with the arrow. All other gates are at zero. (c)
+  A full pinch-off curve of the left wall against the nose. As the undepleted region of the 2DEG shrinks towards the Fermi
   wavelength, a 1D channel is formed, causing the appearance of quantized conductance plateaus.}
 \end{figure}
 
 Contact is made to the 2DEG via metallic ohmic contacts formed using a eutectic alloy of AuGe, which after evaporation is annealed
 at approximately \SI{450}{\celsius}. A full description of the fabrication process which gives ratios and thicknesses is given
-in Appendix~\ref{sec:fab}, for now all we need to know is this n-dopes the semiconductor directly under the contact with Germanium
-causing contact to the 2DEG with a resistance of between \SI{20}{\ohm} and a few \si{\kilo\ohm} depending on the size and quality
+in Appendix~\ref{sec:fab}, for now, all we need to know is this n-dopes the semiconductor directly under the contact with Germanium
+causing a contact to be formed to the 2DEG with a resistance of between \SI{20}{\ohm} and a few \si{\kilo\ohm} depending on the size and quality
 of the ohmic contact.
 
-The design of gate structures that are able to confine electrons into quantum dots is an area of continued and fruitful research (see for
+The design of gate structures that can confine electrons into quantum dots is an area of continued and fruitful research (see for
 example section~\ref{sec:5dot} of this thesis), however a common and well-tested pattern for a double quantum dot is shown in Fig.~\ref{fig:dd_design} (a).
-Gates are chosen to roughly correspond to the various parameters we described in section~\ref{sec:qd}; with the gates labelled LW (left wall)
-and RW (right wall) controlling the tunnel rates from the reservoirs to the dots, the gate labelled C (center) controlling the tunnel coupling
+Gates are designed to correspond to the various parameters we described in section~\ref{sec:qd}; with the gates labelled LW (left wall)
+and RW (right wall) controlling the tunnel rates from the reservoirs to the dots, the gate labelled C (centre) controlling the tunnel coupling
 $t_c$, and LP (left plunger) and RP (right plunger) controlling the chemical potential of the left dot ($\mu_1$) and right dot ($\mu_2$) respectively.
 The N (nose) gate acts as a global control, and a charge sensor (discussed in section~\ref{sec:readout}) which in this case is a third quantum dot formed
-against the left wall is placed to the left of the device. The location of ohmic contacts is marked by crosses, and allows us to measure both current
+against the left wall is placed to the left of the device. The location of ohmic contacts is marked by crosses and allows us to measure current both
 through the device and through the sensor. The left wall of the quantum dot passing through depletion is shown in Fig.~\ref{fig:dd_design} (b) at the
 location marked by the arrow. A full pinch-off trace for the gate is given in Fig.~\ref{fig:dd_design} (c), showing the appearance of quantized
-conductance steps as the undepleted region of 2DEG shrinks to towards the Fermi wavelength. These steps appear in units of the spin degenerate conductance quantum,
-$R = 2 n e^2/h$, the physics of which we discuss in more detail in section~\ref{sec:char}.
+conductance steps as the undepleted region of 2DEG shrinks to towards the Fermi wavelength. These steps appear in units of the spin-degenerate conductance quantum,
+$R = 2 n e^2/h$ for integer $n$, the physics of which we discuss in more detail in section~\ref{sec:char}. Several gates on the device
+are wired up to allow the application of radio frequency tones or fast pulses to drive qubit rotations.
+Further details of how this is accomplished are given in~\ref{sec:setup}.
 
 \subsection{Qubits from Quantum Dots}
 As we discussed at the beginning of this section, one of the challenges of quantum computing is finding physical systems
-that we can express as a two-level system, are isolated enough that the quantum state is preserved during operations,
-that we can easily initialize and read-out and are controllable. The last of these requirements is effectively the
+suitable to be used as qubits. They must be expressible as a two-level system, isolated enough that the quantum state is
+preserved during operations, and easily read-out and controlled. The last of these requirements is effectively the
 same as finding a system whose Hamiltonian ($H$) can express the operations that we defined in section~\ref{sec:qc}. We use
-Schr\"odinger's equation to describe this evolution:
+Schrödinger's equation to describe this evolution:
 \begin{equation}
   i \hbar \diff{\ket{\psi(t)}}{t} = H \ket{\psi(t)}
 \end{equation}
@@ -1032,7 +1032,7 @@ $\omega_e = 2\sqrt{A^2 + B^2}$ is able to drive transitions between the eigensta
 \subsubsection{The Charge Qubit}
 Perhaps the simplest form of qubit we can form with a double quantum dot system is a charge qubit. Here we define
 the logical subspace of the qubit as spanned by two charge states, typically the $(0, 1)$ and $(1, 0)$ charge states,
-with the basis $\ket{0} = (0, 1)$ and $\ket{1} = (1, 0)$. The qubit Hamiltonian is given by:
+with the basis $\ket{0} = (0, 1)$ and $\ket{1} = (1, 0)$. The single qubit Hamiltonian is given by:
 \begin{equation}
   H_{\textrm{charge}} = \frac{1}{2}\varepsilon\sigma_Z + t_c\sigma_X
 \end{equation}
@@ -1041,10 +1041,155 @@ of microwave pulses with frequency $\Omega = \sqrt{\varepsilon^2 + (2 t_c)^2}$ i
 excited charge configurations, and the state is read out via a proximal charge sensor (discussed in section~\ref{sec:readout}).
 
 Such a qubit, while conceptually simple is highly sensitive to charge noise in the semiconductor, such that the qubit lifetime $T_1$ and
-coherence times $T_2$ are both on the order of \SI{10}{\nano\second}~\cite{PhysRevLett.105.246804}. As such the usefulness of such a qubit
+coherence times $T_2$ are both on the order of \SI{10}{\nano\second}~\cite{PhysRevLett.105.246804}. As such, the usefulness of such a qubit
 is limited.
 
-\subsubsection{The Loss-Divincenzo Qubit}
+\subsubsection{The Loss-DiVincenzo (Single Spin) Qubit}
+The next idea for the implementation of a qubit would be to use the spin of a single electron as our two-level subsystem. In
+many ways, spin is an ideal phenomenon to use. It is naturally two levels, and as such has no leakage states that our qubit
+may accidentally end up in and can easily be implemented using quantum dots~\cite{PhysRevA.57.120}. We can represent the $\ket{0}$ and $\ket{1}$ states
+by the spin down and up states ($\ket{\downarrow}$ and $\ket{\uparrow}$) respectively. The splitting between the two states
+is controlled by the application of an external magnetic field that causes a Zeeman splitting $\Delta E_Z = g^* \mu_B B$. Since the
+spin of an electron does not couple to electric fields (to first order), this gives the single-spin qubit some resistance to
+charge noise in the semiconductor. Of course, this also makes the control of the qubit more challenging, as we now require
+an oscillating magnetic field to control the qubit. As such, the Hamiltonian, and the control of such a qubit will vary depending on
+how we achieve our qubit drive. There are four common methods described in the literature for controlling
+single spin qubits:
+\begin{enumerate}
+  \item \textbf{Electron Spin Resonance (ESR)} An alternating magnetic field is generated by an alternating current run through a proximal ESR gate,
+        with a frequency matching the Zeeman splitting~\cite{nnano.2014.216}. However, this method of driving rotations is relatively
+        slow (on the order of a few \si{\micro\second}).
+  \item \textbf{Electron-Dipole Induced Spin Resonance (EDSR)} In materials with strong Spin-Orbit interaction, we can
+        use the effective magnetic field felt by an electron in motion in a confining potential. Such techniques utilize an AC electric
+        field to "wobble" the electron wave function to drive rotations within a single dot~\cite{Nowack1430,nature11559}. This technique
+        achieves spin rotations in $\approx \SI{100}{\nano\second}$ in GaAs, down to $\approx \SI{10}{\nano\second}$ in InAs with a stronger Spin-Orbit coupling.
+  \item \textbf{Electrically-Driven ESR in a Slated Magnetic Field} In materials without strong Spin-Orbit interaction,
+        we can generate an effective oscillating magnetic field by generating a strong magnetic field gradient across a quantum dot with the use of a micromagnet.
+        Again, the "wobble" of the electron wave function drives rotations of single spins in a single dot~\cite{PhysRevLett.107.146801}
+        or between two quantum dots~\cite{2019arXiv190500346C}. This technique allows rotations on the order of $\approx \SI{10}{\nano\second}$.
+  \item \textbf{Electrically-Driven ESR in the Exchange Field of an Auxilliary Spin} The use of an auxiliary spin against
+        which we can drive rotations via the exchange interaction again  allows electric field control of spin with sub-nanosecond operation times~\cite{PhysRevB.90.235311}.
+        In many ways, this method of control is similar to that of the singlet-triplet qubit, described below, with the exception that we still use a single
+        spin as our logical subspace. However, such control has not yet been realized.
+\end{enumerate}
+
+As mentioned above, although we have first-order insensitivity to electric fields, the slow speed of ESR leads us to
+reintroduce an electric field coupling, either via intrinsic material properties via the Spin-Orbit interaction, or through
+the creation of gradient magnetic fields, to rapidly control these qubits. Even then the effect of charge noise
+is far lower than for a charge qubit, with coherence times of hundreds of microseconds possible. Additional sources
+of noise originate from the coupling between electron spins and the nuclear spins of nearby spinful nuclei. This
+effect is termed the Hyperfine interaction, and leads to a fluctuating field, termed the Overhauser field, with magnitude:
+\begin{equation}
+  B_{\textrm{nuc}} = \frac{1}{g^* \mu_B} \sum^N_n A_nI_n
+\end{equation}
+where $I_n$ is the nuclear spin operator for the n-th nucleus, and $A_k$ is the coupling strength of that nucleus with the
+electron spin. We can treat the Overhauser field as a classical random variable with a Gaussian distribution around zero net
+polarization. The RMS fluctuation of $B_{\textrm{nuc}}$ is $\sigma_B = \tfrac{\SI{4.0}{\tesla}}{\sqrt{N}}$ where N is the number of
+nuclei that an electron in a quantum dot overlaps\cite{PhysRevB.76.035315}. For GaAs this is typically on the order of $N \approx 10^6$.
+This effect is minimized by the use of isotopically purified silicon~\cite{itoh_watanabe_2014}, which contains a
+reduced density of spinful nuclei.
+
+\subsubsection{The Singlet-Triplet Qubit}
+The use of a single spin, while having a convenient mapping to qubit states, requires either the application of an AC magnetic field
+or an AC electric field coupled with some form of gradient magnetic field or Spin-Orbit interaction. By creating ensembles of
+spin, we can trade off a more straightforward system for one with more flexible control or greater immunity to certain types of noise.
+The use of two electrons across two quantum dots allows us to use purely pulsed DC control to achieve full control
+over the qubit. For this type of qubit, we define our computational subspace as spin states of two coupled electrons, choosing
+$\ket{S}$ and $\ket{T_0}$ as our $\ket{0}$ and $\ket{1}$ state respectively, with a Hamiltonian described by:
+\begin{equation}
+  H = J(\varepsilon)\sigma_Z + g^* \mu_B \Delta B_X \sigma_X
+\end{equation}
+The fixed gradient field $\Delta B_X$ is achieved either through the use of a micromagnet or via the polarization of the nuclear
+field~\cite{PhysRevLett.105.216803}, where $\Delta B_X$ describes the difference in the field seen by an electron in the left and
+right quantum dots. An external magnetic field is required to break the degeneracy of the three triplet states, such that
+we only operate in the $S-T_0$ states. Any leakage into the $T_-$ or $T_+$ states is undesirable.
+
+\begin{figure}
+\includegraphics[width=0.9\linewidth]{st0}
+\caption[Energy Levels and Eigenstates of a Singlet-Triplet Qubit]
+{\label{fig:st0}(a) The energy levels of a Singlet-Triplet Qubit. The three triplet states are split by the application of a
+uniform magnetic field $B$. At a large negative detuning, i.e. $J(\epsilon) \approx 0$, the gradient magnetic field $\Delta B_X$ leads to a
+change in basis, such that the energy eigenstates are described by $\ket{\uparrow_1\downarrow_2}$ and $\ket{\downarrow_1\uparrow_2}$,
+where here we've arbitrarily chosen $\Delta B_X > 0$.
+(b) Bloch sphere representation of a single Singlet-Triplet qubit. Qubit rotation proceeds around the axis in blue,
+which may be varied by pulsing tilt ($\varepsilon$). The gradient field $\Delta B_X$ is usually constant, set either
+by nuclear fields or a fixed micromagnet.}
+\end{figure}
+
+The energy levels of such a qubit are shown in Fig.~\ref{fig:st0} (a). The qubit may be easily initialized in the $(2, 0)S$ state via
+the exchange of electrons with the reservoirs, as the $(2, 0)T$ states are energetically inaccessible for small tilt and offset [as we
+saw in~\ref{fig:dqdenergy} (d)]. In general, rotations in the $S-T_0$ qubit are driven around an axis set by the relative magnitudes
+of $J$ and $\Delta B_X$, as is shown in Fig.~\ref{fig:st0} (b), however by pulsing tilt, we are able to drive rotations around the Z axis
+when $J(\varepsilon) \gg g^* \mu_B \Delta B_X$ or around the X-axis when $g^* \mu_B \Delta B_X \gg J(\varepsilon)$. An equivalent way of
+expressing this is to speak in terms of energy eigenstates, for large $J(\varepsilon)$, the two eigenstates of the qubit are $\ket{S}$ and
+$\ket{T_0}$, while for $J(\varepsilon) \approx 0$, the energy eigenstates of the qubit are set by the gradient field $\Delta B_X$, with
+the ground state given by spins anti-aligned with the gradient magnetic field (since $g^* < 0$ in GaAs), and the excited state by spins aligned with
+the gradient magnetic field. Lifetimes for singlet-triplet qubits are primarily limited by coupling to nuclear spins via the hyperfine
+interaction~\cite{nnano.2016.170} as well as charge noise that is ever present in semiconductor-based systems~\cite{PhysRevLett.110.146804}.
+Despite this, coherence times have been extended in GaAs spin qubitsto over \SI{200}{\micro\second} via the use of dynamical
+decoupling sequences~\cite{nphys1856}.
+
+It is also worth mentioning that there is active research in optimizing the control schemes for singlet-triplet qubits, again with
+the intention of gaining resistance to certain forms of noise. For example, recent results suggest that variation of $J(\varepsilon)$ by modulation of
+tunnel coupling $t_C$, leading to symmetric pulses on the left and right quantum dot~\cite{PhysRevB.73.205302,PhysRevB.97.155402,PhysRevLett.116.116801,PhysRevLett.118.216802},
+or the use of magnetic field gradient estimation and active control~\cite{ncomms6156,s41534-016-0003-1} may lead to higher
+fidelity control and reduced dephasing. Further reduction in charge noise is expected with
+improved materials growth, which is expected to improve qubit coherence further~\cite{PhysRevApplied.9.034008}.
+
+\subsubsection{The Exchange-Only Qubit}
+
+\begin{figure}
+  \includegraphics[width=0.85\linewidth]{eo}
+  \caption[Energy Levels and Eigenstates of an Exchange Only Qubit]
+  {\label{fig:eo}(a) Schematic of a triple quantum dot, with tunable tunnel couplings between the left and centre quantum dots, and the
+  right and centre quantum dots. (b) Charge stability diagram for a triple quantum dot when sweeping the $V_{G1}$ and $V_{G3}$ around the
+  $(1,1,1)$ charge configuration. The tilt axis is marked in red and sweeps from the $(2,0,1) \rightarrow (1,1,1) \rightarrow (1,0,2)$
+  charge configurations. (c) Energy levels of the exchange only qubit. Quadruplet states or excited doublet states are not shown. The Exchange energies
+  between the left (right) and centre dots are swept as a function of tilt. The energy eigenstates change between $\ket{S/T_l}$ and $ket{S/T_r}$
+  at the extremes of tilt. (d) Bloch state representation of the exchange only qubit. The exchange interaction drives rotation around two
+  axes of the Bloch sphere separated by \SI{120}{\degree}.}
+\end{figure}
+
+While the singlet-triplet qubit described in the above section allows us to control our qubits with only fast pulses, they still require
+a spatially varying magnetic field for full two-axis control. The use of three electrons distributed through three quantum dots allows
+for fully electrical control of a spin qubit using only exchange interactions between the left and centre, and right and centre quantum
+dots~\cite{10.1038-35042541}, as shown in Fig~\ref{fig:eo} (a) and (b). In this case, the system has a total of eight possible spin states. These
+are one set of quadruplet states with total spin $S^2 = 3/2$ and spin projections $S_Z = \{-3/2, -1/2, +1/2, +3/2\}$, and two sets of doublet
+states corresponding to a singlet or triplet in the left (right) dot, and a third spin on the right (left) dot. The choice of placing the singlet/triplet
+state on the left or right dot is set by the tilt, with the energy eigenstates of the system given by the singlet/triplet state on the left for $\varepsilon \ll 0$,
+and on the right for $\varepsilon \gg 0$. We can, therefore, write out the four doublet states as:
+\footnote{The full set of eigenstates at different values of $J_l, J_r, \varepsilon$ can be found in~\cite{PhysRevB.82.075403}}
+\begin{equation}
+\begin{split}
+  \ket{\textrm{D}_{-1/2}}        &= \ket{\uparrow T_R}   (\textrm{for }\varepsilon \gg 0) = \ket{T_L\uparrow}   (\textrm{for }\varepsilon \ll 0)\\
+  \ket{\textrm{D}_{+1/2}}        &= \ket{\downarrow T_R} (\textrm{for }\varepsilon \gg 0) = \ket{T_L\downarrow} (\textrm{for }\varepsilon \ll 0)\\
+  \ket{\textrm{D}^\prime_{-1/2}} &= \ket{\uparrow S_R}   (\textrm{for }\varepsilon \gg 0) = \ket{S_L\uparrow}   (\textrm{for }\varepsilon \ll 0)\\
+  \ket{\textrm{D}^\prime_{+1/2}} &= \ket{\downarrow S_R} (\textrm{for }\varepsilon \gg 0) = \ket{S_L\downarrow} (\textrm{for }\varepsilon \ll 0)\\
+\end{split}
+\end{equation}
+
+In order to break the degeneracy of the third spin, a global magnetic field is applied, such that we are left with our computational basis states, which
+I arbitrarily choose to be the $-1/2$ states here:
+\begin{alignat}{2}
+  \ket{0} &=& \ket{\textrm{D}^\prime_{-1/2}} &= \ket{S_{l,r}} \\
+  \ket{1} &=& \ket{\textrm{D}_{-1/2}} &= \ket{T_{l,r}}
+\end{alignat}
+
+Focussing on this subspace, the energy level diagram of the exchange only qubit is given in Fig.~\ref{fig:eo} (c). We are able to change the exchange
+energy between the left (right) and center dots by sweeping tilt ($\varepsilon$). We can largely ignore leakage states as the set of four quadruplet
+states have different principal spin, and the two remaining doublet states are rendered inaccessible by the applied Zeeman field. The exchange-only
+qubit was first experimentally realized in~\cite{PhysRevB.82.075403}. In GaAs systems, rotations at rates of up to \SI{47.4}{\giga\hertz} have been measured,
+with a lower bound of $T_2 = \SI{100}{\nano\second}$, limited by nuclear spins in GaAs~\cite{nnano.2013.168}.
+
+The fast rotation rate also leads to increased sensitivity
+to exchange (charge) noise, however improved schemes building on the ideas of the exchange only qubit~\cite{Russ_2017}, such as the Resonant Exchange Qubit~\cite{PhysRevLett.111.050501},
+the Always-On Exchange-Only (AEON) qubit~\cite{PhysRevB.93.121410} or the Quadrupolar Exchange-Only Qubit~\cite{PhysRevLett.121.177701,Kornich_2018},
+which can trade off the number of electrons or continuous driving for insensitivity to certain forms of noise. Additional work with double
+quantum dots with higher electron occupancies and hence higher principal spin quantum numbers are also predicted to have desirable noise rejection,
+while still allowing fully electrical control, such as the hybrid spin/charge-qubit~\cite{PhysRevLett.108.140503}, which has recently shown an
+ensemble dephasing time of $T_2^* = \SI{8.1}{\nano\second}$ with rotation rate $f_{\textrm{rabi}} = \SI{2.43}{\giga\hertz}$ in
+GaAs~\cite{PhysRevLett.116.086801} or $T_2^* = \SI{2}{\nano\second}$ with rotation rate $f_{\textrm{rabi}} = \SI{5.2}{\giga\hertz}$ in
+Si/SiGe~\cite{nature13407}, which is presently limited by charge noise~\cite{s41534-017-0034-2}.
 
 \subsection{Majorana Zero Modes}
 \label{sec:majo}

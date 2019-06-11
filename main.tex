@@ -29,8 +29,10 @@
 \usepackage{import}
 \usepackage{graphicx}
 \graphicspath{{Figures/}}
+\usepackage{booktabs}
 \usepackage{siunitx}
 \usepackage{fontspec}
+\usepackage{xcolor}
 \usepackage[english]{babel}
 \usepackage[autostyle,english=american]{csquotes}
 \MakeOuterQuote{"}
@@ -66,6 +68,7 @@
 \pagestyle{plain}
 
 % Handy Commands
+\newcommand{\note}[1]{{\color{red}\textbf{Note:}}~#1}
 \newcommand{\den}[1]{\SI{#1}{\per\square\centi\meter}}
 \newcommand{\mob}[1]{\SI[per-mode=symbol]{#1}{\square\centi\meter\per\volt\per\second}}
 \newcommand{\svec}[1]{\ensuremath{\begin{bmatrix}#1\end{bmatrix}}}
@@ -78,6 +81,7 @@
 \DeclareSIUnit\uev{\micro\electronvolt}
 \DeclareSIUnit\mk{\milli\kelvin}
 \DeclareSIUnit\mv{\milli\volt}
+\DeclareSIUnit\rpm{rpm}
 
 %% This bit allows you to either specify only the files which you wish to
 %% process, or `all' to process all files which you \include.
@@ -132,6 +136,12 @@
 \def\frontmatter@finalspace{\vskip 1em\relax}
 \let\@makefnmark\frontmatter@makefnmark
 \makeatother
+
+% Set Appendix Numbering
+\appto\appendix{\addtocontents{toc}{\protect\setcounter{tocdepth}{1}}}
+% reinstate the correct level for list of tables and figures
+\appto\listoffigures{\addtocontents{lof}{\protect\setcounter{tocdepth}{1}}}
+\appto\listoftables{\addtocontents{lot}{\protect\setcounter{tocdepth}{1}}}
 
 \pagestyle{plain}
 \input{contents}

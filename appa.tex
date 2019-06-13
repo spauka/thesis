@@ -28,7 +28,7 @@ that would be necessary to tailor the process to your own cleanroom.
 \begin{enumerate}
     \item \textbf{Cleave Chips} (Sec.~\ref{sec:cleave})
     \item \textbf{Chip Clean and Bake}: Remove any organic solvents and adsorbed moisture. (Sec.~\ref{sec:clean})
-    \item \textbf{Mesa Etch}: Define the active region of the device by etching away the 2DEG. (Sec.~\ref{sec:inasmesa})
+    \item \textbf{Mesa Etch}: Define the active region of the device by etching away the 2DEG. Note that if Al is grown on the surface, this must be removed (Sec.~\ref{sec:transene}) prior to the mesa etch. (Sec.~\ref{sec:mesaetch})
     \item \textbf{Al Removal}: Etch away excess Al from the surface of the hall bar. (Sec.~\ref{sec:transene})
     \item \textbf{Global Oxide Deposition}: Deposit a global \ce{Al2O3} or \ce{HfO2} oxide using ALD as a insulating barrier. (Sec.~\ref{sec:ald})
     \item \textbf{Gate Deposition}: Deposit surface gate pattern. (Sec.~\ref{sec:metaldep})
@@ -219,7 +219,7 @@ development times are summarized in Table~\ref{tab:develop}.
 
 \subsection{Mesa Etch}
 \label{sec:mesaetch}
-It is often necessary to define the sections where the 2DEG exists. For Hall measurements this is used to define the shale of the Hall bar.
+It is often necessary to define the sections where the 2DEG exists. For Hall measurements this is used to define the shape of the Hall bar.
 For quantum dots, this is used to isolate devices from each other when multiple devices exist on a single chip, and to reduce parasitic
 capacitance along readout or pulsing gates. In addition, it is possible to reduce crosstalk between gates by removing the 2DEG below
 as much of the length of the gate as possible\cite{doi:10.1063/1.4752863}.
@@ -259,7 +259,7 @@ by this bake step. The addition of this step creates both smoother etch edges an
 
 \begin{enumerate}
     \item Spin and bake AZ6612, PMMA or a similar resist (Sec.~\ref{sec:spin}). In general ZEP or CZAR should be avoided for acid etches.
-    \item Expose the mesa pattern using the optical mask aligner (Sec.~\ref{sec:opt}) or electron-beam lithography (Sec.~\ref{sec:ebl}). Develop using the appropriate recipe (Sec.~\ref{sec:develop}).
+    \item Expose the mesa pattern using the optical mask aligner or electron-beam lithography. Develop using the appropriate recipe (Sec.~\ref{sec:develop}).
     \item Postbake the resist using the same bake as the initial bake (see Table~\ref{tab:spin}) to remove any undercut and readhere the resist to the surface of the chip.
     \item Prepare a solution dilute phosphoric acid solution of \ce{H3PO4}:\ce{H2O2}:\ce{H2O} in a 5:1:50 ratio. Remember that acids should always be added to water, not the other way around. Stir thoroughly with PTFE (acid) tweezers, and leave to thermalize for $\approx \SI{30}{\minute}$.
     \item Measure the resist height with a surface profilometer (dektak in our case). Record in several locations.
@@ -267,6 +267,32 @@ by this bake step. The addition of this step creates both smoother etch edges an
     \item Rinse in distilled \ce{H2O} for a minimum of \SI{30}{\second} and dry with nitrogen on a clean wipe.
     \item Measure the new height of the resist using a surface profilometer in the same locations as before. The etch depth is the difference between the two measurements. If the depth is insufficient, repeat steps 5-7.
     \item Strip resist (Sec.~\ref{sec:strip}).
+\end{enumerate}
+
+\subsection{Al Etch}
+\label{sec:transene}
+For InAs devices, aluminium must be selectively etched away to define device grometries. This is accomplished
+using a Transene-D based wet etch. This process has been found to be highly sensitive to both temperature
+and etch time, and hence care must be taken when performing this step if you wish to achieve reproducible
+results. For this reason, a PID controller, glass thermometer and stirrer is necessary for high quality etches.
+
+For a thin (\SI{8}{\nano\meter}) layer of epitaxially grown Al, we have had success using a \SI{11}{\second} etch
+followed by two \SI{11}{\second} \ce{H2O} rinses, however this process must be optimized for local conditions.
+
+\note{Transene-D will begin to degrade at temperatures above $\approx \SI{50}{\celsius}$. Care must be taken while heating to ensure this temperature is not exceeded, including at the base of the beaker. As such heating must be quite slow.}
+
+\note{Tranene-D will oxidize if stirred too vigorously. The stirrer should be set to the lowest possible speed and should not visibly agitate the surface of the etch solution.}
+
+\begin{enumerate}
+    \item Spin and bake AZ6612, PMMA or a similar resist (Sec.~\ref{sec:spin}). In general ZEP or CZAR should be avoided for acid etches.
+    \item Expose the mesa pattern using the optical mask aligner\ or electron-beam lithography. Develop using the appropriate recipe (Sec.~\ref{sec:develop}).
+    \item Postbake the resist using the same bake as the initial bake (see Table~\ref{tab:spin}) to remove any undercut and readhere the resist to the surface of the chip.
+    \item Prepare a solution of Transene-D, heated to \SI{47.5}{\celsius} with a PID controller, and stirred at low speed. Ensure this temperature is stable before beginning the etch.
+    \item Prepare two beakers of DI-water for the rinse. Prepare a beaker of Acetone to strip the resist as soon as the etch is complete.
+    \item Immediately prior to commencing the etch, stop the stirrer.
+    \item Dip the sample in Transene using PTFE tweezers, agitating continously. Once complete, immeditately transfer to first water beaker, again agitating continuously, followed by the second water beaker.
+    \item Transfer the chip as soon as possible to Acetone to strip the resist. Restart the stirrer.
+    \item Follow the steps for stripping resist to finish (Sec.~\ref{sec:strip}).
 \end{enumerate}
 
 \subsection{Metal Deposition}
@@ -332,7 +358,7 @@ Metal thicknesses for a number of processes are given in Table~\ref{tab:evap}.
 
 \begin{enumerate}
     \item Spin and bake photoresist or e-beam resists (Sec.~\ref{sec:spin}).
-    \item Expose the pattern using the optical mask aligner (Sec.~\ref{sec:opt}) or electron-beam lithography (Sec.~\ref{sec:ebl}). Develop using the appropriate recipe (Sec.~\ref{sec:develop}).
+    \item Expose the pattern using the optical mask aligner or electron-beam lithography. Develop using the appropriate recipe (Sec.~\ref{sec:develop}).
     \item Mount samples in evaporator. You can optionally mount samples to a glass slide if features exist close to edges along all 4 sides of the chip. In this case, use a drop of PMMA A3 on a glass slide, place the chip on the drop and bake for \SI{60}{\second} at \SI{90}{\celsius} or until resist is dried. Avoid higher temperatures for risk of reflowing resist and melting the undercut.
     \item Pump evaporator until sufficiently low pressure and evaporate according to the given procedure for your evaporator.
     \item Allow chip to cool for $\approx \SI{5}{\minute}$ before venting. Remove samples.
@@ -350,7 +376,7 @@ of AuGe. Nickel is used as a sticking layer to the surface of the GaAs and a dif
 into the semiconductor, followed by a Au:Ge in a 2:1 ratio, which forms our eutectic alloy. This is capped by a further Ni and
 Au layer to prevent oxidation. The exact stack for a 91nm 2DEG is given in Table~\ref{tab:evap}. For use with shallower or
 deeper 2DEGs, the thickness of the centeral Ge and Au layers must be modified. The contact to the 2DEG is made by a degenerately
-Ge doped section of semiconductor that is formed under the metal stack~\cite{RELLING1989380}.
+Ge doped section of semiconductor that is formed under the metal stack~\cite{RELLING1989380,PIOTROWSKA1983179}.
 
 \begin{figure}
     \includegraphics[width=0.8\linewidth]{Ohmic}
@@ -398,4 +424,34 @@ may be necessary to remove contamination.
     \item Vent the annealer for \SI{3}{\minute} with nitrogen prior to loading sample. Following sample loading, purge the chamber with forming gas for \SI{3}{\minute} prior to beginning the process.
     \item Anneal chips in an atmosphere of forming gas (4\% \ce{H2}:96\% \ce{N2}), following instructions for the local tool. A sample set of parameters is given in Table~\ref{tab:anneal} which has been found to give low resistance ohmics in our lab.
     \item After the anneal is complete, immediately purge the chamber with nitrogen gas at high flow to assist with cooling. Allow the sample to cool to \SI{50}{\celsius} prior to unloading.
+\end{enumerate}
+
+\subsection{Oxide Deposition (ALD)}
+\label{sec:ald}
+ALD is deposited on samples as an insulating dielectric, either to minimize leakage to the donor layer which
+is hypothesized to be a source of charge noise~\cite{PhysRevB.72.115331}, or as an insulating layer for
+multi-layer devices. The addition of this step to spin qubit devices is a reasonably recent addition to our
+fabrication process and over time this process has been optimized to increase the quality of the dielectric
+that is grown. Initially we had been using a lift-off process~\cite{doi:10.1063/1.1612904}, however such a process
+was found to grow measurably worse quality oxide films, due to the low temperature of growth required for resist
+compatibility (\SIrange{90}{150}{\celsius}), and contamination due to resist in the process chamber.
+
+Our current process therefore deposits a global oxide, grown at a minimum temperature of \SI{200}{\celsius}.
+We make contact to lower layers either by bonding through the oxide, or using a selective Al etchant to remove
+sections of the oxide. In general, the highest possible growth temperature will result in the highest oxide
+quality, where materials compatibility is taken into account (In will precipitate out of InAs above \SI{250}{\celsius} for example).
+
+For devices in this thesis, we've grown both \ce{Al2O3} and \ce{HfO2} oxides using TMA and TDMA-Hf as precursors and
+\ce{H2O} as an oxidising agent. In general we've not had success with \ce{O3} as an oxidizer, with the quality of film
+grown lowered relative to \ce{H2O}. Although there will be variance by tool and growth temperature, as a rule of thumb,
+we've found 100 cycles of TMA at \SI{200}{\celsius} to grown approximately \SI{8}{\nano\meter} of oxide.
+
+\note{Avoid placing samples with resist in the growth chamber as it leads to significantly decreased oxide quality.}
+
+\begin{enumerate}
+    \item Set the chamber temperature to the correct growth temperature for the growth. Allow the chamber temperature to settle prior to loading your sample.
+    \item Set the correct number of cycles for your oxide growth. The thickness of oxide grown per cycle with vary depending on the tool and the temperature of the growth.
+    \item Load your sample, and a blank silicon piece, into the growth chamber. For load locked tools, allow the stage to reach the correct temperature before beginning the process.
+    \item Run the ALD growth program. It is usually worth checking that there are pressure spikes for the first few cycles to ensure precursors have not been depleted.
+    \item Once the process is complete, unload the samples. Check the depth of deposited oxide using an ellipsometer on the blank Si chip and record this value.
 \end{enumerate}

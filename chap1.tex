@@ -147,7 +147,7 @@ serves as the quantum analog to the classical bit. To review, a classical \textb
 that can either take the value 0 or 1. It represents the fundamental unit of computation in digital computers.
 We can take individual bits, and combine them to form a \textbf{register}, whose state is defined as
 the state of each bit in the register. For example, two bits can take up to 4 different
-values: 00, 01, 10, 11. Three bits can take up to 9 values, and $N$ bits can take up to $2^N$ values, however
+values: 00, 01, 10, 11. Three bits can take up to 8 values, and $N$ bits can take up to $2^N$ values, however
 to give the state of a register all we have to do is list the state of each bit in that register, a total of $N$ states.
 By choosing various encodings of values, we can map numbers, letters, and other symbols onto these registers
 and perform computations on them. For example, we can map positive integers onto registers using a base-2 number
@@ -451,6 +451,7 @@ computers beyond spins and majoranas. Before we begin a detailed discussion of q
 at the physics that underlie most of these implementations; the 2-dimensional electron gas (2DEG).
 
 \subsection{The 2-Dimensional Electron Gas}
+\label{sec:2deg}
 The 2-dimensional electron gas (2DEG) is the foundation for many of the experiments and qubit-realizations to follow and
 is a confinement of electrons in a semiconductor to a single plane. To fully
 appreciate what this means, we first have to discuss what it means to confine an electron in one of the three dimensions.
@@ -648,15 +649,23 @@ the lattice under an accelerating field $E$. Then, by Newton's second law:
 If we rearrange for $v_d$ we find:
 \begin{align}
   && v_d = \mu E && (\textrm{where~} \mu = \frac{e \tau}{m^*})
+  \label{eq:driftv}
 \end{align}
 where $\mu$ is a quantity called mobility, with units \si{\square\centi\meter\per\volt\per\second}.
 To find the conductivity, we remember the definition for current
-density, which will be given by the number of electrons that pass an area per second, $J = n_s e v_d$,
-and the definition of conductivity, which is simply the current density per electric field, $\sigma = J/E$. From here,
+density, which will be given by the number of electrons that pass an area per second:
+\begin{equation}
+  J = n_s e v_d
+  \label{eq:currden}
+\end{equation}
+This is combined with the definition of conductivity, which is simply the current density per electric field, $\sigma = J/E$. From here,
 we find the equation for conductivity in terms of electron density and mobility to be:
 \begin{equation}
   \sigma = n_s e \mu
+  \label{eq:cond}
 \end{equation}
+We will revisit these equations, adding quantum corrections where necessary, and expand on scattering mechanisms within a
+2DEG in Section~\ref{sec:char}.
 
 At this point, our discussion splits into two streams.
 The first deals with the formation of quantum dots, structures with tight confinement in all three dimensions,
@@ -1218,10 +1227,130 @@ Si/SiGe~\cite{nature13407}, which is presently limited by charge noise~\cite{s41
 \label{sec:majo}
 
 
-\subsection{Characterizing 2DEGs}
+\section{Characterizing 2DEGs}
 \label{sec:char}
-\subsubsection{The Quantum Hall Effect}
-\subsubsection{Spin Orbit Interaction}
+In the previous sections, we went through how a 2DEG is constructed, and wrote down some equations for scattering
+and conductivity in a 2DEG. These equations have all assumed that the 2DEG is purely classical, however at the temperatures
+and scales that many of our devices operate, this assumption begins to break down. In order to explore why this is the case
+we must revisit the scattering mechanisms and equations for conductance that we previously wrote down in Equation~\ref{eq:cond}
+and add some quantum corrections to these equations. As we do this, we can define several regimes for transport
+where various quantum corrections to transport become apparent.
+
+Before we get started, let's quickly review the scattering lengths that we originally defined in Section~\ref{sec:2deg}. We can classify
+scattering into two forms, elastic scattering, which ocurrs when the electron changes direction but not its energy or wavevector, or
+inelastic scattering, which occurs when the energy of the electron is changed by the scattering event. Elastic scattering occurs at impurities, or along dislocations
+and walls, i.e. on scattering sites with mass much larger than the electron itself. The distance between successive elastic scattering events is
+called the elastic scattering length $l_e$\footnote{This is sometimes also called the momentum relaxation length, $l_m$ or $l_{\textrm{imp}}$.}.
+Inelastic scattering occurs via time-dependant mechanisms such as phonons or electron-electron scattering. As the scatterers will have an energy and
+mass on the order of the electron energy and mass, energy is easily transferred between the electron and the scatterer. In 2DEGs, our assumption that
+electrons do not interact continues to hold for the effects we wish to explore and hence the primary inelastic scattering mechanism is electron-phonon scattering.
+As phonons are largely thermally generated, inelastic scattering therefore occurs on the thermally dependant length-scale $l_i$. Since these scattering events
+are each unique and time dependant, the phase of the electron is effectively randomized at each inelastic scattering event, and so
+the inelastic scattering length $l_i$ is often used interchangeably with $l_\phi$, the phase coherence length.
+
+We now have the ingredients necessary to classify transport into a number of distinct regimes, based on the relationship between the size
+of the system being measured $L$, and the various length scales in our system $l_\phi$, $l_e$ and $\lambda_F$.
+\begin{itemize}
+  \item \textbf{Classical Diffusive} ($\lambda_F < l_e, l_\phi \ll L$): This is the classical limit of transport, true for large pieces of metal or semiconductor. The system is much larger than any relevant scattering length, hence electrons travel diffusively through the system, with no coherent effects. This is the regime in which the previously derived equations are correct, where we have implicitly assumed that each scattering event completely destroys all phase information.
+  \item \textbf{Quantum Diffusive} ($\lambda_F < l_e \ll L, l_\phi$): At this length scale, the electron will still travel diffusively through the system, as $l_e \ll L$, however phase coherent effects will begin to appear, since correlations between the phases of different paths will exist for path lengths up to $l_\phi$. Weak localization is a quantum correction we must add to Equation~\ref{eq:cond}, and appears in 2DEGs at low temperature.
+  \item \textbf{Classical Ballistic} ($\lambda_F \ll L < l_e, l_\phi$): At this length scale, electrons travel without collisions, except at the boundaries of the system, and as such the energy of an electron may not be dissipated within a system. Dissipation can therefore be treated separately from such systems. In addition, this also implies that processes are non-local, i.e. they can be described at any point within the system. For example, current at all points in the system is well described by the boundary conditions of our system. Effects such as electron focusing, occur at this length scale.
+  \item \textbf{Quantum Ballistic} ($\lambda_F \approx L \ll l_e, l_\phi$): At this point, discrete orbital energies occur in the confining directions. In 2D, this leads to the emergence of a 2DEG, in 1D a quantum point contact and in 0D a quantum dot.
+\end{itemize}
+
+For this thesis, we will largely focus on the Quantum Diffusive and the Quantum Ballistic regimes, as they describe the physics of the
+2DEG and the quantum dot respectively. Having already described the physics of the quantum dot, let's look at the quantum corrections that occur
+in the Quantum Diffusive regime, as they will allow us to extract both the scattering length and the strength of the spin-orbit
+interaction. As these must be well controlled to form both quantum dots and Majorana zero modes, our understanding of the origins of
+scattering and the spin-orbit effect will be vital to our journey towards building a large-scale quantum computer. Measurements in this section
+will be made in reference to a hall bar, shown schematically in Fig.~\ref{fig:hall}. A current $I$ is applied along the length of the Hall bar.
+Two quantities are extracted relative to that current, the Hall resistivity $\rho_{XY} = V_{XY}/I$ gives
+the voltage formed orthogonal to the direction of current flow, and the transverse resistivity $\rho_{XX} = V_{XX}/I$.
+This second quantity gives us an expression for the conductivity of our sample:
+\begin{equation}
+  \sigma = \rho_{XX} \frac{W}{L}
+\end{equation}
+where $W$ is the width of the sample and $L$ is the length between contacts.
+
+\subsection{Weak Localization}
+To include the effects of phase coherence on conductivity, we will use the so-called Feynmann path method to calculate
+a corrected conductivity. The basic idea of such an approach is to consider what conductivity refers to on the scale of
+a small number of scattering sites. Given a small sample, with a small number of elastic scattering sites within the lattice,
+we can define the conductivity as the probability that an electron reaches the end point, where it leaves the system,
+from a given starting point. A schematic of this case is shown in Fig.~\ref{fig:WL}. This
+probability will be given by the wavefunction at the final point, which is given by the sum of the wavefunctions corresponding
+to each path through the lattice. For example, the paths may be {start, 1, 4, end} or {start, 2, 5, end} etc. The total wavefunction at the end is:
+\begin{equation}
+  \Psi_{\textrm{start}\rightarrow\textrm{end}} = \sum_j \psi_j = \sum_j t_j e^{i \varphi_j}
+\end{equation}
+Here $t_j$ is the transmission probability along the path $j$, and $\varphi_j$ is the phase accumulated along the path $j$.
+The probability of finding the election at the end point is threfore:
+\begin{equation}
+  P(\textrm{end}) = \left|\Psi_{\textrm{start}\rightarrow\textrm{end}}\right|^2 = \sum_j t_j^2 + \sum_{j \neq k} t_jt_k \cos(\varphi_j - \varphi_k)
+\end{equation}
+where the first term gives the probability of the electron travelling along a given path $j$, and the second term gives the
+interference between each pair of paths through the lattice. Since the phases accumulated along each path are effectively random,
+this second term will average to zero, and the total forward probability is given by:
+\begin{equation}
+P(\textrm{end}) \approx \sum_j t_j^2
+\end{equation}
+Next, let's consider paths that return to the starting point. In this case, we have both a clockwise and a counter-clockwise propogating
+path (which we can label $j_+$ and $j_-$), around which, due to the symmetry of elastic scattering, we have the same transmission
+probability $t_{j_+} = t_{j_-} = t_j$, and the same acquired phase $\varphi_{j_+} = \varphi_{j_-} = \varphi_j$. This situtation is represented schematically
+in Fig.~\ref{fig:WL} (b). The return probability is therefore:
+\begin{equation}
+  P(\textrm{start}) = \sum_j \left(t_{j_+}^2 + t_{j_-}^2 + t_{j_+}t_{j_-}\cos(\varphi_{j_+} - \varphi_{j_-}) + t_{j_-}t_{j_+}\cos(\varphi_{j_-} - \varphi_{j_+})\right) = 4 \sum_jt_j^2
+\end{equation}
+In other words, \textquote[delftbook]{phase-coherent summation of time-reversed trajectories in a diffusive medium leads to an increased probability for electrons
+to return to their initial position}. To find an expression for conductance, we must find an expression for the probabilities of different paths, and take
+into account the ratio of elastic and inelastic scattering length (the longer the path, the higher the chance that it's phase will be randomized). A full derivation
+is not given here, I will simply quote the final result, however I point the interested reader towards~\cite{delftbook,datta1997electronic}. The correction
+to conductance is given by:
+\begin{equation}
+  \Delta \sigma_{2D} = -\frac{1}{4\pi}\frac{2e^2}{h}\ln\left(\frac{l_\phi}{l_e}\right)
+\end{equation}
+As expected this gives us an reduced conductivity due to the increased probability of coherent back-scattering.
+
+In order to extract a useful parameter from this, we need some way of differentiating the contribution of weak-localization from
+the bare conductivity. To do this, we may apply a magnetic field perpendicular to the plane of the 2DEG, in order to break the time
+reversal symmetry of the paths. For a magnetic field $B_\perp$, the phase difference along clockwise and counter-clockwise paths
+is given by:
+\begin{equation}
+  \Delta \phi(B_\perp) = 4 \pi \frac{\Phi}{\Phi_0} = 4\pi \frac{B_\perp A}{\Psi_0}
+\end{equation}
+At the point where the magnetic field induces a $\pi/2$ phase shift around a loop, the destructive interference will be supressed, thus the
+effect of longer loops will be suppressed as a magnetic field is applied. The correction for weak localization unfortunately does not have
+a simple form~\cite{PhysRevB.70.245311}, however for a diffusive approximation, where $l_e \ll l_\phi$, we can use the reasonably simple form
+given by~\ref{10.1143/PTP.63.707}:
+\begin{equation}
+  \Delta \sigma_{2D}(B_\perp) = -\frac{2 e^2}{\pi h}\left[\digamma\left(\frac{1}{2} + \frac{B_0}{B}\right) - \digamma\left(\frac{1}{2} + \frac{l_e B_0}{l_\phi B}\right)\right]
+\end{equation}
+where $\digamma$ is the digamma function and
+\begin{equation}
+  B_0 = \frac{v_F (m^*)^2}{2 n_s h e l_e}
+\end{equation}
+Note that the diffusive approximation may not hold for high mobility GaAs samples, where the elastic scattering length is large.
+Alternate forms are available in~\ref{PhysRevB.70.245311} which may be required for such samples.
+
+\subsection{The Quantum Hall Effect}
+As the field perpendicular to the sample is applied, apart from a modification to conductivity we can also ask what occurs to the Hall (perpendicular) voltage
+and conductivity. As we saw in the Equation~\ref{eq:driftv}, the application of an electric field leads to a drift velocity in the sample set by the scattering
+time $\tau$ and the effective mass of electrons $m^*$. In combination with the magnetic field $B$, this leads to a lorentz force $F = e v_x \times B_\perp$, causing
+a charge build up along one edge of the Hall bar. This is balanced out by an opposing electric field that is formed:
+\begin{equation}
+  E_y = -e v_x \times B_\perp
+\end{equation}
+To find the hall resistivity, we can combine the electric field with the equation for current density, given in Equation~\ref{eq:currden}, to find
+\begin{equation}
+  \rho_{XY} = \frac{E_y}{J_x} = \frac{B}{n_s e}
+\end{equation}
+Hence we find a linear relationship between magnetic field and Hall resistivity with a gradient proportional to the electron density, as seen in Fig.~\ref{fig:hall}.
+
+As the magnitude of the magnetic field is increased, electrons will be curved into roughly circular paths, with a radius:
+\begin{equation}
+  r_c = \frac{m^* v_F}{e B}
+\end{equation}
+
+\subsection{Spin Orbit Interaction}
 
 \section{Architecture of a Quantum Computer}
 \label{sec:arch}

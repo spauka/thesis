@@ -598,6 +598,7 @@ dispersion relation becomes that of free electrons in two-dimensions:
 We can also define the density of states (DOS) in 2-dimensions as the number of states $n(E)$ per unit energy $(E)$:
 \begin{equation}
   \rho_{2D} = \diff{n(E)}{E}
+  \label{eq:raw2dden}
 \end{equation}
 
 For free electrons in 2D, the states fill an area in momentum-space up to k-vector $k$:
@@ -613,6 +614,7 @@ the number of states up to energy $E$ is therefore:
 and giving a density of states:
 \begin{equation}
   \rho_{2D} = g_s g_v \frac{m}{2 \pi \hbar^2}
+  \label{eq:2dden}
 \end{equation}
 where $g_s$ is the \textbf{spin degeneracy} (almost always 2), and $g_v$ is the \textbf{valley degeneracy} (1 for III-V semiconductors, 3 for Si).
 Importantly we note that the density of states is independent of energy, a situation which is unique to 2-dimensions.
@@ -1320,24 +1322,25 @@ is given by:
 At the point where the magnetic field induces a $\pi/2$ phase shift around a loop, the destructive interference will be supressed, thus the
 effect of longer loops will be suppressed as a magnetic field is applied. The correction for weak localization unfortunately does not have
 a simple form~\cite{PhysRevB.70.245311}, however for a diffusive approximation, where $l_e \ll l_\phi$, we can use the reasonably simple form
-given by~\ref{10.1143/PTP.63.707}:
+given by~\cite{10.1143/PTP.63.707}:
 \begin{equation}
-  \Delta \sigma_{2D}(B_\perp) = -\frac{2 e^2}{\pi h}\left[\digamma\left(\frac{1}{2} + \frac{B_0}{B}\right) - \digamma\left(\frac{1}{2} + \frac{l_e B_0}{l_\phi B}\right)\right]
+  \Delta \sigma_{2D}(B_\perp) = -\frac{2 e^2}{\pi h}\left[\digamma\left(\frac{1}{2} + \frac{B_0}{B_\perp}\right) - \digamma\left(\frac{1}{2} + \frac{l_e}{l_\phi}\frac{B_0}{B_\perp}\right)\right]
 \end{equation}
 where $\digamma$ is the digamma function and
 \begin{equation}
-  B_0 = \frac{v_F (m^*)^2}{2 n_s h e l_e}
+  B_0 = \frac{v_F (m^*)^2}{2 h e l_e n_s}
 \end{equation}
 Note that the diffusive approximation may not hold for high mobility GaAs samples, where the elastic scattering length is large.
-Alternate forms are available in~\ref{PhysRevB.70.245311} which may be required for such samples.
+Alternate forms are available in~\cite{PhysRevB.70.245311} which may be required for such samples.
 
 \subsection{The Quantum Hall Effect}
-As the field perpendicular to the sample is applied, apart from a modification to conductivity we can also ask what occurs to the Hall (perpendicular) voltage
-and conductivity. As we saw in the Equation~\ref{eq:driftv}, the application of an electric field leads to a drift velocity in the sample set by the scattering
-time $\tau$ and the effective mass of electrons $m^*$. In combination with the magnetic field $B$, this leads to a lorentz force $F = e v_x \times B_\perp$, causing
+As the field perpendicular to the sample is applied, which for brevity we will call $B$, apart from a modification to conductivity
+we can also ask what occurs to the Hall (perpendicular) voltage and conductivity. As we saw in the Equation~\ref{eq:driftv},
+the application of an electric field leads to a drift velocity in the sample set by the scattering
+time $\tau$ and the effective mass of electrons $m^*$. In combination with the magnetic field $B$, this leads to a Lorentz force $F = e v_x \times B$, causing
 a charge build up along one edge of the Hall bar. This is balanced out by an opposing electric field that is formed:
 \begin{equation}
-  E_y = -e v_x \times B_\perp
+  E_y = -e v_x \times B
 \end{equation}
 To find the hall resistivity, we can combine the electric field with the equation for current density, given in Equation~\ref{eq:currden}, to find
 \begin{equation}
@@ -1347,10 +1350,128 @@ Hence we find a linear relationship between magnetic field and Hall resistivity 
 
 As the magnitude of the magnetic field is increased, electrons will be curved into roughly circular paths, with a radius:
 \begin{equation}
-  r_c = \frac{m^* v_F}{e B}
+  R_c = \frac{m^* v_F}{e B}
+\end{equation}
+and an angular frequency of:
+\begin{equation}
+  \omega_c = \frac{v_F}{R_c} = \frac{e B}{m^*}
+  \label{eq:cycl}
+\end{equation}
+Once we are in the limit that $R_c \ll l_e$, we can write down a hamiltonian for the system:
+\begin{equation}
+  H = \frac{(P + eA)^2}{2m^*} + U(x, y)
+\end{equation}
+where $P$ is the momentum operator, and $A$ is the magnetic vector potential. We can choose the gauge of the vector potential such
+that:
+\begin{equation}
+  \vec{A} = (0, Bx, 0)
+\end{equation}
+and expand the Hamiltonian, ignoring the Z component as we only have a single mode:
+\begin{equation}
+  H = \frac{p_x^2}{2m^*} + \frac{(p_y + eBx)^2}{2m^*}
 \end{equation}
 
+We note that the Hamiltonian is translationally invariant in the $y$-direction and can be rewritten as:
+\begin{equation}
+  H = \frac{p_y^2}{2m^*} + \frac{1}{2}m^*\omega_c^2(x - x_0)^2
+\end{equation}
+where we've substituted $\omega_c$ from Equation~\ref{eq:cycl} and $x_0 = \tfrac{p_x}{eB}$.
+
+This Hamiltonian corresponds to that of a harmonic oscillator centered at $x_0$ with energy levels
+\begin{equation}
+  E_n = \hbar \omega_c\left(n + \frac{1}{2}\right)
+\end{equation}
+This implies that at high field, and neglecting the effects of scattering, our density of states evolves to
+a series of discrete delta functions, where each state is highly degenerate, filled up to the state $E_n < E_F$.
+Each of these states is called a \textbf{Landau level}. This situation is described by the schematic in Fig.~\ref{fig:hall}.
+As a brief comment on the effects of scattering, which we've ignored in our derivation thus far. For the case that the quantum Hall
+effect is beginning to appear, and $R_c \sim l_e, l_\phi$, the Landau levels will become broadened, although the exact mechanism
+by which this occurs is not yet resolved~\cite{PhysRevB.90.035425, PhysRevB.82.075401}. In addition, up to this point,
+we have been neglecting the effects of spin, however, we can trivially add it to our energies:
+\begin{equation}
+  E_n = \hbar \omega_c\left(n + \frac{1}{2}\right) \pm \frac{1}{2}g^* \mu_b B
+\end{equation}
+
+Finally we introduce a parameter to describe the number of electrons per magnetic flux quantum, which will also correspond
+to the number of Landau levels below the Fermi energy:
+\begin{equation}
+  \nu = \frac{n_s}{\tfrac{B}{\Phi_0}} = \frac{n_s h}{e B}
+  \label{eq:nu}
+\end{equation}
+
+As we've moved to the Landau level description of states inside the 2DEG, you might expect that the conductivity of the sample should also
+be modified, as we now no longer have free states at the Fermi level. In fact this intuition is correct, and the bulk of a Hall bar in the quantum
+Hall regime will indeed be insulating. Current is carried at the edges of the sample, where the confining potential curves upwards, and Landau levels
+intersect with the Fermi level~\cite{PhysRevB.25.2185} as shown in Fig.~\ref{fig:hall}. This gives rise to a series of chiral, 1D channels that carry current around the edges
+of the Hall bar. Since these edge states are directional, and edges flowing in the opposite direction are physically separated by the width of the Hall
+bar, backscattering is strongly suppressed, and edges provide dissipationless condactance, i.e. $\rho_{XX} \rightarrow 0$. The next question is, what about
+the Hall resistance $rho_{XY}$. The number of edges that will cut through the Fermi level is given by: $N_\textrm{max} = \lfloor \nu \rfloor$, each of which
+will contribute to the total conductivity. The total conductivity then is the sum of the conductances of each of the channels. Let's assume a difference in the
+chemical potential of both sides of $\delta \mu = \mu_2 - \mu_1$. The total current across the sample is given by the product of the velocity $v_n(E)$
+and the density of states $\rho_{\textrm{1D},n}$.
+\begin{equation}
+  J = e\sum_n^{N_{\textrm{max}}} \int_{\mu_1}^{\mu_2} v_n(E)\rho_{\textrm{1D},n}(E) \mathrm{d}E
+\end{equation}
+By a similar line of reasoning to Equation~\ref{eq:raw2dden}, we calculate the 1D DOS to be:
+\begin{equation}
+  \rho_{\textrm{1D},n} = \frac{1}{2\pi}\left(\diff{E_n(k)}{k}\right)^{-1}
+\end{equation}
+And the velocity from quantum mechanics is simply:
+\begin{equation}
+  v_n(E) = \frac{1}{\hbar}\diff{E_n(k)}{k}
+\end{equation}
+Hence, the total current is:
+\begin{equation}
+  J = e\sum_n^{N_{\textrm{max}}} \int_{\mu_1}^{\mu_2} \frac{1}{h} \mathrm{d}E = \frac{e N_{\textrm{max}} \delta\mu}{h}
+\end{equation}
+This remarkable cancellation between the DOS and velocity is unique to 1D channels and leads to the emergence of the conductance quantum that
+we alluded to in section~\ref{sec:qd}. The difference in chemical potential is related to the voltage by $\delta \mu = eV$, and the conductivity is therefore:
+\begin{equation}
+  \sigma = \frac{J}{V} = \frac{N_{\textrm{max}} e^2}{h}
+  \label{eq:hallsigma}
+\end{equation}
+
+Therefore, we find the conductance of the edge will be quantized in units of the conductance quantum, with a value determined
+by the filling factor, which gives us the number of parallel conducting 1D channels in the samples. An example of this, showing both $\rho_{XX}$
+and $\rho_{XY}$ is given in Fig.~\ref{fig:hallcond}.
+
 \subsection{Spin Orbit Interaction}
+
+\subsection{Edge Magnetoplasmons (EMPs)}
+As we might expect, these edge states should support resonant charge density, and indeed we find that such excitations do exist
+and are termed \textbf{edge magnetoplasmons}. Such edge excitations are distinct from bulk plasmon (drum) modes, and propogate with
+a distinct frequency and dispersion that is set purely by the properties of the edge. Classical descriptions for such excitations
+were first given in the 1980s, on 2DEGs formed on the surface of liquid Helium~\cite{PhysRevLett.54.1706,PhysRevB.32.7676,1985ZhPmR..42..450V}.
+We can understand the existence of such modes in a semiclassical picture. Consider a 2DEG running along the $x$ direction, placed in a magnetic field,
+where the confining potential $E_y$ causes the appearance of edge states. A local peturbation, such as a gate voltage, can cause a dipole to form across
+the sample, leading to an electric field that induces a propogating current $J = \sigma_{XY}E$ around the edge. As electrons are confined to travel at an
+angle $\theta_H = \SI{90}{\degree}$ with a given directionality, this creates a self-propogating charge density wave (and hence electric current), that propogates
+around the edge, a situation sketched in Fig.~\ref{fig:EMP}. Substituting Equation~\ref{eq:hallsigma} and Equation~\ref{eq:nu} into our expression for current density we find:
+\begin{equation}
+  J = n_s e \frac{E}{B}
+\end{equation}
+The resultant oscillatory modes are confined to the perimiter of the Hall sample, and travel with a phase velocity $v_D$ approximated by the ratio
+of electric and magnetic fields at the edge. To find the frequency of the EMPs, the details of the confining potential and edge must be calculated.
+From~\cite{1988ZhETF..94..217V}, the excitations are found to have a fundamental angular frequency of:
+\begin{equation}
+  \omega_{\textrm{EMP}} = \frac{\sigma_{XY}}{P\epsilon_0\epsilon^*}\left(\ln\left(\frac{P}{\pi w}\right) + C\right)
+\end{equation}
+where $P$ is the length of the edge, $\epsilon^*$ is the effective dielectric constant and C is a constant related to the geometry of the edge and goes
+to $1$ for a sharply defined edge with a step-like profile. The logarithmic correction arises due to electron correlations (which has a small impact,
+unlike in other calculations), and $w$ represents the damping and physical width of the EMP from the edge:
+\begin{equation}
+  w = i\frac{\sigma_{XX}(\omega)}{2\omega\epsilon_0\epsilon^*}
+\end{equation}
+Note that this quantity does not necessarily go to zero on plateaus.
+In the limit of low transverse resistivity, ignoring electron-electron interactions ($\omega\tau \ll 1$), and taking the limit
+that $\omega_{\textrm{EMP}} \ll \omega_c$, we can approximate this term as:
+\begin{equation}
+  w \approx \frac{n_sm^*}{2\epsilon_0\epsilon_r B^2}
+\end{equation}
+These equations collectively show that the EMP travels at a significantly reduced frequency, which decreases with field, roughly proportionally to $\tfrac{1}{B}$.
+Comparing the EMP frequency to that of a bulk plasmon in Fig.~\ref{fig:EMP}, one sees that while the fundamental bulk plasmon frequency $\omega_\textrm{bulk}$
+approaches the cyclotron frequency $\omega_c$, the EMP frequency $\omega_\textrm{EMP}$ decreases towards zero. This slow and directional propogation is exploited in
+Section~\ref{sec:hallcirc} and Section~\ref{sec:spinhallcirc} to construct compact circulators.
 
 \section{Architecture of a Quantum Computer}
 \label{sec:arch}

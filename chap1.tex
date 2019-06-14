@@ -1042,6 +1042,7 @@ are wired up to allow the application of radio frequency tones or fast pulses to
 Further details of how this is accomplished are given in~\ref{sec:setup}.
 
 \subsection{Qubits from Quantum Dots}
+\label{sec:dotqubits}
 As we discussed at the beginning of this section, one of the challenges of quantum computing is finding physical systems
 suitable to be used as qubits. They must be expressible as a two-level system, isolated enough that the quantum state is
 preserved during operations, and easily read-out and controlled. The last of these requirements is effectively the
@@ -1274,6 +1275,7 @@ This second quantity gives us an expression for the conductivity of our sample:
 where $W$ is the width of the sample and $L$ is the length between contacts.
 
 \subsection{Weak Localization}
+\label{sec:wl}
 To include the effects of phase coherence on conductivity, we will use the so-called Feynmann path method to calculate
 a corrected conductivity. The basic idea of such an approach is to consider what conductivity refers to on the scale of
 a small number of scattering sites. Given a small sample, with a small number of elastic scattering sites within the lattice,
@@ -1435,11 +1437,9 @@ Therefore, we find the conductance of the edge will be quantized in units of the
 by the filling factor, which gives us the number of parallel conducting 1D channels in the samples. An example of this, showing both $\rho_{XX}$
 and $\rho_{XY}$ is given in Fig.~\ref{fig:hallcond}.
 
-\subsection{Spin Orbit Interaction}
-
 \subsection{Edge Magnetoplasmons (EMPs)}
-As we might expect, these edge states should support resonant charge density, and indeed we find that such excitations do exist
-and are termed \textbf{edge magnetoplasmons}. Such edge excitations are distinct from bulk plasmon (drum) modes, and propogate with
+The edge states of the Hall effect support charge density excitations, that we term \textbf{edge magnetoplasmons} (EMPs).
+Such edge excitations are distinct from bulk plasmon (drum) modes, and propogate with
 a distinct frequency and dispersion that is set purely by the properties of the edge. Classical descriptions for such excitations
 were first given in the 1980s, on 2DEGs formed on the surface of liquid Helium~\cite{PhysRevLett.54.1706,PhysRevB.32.7676,1985ZhPmR..42..450V}.
 We can understand the existence of such modes in a semiclassical picture. Consider a 2DEG running along the $x$ direction, placed in a magnetic field,
@@ -1456,7 +1456,7 @@ From~\cite{1988ZhETF..94..217V}, the excitations are found to have a fundamental
 \begin{equation}
   \omega_{\textrm{EMP}} = \frac{\sigma_{XY}}{P\epsilon_0\epsilon^*}\left(\ln\left(\frac{P}{\pi w}\right) + C\right)
 \end{equation}
-where $P$ is the length of the edge, $\epsilon^*$ is the effective dielectric constant and C is a constant related to the geometry of the edge and goes
+where $P$ is the length of the edge, $\epsilon^*$ is the effective dielectric constant seen by the edge and C is a constant related to the geometry of the edge and goes
 to $1$ for a sharply defined edge with a step-like profile. The logarithmic correction arises due to electron correlations (which has a small impact,
 unlike in other calculations), and $w$ represents the damping and physical width of the EMP from the edge:
 \begin{equation}
@@ -1472,6 +1472,61 @@ These equations collectively show that the EMP travels at a significantly reduce
 Comparing the EMP frequency to that of a bulk plasmon in Fig.~\ref{fig:EMP}, one sees that while the fundamental bulk plasmon frequency $\omega_\textrm{bulk}$
 approaches the cyclotron frequency $\omega_c$, the EMP frequency $\omega_\textrm{EMP}$ decreases towards zero. This slow and directional propogation is exploited in
 Section~\ref{sec:hallcirc} and Section~\ref{sec:spinhallcirc} to construct compact circulators.
+
+\subsection{The Spin-Orbit Interaction}
+Within a solid, we've thus far assumed that the spin or an electron is independant of it's motion through that semiconductor, apart from
+a tangential mention in Sec.~\ref{sec:dotqubits}, where we discussed its usefulness in controlling spins in semiconductors. In reality, the
+band structure of the semiconductor, which up to this point we've captured in a single parameter, the effective electron mass $m^*$ is shaped
+by a coupling of the motion of electrons through the lattice and around atoms. For this thesis, I will not aim to give a general description of
+the effect, which contributes to a whole host of effects such as the fine structure hydrogen and the heavy/light hole structure of GaAs,
+but rather give an intuitive understanding of its origins in a semiconductor, and in particular on conduction band electrons. Hence, the terms that
+I introduce here should not be considred to apply generally. This treatment is partly derived from~\cite{winkler2003spin,dyakonov2017spin}.
+Firstly, as we are dealing with conduction band electrons, which have a net spin angular momentum of
+zero ($\vec S = 0$), we do not have any band splitting from the atomic orbitals. Instead, the SOI effect in conduction band electrons comes from effective
+potential seen by an electron. Consider an electron moving through the an asymmetric potential within a semiconductor. The asymmetric potential leads the
+electron to feel an effective electric field, which in the rest frame of the electron is equivalent to an effective magnetic field, which causes an energy difference
+between different spin species at a given $k$-vector. The origins of the asymmetic potential seen by the electron is manifested in two distinct ways,
+the first is called structural inversion asymmetry and is caused by an asymmetry in the confining potential of the electron (for example the triangle
+well that confines the 2DEG), the second is called bulk inversion asymmetry and comes from the lack of crystal inversion symmetry in III-V and II-VI semiconductors. These
+two terms lead to the Rashba and Dresselhaus terms respectively.
+
+We can write down the Hamiltonian for an electron in the system, including terms for the Rashba and Dresselhaus SOI:
+\begin{equation}
+  \mathbf{H} = \frac{p_x^2 + p_y^2}{2m^*} + \frac{\alpha}{\hbar}(\sigma_xp_y - \sigma_yp_x) + \frac{\beta}{\hbar}(\sigma_x p_x - \sigma_y p_y) +
+  \frac{\gamma}{\hbar^3}\left(\frac{d}{\pi}\right)^2 p_x p_y (p_y\sigma_x-p_x\sigma_y)
+\end{equation}
+where $\sigma_x$ and $\sigma_y$ are the Pauli operators on the spin of the electron. The first term in this equation is the free-electron Hamiltonian,
+and gives the motion of the electron through the semiconductor as we've seen in Equation~\ref{eq:k2d}. The second term is the Rashba SOI term, characterized
+by a strength $\alpha$ and linear in momentum, creating an effective magnetic field perpendicular to the momentum of the electron. The third and fourth terms
+are the Dresselhaus terms, with strength characterized by $\beta$ for the term linear in momentum and $\gamma$ for the term cubic in momentum. The cubic term is
+generally small relative to the two linear terms in both InAs and GaAs quantum wells and is normally ignored. For the linear Dresselhaus case, the effective magnetic field twists
+as the momentum of the electron changes~\cite{PhysRev.100.580}. This situation is illustrated schematically in Fig.~\ref{fig:SOI} (a) and Fig.~\ref{fig.SOI} (b)
+for the Rashba and linear Dresselhaus terms respectively. As the Rashba term is set by the shape of the confining potential of the electrons in the 2DEG, it is
+also strongly tunable by gate voltage, which is able to induce greater asymmetry in the confining potential.
+We should also note that although we call the effect of SOI an effective magnetic field, it is not a true magnetic field as
+it does NOT break time reversal symmetry or introduce an asymmetry in the population of different spin species. As can be seen from an inspection of Fig.~\ref{fig:SOI},
+states up to the Fermi energy come in the form of Kramers pairs, such that:
+\begin{equation}
+  E_\uparrow(\vec k) = E_\downarrow(-\vec k)
+\end{equation}
+As the origins of this effect lie in the potentials formed by the constituent atoms of the semiconductors, we find that heavy-element semiconductors
+will have a stronger SOI. For applications that require a strong spin orbit interaction, the use of heavy-element III-V or II-VI semiconductors, such
+as InAs, InSb or CdTe is common.
+
+Collectively, these effects allow us to engineer the Hamiltonians of our systems to generate topological phases of matter as we shall see in our discussion below
+of how we use these effects to form spin quantum Hall states and Majorana zero modes. However before we move onto those topics, we can close out our discussion of SOI
+with a striking modification that the SOI causes to weak localization, as described in Sec.~\ref{sec:wl}. The fact that the rotation of spins occurs in opposite
+directions for opposite momenta leads to destructive interference around self intersecting paths, leading to an increase in conductivity, \textbf{weak anti-localization},
+in materials with strong SOI~\cite{10.1143/PTP.63.707}. This situation is shown However, due to the coupling of momenta and spin within the semiconductor,
+scattering events lead to spin randomization over the course of a number of scattering events, via the Dyakonov-Perel spin relaxation mechanism~\cite{DYAKONOV1971459}.
+This allows us to introduce an additional length scale, $l_\textrm{so}$, the length over which a spin relaxes in a material with SOI. This paramater is inversely
+proportional to the strength of the SOI, with a larger strength causing faster spin relaxation. As such, we are also able to measure this effect via low-field hall measurements
+in the same way we measure weak-localization, as seen in Fig.~\ref{fig:SOI} (d). Here the competition between weak-antilocalization (peak) and
+weak-localization (dip) is visible as field is swept on a sample of InAs with strong SOI. In this regime we have $l_e < l_\textrm{so} < l_\phi$ hence all
+three effects are visible. As the strength of the SOI interaction is increased, the spin orbit length bocomes comparable to the elastic scattering length, thereby
+hiding the effect of weak-localization $l_e \approx l_\textrm{so} < l_\phi$ , as seen in Fig.~\ref{fig:SOI} (e). For materials with only Rashba SOI, the strength of the SOI may be
+extracted via fits given in~\cite{10.1143/PTP.63.707}. For materials where both Rashba and SOI terms exist, a full treatment of the correction to conductivity is given
+in~\cite{PhysRevB.53.3912}.
 
 \section{Architecture of a Quantum Computer}
 \label{sec:arch}

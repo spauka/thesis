@@ -1224,11 +1224,70 @@ of $T_2^* = \SI{8.1}{\nano\second}$ with rotation rate $f_{\textrm{rabi}} = \SI{
 GaAs~\cite{PhysRevLett.116.086801} or $T_2^* = \SI{2}{\nano\second}$ with rotation rate $f_{\textrm{rabi}} = \SI{5.2}{\giga\hertz}$ in
 Si/SiGe~\cite{nature13407}, which is presently limited by charge noise~\cite{s41534-017-0034-2}.
 
-\clearpage
-
 \subsection{Majorana Zero Modes}
 \label{sec:majo}
 
+While the above section runs through a number of techniques for building qubits using semiconductor heterostructures,
+each of them suffers from significant amount of noise that must be corrected in order for these qubits to be useful
+in a quantum computer. For an error rate of of $1 \times 10^{-5}$, it is estimated that roughly 3,000 physical qubits
+are required to construct one logical qubit using the surface code, and close to 10,000 gates must be performed per computation gate to correct
+errors as the occur~\cite{6657074}. For spin qubits, although single qubit gate fidelities routinely exceed $99\%$~\cite{Zajac439}, two qubit
+gate fidelities of 98\% are the highest values the author is aware of at time of writing~\cite{PhysRevA.99.042310}.
+The source of error, as we discussed in previous sections, is caused by uncontrolled coupling to the environment, causing information
+to be lost. An alternative approach to building qubits, one that uses the topology of exotic quasiparticles called non-abelian
+anyons, was proposed by Kitaev, as a method of performing quantum computation in a way that is protected from local peturbations~\cite{KITAEV20032}.
+Namely, a system of non-abelian anyons uses as it's computational subspace a set of degenerate ground states with a fixed number
+of quasiparticles, separated by some distance. A result of this separation is that any local peturbation to a quasiparticle does not
+lead to decoherence. To quote: \textquote[RevModPhys.80.1083]{the only way the system can undergo a non-trivial unitary evolution -
+that is an evolution that takes it from one ground state to another - is by having its quasiparticles braided}. In such a way, error rates
+far below those achievable in other qubit systems may be possible. Rather than requiring many noisy qubits to form one logical qubit,
+we may be able to use a few, or even a single clean qubit instead. I will not go into
+further details of how such a computation is achieved via braiding, but will point the interested reader towards~\cite{RevModPhys.80.1083}, which
+gives a far more thorough introduction to the physics than I can in the limited space I have available. I will, however, give a quick introduction
+into the physical origins of the Majorana zero mode, based on the material from~\cite{rafael_notes}.
+
+The next challenge then is to find a system which contains these emergent quasiparticles. Again, it was Kitaev that proposed that
+a one-dimensional chain of fermions, with a specific Hamiltonian, may cause the emergence of exactly the quasiparticles we require~\cite{Kitaev_2001}.
+The Hamiltonian he proposed was\cite{Alicea_2012}:
+\begin{equation}
+  H = -\mu\sum_j \hat c_j^\dagger \hat c_j - \frac{t}{2}\sum_j\left(\hat c_j^\dagger \hat c_{j+1} + \hat c_{j+1}^\dagger \hat c_j\right)
+      -\frac{\Delta}{2}\sum_j\left(e^{i\phi}\hat c_j\hat c_{j+1} + e^{-i\phi} \hat c_{j+1}^\dagger \hat c_j^\dagger\right)
+  \label{eq:kith}
+\end{equation}
+Here we have a set of sites, indexed by $j$, with an onsite energy (chemical potentital) $\mu$, a hopping term $t$, and a superconducting coupling
+term $\Delta$ with phase $\phi$. The terms $\hat c_i$ and $\hat c_i^\dagger$ are the fermion annihilation and creation operators respectively.
+Let's look at a few limits. For $\mu < 0$ and $\Delta, t = 0$, this Hamiltonian simply describes a wire with a single ground state and a fixed
+number of fermions on it. If we wish to add an extra election, we must pay an energy cost $\mu$. The next case we consider is where $\mu=0$ and
+$\Delta = t \neq 0$. We can achieve the first requirement by coupling the wire strongly to a large reservoir of fermions, such that the number of
+fermions on the wire is not a good quantum number (exactly the opposite of a quantum dot). To understand the effect of the next two terms, it is
+helpful to decompose the fermion annihilation and creation operators into Majorana operators:
+\begin{align}
+  \gamma_+ = \hat c + \hat c^\dagger && \gamma_- = -i(\hat c - \hat c^\dagger)
+\end{align}
+They are real operators ($\gamma_\pm = \gamma_\pm^\dagger$), they square to 1 ($\gamma_\pm^2 = 1$), and they anticommute ($\left\{\gamma_+, \gamma_-\right\} = 0$).
+Indeed there is nothing special about these operators, I could easily define them for a single fermion state, which would give:
+\begin{align}
+  \hat c = \frac{1}{2}(\gamma_{+} + i\gamma_{-}) && \hat c^\dagger = \frac{1}{2}(\gamma_{+} - \gamma{-})
+\end{align}
+however since both operators are associated with a single wave function, they are inseparable. There is really only one state.
+The question we need to answer is how to we separate our Majoranas. Let's write down the Kitaev Hamiltonian from Equation~\ref{eq:kith}
+substituting in our Majorana operators. After some rearrangement we find (and removal of a global phase):
+\begin{equation}
+  H = -\frac{\mu}{2}\sum_j(1 + i\gamma_{j,+}\gamma_{j,-}) - \frac{t + \Delta}{4}\sum_j i \gamma_{j,-}\gamma_{j+1,-} - \frac{\Delta - t}{4}\sum_j i \gamma_{j,+}\gamma_{j+1,-}
+\end{equation}
+Note a number of features: $P_i = (1 + i\gamma_{j,+}\gamma_{j,-})$ gives us the parity of the site $i$, and the second and third terms give inter-site majorana couplings.
+For $\mu < 0$ and $\Delta, t = 0$ we recover the original description of a wire with a set of occupied or unoccupied sites. In the case
+that $\mu = 0$ and $\Delta = t \neq 0$, we end up with a vacuum state, gapped from the next state by $\tfrac{\Delta+t}{4}$, but with two unpaired
+Majorana zero modes $\gamma_{0,+}$ and $\gamma_{N,-}$, which form a zero-energy two-level system, protected from local peturbations
+by theur non-local nature, a situation depicted in Fig.~\ref{fig:majo}. Infact this "topological" domain extends around the region of $\Delta = t \neq 0$
+allowing us to construct fault tolerant qubits out of 2 pairs of Majorana zero modes~\cite{RevModPhys.80.1083}. The experimental challenge is
+to find a physical system that is simlar to that described by the Hamiltonian in Equation~\ref{eq:kith}. We can make a 1D chain using the principles
+we've covered up to this point, and the electron pairing is similar to that of a superconductor, the complication is that the Hamiltonian describes
+a set of spinless fermions. The spin of electrons would unfortunately prevent the pairing described above. We will cover one such method for forming
+a spinless 1D superconductor in Sec.~\ref{sec:makemajo}, which combines a superconducting 1D system with strong spin-orbit coupling and a
+parallel magnetic field to create an effective spinless system~\cite{PhysRevLett.105.077001,PhysRevLett.105.177002}. At this point, such systems
+have been experimentally realized, and evidence for Majorana zero modes is mounting~\cite{Mourik1003,s41578-018-0003-1}, however as of writing
+a topologically protected qubit has not yet been observed.
 
 \section{Characterizing 2DEGs}
 \label{sec:char}
@@ -1260,6 +1319,17 @@ of the system being measured $L$, and the various length scales in our system $l
   \item \textbf{Quantum Ballistic} ($\lambda_F \approx L \ll l_e, l_\phi$): At this point, discrete orbital energies occur in the confining directions. In 2D, this leads to the emergence of a 2DEG, in 1D a quantum point contact and in 0D a quantum dot.
 \end{itemize}
 
+\begin{figure}
+  \includegraphics[width=0.85\linewidth]{hall}
+  \caption[Schematic of a Hall bar and several devices]
+  {\label{fig:hall}(a) Schematic of a Hall bar showing the location of contacts, and relevant dimensions. Care should be taken to ensure that
+  current cannot flow at voltage contacts. (b) A Hall bar on InAs, with Al contacts. Several locations are defined where Hall conductivity and transverse conductivity
+  may be measured, and a global topgate allows continuous tuning of density. (c) A Hall bar on GaAs, with multiple contacts, allowing
+  measurement of parameters at multiple locations. (d) A Hall bar integrated on a qubit device. Fewer contacts are defined, with a focus on small
+  footprint, however it allows for characterization of the 2DEG prior to measurement. Note that for each contact, notches are defined in the Mesa
+  and the Ohmic contact extends over the edge of the Mesa to ensure good contact to edges at high field along multiple crystalographic axes.}.
+\end{figure}
+
 For this thesis, we will largely focus on the Quantum Diffusive and the Quantum Ballistic regimes, as they describe the physics of the
 2DEG and the quantum dot respectively. Having already described the physics of the quantum dot, let's look at the quantum corrections that occur
 in the Quantum Diffusive regime, as they will allow us to extract both the scattering length and the strength of the spin-orbit
@@ -1272,7 +1342,10 @@ This second quantity gives us an expression for the conductivity of our sample:
 \begin{equation}
   \sigma = \rho_{XX} \frac{W}{L}
 \end{equation}
-where $W$ is the width of the sample and $L$ is the length between contacts.
+where $W$ is the width of the sample and $L$ is the length between contacts. Samples of Hall bars on several samples are given in Fig.~\ref{fig:hall} (b)
+(c) and (d). Device (b), fabricated on a shallow InAs quantum well, includes a global top gate that allows the density in the 2DEG to be tuned continuously,
+while (d) shows a device that is embedded on a GaAs quantum dot device, and is optimized for a small footprint. Details on the optimization of ohmic contacts
+are given in the appendix, Sec.~\ref{sec:ohmics}.
 
 \subsection{Weak Localization}
 \label{sec:wl}
@@ -1280,12 +1353,25 @@ To include the effects of phase coherence on conductivity, we will use the so-ca
 a corrected conductivity. The basic idea of such an approach is to consider what conductivity refers to on the scale of
 a small number of scattering sites. Given a small sample, with a small number of elastic scattering sites within the lattice,
 we can define the conductivity as the probability that an electron reaches the end point, where it leaves the system,
-from a given starting point. A schematic of this case is shown in Fig.~\ref{fig:WL}. This
+from a given starting point. A schematic of this case is shown in Fig.~\ref{fig:WL} (a). This
 probability will be given by the wavefunction at the final point, which is given by the sum of the wavefunctions corresponding
-to each path through the lattice. For example, the paths may be {start, 1, 4, end} or {start, 2, 5, end} etc. The total wavefunction at the end is:
+to each path through the lattice. For example, the paths may be {start, 1, 2, 7, end} or {start, 8, 7, end} etc. The total wavefunction at the end is:
 \begin{equation}
   \Psi_{\textrm{start}\rightarrow\textrm{end}} = \sum_j \psi_j = \sum_j t_j e^{i \varphi_j}
 \end{equation}
+
+\begin{figure}
+  \includegraphics[width=0.85\linewidth]{wl}
+  \caption[Weak localization]
+  {\label{fig:WL}(a) To calculate the probability of transmission, we must sum together the wavefunctions for each path through the 2DEG. Scattering
+  sites are represented by numbered dots, and several example paths are highlighted.
+  (b) We can also calculate the probability that an electron will return to its starting location in the same way. Since an electron can travel in both
+  a clockwise and counter-clockwise direction along the loop, there is an increased probability of reflection relative to transmission.
+  (c) Weak localization in an InAs Hall bar. A weak antilocalization peak is seen at zero field, however at small magnetic fields, weak localization
+  begins to dominate and we see a drop in conductance and a gradual recovery with field as expected. (d) The relavant length scales in the weak
+  localization problem. As the magnetic length is reduced (field is increased), weak localization is suppressed.}
+\end{figure}
+
 Here $t_j$ is the transmission probability along the path $j$, and $\varphi_j$ is the phase accumulated along the path $j$.
 The probability of finding the election at the end point is threfore:
 \begin{equation}
@@ -1322,7 +1408,16 @@ is given by:
   \Delta \phi(B_\perp) = 4 \pi \frac{\Phi}{\Phi_0} = 4\pi \frac{B_\perp A}{\Psi_0}
 \end{equation}
 At the point where the magnetic field induces a $\pi/2$ phase shift around a loop, the destructive interference will be supressed, thus the
-effect of longer loops will be suppressed as a magnetic field is applied. The correction for weak localization unfortunately does not have
+effect of longer loops will be suppressed as a magnetic field is applied. A measurement of weak localization on an InAs Hall bar is shown in
+Fig.~\ref{fig:WL}. Near zero field, there is a weak-antilocalization peak, a topic we cover in Sec.~\ref{sec:SOI}, however for fields
+slightly above zero we see the reduction in conductivity and gradual increase towards the bulk value we expect.
+Assuming paths are roughly circular we can approximate the length scale that a $\pi/2$ phase change between forwards and backwards
+propogating paths corresponds to as:
+\begin{equation}
+  l_\textrm{Bcrit} = \sqrt{\frac{h \pi}{2 e B}}
+\end{equation}
+We therefore expect weak-localization to start getting suppressed when $l_\textrm{Bcrit} \approx l_\phi$, and the conductivity to return to the bare
+value when $l_\textrm{Bcrit} \approx l_e$. This is shown in Fig.~\ref{fig:WL} (d). The exact form for the correction for weak localization unfortunately does not have
 a simple form~\cite{PhysRevB.70.245311}, however for a diffusive approximation, where $l_e \ll l_\phi$, we can use the reasonably simple form
 given by~\cite{10.1143/PTP.63.707}:
 \begin{equation}
@@ -1397,7 +1492,7 @@ we have been neglecting the effects of spin, however, we can trivially add it to
 Finally we introduce a parameter to describe the number of electrons per magnetic flux quantum, which will also correspond
 to the number of Landau levels below the Fermi energy:
 \begin{equation}
-  \nu = \frac{n_s}{\tfrac{B}{\Phi_0}} = \frac{n_s h}{e B}
+  \nu = \frac{n_s}{B / \Phi_0} = \frac{n_s h}{e B}
   \label{eq:nu}
 \end{equation}
 
@@ -1406,9 +1501,9 @@ be modified, as we now no longer have free states at the Fermi level. In fact th
 Hall regime will indeed be insulating. Current is carried at the edges of the sample, where the confining potential curves upwards, and Landau levels
 intersect with the Fermi level~\cite{PhysRevB.25.2185} as shown in Fig.~\ref{fig:hall}. This gives rise to a series of chiral, 1D channels that carry current around the edges
 of the Hall bar. Since these edge states are directional, and edges flowing in the opposite direction are physically separated by the width of the Hall
-bar, backscattering is strongly suppressed, and edges provide dissipationless condactance, i.e. $\rho_{XX} \rightarrow 0$. The next question is, what about
-the Hall resistance $rho_{XY}$. The number of edges that will cut through the Fermi level is given by: $N_\textrm{max} = \lfloor \nu \rfloor$, each of which
-will contribute to the total conductivity. The total conductivity then is the sum of the conductances of each of the channels. Let's assume a difference in the
+bar, backscattering is strongly suppressed, and edges provide dissipationless transport, i.e. $\rho_{XX} \rightarrow 0$. What about
+the Hall resistance, $\rho_{XY}$? The number of edges that will cut through the Fermi level is given by: $N_\textrm{max} = \lfloor \nu \rfloor$, each of which
+will contribute to the total conductivity. The total conductivity is the sum of the conductances of each of the channels. Let's assume a difference in the
 chemical potential of both sides of $\delta \mu = \mu_2 - \mu_1$. The total current across the sample is given by the product of the velocity $v_n(E)$
 and the density of states $\rho_{\textrm{1D},n}$.
 \begin{equation}
@@ -1474,6 +1569,7 @@ approaches the cyclotron frequency $\omega_c$, the EMP frequency $\omega_\textrm
 Section~\ref{sec:hallcirc} and Section~\ref{sec:spinhallcirc} to construct compact circulators.
 
 \subsection{The Spin-Orbit Interaction}
+\label{sec:SOI}
 Within a solid, we've thus far assumed that the spin or an electron is independant of it's motion through that semiconductor, apart from
 a tangential mention in Sec.~\ref{sec:dotqubits}, where we discussed its usefulness in controlling spins in semiconductors. In reality, the
 band structure of the semiconductor, which up to this point we've captured in a single parameter, the effective electron mass $m^*$ is shaped
@@ -1500,12 +1596,12 @@ and gives the motion of the electron through the semiconductor as we've seen in 
 by a strength $\alpha$ and linear in momentum, creating an effective magnetic field perpendicular to the momentum of the electron. The third and fourth terms
 are the Dresselhaus terms, with strength characterized by $\beta$ for the term linear in momentum and $\gamma$ for the term cubic in momentum. The cubic term is
 generally small relative to the two linear terms in both InAs and GaAs quantum wells and is normally ignored. For the linear Dresselhaus case, the effective magnetic field twists
-as the momentum of the electron changes~\cite{PhysRev.100.580}. This situation is illustrated schematically in Fig.~\ref{fig:SOI} (a) and Fig.~\ref{fig.SOI} (b)
-for the Rashba and linear Dresselhaus terms respectively. As the Rashba term is set by the shape of the confining potential of the electrons in the 2DEG, it is
-also strongly tunable by gate voltage, which is able to induce greater asymmetry in the confining potential.
+as the momentum of the electron changes~\cite{PhysRev.100.580}. The effects of these terms is to shift the energies of the two spin species at each point of the dispersion
+relation, a situation illustrated schematically in Fig.~\ref{fig:SOI} (a) and Fig.~\ref{fig.SOI} (b). As the Rashba term is set by the shape
+of the confining potential of the electrons in the 2DEG, it is also strongly tunable by gate voltage, which is able to induce greater asymmetry in the confining potential.
 We should also note that although we call the effect of SOI an effective magnetic field, it is not a true magnetic field as
-it does NOT break time reversal symmetry or introduce an asymmetry in the population of different spin species. As can be seen from an inspection of Fig.~\ref{fig:SOI},
-states up to the Fermi energy come in the form of Kramers pairs, such that:
+it does NOT break time reversal symmetry or introduce an asymmetry in the population of different spin species. As can be seen from an inspection of
+Fig.~\ref{fig:SOI} (a) and Fig.~\ref{fig:SOI} (b), states at each energy come in the form of Kramers pairs, such that:
 \begin{equation}
   E_\uparrow(\vec k) = E_\downarrow(-\vec k)
 \end{equation}
@@ -1513,20 +1609,67 @@ As the origins of this effect lie in the potentials formed by the constituent at
 will have a stronger SOI. For applications that require a strong spin orbit interaction, the use of heavy-element III-V or II-VI semiconductors, such
 as InAs, InSb or CdTe is common.
 
-Collectively, these effects allow us to engineer the Hamiltonians of our systems to generate topological phases of matter as we shall see in our discussion below
-of how we use these effects to form spin quantum Hall states and Majorana zero modes. However before we move onto those topics, we can close out our discussion of SOI
-with a striking modification that the SOI causes to weak localization, as described in Sec.~\ref{sec:wl}. The fact that the rotation of spins occurs in opposite
-directions for opposite momenta leads to destructive interference around self intersecting paths, leading to an increase in conductivity, \textbf{weak anti-localization},
-in materials with strong SOI~\cite{10.1143/PTP.63.707}. This situation is shown However, due to the coupling of momenta and spin within the semiconductor,
-scattering events lead to spin randomization over the course of a number of scattering events, via the Dyakonov-Perel spin relaxation mechanism~\cite{DYAKONOV1971459}.
-This allows us to introduce an additional length scale, $l_\textrm{so}$, the length over which a spin relaxes in a material with SOI. This paramater is inversely
-proportional to the strength of the SOI, with a larger strength causing faster spin relaxation. As such, we are also able to measure this effect via low-field hall measurements
-in the same way we measure weak-localization, as seen in Fig.~\ref{fig:SOI} (d). Here the competition between weak-antilocalization (peak) and
-weak-localization (dip) is visible as field is swept on a sample of InAs with strong SOI. In this regime we have $l_e < l_\textrm{so} < l_\phi$ hence all
-three effects are visible. As the strength of the SOI interaction is increased, the spin orbit length bocomes comparable to the elastic scattering length, thereby
-hiding the effect of weak-localization $l_e \approx l_\textrm{so} < l_\phi$ , as seen in Fig.~\ref{fig:SOI} (e). For materials with only Rashba SOI, the strength of the SOI may be
-extracted via fits given in~\cite{10.1143/PTP.63.707}. For materials where both Rashba and SOI terms exist, a full treatment of the correction to conductivity is given
-in~\cite{PhysRevB.53.3912}.
+\begin{figure}
+  \includegraphics[width=0.85\linewidth]{SOI}
+  \caption[The spin orbit interaction and weak anti-localization]
+  {\label{fig:SOI}(a) The dispersion relation at the Fermi surface under the influence of only the Rashba spin-orbit interaction. The effective
+  magnetic field is shown in green. (b) The dispersion relation at the Fermi surface under the influence of only the Dresselhaus spin-orbit interaction.
+  The effective magnetic field is shown in green. (c) Weak anti-localization and weak localization in an InAs Gall bar. In this case, $l_e < l_\phi < l_\textrm{so}$. A
+  conductance peak is seen at zero field, which is rapidly suppressed by an applied perpendicular field. At intermediate fields, weak localization
+  begins to dominate leading to a dip and gradual rise in conductance. (d) Weak anti-localization in the same sample, for the case that $l_e \approx l_\textrm{so} < l_\phi$.
+  The strength of the Rashba spin-orbit interaction is increased by the application of a higher gate voltage, leading to a tilted confining potential and
+  a reduced spin relaxation length $l_\textrm{so}$.}
+\end{figure}
+
+Collectively, these effects allow us to engineer the Hamiltonians of our systems to generate topological phases of matter as we shall see in our discussion below,
+where we use these effects to form anomalous quantum Hall states and Majorana zero modes. However before we move onto those topics, we can close out our discussion of SOI
+with a striking modification that SOI causes to weak localization as described in Sec.~\ref{sec:wl}. The fact that the rotation of spins occurs in opposite
+directions for opposite momenta leads to destructive interference around self intersecting paths. This leads to an increase in conductivity, or \textbf{weak anti-localization},
+in materials with strong SOI~\cite{10.1143/PTP.63.707}. However, as the electron scatters around a closed loop, the coupling of momentum and spin leads to the randomization of
+the spin over the course of a number of scattering events. In a semiconductor, this is described by the Dyakonov-Perel spin relaxation
+mechanism~\cite{DYAKONOV1971459}. We can therefore introduce an additional length scale, $l_\textrm{so}$, the length over which a spin relaxes in a material with SOI.
+This paramater is inversely proportional to the strength of the SOI, with a larger strength causing faster spin relaxation.
+As the destructive interference relies on the differing energies between the two distinct spin species, the length scale over which spin relaxes in the semiconductor sets
+a bound on the size of the loops where weak anti-localization can occur. As such, we are also able to measure
+this effect via low-field hall measurements in the same way we measure weak-localization, as seen in Fig.~\ref{fig:SOI} (c). Here the competition between
+weak-antilocalization (peak) and weak-localization (dip) is visible as field is swept on a sample of InAs with strong SOI. In this regime we have $l_e < l_\phi < l_\textrm{so}$
+hence all three effects are visible. As the strength of the SOI interaction is increased by increasing gate voltage, the spin orbit length bocomes comparable to the elastic
+scattering length $l_e \approx l_\textrm{so} < l_\phi$, thereby masking the effect of weak-localization, as seen in Fig.~\ref{fig:SOI} (d). For materials with only
+Rashba SOI, the strength of the SOI may be extracted via fits given in~\cite{10.1143/PTP.63.707}. For materials where both Rashba and SOI terms exist, a more complete
+treatment of the correction to conductivity is given in~\cite{PhysRevB.53.3912}.
+
+\subsection{Quantum Anomalous Hall Effect}
+One natural question we might ask is whether we are able to form edge states with quantized conductance that are protected from
+scattering without an external magnetic field. It was a number of years before the question was answered in the affirmative by
+Thouless~\cite{PhysRevLett.49.405} and later Haldane~\cite{PhysRevLett.61.2015}, their insight being the relationship between the
+quantum Hall and related effects, and topology. For this insight they were, along with Kosterlitz, awarded the Nobel prize in 2016~\cite{nobel2016}.
+Briefly, we can try and get an intuitive understanding of topology by considering the genus of an object. This is a global property of
+a surface that is related to the number of holes in it. A ball for example has a genus of zero, and by continuous deformation, we can turn it
+into other objects with the same genus, for example a cube, a sheet of paper or even a pan have a genus of zero. A doughnut on the other hand has
+a genus of one, it has a single hole. We can stretch and shape it into objects such as a mug, where the hole is its handle, but it can never become a ball.
+This genus is captured by the Gauss-Bonnet theorem which states that the integral over the surface $S$ of a shape, with local curvature $K$ will yield
+the genus $g$ of the object:
+\begin{equation}
+  \frac{1}{2\pi}\int_S K \mathrm{d}A = 2(1-g)
+\end{equation}
+We use a generalization of this theorem, called the Chern-Simons theorem, which allows us to map this theorem onto a band structure. We can define an
+equivalent to "curvature" along the surface of bands in a solid, termed the Berrys phase. This is the phase that an particle travelling around
+a path on the surface of a band acquires. The integral of the Berrys phase over momentum space leads to an integral quantity known as the Chern number,
+$n$, which is an integer and characterizes the topology of the material~\cite{conmatphys-011417}. In the integer quantum Hall effect, the number $n$
+is the same as the filling factor $\nu$, and gives us a topological explanation for the emergence of quantized edge states: as we transition from within
+the material with Chern number $n$, to free space with Chern number $0$, there must be a twisting of the band structure near the edge that leads to the emergence
+of conductive edges. However, for the quantum Hall state, a large magnetic field is required to define the Berrys phase and hence the Chern number of the material.
+
+In materials with a strong spin-orbit coupling, it is possible to find configurations with a non-zero Chern number, a topologically non-trivial band structure.
+At the boundaries of such a material, a conductive state must appear~\cite{PhysRevLett.93.156804,PhysRevLett.92.126603}, and indeed for heterostructures of \ce{HgCdTe}
+the \textbf{spin quantum Hall effect} has been observed~\cite{Konig766}, where two counterpropogating, spin polarized, 1D channels lead to quantized conductance. Unfortunately, these
+samples are sensitive to spin-scattering and thus have not been robustly demonstrated. The addition of a ferromagnetic dopant, such as chromium or vanadium lifts the
+time reversal symmetry and generates leads to the formation of a spin-polarized chiral edge state, once the material has been taken past the coercive field of the
+Cr or V dopants. This is termed the \textbf{quantum anomalous Hall effect}. The total conductance is given by the sum of the top and bottom edge states,
+each contributing $e^2/2h$ of conductance, for a total hall conductance of $\sigma = e^2/h$, as shown in Fig.~\ref{fig:qah}.
+
+\subsection{Forming Majoranas}
+\label{sec:makemajo}
 
 \section{Architecture of a Quantum Computer}
 \label{sec:arch}

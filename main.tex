@@ -34,8 +34,11 @@
 \usepackage{fontspec}
 \usepackage{xcolor}
 \usepackage[english]{babel}
-\usepackage[autostyle,english=american]{csquotes}
+\usepackage[autostyle,
+            autopunct=true,
+            english=american]{csquotes}
 \MakeOuterQuote{"}
+\renewcommand{\mkcitation}[1]{#1}
 \usepackage{braket}
 \usepackage{amsmath}
 \usepackage{unicode-math}
@@ -85,6 +88,11 @@
 \DeclareSIUnit\mv{\milli\volt}
 \DeclareSIUnit\rpm{rpm}
 
+\makeatletter
+\g@addto@macro{\figure}{\centering}%
+\g@addto@macro{\endfigure}{}
+\makeatother
+
 %% This bit allows you to either specify only the files which you wish to
 %% process, or `all' to process all files which you \include.
 %% Krishna Sethuraman (1990).
@@ -121,11 +129,6 @@
     \end{center}
     \clearpage
 }
-
-\makeatletter
-\g@addto@macro{\figure}{\centering}%
-\g@addto@macro{\endfigure}{}
-\makeatother
 
 % Use "thesis-style" one-half spacing
 \onehalfspace

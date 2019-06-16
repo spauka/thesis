@@ -201,12 +201,15 @@
 \LoadClass{report}
 
 % If the user wants single spacing, set baselinestretch=1.
-
 \usepackage{setspace}
 
 % Load author formatting packages
 \usepackage[superscriptaddress]{ltxfront}
-\usepackage{ltxgrid}
+\def\set@footnotewidth@one{%
+ \hsize\columnwidth
+ \linewidth\hsize
+}
+\def\do@output@cclv{}
 \usepackage[hidelinks,bookmarksdepth=3]{hyperref}
 
 % Note - doublespace.sty has some float-related troubles in

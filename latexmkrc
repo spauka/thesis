@@ -1,8 +1,8 @@
-# $pdflatex = "xelatex %O %S";
-$pdf_mode = 5;
+$pdf_mode = 4;
+$postscript_mode = $dvi_mode = 0;
 
 # Pass specific options to bibtex
-$bibtex     = "bibtex %S > '$ENV{'TMPDIR'}'${filesep}bibtex.out";
+$bibtex     = "bibtex %S > '$ENV{'TMPDIR'}'bibtex.out";
 # $bibtex     = "bibtex %S";
 
 # Define all output directories to be "tmp"

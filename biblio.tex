@@ -3,6 +3,16 @@
 %% this file to a `thebibliography' environment.  For more information
 %% see section 4.3 of the LaTeX manual.
 \begin{singlespace}
+\renewcommand*{\doi}[1]{\href{https://doi.org/\detokenize{#1}}{doi: \textcolor{blue}{\detokenize{#1}}}}
+\renewcommand*{\backrefalt}[4]{%
+    \ifcase #1 %
+        No citations.%
+    \or
+        Page: #2%
+    \else
+        Pages: #2%
+    \fi
+}
 \bibliography{intro,main,chap1,chap2,chap3,chap4}
-\bibliographystyle{unsrt}
+\bibliographystyle{unsrtnat_mod}
 \end{singlespace}

@@ -55,11 +55,10 @@ hypothesis:
 To paraphrase, this stated that anything a Turing machine could do, a computer could do too, and anything
 it \emph{can't} do, no computer can. It wasn't long before this was extended to the strong Church-Turing
 hypothesis, which states \textquote[\cite{kaye2007an}]{A probabilistic Turing machine can efficiently simulate any
-realistic model of computation}.
-\footnote{Note we had to add the word "probabilistic" to the statement of the strong Church-Turing hypothesis. This was
- due to the discovery of a new complexity class, bounded-error probabilistic polynomial (\cc{BPP}), which includes problems
- we can solve with $> 2/3$ chance in polynomial time. By running these algorithms repeatedly, we can solve problems to within
- a small error $\epsilon$ in polynomial time.}
+realistic model of computation}\footnote{Note we had to add the word "probabilistic" to the statement of the strong
+ Church-Turing hypothesis. This was due to the discovery of a new complexity class, bounded-error probabilistic polynomial (\cc{BPP}),
+ which includes problems  we can solve with $> 2/3$ chance in polynomial time. By running these algorithms repeatedly, we can solve
+ problems to within a small error $\epsilon$ in polynomial time.}.
 Note the addition of the term \emph{efficiently}. This prescribes that for any
 operation we could add to any physical computer, we can get at most a polynomial speedup. Since
 a polynomial $P(n)$ divided by another polynomial $Q(n)$ is still a polynomial, and anything that grows faster
@@ -255,9 +254,9 @@ These three rotations (and often a global phase factor to simplify our result) a
 any single qubit operation. For completeness, we can also define some other gates that often come up in
 the context of quantum computation:
 \begin{alignat}{4}
-    H &=& \frac{1}{\sqrt{2}}\svec{1&1\\1&-1} &=& e^{\tfrac{i\pi}{2}} R_Y\left(\frac{\pi}{2}\right) R_Z(\pi) &=& \frac{\sigma_X+\sigma_Z}{\sqrt{2}} \\
-    T &=& \svec{1&0\\0&e^{\tfrac{i\pi}{4}}}  &=& e^{\tfrac{i\pi}{8}} R_Z\left(\frac{\pi}{4}\right)          &=& \sqrt[4]{\sigma_Z} \\
-    S &=& \svec{1&0\\0&i}                    &=& e^{\frac{i \pi}{4}} R_Z\left(\frac{\pi}{2}\right)          &=& \sqrt{\sigma_Z}
+    H &=& \frac{1}{\sqrt{2}}\svec{1&1\\1&-1} &=& \, e^{\tfrac{i\pi}{2}} R_Y\left(\frac{\pi}{2}\right) R_Z(\pi) \, &=& \frac{\sigma_X+\sigma_Z}{\sqrt{2}} \\
+    T &=& \svec{1&0\\0&e^{\tfrac{i\pi}{4}}}  &=& \, e^{\tfrac{i\pi}{8}} R_Z\left(\frac{\pi}{4}\right)          \, &=& \sqrt[4]{\sigma_Z} \\
+    S &=& \svec{1&0\\0&i}                    &=& \, e^{\frac{i \pi}{4}} R_Z\left(\frac{\pi}{2}\right)          \, &=& \sqrt{\sigma_Z}
 \end{alignat}
 These are the Hadamard gate, the T gate (or $\pi/8$ gate)\footnote{The $T$-gate is often
 referred to as the $\pi/8$ gate, even though it represents a $\pi/4$ rotation, a name that is derived from
@@ -265,14 +264,14 @@ the phase factor for historical reasons.} and the phase gate respectively.
 As is typical, phase factors are usually dropped (something I did not do in the above), hence it is
 common to see variations of these equations in the literature.
 
-As a final example, let's take a detailed look at where interfering probabilities leads to a thoroughly
+As a final example, let's take a detailed look at where interfering probabilities lead to a thoroughly
 non-classical result. To start with, let's define two additional states:
 \begin{align}
   \ket{+} = \frac{\ket{0} + \ket{1}}{\sqrt{2}} && \ket{-} = \frac{\ket{0} - \ket{1}}{\sqrt{2}}
 \end{align}
 We can get these states by starting from $\ket{0}$ and rotating $\pi/2$ or $-\pi/2$ around the Y-axis. You can
-reasonably easily confirm that they are properly normalized, and that if we were to measure each state, the
-probability of measuring a $\ket{0}$ or a $\ket{1}$ are equal for both states: $\mathrm{P}\left(\ket{0}\right) =
+confirm that they are properly normalized, and that if we were to measure each state, the
+probabilities of measuring a $\ket{0}$ or a $\ket{1}$ are equal for both states: $\mathrm{P}\left(\ket{0}\right) =
 \mathrm{P}\left(\ket{1}\right) = 0.5$. So a direct measurement would be unable to distinguish these two states.
 However, if we were to apply the Hadamard gate to each of those two states, we surprisingly end up with two
 different outputs:
@@ -290,7 +289,7 @@ with each other. Due to this correlation, the state of a qubit that has been ent
 can no longer be described independently, the states of the two qubits become linked. Perhaps the easiest
 way to grok the consequences of this is to give an example of how this correlation might play out.
 
-Let's start with two qubits, one of which starts in the $\ket{+}$ state, the other which starts in
+Let's start with two qubits, one of which starts in the $\ket{+}$ state, and the other which starts in
 the $\ket{0}$ state. If we were to apply a gate that flips the state of the second qubit if the state of
 the first qubit is $\ket{1}$, then we might expect to end up with something like $\ket{+}$ in the second
 qubit. If we measure the first qubit and get the result $\ket{0}$, the state of the second qubit must also
@@ -358,7 +357,7 @@ that was prepared in the state is lost. Quantum algorithms must, therefore, have
   \caption[Noise affecting pure states]
   {(a)We can think of noise as uncontrolled interactions with an environment. However since we can't measure
   information that is transferred into the environment, we end up with an incomplete representation of our qubit.
-  In order to represent this state, with some of it's information lost, we must describe the state with a density
+  In order to represent this state, with some of its information lost, we must describe the state with a density
   matrix representation. (b) A simple model for relaxation, where we represent the probability of a decay $\gamma$
   in the rotation angle $\sin^2(\theta/2) = \gamma$. Each time this gate is applied, we end up more likely to be in
   the $\ket{1}$ state. (c) A simple model for dephasing, where the phase $\theta$ is a random variable. This type
@@ -376,9 +375,9 @@ in Fig.~\ref{fig:noise} (a), where we see a qubit $\ket{\Psi}$ interact with the
 As we are unable to make a good projective measurement of the environment, the output
 state after the unitary interaction $U$ with the environment cannot be well described in the vector notation we have been using
 this far, and some information about the state is irrevocably lost. The challenge of including
-these sources of noise into our view of quantum computing is to figure out how to model the uncontrolled environment.
-\footnote{Or, we could replace the environment with something we CAN control and measure, an approach attempted
-in \cite{s41586-019-1287-z}.}
+these sources of noise into our view of quantum computing is to figure out how to model the uncontrolled
+environment\footnote{Or, we could replace the environment with something we CAN control and measure, an approach attempted
+in \cite{s41586-019-1287-z}.}.
 The primary way to describe such an interaction is to switch to a density matrix representation of our state, which allows us
 to describe a subsystem of a composite quantum system, i.e. to ignore the portion of the state lost to the environment.
 Indeed this is the most complete way to describe noise processes and information loss of our state, however rather
@@ -408,10 +407,10 @@ as a randomization of the $\varphi$ angle. An equivalent circuit, again using a 
 environment is shown in fig.~\ref{fig:noise} (c). We represent an irretrievable loss of information to the
 environment as a projective measurement on the second qubit. This error rate is commonly quoted as the $T_2$ time,
 the rate that phase information is lost to the environment. In the case of a single qubit evolving under completely uncorrelated
-(markovian) noise, this would be the end of the story, however in most systems, we also define a $T_2^*$, an ensemble
+(Markovian) noise, this would be the end of the story, however in most systems, we also define a $T_2^*$, an ensemble
 dephasing time. In the case of single qubits that evolve under quasi-static noise
 \footnote{Quasi-static noise is noise that is approximately constant over the timescale of qubit operations. More formally,
-we can define it as non-markovian noise, that is there is some correlation in the noise that we can learn and correct
+we can define it as non-Markovian noise, that is there is some correlation in the noise that we can learn and correct
 by appropriate application of dynamical decoupling.} or multi-qubit systems that operate
 under an inhomogeneous background, we can use correlations in the noise or the static nature of the inhomogeneous background
 to "rephase" our qubits\cite{PhysRev.80.580,dynamic-decoupling-biercuk}. We can think of this effect as coming from the
@@ -426,7 +425,7 @@ than the correlation time and without correcting for inhomogeneities.
 Having described the basic ideas of quantum computing, our next challenge is to find a physical system that
 can implement the operations that we discussed above. This problem can be distilled to that
 of finding a quantum two-level system conforming to a set of criteria that were first laid out by David
-DiVincenzo, criteria that are widely considered to be the standard checklist for any qubit\cite{divincenzo_crit}. They are:
+DiVincenzo, criteria that are widely considered to be the standard checklist for any qubit system\cite{divincenzo_crit}. They are:
 \begin{enumerate}
   \item A scalable physical system with well-characterized qubits.
   \item The ability to initialize a fiducial qubit state, such that the state of the system is known prior
@@ -440,7 +439,7 @@ that there is a dearth of systems that could fulfil them. It is in this context 
 NMR based qubits, superconducting qubits and semiconductor-based qubits are being investigated as the base of a quantum computer, each satisfying the
 criteria to varying degrees. Apart from a brief discussion of the scalability prospects of each of these systems
 in Section~\ref{sec:arch}, I will focus on semiconductor-based qubits for the remainder of this thesis. This type
-of qubit has the potential to utilize the extraordinary processing capabilities of modern semiconductor manufacturing,
+of qubit has the potential to utilize the extraordinary processing capabilities of modern semiconductor manufacturing.
 Despite narrowing the focus to semiconductor systems, there are still many
 choices of two-level subspace we could use. I will not attempt to cover all the variations
 of qubit that exist; rather I will focus specifically on two general designs, quantum dots and Majorana zero modes,
@@ -476,7 +475,7 @@ an idea of its "size". The following introduction is based on material taken fro
 In a crystalline material, such as a metal or a semiconductor lattice, we can think
 about electrons as travelling through a periodic potential, caused by the periodic spacing of nuclei in the lattice, as
 is shown in Fig.~\ref{fig:blochwaves}~(a) for a 1D lattice. There will be two sets of solutions; one for electrons
-that are bound around nuclei which will form the valence band and one for free electron solutions which
+that are bound around nuclei which will form the valence band and one for free electrons which
 will form the conduction band. The gap between these two solutions forms a band gap of size $(E_G)$, a range
 of energies for which there are no available states. As we are looking at the 2DEG, let's focus on free electron solutions for now.
 These solutions will take the form of Bloch waves, expressed as a function of lattice position $r$ and wave-vector $k$:
@@ -512,8 +511,8 @@ the form of the effective mass will be more complex for materials that have dire
 or more complex band structures such as graphene. From Eqn.~\ref{eqn:3ddisp}, we can also give the
 formal definition for the Fermi energy. The \textbf{Fermi energy} ($E_F$) is the energy of the highest filled electron state
 at zero temperature. This situation is represented schematically in Fig.~\ref{fig:blochwaves}~(b) for a single dimension.
-In 3D, the Fermi energy forms a sphere in momentum space delineating the region where electron states are filled, the surface
-of which we call the Fermi surface. Finally, we can define the \textbf{Fermi wavelength} $\lambda_F$ of an electron at the Fermi
+In 3D, the Fermi energy forms the surface of a sphere in momentum space delineating the region where electron states are filled,
+which we call the Fermi surface. Finally, we can define the \textbf{Fermi wavelength} $\lambda_F$ of an electron at the Fermi
 surface, effectively the size of an electron in our semiconductor. Using $k = 2\pi/\lambda$ we find:
 \begin{equation}
   \lambda_F = \frac{h}{\sqrt{2m^*E_F}}
@@ -566,9 +565,9 @@ their levels, leading to band bending at the interface. Careful choice of semico
 where the width of the well can be designed to be on the order of the Fermi wavelength in the semiconductor. GaAs and (Al,Ga)As are
 an ideal choice for this type of heterojunction as they are almost perfectly lattice matched (their lattice constants differ by 0.14\%),
 while also forming a straddling-gap heterojunction. The gap in GaAs is $E_{G1} = \SI{1.424}{\electronvolt}$ and the gap in
-\ce{Al_{1-x}Ga_{x}As} can be continuously varied by
+\ce{Al_{x}Ga_{1-x}As} can be continuously varied by
 changing the ratio of Al and Ga in the semiconductor, taking the value $E_{G2} = 1.424 + 1.225x$ \si{\electronvolt}.
-Furthermore, up to $x = 0.44$, the ratio of the step in the conductance
+Furthermore, between $x = 0$ and $x = 0.44$, the bandgap is direct and ratio of the step in the conductance
 band ($\Delta E_C$) to the step in valence band ($\Delta E_V$) is a constant: $\Delta E_C/\Delta E_V = 1.5$\cite{adachi1993properties}
 [see steps in Fig.~\ref{fig:heterostructure}~(b)], allowing the depth of the well to be easily varied.
 Finally, by doping the semiconductor with Si, we can move the Fermi energy up to populate a single subband, leading to a
@@ -1140,7 +1139,7 @@ we only operate in the $S-T_0$ states. Any leakage into the $T_-$ or $T_+$ state
 \includegraphics[width=0.9\linewidth]{st0}
 \caption[Energy levels and eigenstates of a Singlet-Triplet qubit]
 {\label{fig:st0}(a) The energy levels of a Singlet-Triplet Qubit. The three triplet states are split by the application of a
-uniform magnetic field $B$. At a large negative detuning, i.e. $J(\epsilon) \approx 0$, the gradient magnetic field $\Delta B_X$ leads to a
+uniform magnetic field $B$. At a large negative tilt, i.e. $J(\epsilon) \approx 0$, the gradient magnetic field $\Delta B_X$ leads to a
 change in basis, such that the energy eigenstates are described by $\ket{\uparrow_1\downarrow_2}$ and $\ket{\downarrow_1\uparrow_2}$,
 where here we've arbitrarily chosen $\Delta B_X > 0$.
 (b) Bloch sphere representation of a single Singlet-Triplet qubit. Qubit rotation proceeds around the axis in blue,
@@ -1230,20 +1229,21 @@ Si/SiGe\cite{nature13407}, which is presently limited by charge noise\cite{s4153
 While the above section runs through several techniques for building qubits using semiconductor heterostructures,
 each of them suffers from a significant amount of noise that must be corrected for these qubits to be useful
 in a quantum computer. For an error rate of $1 \times 10^{-5}$, it is estimated that roughly 3,000 physical qubits
-are required to construct one logical qubit using the surface code, and close to 10,000 gates must be performed per computation gate to correct
+are required to construct one logical qubit using the surface code, and close to 10,000 gates must be performed per computational gate, to correct
 errors as the occur\cite{6657074}. For spin qubits, although single qubit gate fidelities routinely exceed $99\%$\cite{Zajac439}, two-qubit
 gate fidelities of 98\% are the highest values the author is aware of at the time of writing\cite{PhysRevA.99.042310}.
 The source of error, as we discussed in previous sections, is caused by uncontrolled coupling to the environment, causing the information stored in the qubits
 to be lost. An alternative approach to building qubits, one that uses the topology of exotic quasiparticles called non-abelian anyons,
-was proposed by Kitaev, as a method of performing quantum computation in a way that is protected from local peturbations\cite{KITAEV20032}.
-Namely, a system of non-abelian anyons uses as it's computational subspace a set of degenerate ground states with a fixed number
+was proposed by Kitaev as a method of performing quantum computation in a way that is protected from local peturbations\cite{KITAEV20032}.
+
+A system of non-abelian anyons uses as it's computational subspace a set of degenerate ground states with a fixed number
 of quasiparticles, separated by a physical distance, where information is stored over multiple pairs of anyons. A result of this
 distributed storage is that any local perturbation to a quasiparticle does not
 lead to decoherence. To quote: \textquote[{\cite{RevModPhys.80.1083}}]{the only way the system can undergo a non-trivial unitary evolution ---
 that is an evolution that takes it from one ground state to another --- is by having its quasiparticles braided}. A physical movement or
 interaction of pairs of anyons is required to change the state of the qubit. In such a way, error rates
 far below those achievable in other qubit systems may be possible. Rather than requiring many noisy qubits to form one logical qubit,
-we may be able to use a few, or even a single clean qubit, instead. I will not go into further details of how such a computation
+we would be able to use a few, or even a single clean qubit instead. I will not go into further details of how such a computation
 is achieved via braiding, but will point the interested reader towards \cite{RevModPhys.80.1083}, which
 gives a far more thorough introduction to the physics than I can in the limited space I have available. I will, however, give a quick introduction
 into the physical origins of the Majorana zero mode, based on the material from \cite{rafael_notes}.
@@ -1258,7 +1258,7 @@ into the physical origins of the Majorana zero mode, based on the material from 
   topologically protected qubit.}
 \end{figure}
 
-The next challenge then is to find a system which contains these emergent quasiparticles. Again, it was Kitaev that proposed that
+The challenge, then, is to find a system which contains these emergent quasiparticles. Again, it was Kitaev that proposed that
 a one-dimensional chain of fermions, with a specific Hamiltonian, may cause the emergence of precisely the quasiparticles we require\cite{Kitaev_2001}.
 The Hamiltonian he proposed was\cite{Alicea_2012}:
 \begin{equation}
@@ -1268,29 +1268,30 @@ The Hamiltonian he proposed was\cite{Alicea_2012}:
 \end{equation}
 Here we have a set of sites, indexed by $j$, with an onsite energy (chemical potentital) $\mu$, a hopping term $t$, and a superconducting coupling
 term $\Delta$ with phase $\phi$. The terms $\hat c_i$ and $\hat c_i^\dagger$ are the fermion annihilation and creation operators respectively.
-Let's look at a few limits. For $\mu < 0$ and $\Delta, t = 0$, this Hamiltonian describes a wire with a single ground state and a fixed
-number of fermions on it. If we wish to add an extra electron, we must pay an energy cost $\mu$. The next case we consider is where $\mu=0$ and
+Let's look at a few limits of this Hamiltonian. For $\mu < 0$ and $\Delta, t = 0$, this Hamiltonian describes a wire with a single ground state containing a fixed
+number of fermions. If we wish to add an extra electron, we must pay an energy cost $\mu$, as in Fig.~\ref{fig:majo} (a). The next case we consider is where $\mu=0$ and
 $\Delta = t \neq 0$. We can achieve the first requirement by coupling the wire strongly to a large reservoir of fermions, such that the number of
 fermions on the wire is not a good quantum number (exactly the opposite of a quantum dot). To understand the effect of the next two terms, it is
 helpful to decompose the fermion annihilation and creation operators into Majorana operators:
 \begin{align}
   \gamma_+ = \hat c + \hat c^\dagger && \gamma_- = -i(\hat c - \hat c^\dagger)
 \end{align}
-They are real operators ($\gamma_\pm = \gamma_\pm^\dagger$), they square to 1 ($\gamma_\pm^2 = 1$), and they anticommute ($\left\{\gamma_+, \gamma_-\right\} = 0$).
-Indeed there is nothing special about these operators; I could easily define them for a single fermion state, which would give:
+These are real operators ($\gamma_\pm = \gamma_\pm^\dagger$), they square to 1 ($\gamma_\pm^2 = 1$), and they anticommute ($\left\{\gamma_+, \gamma_-\right\} = 0$).
+Indeed there is nothing special about these operators; I could easily define them for a single fermion state, which would yield:
 \begin{align}
   \hat c = \frac{1}{2}(\gamma_{+} + i\gamma_{-}) && \hat c^\dagger = \frac{1}{2}(\gamma_{+} - \gamma{-})
 \end{align}
-however since both operators are associated with a single wave function, they are inseparable. There is really only one state.
+however since both operators are associated with a single wave function, they are inseparable. In fact, I have even drawn my fermions in Fig.~\ref{fig:majo} (a) as a
+pair of Majorana operators. There is really only one state described by the two operators.
 The question we need to answer is how do we separate our Majoranas. Let's write down the Kitaev Hamiltonian from Equation~\ref{eq:kith}
-substituting in our Majorana operators. After some rearrangement we find (and removal of a global phase):
+substituting in our Majorana operators. After some rearrangement (and the removal of a global phase) we find:
 \begin{equation}
   H = -\frac{\mu}{2}\sum_j(1 + i\gamma_{j,+}\gamma_{j,-}) - \frac{t + \Delta}{4}\sum_j i \gamma_{j,-}\gamma_{j+1,-} - \frac{\Delta - t}{4}\sum_j i \gamma_{j,+}\gamma_{j+1,-}
 \end{equation}
 Note a number of features: $P_i = (1 + i\gamma_{j,+}\gamma_{j,-})$ gives us the parity of the site $i$, and the second and third terms give inter-site majorana couplings.
 For $\mu < 0$ and $\Delta, t = 0$ we recover the original description of a wire with a set of occupied or unoccupied sites. In the case
 that $\mu = 0$ and $\Delta = t \neq 0$, we end up with a vacuum state, gapped from the next state by $\tfrac{\Delta+t}{4}$, but with two unpaired
-Majorana zero modes $\gamma_{0,+}$ and $\gamma_{N,-}$, which form a zero-energy two-level system, protected from local perturbations
+Majorana zero modes $\gamma_{0,+}$ and $\gamma_{N,-}$, which form a zero-energy two-level system. They are protected from local perturbations
 by their non-local nature, a situation depicted in Fig.~\ref{fig:majo}. In fact this "topological" domain extends around the region of $\Delta = t \neq 0$
 allowing us to construct fault-tolerant qubits out of 2 pairs of Majorana zero modes\cite{RevModPhys.80.1083}. The experimental challenge is
 to find a physical system that is similar to that described by the Hamiltonian in Equation~\ref{eq:kith}. We can make a 1D chain using the principles
@@ -1306,7 +1307,8 @@ a topologically protected qubit has not yet been observed.
 In the previous sections, we went through how a 2DEG is constructed and wrote down some equations for scattering
 and conductivity in a 2DEG. These equations have all assumed that the 2DEG is purely classical, however at the temperatures
 and scales that many of our devices operate, this assumption begins to break down. To explore why this is the case,
-we must revisit the scattering mechanisms and equations for conductance that we previously wrote down in Equation~\ref{eq:cond} and add some quantum corrections to these equations. As we do this, we can define several regimes for transport
+we must revisit the scattering mechanisms and equations for conductance that we previously wrote down in Equation~\ref{eq:cond}
+and add some quantum corrections to these equations. As we do this, we can define several regimes for transport
 where various quantum corrections to transport become apparent.
 
 Before we get started, let's quickly review the scattering lengths that we originally defined in Section~\ref{sec:2deg}. We can classify

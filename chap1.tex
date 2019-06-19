@@ -1,4 +1,5 @@
 \chapter{The Quest for a Quantum Computer}
+\label{sec:quest}
 Before delving into the question of how we might build a quantum computer, it is worth taking a step
 back and exploring the question of what brought us as a scientific community to the point where
 it is seen as a priority to build one. The answer to that requires us to delve briefly into
@@ -9,8 +10,8 @@ machines we might recognize as computers were constructed. Based on delicate vac
 and often taking up full rooms, their inherent fragility and bugginess posed formidable obstacles to scaling.
 It was not until the mid-1900's that the field took off with two pivotal discoveries. The first
 was the construction of the first transistor in 1947, credited to Bardeen, Brittain and Schockley and for which
-they were awarded the Nobel prize in 1956 \cite{nobel1956}. This was followed by the creation of integrated circuits by Jack Kilby
-in 1959, for which he was awarded the Nobel prize in the year 2000 \cite{nobel2000}. With these two inventions, a remarkable
+they were awarded the Nobel Prize in 1956 \cite{nobel1956}. This was followed by the creation of integrated circuits by Jack Kilby
+in 1959, for which he was awarded the Nobel Prize in the year 2000 \cite{nobel2000}. With these two inventions, a remarkable
 surge in computational power occurred. This surge is embodied in Moore's law, which described an annual
 doubling in the number of transistors that it would be possible to fit on a single integrated circuit \cite{4785860}.
 And with this doubling came an exponential growth in the computation power that we had available to us.
@@ -96,9 +97,9 @@ It was in this context that Feynmann gave his seminal address, noting that as fa
 quantum systems falls outside of the set of problems that are efficiently solveable on classical computers \cite{Feynman1982}.
 However, as long as we can manipulate quantum systems, we should also be able to set up a "quantum
 simulator" to see how a quantum system behaves. If this turned out to be the case, then the strong
-Church-Turing hypothesis would be violated!\footnote{Despite this violation, as far as we know the original
+Church-Turing hypothesis would be violated\footnote{Despite this violation, as far as we know the original
 Church-Turing hypothesis still holds. No previously uncomputable function became computable with the addition
-of quantum physics.} Here was nature efficiently simulating a system that as far as we know, a Turing machine
+of quantum physics.}! Here was nature efficiently simulating a system that as far as we know, a Turing machine
 can't. It was David Deutsch who in 1985 formalized the idea of a quantum Turing machine \cite{doi:10.1098/rspa.1985.0070},
 and laid out the Deutsch-Church-Turing hypothesis, which as far as we know holds to this day:
 
@@ -134,9 +135,9 @@ quantum computer may offer an exponential speedup on a subset of algorithms, it 
 speedup in the general case.
 
 The remainder of this chapter aims to lay out the fundamentals of quantum computing and how we might realize
-them in a semiconductor system. In Section~\ref{sec:qc} I go through a quick introduction to the concepts
-underlying quantum computation. In Section~\ref{sec:qcinsm} I will detail several methods by which we might
-realize a qubit in a semiconductor. Finally, in Section~\ref{sec:arch} I will examine the architectural
+them in a semiconductor system. In Section~\ref{sec:qc}, I go through a quick introduction to the concepts
+underlying quantum computation. In Section~\ref{sec:qcinsm}, I will detail several methods by which we might
+realize a qubit in a semiconductor. Finally, in Section~\ref{sec:arch}, I will examine the architectural
 challenges of realizing a useful, scalable quantum computer.
 
 \section{A Quick Introduction to Quantum Computing}
@@ -196,7 +197,7 @@ interference!
   \label{fig:bloch}
 \end{figure}
 
-Too see how this is true, it's helpful to rewrite the above state in spherical coordinates. First, let's
+To see how this is true, it's helpful to rewrite the above state in spherical coordinates. First, let's
 write $\alpha = r_0e^{-i\varphi_1}$ and $\beta = r_1e^{-i\varphi_2}$. The normalization condition is now
 $r_0^2 + r_1^2 = 1$, from which we can make the replacement $r_0 = \cos(\theta/2)$ and $r_1 = \sin(\theta/2)$.
 We can also factor out the phase $\varphi_1$ to give:
@@ -214,7 +215,7 @@ the global phase factor, which gives us the state:
   \ket{\psi} = \cos\left(\frac{\theta}{2}\right)\ket{0} + e^{-i\phi}\sin\left(\frac{\theta}{2}\right)\ket{1}
 \end{equation}
 This representation is shown visially in Fig.~\ref{fig:bloch} and is called the Bloch sphere representation
-of a qubit.\footnote{For mathematicians, this is a description of the qubit in Complex Projective Space}
+of a qubit\footnote{For mathematicians, this is a description of the qubit in Complex Projective Space}.
 
 Given this description, we can now start to think about what operations on a single qubit might look like.
 While on a single bit, the only non-trivial operation we can perform is a flip ($0 \rightarrow 1$ and $1 \rightarrow 0$),
@@ -240,9 +241,9 @@ They have the values:
 
 We can build up arbitrary rotations from these unit vectors by taking various powers of these vectors
 and multiplying them together. For example to apply a $\pi/2$ rotation around the y-axis applied to the state $\ket{\psi}$
-we would perform $\sqrt{\sigma_Y}\ket{\psi}$. \footnote{For those familiar with the rotation operators,
+we would perform $\sqrt{\sigma_Y}\ket{\psi}$\footnote{For those familiar with the rotation operators,
 this is more commonly written with a phase factor to make the solution purely real: $R_Y(\tfrac{\theta}{2})
-= \exp(-i\pi/4)\sqrt{\sigma_Y}$}
+= \exp(-i\pi/4)\sqrt{\sigma_Y}$}.
 A $2\pi$ rotation around the x-axis would be $\sigma_X\sigma_X\ket{\psi}$. It is possible to generalize this
 to arbitrary rotations, giving us the rotation operators \cite{Nielsen:rot}:
 \begin{align}
@@ -283,7 +284,7 @@ become distinguishable, something that a classical bit could not replicate. What
 
 \subsubsection{Multi-Qubit States (Qubit Registers)}
 The next additional computational resource that quantum physics gives us is \textbf{entanglement}. This
-resource rears it's head when we try to combine multiple qubits into a register. Formally,
+resource rears its head when we try to combine multiple qubits into a register. Formally,
 we can define entanglement as a correlation between the states of qubits after they have interacted
 with each other. Due to this correlation, the state of a qubit that has been entangled with its partner
 can no longer be described independently, the states of the two qubits become linked. Perhaps the easiest
@@ -355,7 +356,7 @@ that was prepared in the state is lost. Quantum algorithms must, therefore, have
 \begin{figure}
   \includegraphics[width=\linewidth]{Noise}
   \caption[Noise affecting pure states]
-  {(a)We can think of noise as uncontrolled interactions with an environment. However since we can't measure
+  {(a) We can think of noise as uncontrolled interactions with an environment. However since we can't measure
   information that is transferred into the environment, we end up with an incomplete representation of our qubit.
   In order to represent this state, with some of its information lost, we must describe the state with a density
   matrix representation. (b) A simple model for relaxation, where we represent the probability of a decay $\gamma$
@@ -380,9 +381,9 @@ environment\footnote{Or, we could replace the environment with something we CAN 
 in \cite{s41586-019-1287-z}.}.
 The primary way to describe such an interaction is to switch to a density matrix representation of our state, which allows us
 to describe a subsystem of a composite quantum system, i.e. to ignore the portion of the state lost to the environment.
-Indeed this is the most complete way to describe noise processes and information loss of our state, however rather
+Indeed, this is the most complete way to describe noise processes and information loss of our state, however rather
 than introduce a more powerful and complex, but otherwise equivalent, description of quantum mechanics, we can instead model
-noise processes as interactions with a controlled and known environment, such as another qubit, as in figs.~\ref{fig:noise} (b) and (c).
+noise processes as interactions with a controlled and known environment, such as another qubit, as in Figs.~\ref{fig:noise} (b) and (c).
 We can categorize interactions of our qubits into two general classes: relaxation (sometimes called amplitude
 damping), and dephasing (sometimes called phase damping), which collectively lead to decoherence.
 
@@ -443,7 +444,7 @@ of qubit has the potential to utilize the extraordinary processing capabilities 
 Despite narrowing the focus to semiconductor systems, there are still many
 choices of two-level subspace we could use. I will not attempt to cover all the variations
 of qubit that exist; rather I will focus specifically on two general designs, quantum dots and Majorana zero modes,
-which in many ways share similar control and read-out. As such the discussion of physics in this section will
+which in many ways share similar control and readout. As such the discussion of physics in this section will
 largely be confined to III-V materials, although I will point out that as my thesis is aimed at the general
 problem of architecting a quantum computer, many of the results presented may are extensible to quantum
 computers beyond spins and majoranas. Before we begin a detailed discussion of qubits in semiconductors, let's first take a look
@@ -726,7 +727,7 @@ we derive our second restriction:
 \begin{equation}
   R_t \gg h/e^2
 \end{equation}
-This quantity $h/e^2$ is called the von-Klitzing constant, or the quantum or resistance, and will show up
+This quantity $h/e^2$ is called the vonKlitzing constant, or the quantum or resistance, and will show up
 throughout this thesis in several contexts; as the resistance of a 1D channel, the resistance of an edge
 state in the quantum Hall and spin quantum Hall effect and the tunnelling rate through coupled Majorana zero modes,
 and has the value $R_K = \SI{25812.807}{\ohm}$.
@@ -1136,7 +1137,7 @@ right quantum dots. An external magnetic field is required to break the degenera
 we only operate in the $S-T_0$ states. Any leakage into the $T_-$ or $T_+$ states is undesirable.
 
 \begin{figure}
-\includegraphics[width=0.9\linewidth]{st0}
+\includegraphics[width=0.95\linewidth]{st0}
 \caption[Energy levels and eigenstates of a Singlet-Triplet qubit]
 {\label{fig:st0}(a) The energy levels of a Singlet-Triplet Qubit. The three triplet states are split by the application of a
 uniform magnetic field $B$. At a large negative tilt, i.e. $J(\epsilon) \approx 0$, the gradient magnetic field $\Delta B_X$ leads to a
@@ -1249,7 +1250,7 @@ gives a far more thorough introduction to the physics than I can in the limited 
 into the physical origins of the Majorana zero mode, based on the material from \cite{rafael_notes}.
 
 \begin{figure}
-  \includegraphics[width=0.8\linewidth]{majochain}
+  \includegraphics[width=0.65\linewidth]{majochain}
   \caption[1D chain of fermions, forming a Majorana zero modes]
   {\label{fig:majo}(a) Schematic of a 1D chain of fermions under conventional pairing. Although each fermion is broken into two
   Majorana operators, each pair of operators are tied to a single real particle, and we cannot manipulate them in isolation.
@@ -1329,21 +1330,21 @@ of the system being measured $L$, and the various length scales in our system $l
 \begin{itemize}
   \item \textbf{Classical Diffusive} ($\lambda_F < l_e, l_\phi \ll L$): This is the classical limit of transport, true for large pieces of metal or semiconductor. The system is much larger than any relevant scattering length; hence, electrons travel diffusively through the system, with no coherent effects. This is the regime in which the previously derived equations are correct, where we have implicitly assumed that each scattering event destroys all phase information.
   \item \textbf{Quantum Diffusive} ($\lambda_F < l_e \ll L, l_\phi$): At this length scale, the electron will still travel diffusively through the system, as $l_e \ll L$, however, phase coherent effects begin to appear, since correlations between the phases of different paths exist for path lengths up to $l_\phi$. Weak localization is a quantum correction we must add to Equation~\ref{eq:cond}, and appears in 2DEGs at low temperature.
-  \item \textbf{Classical Ballistic} ($\lambda_F \ll L < l_e, l_\phi$): At this length scale, electrons travel without collisions, except at the boundaries of the system, and as such the energy of an electron may not be dissipated within a system. Dissipation can, therefore, be treated separately from such systems. This also implies that processes are non-local, i.e. they can be described at any point within the system. For example, the boundary of the region describes the current at all points in the system. Effects such as electron focusing, occur at this length scale.
+  \item \textbf{Classical Ballistic} ($\lambda_F \ll L < l_e, l_\phi$): At this length scale, electrons travel without collisions, except at the boundaries of the system. As such the energy of an electron may not be dissipated within a system. Dissipation can, therefore, be treated separately from such systems. This also implies that processes are non-local, i.e. they can be described at any point within the system. For example, the boundary of the region describes the current at all points in the system. Effects such as electron focusing, occur at this length scale.
   \item \textbf{Quantum Ballistic} ($\lambda_F \approx L \ll l_e, l_\phi$): At this point, discrete orbital energies occur in the confining directions. In 2D, this leads to the emergence of a 2DEG, in 1D a quantum point contact and in 0D a quantum dot.
 \end{itemize}
 
 \begin{figure}
   \includegraphics[width=0.85\linewidth]{hall}
   \caption[Schematic of a Hall bar and several devices]
-  {\label{fig:hall}(a) Schematic of a Hall bar showing the location of contacts, and relevant dimensions. Care should be taken to ensure that current cannot flow at voltage contacts. (b) A Hall bar on InAs, with Al contacts. Several locations are defined where Hall conductivity and transverse conductivity may be measured, and a global top-gate allows continuous tuning of density. (c) A Hall bar on GaAs, with multiple contacts, allowing measurement of parameters at multiple locations. (d) A Hall bar integrated on a qubit device. Fewer contacts are defined, with a focus on a small footprint, however it allows for characterization of the 2DEG before measurement. Note that for each contact, notches are defined in the Mesa and the Ohmic contact extends over the edge of the Mesa to ensure good contact to edges at high field along multiple crystallographic axes.}
+  {\label{fig:hall}(a) Schematic of a Hall bar showing the location of contacts, and relevant dimensions. Care should be taken to ensure that current cannot flow at voltage contacts. (b) A Hall bar on InAs, with Al contacts. Several locations are defined where Hall conductivity and transverse conductivity may be measured, and a global top-gate allows continuous tuning of the electron density. (c) A Hall bar on GaAs, with multiple contacts, allowing measurement of parameters at multiple locations. (d) A Hall bar integrated on a qubit device. Fewer contacts are defined, with a focus on a small footprint, however it allows for characterization of the 2DEG before measurement. Note that for each contact, notches are defined in the mesa and the ohmic contact extends over the edge of the mesa to ensure good contact to edges at high field along multiple crystallographic axes.}
 \end{figure}
 
 For this thesis, we will primarily focus on the Quantum Diffusive and the Quantum Ballistic regimes, as they describe the physics of the
 2DEG and the quantum dot, respectively. Having already described the physics of the quantum dot, let's look at the quantum corrections that occur
 in the Quantum Diffusive regime, as they will allow us to extract both the scattering length and the strength of the spin-orbit interaction. As these must be well controlled to form both quantum dots and Majorana zero modes, our understanding of the origins of
 scattering and the spin-orbit effect will be vital to our journey towards building a large-scale quantum computer. Measurements in this section
-will be made in reference to a hall bar, shown schematically in Fig.~\ref{fig:hall}. A current $I$ is applied along the length of the Hall bar.
+will be made in reference to a Hall bar, shown schematically in Fig.~\ref{fig:hall}. A current $I$ is applied along the length of the Hall bar.
 Two quantities are extracted relative to that current, the Hall resistivity $\rho_{XY} = V_{XY}/I$ gives
 the voltage formed orthogonal to the direction of current flow, and the transverse resistivity $\rho_{XX} = V_{XX}/I$.
 This second quantity gives us an expression for the conductivity of our sample:
@@ -1357,11 +1358,11 @@ are given in the appendix, Sec.~\ref{sec:ohmics}.
 
 \subsection{Weak Localization}
 \label{sec:wl}
-To include the effects of phase coherence on conductivity, we will use the so-called Feynmann path method to calculate
+To include the effects of phase coherence on conductivity, we will use the so-called Feynman path method to calculate
 a corrected conductivity. The basic idea of such an approach is to consider what conductivity refers to on the scale of a small number of scattering sites. Given a small sample, with a small number of elastic scattering sites within the lattice,
 we can define the conductivity as the probability that an electron reaches the end point, where it leaves the system,
 from a given starting point. A schematic of this case is shown in Fig.~\ref{fig:WL} (a). The wavefunction will give this probability at the final point, which is given by the sum of the wavefunctions corresponding
-to each path through the lattice. For example, the paths may be {start, 1, 2, 7, end} or {start, 8, 7, end} etc. The total wavefunction at the end is:
+to each path through the lattice. For example, the paths may be \{start, 1, 2, 7, end\} or \{start, 8, 7, end\} etc. The total wavefunction at the end is:
 \begin{equation}
   \Psi_{\textrm{start}\rightarrow\textrm{end}} = \sum_j \psi_j = \sum_j t_j e^{i \varphi_j}
 \end{equation}
@@ -1394,7 +1395,7 @@ in Fig.~\ref{fig:WL} (b). The return probability is therefore:
 \end{equation}
 In other words, \textquote[\cite{delftbook}]{phase-coherent summation of time-reversed trajectories in a diffusive medium leads to an increased probability for electrons
 to return to their initial position}. To find an expression for conductance, we must find an expression for the probabilities of different paths, and take
-into account the ratio of elastic and inelastic scattering length (the longer the path, the higher the chance that it's phase will be randomized). A full derivation
+into account the ratio of elastic and inelastic scattering length (the longer the path, the higher the chance that its phase will be randomized). A full derivation
 is not given here, I will simply quote the final result, however I point the interested reader towards \cite{delftbook,datta1997electronic}. The correction
 to conductance is given by:
 \begin{equation}
@@ -1442,11 +1443,11 @@ a charge build-up along one edge of the Hall bar. The charge build-up is balance
 \begin{equation}
   E_y = -e \vec v \times \vec B
 \end{equation}
-To find the hall resistivity, we can combine the electric field with the equation for current density, given in Equation~\ref{eq:currden}, to find
+To find the Hall resistivity, we can combine the electric field with the equation for current density, given in Equation~\ref{eq:currden}, to find
 \begin{equation}
   \rho_{XY} = \frac{E_y}{J_x} = \frac{B}{n_s e}
 \end{equation}
-Hence we find a linear relationship between magnetic field and Hall resistivity with a gradient proportional to the electron density, as seen in Fig.~\ref{fig:hall}.
+Hence, we find a linear relationship between magnetic field and Hall resistivity with a gradient proportional to the electron density, as seen in Fig.~\ref{fig:hall}.
 
 As the magnitude of the magnetic field is increased, electrons are curved into roughly circular paths, with a radius:
 \begin{equation}
@@ -1503,8 +1504,9 @@ be modified, as we now no longer have free states at the Fermi level. This intui
 Hall regime will be insulating. Current is carried at the edges of the sample, where the confining potential curves upwards, and Landau levels
 intersect with the Fermi level \cite{PhysRevB.25.2185} as shown in Fig.~\ref{fig:hall}. This gives rise to a series of chiral, 1D channels that carry current around the edges
 of the Hall bar. Since these edge states are directional, and edges flowing in the opposite direction are physically separated by the width of the Hall
-bar, backscattering is strongly suppressed, and edges provide dissipationless transport, i.e. $\rho_{XX} \rightarrow 0$. What about
-the Hall resistance, $\rho_{XY}$? The number of edges that will cut through the Fermi level is given by $N_\textrm{max} = \lfloor \nu \rfloor$, each of which
+bar, backscattering is strongly suppressed, and edges provide dissipationless transport, i.e. $\rho_{XX} \rightarrow 0$.
+
+What about the Hall resistance, $\rho_{XY}$? The number of edges that will cut through the Fermi level is given by $N_\textrm{max} = \lfloor \nu \rfloor$, each of which
 will contribute to the total conductivity. The total conductivity is the sum of the conductances of each of the channels. Let's assume a difference in the
 chemical potential of both sides of $\delta \mu = \mu_2 - \mu_1$. The total current across the sample is given by the product of the velocity $v_n(E)$ and the density of states $\rho_{\textrm{1D},n}$.
 \begin{equation}
@@ -1528,6 +1530,15 @@ we alluded to in section~\ref{sec:qd}. The difference in chemical potential is r
   \sigma = \frac{J}{V} = \frac{N_{\textrm{max}} e^2}{h}
   \label{eq:hallsigma}
 \end{equation}
+
+\begin{figure}
+  \includegraphics[width=0.7\linewidth]{hallcond}
+  \caption[Integer quantum Hall effect in GaAs and InAs]
+  {\label{fig:hallcond}(a) The integer quantum Hall effect in a high mobility GaAs 2DEG. The locations of filling factors are calculated using Eq.~\ref{eq:nu}
+  and overlaid as dotted purple lines, while expected conductances are calculated using Eq.~\ref{eq:hallsigma}. (b) The same data except on an shallow InAs 2DEG.
+  The higher density results in filling factors being shifted to higher magnetic fields. The lower mobility of the sample means plateaus are not visible up
+  to high fields.}
+\end{figure}
 
 Therefore, we find the conductance of the edge will be quantized in units of the conductance quantum, with a value determined
 by the filling factor, which gives us the number of conducting 1D channels parallel to the edge in the samples. An example of this, showing both $\rho_{XX}$
@@ -1584,8 +1595,10 @@ a tangential mention in Sec.~\ref{sec:dotqubits}, where we discussed its usefuln
 band structure of the semiconductor, which up to this point we've captured in a single parameter, the effective electron mass $m^*$ is shaped
 by a coupling of the motion of electrons through the lattice and around atoms. For this thesis, I will not aim to give a general description of
 the effect, which contributes to a whole host of effects such as the fine structure hydrogen and the heavy/light hole structure of GaAs,
-but rather give an intuitive understanding of its origins in a semiconductor, and in particular on conduction band electrons. Hence, the terms that
-I introduce here should not be considered to apply generally. This treatment is partly derived from \cite{winkler2003spin,dyakonov2017spin}.
+but rather give an intuitive understanding of its origins in a semiconductor. Hence, the terms that
+I introduce here should not be considered to apply generally, but rather is specific to conduction band electrons in direct band-gap semiconductors.
+This treatment is partly derived from \cite{winkler2003spin,dyakonov2017spin}.
+
 Firstly, as we are dealing with conduction band electrons, which have a net spin angular momentum of
 zero ($\vec S = 0$), we do not have any band splitting from the atomic orbitals. Instead, the SOI effect in conduction band electrons comes from effective
 potential seen by an electron. Consider an electron moving through an asymmetric potential within a semiconductor. The asymmetric potential leads the
@@ -1636,7 +1649,7 @@ mechanism \cite{DYAKONOV1971459}. We can, therefore, introduce a new length scal
 This parameter is inversely proportional to the strength of the SOI, with a larger strength causing faster spin relaxation.
 As the destructive interference relies on the differing energies between the two distinct spin species, the length scale over which spin relaxes in the semiconductor sets
 a bound on the size of the loops where weak anti-localization can occur. As such, we are also able to measure
-this effect via low-field hall measurements in the same way we measure weak-localization, as seen in Fig.~\ref{fig:SOI} (c). Here the competition between
+this effect via low-field Hall measurements in the same way we measure weak-localization, as seen in Fig.~\ref{fig:SOI} (c). Here the competition between
 weak-antilocalization (peak) and weak-localization (dip) is visible as the field is swept on a sample of InAs with strong SOI. In this regime we have $l_e < l_\phi < l_\textrm{so}$
 hence all three effects are visible. As the strength of the SOI interaction is increased by increasing gate voltage, the spin-orbit length becomes comparable to the elastic
 scattering length $l_e \approx l_\textrm{so} < l_\phi$, thereby masking the effect of weak-localization, as seen in Fig.~\ref{fig:SOI} (d). For materials with only
@@ -1647,7 +1660,7 @@ treatment of the correction to conductivity is given in \cite{PhysRevB.53.3912}.
 One fundamental question we might ask is whether we can form edge states with quantized conductance that are protected from
 scattering without an external magnetic field. It was several years before the question was answered in the affirmative by
 Thouless \cite{PhysRevLett.49.405} and later Haldane \cite{PhysRevLett.61.2015}, their insight being the relationship between the
-quantum Hall and related effects, and topology. For this insight, they were, along with Kosterlitz, awarded the Nobel prize in 2016 \cite{nobel2016}.
+quantum Hall and related effects, and topology. For this insight, they were, along with Kosterlitz, awarded the Nobel Prize in 2016 \cite{nobel2016}.
 Briefly, we can try and get an intuitive understanding of topology by considering the genus of an object. This is a global property of
 a surface that is related to the number of holes in it. A ball, for example, has a genus of zero, and by continuous deformation, we can turn it
 into other objects with the same genus, for example, a cube, a sheet of paper or even a pan have a genus of zero. A doughnut, on the other hand, has
@@ -1659,9 +1672,9 @@ the genus $g$ of the object:
 \end{equation}
 We use a generalization of this theorem, called the Chern-Simons theorem, which allows us to map this theorem onto a band structure. We can define an
 equivalent to "curvature" along the surface of bands in a solid, termed the Berrys phase. This is the phase that a particle travelling around
-a path on the surface of a band acquires. The integral of the Berrys phase over momentum space leads to an integral quantity known as the Chern number,
+a path on the surface of a band acquires. The integral of the Berrys phase over momentum space leads to an integral quantity known as the Chern number
 $n$, which is an integer and characterizes the topology of the material \cite{conmatphys-011417}. In the integer quantum Hall effect, the number $n$ is the same as the filling factor $\nu$, and gives us a topological explanation for the emergence of quantized edge states. As we transition from within
-the material, with Chern number $n$, to free space, with Chern number $0$, there must be a twisting of the band structure near the edge that leads to the emergence of conductive edges. However, for the quantum Hall state, a large magnetic field is required to define the Berrys phase and hence the Chern number of the material.
+the material, with Chern number $n$, to free space, with Chern number $0$, there must be a twisting of the band structure near the edge that leads to the emergence of conductive edges. However, for the quantum Hall state, a large magnetic field is required to define the Berry's phase and hence the Chern number of the material.
 
 In materials with a strong spin-orbit coupling, it is possible to find configurations with a non-zero Chern number, a topologically non-trivial band structure.
 At the boundaries of such a material, a conductive state must appear \cite{PhysRevLett.93.156804,PhysRevLett.92.126603}, and indeed for heterostructures of \ce{HgCdTe}
@@ -1669,7 +1682,7 @@ the \textbf{spin quantum Hall effect} has been observed \cite{Konig766}, where t
 samples are sensitive to spin-scattering and thus have not been robustly demonstrated. The addition of a ferromagnetic dopant, such as chromium or vanadium lifts the
 time reversal symmetry and generates leads to the formation of a spin-polarized chiral edge state, once the material has been taken past the coercive field of the
 Cr or V dopants. This is termed the \textbf{quantum anomalous Hall effect}. The total conductance is given by the sum of the top and bottom edge states,
-each contributing $e^2/2h$ of conductance, for a total hall conductance of $\sigma = e^2/h$, as shown in Fig.~\ref{fig:qah}. We will use a sample that shows the
+each contributing $e^2/2h$ of conductance, for a total Hall conductance of $\sigma = e^2/h$, as shown in Fig.~\ref{fig:qah}. We will use a sample that shows the
 quantum anomalous Hall effect in Sec.~\ref{sec:spinhallcirc} to demonstrate a circulator that can operate without an external magnetic field.
 
 \subsection{Forming Majoranas}
@@ -1687,7 +1700,7 @@ In section~\ref{sec:majo} we went over a brief introduction to the physics that 
 and left ourselves with the problem of finding a materials system that fits the model Hamiltonian given in equation~\ref{eq:kith}. I will stress
 again that this Hamiltonian represents one proposed method of forming an emergent Majorana quasiparticle, there are many techniques described
 in the literature involving a variety of materials systems, including in several excellent reviews \cite{RevModPhys.83.1057,doi:10.1146/030212-184337,Leijnse_2012,
-RevModPhys.87.137,npjqi.2015.1,Aguado:2017ofc}. The technique of using a proximatized semiconductor-superconductor hybrid with strong SOI was reviewed
+RevModPhys.87.137,npjqi.2015.1,Aguado:2017ofc}. The technique of using a proximatized superconductor/semiconductor hybrid with strong SOI was reviewed
 recently in \cite{s41578-018-0003-1} and goes into far greater detail than I attempt to here. To briefly recap, our Hamiltonian required a 1-dimensional
 chain of spinless fermions and a superconducting pairing gap. Section~\ref{sec:2deg} covered the method by which we
 can form systems with reduced dimensions in semiconductors; the remaining challenges are to create spinless fermions and induce a superconducting pairing gap
@@ -1699,7 +1712,7 @@ Sec.~\ref{sec:SOI}. In a 1D chain, assuming a single dominant source of spin-orb
 and spin induces a shift in the momentum parabolas compared to the case of no spin-orbit coupling. This is depicted in Fig.~\ref{fig:1dsoi} (a) in the case of a bare
 dispersion relation, and Fig.~\ref{fig:1dsoi} (b) in the case of a shifted dispersion under the influence of Rashba or Dresselhaus SOI. In this case, there is
 no coupling between the high and low energy branches of the dispersion relation. The application of a magnetic field parallel to the 1D channel opens a Zeeman energy
-gap between the two spin species with magnitude $E_z = g^* u_B B_\parallel$, as shown in Fig.~\ref{fig:1dsoi} (c), for a case with no SOI. In the case that the
+gap between the two spin species with magnitude $E_z = g^* \mu_B B_\parallel$, as shown in Fig.~\ref{fig:1dsoi} (c), for a case with no SOI. In the case that the
 SOI is present in the sample alongside an external magnetic field, there is a coupling between the two branches of the dispersion relation, which opens a gap in the
 spectrum, seen in Fig.~\ref{fig:1dsoi} (d). If the chemical
 potential is tuned inside the gap (green line), there is only a single band crossing the Fermi energy, effectively describing a system with a spinless degree of freedom.
@@ -1716,7 +1729,7 @@ the material must have also have high mobility, as disorder scattering suppresse
 To ensure there are few subgap states, the most recent experiments have also required in-situ epitaxially grown aluminium interfaces, as any impurities at the superconductor
 semiconductor interface have been found to contribute to significant sub-gap conductance \cite{nnano.2014.306}.
 
-The choice of materials used for the formation of a Majorana zero mode in a superconductor-semiconductor hybrid system must, therefore, meet each of these, sometimes
+The choice of materials used for the formation of a Majorana zero mode in a superconductor/semiconductor hybrid system must, therefore, meet each of these, sometimes
 conflicting, requirements. A large SOI and Land\'e g-factor calls for a heavy element III-V or II-VI semiconductor; however, the majority of high-quality growth has occurred
 in GaAs. InAs and InSb have recently shown high mobilities for buried 2DEGs \cite{PhysRevMaterials.2.104602,doi:10.1063/1.4993784}, however the requirement for a hard-gap necessitates growth close to the surface of the semiconductor where it is difficult to shield the 2DEG from scattering off surface impurities, an issue we
 tackle in Sec.~\ref{sec:inas_hb}. Nonetheless, recent experiments have demonstrated ever higher quality materials and more definitive evidence of zero bias peaks, close
@@ -1724,6 +1737,99 @@ to the expected value of $2e^2/h$\cite{PhysRevLett.119.136803,nature26142}, lead
 
 \section{Architecture of a Quantum Computer}
 \label{sec:arch}
-  \subsection{Control Plane}
-  \subsection{Readout}
-  \label{sec:readout}
+Although the challenges of building a fault-tolerant qubit have by no means been met, the field is rapidly reaching the point where
+it is possible to start running algorithms on quantum computers. While algorithms such as Shor's algorithm for prime factorization
+would require $2N + 3$ logical qubits with an arbitrarily long lifetime~\cite{Beauregard:2003,6657074}, other algorithms may
+be able to achieve a quantum speedup with a limited number of noisy qubits. Algorithms and systems operating in this regime are
+said to be in the Noisy Intermediate-Scale Quantum (NISQ) regime~\cite{Preskill2018quantumcomputingin}, a term coined by John Preskill
+in 2018 to distinguish between a full-scale quantum computer, with a large number of error corrected qubits, and one that we may realize
+in the coming decade, containing as few 10s of noisy, imperfect qubits. In the near term, the race is on to achieve \textbf{quantum supremacy},
+a calculation on a quantum computer whose simulation on a classical computer is intractable. The expectation is that this milestone will
+be beaten in the coming years, with a system of approximately 50 noisy qubits~\cite{s41567-018-0124-x}. Based on the current state of the field
+this will likely occur using superconducting transmon-like qubits solving a model problem such as Boson sampling~\cite{Aaronson:2011}. While such a
+result would certainly be groundbreaking, the more interesting result would be a demonstration of \textbf{quantum advantage}, an algorithm whose simulation on a
+classical computer is intractable, but one which also solves a useful problem. While Boson sampling certainly seems to be a classically hard problem,
+the solution it provides does not seem to be one that has many practical implications. In the near term, our best bet for achieving a useful result
+seems to be using the Variational Quantum Eigensolver algorithm \cite{ncomms5213}, which, as we alluded to in the introduction to this chapter, would allow us
+to model molecules that we could not on a classical computer, with a small number (100s) of imperfect qubits~\cite{PhysRevA.92.042303}.
+To date, several experimental realizations of this algorithm have been
+published~\cite{nature23879,PhysRevX.8.011021,10.1038/s41586-019-1040-7}, although none have yet simulated a molecule that is classically intractable.
+
+Given the rapid progression of the field, the questions surrounding architecting a quantum computer have been gaining increasing attention,
+particularly as the number of qubits grows beyond the limits that we might control with a ad-hoc architecture that a single graduate student might construct.
+The challenge for experimentalists continues to come down to building scaleable building blocks, which balance the need for experimental
+flexibility surrounding qubits whose designs and control requirements remain in flux, but whose footprint does not explode for larger numbers
+of physical qubits. Thankfully, at least within the realm of solid-state qubits (that is superconductor and semiconductor based qubits),
+there is substantial overlap in the requirements for control and readout of qubits, that allows us to design architectures for hypothetical
+quantum machines. Let's therefore enumerate a number of requirements for a control and readout architecture controlling a solid-state qubit:
+\begin{itemize}
+  \item Cryogenic operation: Solid-state qubits must be operated in cryogenic environments, stemming from the requirement that the thermal energy should be well below the level spacing of energy levels in the qubit, as well as the need for superconducting elements in some designs. Any control and readout architecture must, therefore, be low power, and avoid carrying thermal energy or noise down to the qubit device.
+  \item Control fidelity: In order to reach the fault-tolerance threshold, fidelities of individual qubits must exceed $99\%$, and should ideally be well above the $(1 - 10^{-5})$ level to avoid prohibitive error correction requirements~\cite{6657074}. Depending on the rotation rate and decoherence rates of individual qubits, control lines must have bandwidths of several 10's of \si{\giga\hertz}, along with high density, low crosstalk and low noise.
+  \item Readout fidelity: Readout of qubits brings unique challenges, requiring low probe powers in order to avoid disturbing the state while it is being measured, and limited measurement time due to decoherence. In addition, QEC in general requires the continued measurement of ancilla qubits while nearby qubits are operational, leading to stringent crosstalk requirements. In order to obtain a sufficient signal-to-noise ratio, cryogenic amplification is generally required, which in turn limits and scaleable design to one, or a few, readout lines. As such, some form of multiplexing, either frequency-domain or time-domain, is necessary for readout.
+  \item Space: This requirement is particularly difficult to accomplish as it occurs over three orders of magnitude over the scale of the chip, the cryostat and at room temperature. Each of these are discussed in detail below, but we state the problem briefly here. On a chip scale, dense control lines must be fit into an area set by the distance over which we can achieve coupling between qubits, setting micron-scale limits on on-chip structures. On a cryostat level, the need to operate at \si{\milli\kelvin} in a cryostat places centimeter-scale limits on cryogenic components. Finally at room temperature, phase matching of control pulses and the need for active feedback places limits on the size of the instrumentation used to control individual qubits.
+\end{itemize}
+
+\begin{figure}
+  \includegraphics[width=0.5\linewidth]{genarch}
+  \caption[Generalized quantum computing architecture]
+  {\label{fig:genarch}A generalized qubit architecture, broken into control and readout stages at each temperature stage of a cryostat. The architecture is characterized by number of lines which run between each stage, for example $N_{RF,C,RT}$ for the number of coaxial control lines running from room temperature to the \SI{4}{\kelvin} stage of the cryostat, which will vary depending on the choice of a given architecture. In addition, each stage will dissipate a certain amount of power, for example $P_{R,4K}$ being the power dissipated at \SI{4}{\kelvin} by the readout stage, caused either by active logic, such as an FPGA, amplifiers or off-the-shelf instrumentation, or by passive dissipation, for example due to attenuators.}
+\end{figure}
+
+\afterpage{
+  \clearpage
+  \thispagestyle{empty}
+  \begin{landscape}
+  \begin{table}
+    \centering
+    \def\arraystretch{1.5}
+    \begin{tabular}{|l|l|l|l|l|l|l|}
+    \hline
+    \multicolumn{3}{|l|}{} & \shortstack{CryoCMOS Architecture\\(Section~\ref{sec:gooseberry})} & \shortstack{Prime-Lines Architecture\\(Section~\ref{sec:primelines})} & \shortstack{Frequency\\Multiplexed~\cite{doi:10.1063/1.4868107}} & \multicolumn{1}{|c|}{Na\"ive} \\
+    \hline
+    \multirow{5}{*}{Room Temp}  & \multirow{2}{*}{Power} & $P_{C,RT}$    & $\SI{100}{\watt}$ & $M\times\SI{1000}{\watt}$ &$N\times\SI{1000}{\watt}$ &$N\times\SI{1000}{\watt}$\\\cline{3-7}
+                                &                        & $P_{R,RT}$    & $\SI{100}{\watt}$ & $N\times\SI{100}{\watt}$ & $N\times\SI{100}{\watt}$ & $N\times\SI{100}{\watt}$\\\cline{2-7}
+                                & \multirow{3}{*}{Lines} & $N_{DC,C,RT}$ & 3                         & $N$                      & $N$ & $N$                 \\\cline{3-7}
+                                &                        & $N_{RF,C,RT}$ & 3                         & M                        & $N$ & $N$                 \\\cline{3-7}
+                                &                        & $N_{RF,R,RT}$ & 2                         & 2                        & 2   & $N$                 \\\hline
+    \multirow{5}{*}{4K} & \multirow{2}{*}{Power} & $P_{C,4K}$    & $\SI{1}{\watt}$        &$\SI{1}{\watt}$        & $N\times\SI{4}{\micro\watt}$   & $N\times\SI{4}{\micro\watt}$                   \\\cline{3-7}
+                        &                        & $P_{R,4K}$    & $\SI{50}{\milli\watt}$ &$\SI{50}{\milli\watt}$ & $\SI{50}{\milli\watt}$ & $N\times\SI{50}{\milli\watt}$\\\cline{2-7}
+                        & \multirow{3}{*}{Lines} & $N_{DC,C,4K}$ & 3                         & $N$                      & $N$ & $N$                 \\\cline{3-7}
+                        &                        & $N_{RF,C,4K}$ & 3                         & $M$                      & $N$ & $N$                 \\\cline{3-7}
+                        &                        & $N_{RF,R,4K}$ & 2                         & 2                        & 2   & $N$                 \\\hline
+    \multirow{4}{*}{mK} & \multirow{2}{*}{Power} & $P_{C,mK}$ & $N\times\SI{0.01}{\micro\watt}$ & $ N\times\SI{1}{\micro\watt}$ & $N\times\SI{1}{\micro\watt}$   & $N\times\SI{1}{\micro\watt}$                   \\\cline{3-7}
+                        &                        & $P_{R,mK}$ & \SI{20}{\nano\watt}     & \SI{20}{\nano\watt}           &\SI{20}{\nano\watt}   & $N\times\SI{20}{\nano\watt}$ \\\cline{2-7}
+                        & \multirow{2}{*}{Lines} & $N_{C,mK}$ & $N$                     & $N$                           & $N$ & $N$                 \\\cline{3-7}
+                        &                        & $N_{R,mK}$ & $N$                     & $N$                           & $N$ & $N$                 \\\hline
+    \end{tabular}
+    \caption[OOM Power and Wiring requirements for a QC]{Order of magnitude power $P$ and wiring $N$ requirements for the CryoCMOS architecture, the Prime-Lines architecture, frequency multiplexed readout and a Na\"ive architecture. The number of lines is split between high-bandwidth coaxial lines (RF) and low-bandwidth (DC) lines. In each case, we trade off the complexity in the setup to reduce the wiring required down the fridge. The power consumption and number of lines is given in terms of the number of qubits $N$, and in the case of the Prime-Lines architecture, the number of pulse shapes $M$. Power consumption for control lines is calculated assuming a \SI{10}{\milli\volt} pulse through a \SI{20}{\decibel} attenuator, an \SI{100}{\mega\hertz} repetition rate and assuming approximately \SI{0.5}{\meter} of RG-047 coaxial cable is used between temperature stages. Readout power is calculated assuming a caltech-style HEMP amplifier at the 4K stage, and utilizing rf-reflectometry techniques for readout (see Sec.~\ref{sec:readout}).}
+    \label{tab:arch}
+  \end{table}
+\end{landscape}
+}
+
+In general, qubit architectures for solid-state qubits can be classified into two categories (control and readout) at three different temperature stages
+(room temperature (RT), four Kelvin (4K) and milli Kelvin (mK)), as shown in Fig.~\ref{fig:genarch}. An
+architecture is characterized by the number of RF and DC lines that run between temperature stages $N$, and a power consumption at each stage $P$, divided between the control
+and readout block. Two architectures are presented in this this thesis, which trade off complexity and reduced experimental flexibility for reduced wiring and power consumption
+at different stages of the cryostat. The CryoCMOS architecture, presented in Sec.~\ref{sec:gooseberry} utilizes a CMOS based switching matrix at that is
+bonded directly to the qubit chip in order to minimize the power dissipated in parasitic capacitance. The Prime-Lines architecture, presented in Sec.~\ref{sec:primelines}
+utilizes a cryogenic switching matrix near the qubit to minimize the number of high-frequency coaxial lines required to control qubits. Order of magnitude estimates
+for the number of control lines and the power consumption for each architecture is given in Table~\ref{tab:arch}, characterized by a number of qubits $N$,
+and in the case of the prime-lines architecture, the number of control pulse-shapes $M$, where in general $M \ll N$.
+
+In the remainder of this section, I will quickly review the challenges for control and readout for a large-scale quantum computer, which very much remains
+an open question in the field. As we move through the following sections, the sources of many of the numbers in Table~\ref{tab:arch} should become clear
+as well as our vision for solving some of these problems.
+
+
+\subsection{Control Plane}
+- Rents Rule for control
+- 4K
+
+\subsection{Readout}
+\label{sec:readout}
+- Types of qubit readout
+
+ - RF readout
+
+ - Dispersive gate for majoranas and quantum dots

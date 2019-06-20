@@ -2,14 +2,95 @@
 %% This file simply contains the commands that actually generate the table of
 %% contents and lists of figures and tables.  You can omit any or all of
 %% these files by simply taking out the appropriate command.  For more
-%% information on these files, see appendix C.3.3 of the LaTeX manual. 
+%% information on these files, see appendix C.3.3 of the LaTeX manual.'
+
+%% Use dense chapters in the toc
+\makeatletter
+\let\old@chapter\chapter
+\def\chapter{\clearpage	% Starts new page.
+   \thispagestyle{plain}	% Page style of chapter page is 'plain'
+   \@afterindentfalse		% Suppresses indent in first paragraph.  Change
+   \secdef\@chapter\@schapter}	% to \@afterindenttrue to have indent.
+\let\old@makeschapterhead\@makeschapterhead
+\def\@makeschapterhead#1{%
+   {\parindent \z@ \raggedright
+     \normalfont
+     \interlinepenalty\@M
+     \Huge \bfseries  #1\par\nobreak
+     \vskip 25\p@
+   }}
+\makeatother
+
+\newcommand\publication[3]{
+  \noindent
+  \begin{minipage}{\textwidth}
+  \textbf{#1} \newline
+  \textit{#2} \newline
+  #3\par
+  \end{minipage}
+}
+
 \begin{hyphenrules}{nohyphenation}
   \begin{sloppypar}
-\tableofcontents
-\newpage
-\listoffigures
-\newpage
-\listoftables
-\newpage
+    \tableofcontents
+    \addtocontents{toc}{\protect\setcounter{tocdepth}{-1}}
+    \addcontentsline{toc}{chapter}{Table of Contents}
+    \addtocontents{toc}{\protect\setcounter{tocdepth}{2}}
+    \newpage
+    \listoffigures
+    \addcontentsline{toc}{chapter}{List of Figures}
+    \newpage
+    \listoftables
+    \addcontentsline{toc}{chapter}{List of Tables}
+    \newpage
+    \chapter*{List of Publications}
+    \addcontentsline{toc}{chapter}{List of Publications}
+      \makeatletter
+      \let\old@parskip=\parskip
+      \setlength{\parskip}{2em}
+      \makeatother
+
+      \publication{Cryogenic Control Architecture for Large-Scale Quantum Computing}
+      {J. M. Hornibrook, J. I. Colless, I. D. Conway Lamb, S. J. Pauka, H. Lu, A. C. Gossard, J. D. Watson, G. C. Gardner, S. Fallahi, M. J. Manfra, and D. J. Reilly}
+      {\href{https://doi.org/\detokenize{10.1103/PhysRevApplied.3.024010}}{\textcolor{blue}{Phys. Rev. Applied 3, 024010 (2015)}}}
+
+      \publication{An FPGA-based Instrumentation Platform for use at Deep Cryogenic Temperatures}
+      {I. D. Conway Lamb, J. I. Colless, J. M. Hornibrook, S. J. Pauka, S. J. Waddy, M. K. Frechtling, and D. J. Reilly}
+      {\href{https://doi.org/\detokenize{10.1063/1.4939094}}{\textcolor{blue}{Rev. Sci. Inst. 87, 014701 (2016)}}}
+
+      \publication{On-Chip Microwave Quantum Hall Circulator}
+      {A. C. Mahoney, J. I. Colless, S. J. Pauka, J. M. Hornibrook, J. D. Watson, G. C. Gardner, M. J. Manfra, A. C. Doherty, and D. J. Reilly}
+      {\href{https://doi.org/\detokenize{10.1103/PhysRevX.7.011007}}{\textcolor{blue}{Phys. Rev. X 7, 011007 (2017)}}}
+
+      \publication{Zero-field Edge Plasmons in a Magnetic Topological Insulator}
+      {A. C. Mahoney, J. I. Colless, L. Peeters, S. J. Pauka, E. J. Fox, X. Kou, L. Pan, K. L. Wang, D. Goldhaber-Gordon, and D. J. Reilly}
+      {\href{https://doi.org/\detokenize{10.1038/s41467-017-01984-5}}{\textcolor{blue}{Nat. Comms. 8, 1836 (2017)}}}
+
+      \publication{Device Architecture for Coupling Spin Qubits via an Intermediate Quantum State}
+      {S. J. Pauka, X. G. Croot, J. D. Watson, G. C. Gardner, S. Fallahi, M. J. Manfra, and D. J. Reilly}
+      {\href{https://doi.org/\detokenize{10.1103/PhysRevApplied.10.044058}}{\textcolor{blue}{Phys. Rev. Applied 10, 044058 (2018)}}}
+
+      \publication{Gate-Sensing Charge Pockets in the Semiconductor-Qubit Environment}
+      {X. G. Croot, S. J. Pauka, M. C. Jarratt, H. Lu, A. C. Gossard, J. D. Watson, G. C. Gardner, S. Fallahi, M. J. Manfra, and D. J. Reilly}
+      {\href{https://doi.org/\detokenize{10.1103/PhysRevApplied.11.064027}}{\textcolor{blue}{Phys. Rev. Applied 11, 064027 (2019)}}}
+
+      \publication{Radio-Frequency Methods for Majorana-Based Quantum Devices: Fast Charge Sensing and Phase-Diagram Mapping}
+      {D. Razmadze, D. Sabonis, F. K. Malinowski, G. C. Ménard, S. Pauka, H. Nguyen, D. M. T. van Zanten, E. C. T. O'Farrell, J. Suter, P. Krogstrup, F. Kuemmeth, and C. M. Marcus}
+      {\href{https://doi.org/\detokenize{10.1103/PhysRevApplied.11.064011}}{\textcolor{blue}{Phys. Rev. Applied 11, 064011 (2019)}}}
+
+      %\publication{Surface Repair and Passivation of InAs Quantum Wells with ALD}
+      %{S. J. Pauka, J. Witt, N. C. Murphy, G. C. Gardner, S. Gronin, T. Wang, C. Thomas, M. J. Manfra, D. J. Reilly and M. C. Cassidy}
+      %{In Preparation (2019)}
+
+      \makeatletter
+      \let\parskip=\old@parskip
+      \makeatother
   \end{sloppypar}
 \end{hyphenrules}
+\newpage\null\newpage
+
+%% Restore chapters starting on left page
+\makeatletter
+\let\chapter\old@chapter
+\let\@makeschapterhead\old@makeschapterhead
+\makeatother

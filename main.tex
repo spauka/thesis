@@ -98,6 +98,10 @@
 \g@addto@macro{\endfigure}{}
 \makeatother
 
+%% Allow hiding of contents
+\newcommand{\nocontentsline}[3]{}
+\newcommand{\tocless}[2]{\bgroup\let\addcontentsline=\nocontentsline#1{#2}\egroup}
+
 %% This bit allows you to either specify only the files which you wish to
 %% process, or `all' to process all files which you \include.
 %% Krishna Sethuraman (1990).
@@ -109,10 +113,8 @@
 
 \begin{document}
 
-\protect\setcounter{tocdepth}{-1}
 \pagenumbering{roman} % Start roman numbering
 \include{cover}
-\protect\setcounter{tocdepth}{2}
 % Some departments (e.g. 5) require an additional signature page.  See
 % signature.tex for more information and uncomment the following line if
 % applicable.
@@ -156,10 +158,11 @@
 \pagestyle{plain}
 \input{contents}
 
-\pagenumbering{arabic}
-
 \setcounter{chapter}{-1}
 \pagestyle{fancy}
+\clearpage
+\pagenumbering{arabic}
+
 \input{intro}
 \input{chap1}
 \input{chap2}

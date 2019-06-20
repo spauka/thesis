@@ -13,7 +13,9 @@ for f in os.listdir():
                 title = expr.findall(line)
                 if title:
                     print(title[0])
-                    titles.append(title[0][2].lower())
+                    title = title[0][2].lower()
+                    title = title.translate(str.maketrans("", "", '(){}.:/\\$_-'))
+                    titles.append(title)
 
 stitles = set(titles)
 print(f"Total defined: {len(titles)}, unique: {len(stitles)}")

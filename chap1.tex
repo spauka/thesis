@@ -1819,12 +1819,47 @@ and in the case of the prime-lines architecture, the number of control pulse-sha
 
 In the remainder of this section, I will quickly review the challenges for control and readout for a large-scale quantum computer, which very much remains
 an open question in the field. As we move through the following sections, the sources of many of the numbers in Table~\ref{tab:arch} should become clear
-as well as our vision for solving some of these problems.
-
+as well as our vision for solving some of these problems. In general, I will progress from the qubit plane up to room temperature control, however this
+structure is by no means struct.
 
 \subsection{Control Plane}
-- Rents Rule for control
-- 4K
+A popular refrain for proponents of semiconductor-based qubits is to point to the maturity and flexibilty of modern semiconductor processing as an argument
+for the scalability of qubits based on similar processes. While it is undoubtedly true that the miniaturization of transistors has translated into an ability
+to fabricate finer devices, the scalability of quantum computers based on such an argument is by no means as clear. The problem, and indeed the main diffrentiator
+between a qubit and a transistor, it that while a transistor has the ability to drive other transistors, a qubit has no similar ability. All control of a qubit
+must come from outside. This unfortunate fact is captured in Rent's rule, which relates the number of external terminals (or pins) $T$ of an IC, to the number of
+internal components (or transistors) $g$:
+\begin{equation}
+  T = tg^p
+\end{equation}
+where t and p are constants of the system. For an integrated circuit, the value of $p$ generally ranges from 0.5 to 0.8~\cite{5388820}, however for a quantum
+circuit, it is reasonably simple to see that this exponent must be 1! Each qubit must be driven by some number $t$ gates, with no qubit able to drive another
+qubit without some external control.
+
+The above statement captures the primary difficulty that we will run into when designing qubit chips. While classical ICs can rely on some fan-out to minimize
+the number of inputs required, the design of a quantum chip must be able to bring supply high density wiring with high bandwidth and low cross-talk. In addition,
+classical CMOS processes usually have only a few layers of high-density interconnect, used only for short-range connections~\cite{5424258}, while qubit
+architectures generally require several layers of high-density interconnect over the length of an entire chip~\cite{s41467-017-01905-6}. The question then is
+what sets the maximum pitch of a qubit on a chip, as this gives us the density of control lines that must be achieved. Then, given that pitch, how many lines could
+we bring in to such a device, given a 1D or a 2D grid of qubits?
+
+The answer to the first question, the pitch of qubit devices, will be set by the length scale over which coupling can be achieved. For spin qubit devices based only
+on direct exchange for example, the pitch of qubits will be roughly the size of the qubit itself, as coupling only occurs when electrons can directly tunnel between
+neighbouring devices~\cite{PhysRevB.86.085423}. Work presented in this thesis uses elongated many-electron quantum dots to increase this to the micron-scale in
+Section~\ref{sec:5dot}, an approach which will likely be applicable majorana devices that use quantum dots as couplers~\cite{PhysRevB.95.235305}. Finally, long
+distance coupling of spins via superconducting resonators~\cite{PhysRevB.97.235409} has recently been demonstrated~\cite{2019arXiv190500776B}, enabling coupling
+over \si{\milli\meter} length scales.
+
+The next question is how many lines we can bring to a device. In a 1D device geometry, that is for a single line of qubits, the answer is limited only by the
+physical size of the chip, and the size of pads (bond pads or bump pads) that we are able to make contact to. For example, a singlet triplet qubit which requires
+10 control lines, and pads of pitch $100\times100\si{\micro\meter}$ will require a chip with a \SI{0.01}{\square\milli\meter} area, assuming of course that we are
+able to make contact in 3D (i.e. overlapping bonds). In the case that we are only able to make contact in 2D, a chip of size $400\times400\si{\micro\meter}$ at a
+minimum is required to break pads out to the edge of a device. The situation is more difficult to evaluate in a 2D array. Firstly, a 2D array is not possible on
+a single planar grid, as control lines for inner qubits must be broken out. Therefore a sufficient distance between qubits must be possible to allow control lines
+to be brought in from upper layers. To allow fanout of a dense grid leads to a problem very similar to that of routing a BGA package. There will be a relationship
+between number of layers, track pitch and via (inter-layer contact) pitch, which will set a hard density limit on qubit devices. Therefore increasing the pitch of qubit
+devices may be necessary when moving to 2D grids. Furthermore, the design of qubit layouts allowing realistic wiring schemes will continue to be crucial moving
+forwards~\cite{10.1038/s41534-018-0074-2}.
 
 \subsection{Readout}
 \label{sec:readout}

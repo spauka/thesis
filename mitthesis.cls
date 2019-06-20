@@ -448,7 +448,7 @@ reserved.\par\permission}}
   \signature{Certified by}{#1 \\ #2 \\ Thesis Supervisor}}
   \setbox\@abstractsupervisor\vbox{\unvbox\@abstractsupervisor
   \vskip\baselineskip \def\baselinestretch{1}\@normalsize
-  \par\noindent Thesis Supervisor: #1 \\ Title: #2}}
+  \par\noindent Thesis Supervisor: #2 #1}}
 
 % department chairman, not thesis committee chairman
 \def\chairman#1#2{\gdef\@chairmanname{#1}\gdef\@chairmantitle{#2}}
@@ -494,6 +494,10 @@ at
 % but we want people to also be able to get at the more
 % basic abstract environment
 \def\abstractpage{\cleardoublepage
+\addtocontents{toc}{\protect\setcounter{tocdepth}{-1}}
+\addcontentsline{toc}{chapter}{Abstract}
+\addtocontents{toc}{\protect\setcounter{tocdepth}{2}}
+\let\addcontentsline=\nocontentsline
 \begin{center}{\large{\bf \@title} \\
 by \\
 \@author \\[\baselineskip]}

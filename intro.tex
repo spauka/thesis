@@ -4,7 +4,7 @@ The invention of quantum mechanics early in the twentieth century created the mo
 theory of reality that has been discovered so far. It was Richard Feynman who theorized in his
 seminal 1981 keynote \cite{Feynman1982} that with quantum physics we could build a quantum simulator ---
 a machine that would be able to solve a class of problem that we couldn't solve with a
-classical computer (an idea we will expand on in section~\ref{sec:qc}). Since he delivered this keynote, the
+classical computer (an idea we will expand on in Section~\ref{sec:qc}). Since he delivered this keynote, the
 field of quantum computing has exploded. First came theoretical demonstrations of algorithms
 with a quantum speedup; Deutsch's Algorithm in 1992 \cite{Deutsch} and Shor's Algorithm in 1994 \cite{Shor}.
 Despite these advances, many suspected that it was only a matter of time before a "no-go" result would
@@ -12,11 +12,11 @@ be found; a result that would say that quantum computers could not scale, or tha
 However, with the formulation of the quantum fault-tolerance theorem \cite{1996quant.ph.11025A}, which
 showed that for a small error rate it is possible to correct errors faster than they occur, the last
 reasonable objection to quantum computing was overcome (my favourite reference as to why this seems true
-is in chapter 14 of Scott Aaronson's book \cite{Aaronson:skepticism}). Since then, a plethora of physical
+is in Chapter 14 of Scott Aaronson's book \cite{Aaronson:skepticism}). Since then, a plethora of physical
 systems have emerged that seem like contenders for building a quantum computer, such as trapped
 ions~\cite{doi:10.1063/1.5088164}, nuclear spins~\cite{acs.nanolett.8b00006}, electron spins in
 semiconductors~\cite{RevModPhys.79.1217}, excitations in superconductors ~ \cite{Wendin_2017},
-single photons~\cite{OBrien1567} or a large number of other systems that are too numerous to list here.
+single photons~\cite{OBrien1567}, or a large number of other systems that are too numerous to list here.
 Each of them aims to realize a qubit, the quantum equivalent of a bit, which rather than being described as a
 single number taking the value of 0 or 1, is described by a two-dimensional vector that evolves under the rules
 of quantum physics. Today, many of these qubits are being realized in larger and larger numbers with error rates
@@ -42,43 +42,59 @@ level architecture and working my way down to materials science. The structure o
 thesis then is as follows:
 
 \medskip
-\noindent\textbf{Chapter 1}
+\noindent\textbf{\hyperref[sec:quest]{Chapter 1 - The Quest for a Quantum Computer}}
 
 \noindent
 Chapter 1 provides a brief introduction to the key concepts and background that is required to understand
 the experiments that are presented in this thesis. We will start off by motivating the quest to build a quantum
 computer and explore the theory that underlies the experiments. We will then look at building qubits,
-the fundamental building block of a quantum computer in various semiconductor systems, as well as exploring
-the challenges of controlling them and reading them out. Finally we'll take a look at how we might put
-together these fundamental building blocks in order to build a scaleable quantum computer.
+the fundamental building block of a quantum computer in various semiconductor systems, as well as taking a
+deeper dive into the materials systems that allows them to work. This includes a description of the band structure
+of common semiconductors, the 2-dimensional electron gas, scattering and the spin-orbit interaction. We discuss
+the quantum Hall effect and the anomalous quantum Hall effect, and talk about how each element is brought together
+to form Majorana zero modes in superconductor/semiconductor hybrids.
 
 \medskip
-\noindent\textbf{Chapter 2}
+\noindent\textbf{\hyperref[sec:arch]{Chapter 2 - Architecture of a Quantum Computer}}
 
 \noindent
-Architecture
+Chapter 2 explores how the various elements described throughout this thesis might be combined in order to form
+a large-scale quantum computer. Firstly, the aims for the field of quantum computing in the short and medium term are
+enumerated. A general framework for discussing architecture is presented, and, briefly, the problems surrounding control
+and readout are elucidated. Following on from this, two architectures are presented that solve various aspects of the control
+and readout challenge. First, in Section~\ref{sec:primelines}, the prime-lines architecture explores how high bandwidth
+wiring requirements for control may be reduced. Second, in Section~\ref{sec:gooseberry}, a CryoCMOS architecture for fast
+pulsing and control is described.
 
 \medskip
-\noindent\textbf{Chapter 3}
+\noindent\textbf{\hyperref[sec:hall]{Chapter 3 - Quantum (Anomalous) Hall Effect Circulators}}
 
 \noindent
-Quantum Hall Circulators
+Chapter 3 describes the use of edge magnetoplasmons in the quantum Hall effect and the quantum anomalous Hall effect
+for passive signal routing in quantum experiments. First, we describe the challenge of isolation and signal routing
+for quantum computing applications. Second, in Section~\ref{sec:hallcirc}, we explore the microwave properties of a
+Hall droplet in \ce{GaAs}/\ce{(Al,Ga)As} in a magnetic field coupled to a transmission line, and then use these chiral
+excitations to form a circulator. Finally, in Section~\ref{sec:spinhallcirc}, we explore a circulator formed in a topological
+insulator (TI) \ce{Cr-(Bi,Sb)_2Te3}, which allows magnetic-field free operation. Dissipation mechanisms in this 3D-TI
+are explored.
 
 \medskip
-\noindent\textbf{Chapter 4}
+\noindent\textbf{\hyperref[sec:spinqubit]{Chapter 4 - Spin Qubitgs and Readout}}
 
 \noindent
-Spin qubits and Readout
+Chapter 4 describes experiments on spin qubits formed in a \ce{GaAs}/\ce{(Al,Ga)As} heterostructure. By this point, we've moved
+on from high-level architecture and component development to qubit development, and although these experiments focus on
+spin qubits, many of the issues and solutions raised have applicability to any dispersive readout or quantum dot system.
+First, in Section~\ref{sec:5dot}, we explore a scaleable device design for coupled singlet-triplet qubits. Using an
+extended quantum dot, we create an architecture that allows coupling over intermediate distances, and address the challenges
+of loading large arrays of quantum dots. Second, in Section~\ref{sec:pockets}, we explore anomalous sensing signals when
+using dispersive gate sensing to read out a quantum dot. We associate these signals with the disordered potential landscape
+of the 2DEG, and explore the properties of these signals. These charge pockets are hypothesized to be a source of unexplained
+charge noise in qubit devices.
 
 \medskip
-\noindent\textbf{Chapter 5}
+\noindent\textbf{\hyperref[sec:majoinas]{Chapter 5 - Majoranas and InAs}}
 
 \noindent
 InAs
-
-\medskip
-\noindent\textbf{Chapter 6}
-
-\noindent
-Conclusion
 

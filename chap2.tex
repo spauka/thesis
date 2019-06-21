@@ -27,10 +27,10 @@ of physical qubits. Thankfully, at least within the realm of solid-state qubits 
 there is substantial overlap in the requirements for control and readout of qubits, that allows us to design architectures for hypothetical
 quantum machines. Let's therefore enumerate a number of requirements for a control and readout architecture controlling a solid-state qubit:
 \begin{itemize}
-  \item Cryogenic operation: Solid-state qubits must be operated in cryogenic environments, stemming from the requirement that the thermal energy should be well below the level spacing of energy levels in the qubit, as well as the need for superconducting elements in some designs. Any control and readout architecture must, therefore, be low power, and avoid carrying thermal energy or noise down to the qubit device.
-  \item Control fidelity: In order to reach the fault-tolerance threshold, fidelities of individual qubits must exceed $99\%$, and should ideally be well above the $(1 - 10^{-5})$ level to avoid prohibitive error correction requirements~\cite{6657074}. Depending on the rotation rate and decoherence rates of individual qubits, control lines must have bandwidths of several 10's of \si{\giga\hertz}, along with high density, low crosstalk and low noise.
-  \item Readout fidelity: Readout of qubits brings unique challenges, requiring low probe powers in order to avoid disturbing the state while it is being measured, and limited measurement time due to decoherence. In addition, QEC in general requires the continued measurement of ancilla qubits while nearby qubits are operational, leading to stringent crosstalk requirements. In order to obtain a sufficient signal-to-noise ratio, cryogenic amplification is generally required, which in turn limits and scaleable design to one, or a few, readout lines. As such, some form of multiplexing, either frequency-domain or time-domain, is necessary for readout.
-  \item Space: This requirement is particularly difficult to accomplish as it occurs over three orders of magnitude over the scale of the chip, the cryostat and at room temperature. Each of these are discussed in detail below, but we state the problem briefly here. On a chip scale, dense control lines must be fit into an area set by the distance over which we can achieve coupling between qubits, setting micron-scale limits on on-chip structures. On a cryostat level, the need to operate at \si{\milli\kelvin} in a cryostat places centimeter-scale limits on cryogenic components. Finally at room temperature, phase matching of control pulses and the need for active feedback places limits on the size of the instrumentation used to control individual qubits.
+  \item \textbf{Cryogenic operation}: Solid-state qubits must be operated in cryogenic environments, stemming from the requirement that the thermal energy should be well below the level spacing of energy levels in the qubit, as well as the need for superconducting elements in some designs. Any control and readout architecture must, therefore, be low power, and avoid carrying thermal energy or noise down to the qubit device.
+  \item \textbf{Control fidelity}: In order to reach the fault-tolerance threshold, fidelities of individual qubits must exceed $99\%$, and should ideally be well above the $(1 - 10^{-5})$ level to avoid prohibitive error correction requirements~\cite{6657074}. Depending on the rotation rate and decoherence rates of individual qubits, control lines must have bandwidths of several 10's of \si{\giga\hertz}, along with high density, low crosstalk and low noise.
+  \item \textbf{Readout fidelity}: Readout of qubits brings unique challenges, requiring low probe powers in order to avoid disturbing the state while it is being measured, and limited measurement time due to decoherence. In addition, QEC in general requires the continued measurement of ancilla qubits while nearby qubits are operational, leading to stringent crosstalk requirements. In order to obtain a sufficient signal-to-noise ratio, cryogenic amplification is generally required, which in turn limits and scaleable design to one, or a few, readout lines. As such, some form of multiplexing, either frequency-domain or time-domain, is necessary for readout.
+  \item \textbf{Space}: This requirement is particularly difficult to accomplish as it occurs over three orders of magnitude over the scale of the chip, the cryostat and at room temperature. Each of these are discussed in detail below, but we state the problem briefly here. On a chip scale, dense control lines must be fit into an area set by the distance over which we can achieve coupling between qubits, setting micron-scale limits on on-chip structures. On a cryostat level, the need to operate at \si{\milli\kelvin} in a cryostat places centimeter-scale limits on cryogenic components. Finally at room temperature, phase matching of control pulses and the need for active feedback places limits on the size of the instrumentation used to control individual qubits.
 \end{itemize}
 
 \afterpage{
@@ -177,7 +177,9 @@ capacitance, filtering and high resistance of the sensor will in general limit b
 RF measurement is performed by embedding the QPC in a resonator, where the quality factor of the resonator is set by the resistance of the charge sensor.
 The derivation of the matching condition is not given here, but I point the interested reader towards~\cite{crootthesis}, where a complete derivation is given.
 Of course this immediately points towards the possibility of frequency multiplexing~\cite{doi:10.1063/1.4868107}, allowing the readout of multiple
-resonators simultaneously, although the requirement for a proximal charge sensor means such an architecture is unsuitable for 2-D architectures.
+resonators simultaneously, although the requirement for a proximal charge sensor means such an architecture is unsuitable for 2-D architectures. For larger
+arrays of charge sensors, the presence of noise generated by the charge sensor can additionally become significant~\cite{PhysRevB.78.035324}, creating
+an additional source of dephasing for proximal qubits which we may not wish to disturb.
 
 \begin{figure}
   \includegraphics[width=\linewidth]{multifreq}
@@ -192,21 +194,60 @@ of the system is measured. The polarizability of a quantum dot is given by:
 \begin{equation}
   C_Q = - \diffp[2]{E}{{V_{g}}} = -(\alpha \varepsilon)^2 \diffp[2]{E}{\varepsilon}
 \end{equation}
-where $\alpha$ is the lever arm and $\varepsilon$ is the tilt, as shown in Fig.~\ref{fig:dqd}. As we can see from the above equation the quantum capacitance
-is proportional to the band curvature, which allows us not only to detect charge transitions but also the spin state (since the triplet state has no
+where $\alpha$ is the lever arm and $\varepsilon$ is the tilt, as shown in Fig.~\ref{fig:dqd} and defined in Sec.~\ref{sec:qd}. As we can see from the above equation
+the quantum capacitance is proportional to the band curvature, which allows us not only to detect charge transitions but also the spin state (since the triplet state has no
 curvature at 0 tilt), and hybridization. The latter effect may be used to detect the parity state of a Majorana zero mode coupled to a proximal
 quantum dot~\cite{PhysRevB.95.235305}. As with readout via a charge sensor, by embedding a gate in a resonant circuit, we are able to quickly sense changes
 in capacitance, with a sensitivity that is sufficient to perform single shot readout of spin states~\cite{fernando1,Nnano_dzurak}. A frequency multiplexed device
 with 7 resonators is shown in Fig.~\ref{fig:multifreq}, combining both dispersive and charge-sensing modes of readout.
 
-The potential for frequency multiplexing
+The potential for frequency multiplexing also allows us to imagine integrated methods of readout. While the idea of multi-channel qubit readout is certainly
+not new, the design of equipment that are able to handle large numbers of channels simultaneously is as yet an open problem. In particular, once multiple
+channels are multiplexed onto a single rf pair, the total power that must be transmitted for $n$ channels is:
+\begin{equation}
+  P_\sum(n) = P_0 + 10 \log_{10}(n)
+\end{equation}
+At the device level, this increases the isolation necessary between channels, as it is desirable to be able to select qubits to measure selectively. In addition,
+crosstalk may drive rotations of neighbouring qubits, reducing the fidelity of control, which is particularly problematic for error correction schemes
+where proximal ancilla qubits must be constantly read and corrected.
 
-\clearpage
-\section{Gooseberry}
-\label{sec:gooseberry}
-%\import{chap2/}{arch}
+Moving up the stack, the use of frequency multiplexing reduces the scaling of power and lines at the \SI{4}{\kelvin} stage and at room temperature, as shown in
+Table~\ref{tab:arch}, however it also creates additional constraints on the design of readout hardware at each of these two stages.
+On the design of the first stage amplifier, this must be chosen to balance the \SI{1}{\decibel} compression point and the noise temperature, to allow for a large number of
+channels to be amplified. In particular for quantum limited amplifiers such as Josephson parametric amplifiers and or travelling-wave parametric amplifiers~\cite{Macklin307}
+where the dynamic range is limited, designs which specifically take into account the bandwidth and power requirements for multi-channel readout are required.
+
+\begin{figure}
+  \includegraphics[width=0.8\linewidth]{Readout}
+  \caption[Comparison of analog and digital multichannel readout]
+  {\label{fig:multiread}(a) Schematic of an analog homodyne multichannel readout setup. Elements contained within the blue block must be repeated for each channel.
+  A high-isolation band-pass filter is required per channel due to large non-linearities in the mixer. The use of a heterodyne receiver (not shown) allows phase
+  sensitive detection, however requires a second analog signal generator. (b) The equivalent digital multichannel readout setup. Again, repeated elements are contained
+  in the blue box, however in this case, all repeated elements are digital, hence require no additional hardware. Bandwidths for components used in our lab are shown.}
+\end{figure}
+
+Finally, we briefly touch on the topic of readout hardware at room temperature. The use of multiple simultaneous frequences for readout creates several challenges
+for a typical analog homodyne detection architecture, due to the higher-order non-linearity and the inherent unscalability of analog signal generators and low-bandwidth
+digitizers. A schematic of a typical analog readout chain is shown in Fig.~\ref{fig:multiread} (a). Due to the non-linearities present in the analog mixer, signals must be
+band-pass filtered and boosted prior to mixing to achieve optimal signal-to-noise. For the homodyne setup shown, an analog phase shifter is required, and does not allow
+phase information to be extracted. A second analog signal source may be added prior to the mixer to allow for heterodyne (I/Q) demodulation, however this significantly
+increases the resource requirements of the circuit. Therefore even with frequency multiplexing near the device, the scalability of an analog readout setup is still
+linear in the number of qubits. An equivalent digital circuit is shown in Fig.~\ref{fig:multiread} (b). For such a readout chain, all repeated elements are in digital logic,
+hence, up to the resource limits of the FPGA, no additional hardware is required to increase the channel count. Above around 32 channels, an alternative approach becomes
+necessary, which I flag in Sec.~\ref{sec:gooseberry}, however I will not present results here.
+
+Having introduced the general structure of an architecture for a semiconductor based quantum computer, the remainder of this chapter deals with the practical implementation
+of some architectures, which progressively reduce the power dissipated and resource requirements at each stage of the architecture, at the expense of flexibility.
+Section~\ref{sec:primelines} proposes an architecture for a quantum computer that reduces the need for high-bandwidth wiring to low temperature, covers the distribution of pulses
+at the qubit interface and introduces low power cryogenic switches to accomplish that goal. Section~\ref{sec:gooseberry} proposes an architecture that utilizes CryoCMOS to drastically
+reduce the wiring requirements for a large scale quantum computer, and creates a platform for scaleable control of large numbers of qubits.
 
 \clearpage
 \section{Cryogenic Control Architecture for Large-Scale Quantum Computing}
 \label{sec:primelines}
 \import{chap2/}{arch}
+
+\clearpage
+\section{Gooseberry}
+\label{sec:gooseberry}
+%\import{chap2/}{arch}

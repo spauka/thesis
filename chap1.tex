@@ -505,7 +505,7 @@ defined as the curvature of the conduction or valence band of the semiconductor:
 \begin{equation}
   m^* = \hbar^2 \left(\diff[2]{E}{k}\right)^{-1}
 \end{equation}
-Intuitively we can think of it as describing a change in momentum for a given energy "kick". For a parabolic and isotropic
+Intuitively, we can think of it as describing a change in momentum for a given energy "kick". For a parabolic and isotropic
 band, such as for the bottom of the conduction band in a III-V semiconductor, its value is constant, however
 the form of the effective mass will be more complex for materials that have directional dependences (such as Si),
 or more complex band structures such as graphene. From Eqn.~\ref{eqn:3ddisp}, we can also give the
@@ -810,7 +810,7 @@ adding a tunnel junction between the left and right dots, and adding a gate to c
 electrochemical potential of the second quantum dot, as shown in Fig.~\ref{fig:dqd} (a).
 To completely model the effect of a double quantum dot, we must account for two additional sources of capacitance, first
 a cross-capacitance between the left (right) gate and the right (left) quantum dot, and second the capacitance between
-the left and right dot. Intuitively we can understand the capacitance between dots as a new electron on the left dot
+the left and right dot. Intuitively, we can understand the capacitance between dots as a new electron on the left dot
 shifting the energy and chemical potential of the right dot or vice-versa, leading to a shift in the locations of charge
 transitions as electrons are pulled on and off each quantum dot. To characterize the effect of the two gates on a double
 quantum dot, we can plot the ground state occupancy of the quantum dots as each of the gate voltages is swept, in a plot
@@ -1350,9 +1350,9 @@ This second quantity gives us an expression for the conductivity of our sample:
 \begin{equation}
   \sigma = \rho_{XX} \frac{W}{L}
 \end{equation}
-where $W$ is the width of the sample and $L$ is the length between contacts. Samples of Hall bars on several samples are given in Fig.~\ref{fig:hall} (b)
-(c) and (d). Device (b), fabricated on a shallow InAs quantum well, includes a global top gate that allows the density in the 2DEG to be tuned continuously,
-while (d) shows a device that is embedded on a GaAs quantum dot device and is optimized for a small footprint. Details on the optimization of ohmic contacts
+where $W$ is the width of the sample and $L$ is the length between contacts. Samples of Hall bars on several samples are given in Fig.~\ref{fig:hall} (b),
+(c) and (d). Device (b), fabricated on a shallow InAs quantum well, includes a global top gate that allows the density of electrons in the 2DEG to be tuned continuously.
+(d) shows a device that is embedded on a GaAs quantum dot device and is optimized for a small footprint. Details on the optimization of ohmic contacts
 are given in the appendix, Sec.~\ref{sec:ohmics}.
 
 \subsection{Weak Localization}
@@ -1484,9 +1484,10 @@ This Hamiltonian corresponds to that of a harmonic oscillator centred at $x_0$ w
 This implies that at high field, and neglecting the effects of scattering, our density of states evolves to
 a series of discrete delta functions, where each state is highly degenerate, filled up to the state $E_n < E_F$.
 Each of these states is called a \textbf{Landau level}. This situation is described by the schematic in Fig.~\ref{fig:hall}.
-As a brief comment on the effects of scattering, which we've ignored in our derivation thus far. For the case that the quantum Hall effect is beginning to appear, and $R_c \sim l_e, l_\phi$, the Landau levels become broadened, although the exact mechanism
-by which this occurs is not yet resolved \cite{PhysRevB.90.035425, PhysRevB.82.075401}. Up to this point,
-we have been neglecting the effects of spin. We can, however, trivially add it to our energies:
+Up to this point, we've ignored the effects of scattering, however we can give a brief phonomenological description of its effect.
+For the case that the quantum Hall effect is beginning to appear, and $R_c \sim l_e, l_\phi$, the Landau levels become broadened, although the exact mechanism
+by which this occurs is not yet resolved \cite{PhysRevB.90.035425, PhysRevB.82.075401}. An additional effect we have thus far ignored is spin.
+We can, however, trivially add it to our energies:
 \begin{equation}
   E_n = \hbar \omega_c\left(n + \frac{1}{2}\right) \pm \frac{1}{2}g^* \mu_b B
 \end{equation}
@@ -1571,7 +1572,7 @@ From \cite{1988ZhETF..94..217V}, the excitations are found to have a fundamental
 \begin{equation}
   \omega_{\textrm{EMP}} = \frac{\sigma_{XY}}{P\epsilon_0\epsilon^*}\left(\ln\left(\frac{P}{\pi w}\right) + C\right)
 \end{equation}
-where $P$ is the length of the edge, $\epsilon^*$ is the effective dielectric constant seen by the edge and C is a constant related to the geometry of the edge and goes to $1$ for a sharply defined edge with a step-like profile. The logarithmic correction arises due to electron correlations (which has a small impact,
+where $P$ is the length of the edge, $\epsilon^*$ is the effective dielectric constant seen by the edge and C is a constant related to the geometry of the edge, which goes to $1$ for a sharply defined edge with a step-like profile. The logarithmic correction arises due to electron correlations (which has a small impact,
 unlike in other calculations), and $w$ represents the damping and physical width of the EMP from the edge:
 \begin{equation}
   w = i\frac{\sigma_{XX}(\omega)}{2\omega\epsilon_0\epsilon^*}
@@ -1599,7 +1600,7 @@ I introduce here should not be considered to apply generally, but rather is spec
 This treatment is partly derived from \cite{winkler2003spin,dyakonov2017spin}.
 
 Firstly, as we are dealing with conduction band electrons, which have a net spin angular momentum of
-zero ($\vec S = 0$), we do not have any band splitting from the atomic orbitals. Instead, the SOI effect in conduction band electrons comes from effective
+zero ($\vec S = 0$), we do not have any band splitting from the atomic orbitals. Instead, the spin-orbit effect (SOI) in conduction band electrons comes from effective
 potential seen by an electron. Consider an electron moving through an asymmetric potential within a semiconductor. The asymmetric potential leads the
 electron to feel an effective electric field, which in the rest frame of the electron is equivalent to an effective magnetic field, which causes an energy difference
 between different spin species at a given $k$-vector. The origins of the asymmetric potential seen by the electron is manifested in two distinct ways. The first is called structural inversion asymmetry and is caused by an asymmetry in the confining potential of the electron (for example the triangle well that confines the 2DEG). The second is called bulk inversion asymmetry and comes from the lack of crystal inversion symmetry in III-V and II-VI semiconductors. These two terms lead to the Rashba and Dresselhaus terms, respectively.

@@ -51,7 +51,6 @@
 \allowdisplaybreaks
 \usepackage[version=4]{mhchem}
 \setmainfont{Adobe Caslon Pro}[
-    %OpticalSize = 12,
     Numbers = Lining,
 ]
 \setsansfont{Candara}[
@@ -102,23 +101,10 @@
 \newcommand{\nocontentsline}[3]{}
 \newcommand{\tocless}[2]{\bgroup\let\addcontentsline=\nocontentsline#1{#2}\egroup}
 
-%% This bit allows you to either specify only the files which you wish to
-%% process, or `all' to process all files which you \include.
-%% Krishna Sethuraman (1990).
-
-%\typein [\files]{Enter file names to process, (chap1,chap2 ...), or `all' to
-%process all files:}
-%\def\all{all}
-%\ifx\files\all \typeout{Including all files.} \else \typeout{Including only \files.} \includeonly{\files} \fi
-
 \begin{document}
 
-\pagenumbering{roman} % Start roman numbering
+\pagenumbering{roman}
 \include{cover}
-% Some departments (e.g. 5) require an additional signature page.  See
-% signature.tex for more information and uncomment the following line if
-% applicable.
-% \include{signature}
 
 \renewenvironment{abstract}{
     \begin{center}

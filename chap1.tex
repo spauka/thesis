@@ -2,7 +2,7 @@
 \label{sec:quest}
 Before delving into the question of how we might build a quantum computer, it is worth taking a step
 back and exploring the question of what brought us as a scientific community to the point where
-it is seen as a priority to build one. The answer to that requires us to delve briefly into
+it is seen as a priority to build one. The answer to that requires us to dive briefly into
 the world of computational complexity theory, and to examine what it means to solve problems "efficiently".
 Although the genesis of computation can be traced back to pioneering works by people such as Charles Babbage
 and Ada Lovelace in the early 1800's \cite{Bowden:1953:FTS:1102044}, it was not until the early 1900's that
@@ -14,11 +14,11 @@ they were awarded the Nobel Prize in 1956 \cite{nobel1956}. This was followed by
 in 1959, for which he was awarded the Nobel Prize in the year 2000 \cite{nobel2000}. With these two inventions, a remarkable
 surge in computational power occurred. This surge is embodied in Moore's law, which described an annual
 doubling in the number of transistors that it would be possible to fit on a single integrated circuit \cite{4785860}.
-And with this doubling came an exponential growth in the computation power that we had available to us.
+With this doubling came an exponential growth in the computational power that we had available to us.
 
 Along with this growth came an obvious question. What exactly can these computers do? What sorts of
 problems will we be able to solve with our ever-growing bundle of transistors? To answer this question, we need to
-think about how many steps it takes to run various algorithms. Take for example the question of looking
+think about how many steps it takes to run various algorithms. Take, for example, the question of looking
 for a single item $x_T$, in a list $L = \{x_0, x_1, ..., x_n\}$ with $n$ items in it. Assuming the list
 is in an unknown order, to find the location of the item $x_T$, we need to look at each item in the list
 in turn. If the length of the list were doubled to $2n$ items, it would take twice as many comparisons to
@@ -26,7 +26,7 @@ look through the list. Tripled would be three times. The amount of time it takes
 list is \emph{linear} in the length of the list. We can write this scaling mathematically using big-$\mathcal{O}$
 notation: searching for an item in a list is $\mathcal{O}(n)$.
 
-What about a slightly more complicated problem. What if we want to check whether any item $x_i$ appears
+What about a slightly more complicated problem? What if we want to check whether any item $x_i$ appears
 in the list twice? To run this algorithm, we can run the above algorithm for each item in the list, setting the
 target to $x_T = x_0$, then $x_T = x_1$ and so forth, and checking whether we find each item two or more
 times. So for $n$ items in the list, we run through the list $n$ times, so the number of steps to run
@@ -34,12 +34,12 @@ the algorithm scales as $\mathcal{O}(n^2)$. That is, if the length of the list i
 four times as long, so the scaling is \emph{quadratic}.
 In this way, we can classify algorithms into various complexity classes. For example, sorting a list
 of $n$ items is, in the best case, $\mathcal{O}(n \log(n))$. Solving the travelling salesman problem (TSP) is
-$\mathcal{O}(n^2 2^n)$. Ideally we would like to group problems into various complexity classes. For example,
+$\mathcal{O}(n^2 2^n)$. Ideally, we would like to group problems into various complexity classes. For example,
 we can group problems that have at worst a polynomial complexity, i.e. $\mathcal{O}\left(f(n)\right)$ where $f(n)$
 is a polynomial into the complexity class \cc{P} (for polynomial). We will call these problems \textbf{efficiently
 computable}. Other problems may grow at worst exponentially in the size of the problem. We can group all
 of those problems into the complexity class \cc{EXP}. These problems, and indeed any problem that has a difficulty
-that grows faster than a polynomial in the size of the problem are said to be inefficient to compute.
+that grows faster than a polynomial in the size of the problem, are said to be inefficient to compute.
 
 Of course, you might say, well what sort of operations do we allow our computers to do in a single step?
 If I say that my computer can solve the TSP in a single step, then the complexity of that problem reduces trivially to
@@ -79,15 +79,15 @@ the set of algorithms that are efficient to solve seems to keep growing!}
   \label{fig:mooreslaw}
 \end{figure}
 
-So we've established what sorts of problems a computer can solve efficiently, and we've also noted the
+So, we've established what sorts of problems a computer can solve efficiently, and we've also noted the
 exponential growth in the number of transistors on a chip. As long as both of these facts remain true, we
 should only have to wait a few years before our computers become twice as powerful and problems that were
 previously intractable fall within our grasp. Unfortunately, any exponential scaling must eventually fail,
 and so it was for ICs for two key reasons: power and transistor size. As we made our transistors smaller,
 we stopped seeing a concomitant efficiency increase, and all of a sudden, the power density of our ICs
 became a limiting factor. To halt this increase, we had to reduce power dissipation, and the
-only way we saw how was by capping the clock speed of our computers, which we can see in Fig.~\ref{fig:mooreslaw}
-has plateaued since the early 2000s. Moreover, the smaller our transistors became, the more costly they became
+only way we saw how was by capping the clock speed of our computers, which, as we can see in Fig.~\ref{fig:mooreslaw}
+has plateaued since the early 2000s. Moreover, the smaller our transistors became, the more costly they were
 to make. Even Moore's law, which has stubbornly held past the expectations of most scientists, must eventually
 end as we bump up against the sizes of atoms. It seems unlikely that there is much room below Samsung's
 recently announced \SI{3}{\nano\meter} node, so if we want to bring more problems into the fold of the
@@ -1675,13 +1675,22 @@ a path on the surface of a band acquires. The integral of the Berrys phase over 
 $n$, which is an integer and characterizes the topology of the material \cite{conmatphys-011417}. In the integer quantum Hall effect, the number $n$ is the same as the filling factor $\nu$, and gives us a topological explanation for the emergence of quantized edge states. As we transition from within
 the material, with Chern number $n$, to free space, with Chern number $0$, there must be a twisting of the band structure near the edge that leads to the emergence of conductive edges. However, for the quantum Hall state, a large magnetic field is required to define the Berry's phase and hence the Chern number of the material.
 
+\begin{figure}
+  \includegraphics[width=0.75\linewidth]{qah}
+  \caption[Quantum spin Hall and quantum anomalous Hall effect]
+  {\label{fig:qah}(a) The spin quantum Hall effect. Two counter-propagating spin currents flow around the edge of the sample. Spin scattering can occur between the two
+  edges such that robust protection is not generally seen. (b) The quantum anomalous Hall effect.With the addition of a ferromagnetic dopant, and when the sample is magnetized,
+  only a single spin polarization remains, leading to a spin-polarized chiral edge state, protected from backscattering.}
+\end{figure}
+
 In materials with a strong spin-orbit coupling, it is possible to find configurations with a non-zero Chern number, a topologically non-trivial band structure.
 At the boundaries of such a material, a conductive state must appear \cite{PhysRevLett.93.156804,PhysRevLett.92.126603}, and indeed for heterostructures of \ce{HgCdTe}
-the \textbf{spin quantum Hall effect} has been observed \cite{Konig766}, where two counterpropagating, spin-polarized, 1D channels lead to quantized conductance. Unfortunately, these
+the \textbf{spin quantum Hall effect} has been observed \cite{Konig766}, where two counterpropagating, spin-polarized, 1D channels lead to quantized conductance. This is
+shown in Fig.~\ref{fig:qah} (a). Unfortunately, these
 samples are sensitive to spin-scattering and thus have not been robustly demonstrated. The addition of a ferromagnetic dopant, such as chromium or vanadium lifts the
 time reversal symmetry and generates leads to the formation of a spin-polarized chiral edge state, once the material has been taken past the coercive field of the
 Cr or V dopants. This is termed the \textbf{quantum anomalous Hall effect}. The total conductance is given by the sum of the top and bottom edge states,
-each contributing $e^2/2h$ of conductance, for a total Hall conductance of $\sigma = e^2/h$, as shown in Fig.~\ref{fig:qah}. We will use a sample that shows the
+each contributing $e^2/2h$ of conductance, for a total Hall conductance of $\sigma = e^2/h$, as shown in Fig.~\ref{fig:qah} (b). We will use a sample that shows the
 quantum anomalous Hall effect in Sec.~\ref{sec:spinhallcirc} to demonstrate a circulator that can operate without an external magnetic field.
 
 \subsection{Forming Majoranas}
@@ -1690,9 +1699,7 @@ quantum anomalous Hall effect in Sec.~\ref{sec:spinhallcirc} to demonstrate a ci
 \begin{figure}
   \includegraphics[width=0.75\linewidth]{1dSOI}
   \caption[Spin-orbit interaction in a nanowire with a magnetic field]
-  {\label{fig:1dsoi}(a) The dispersion relation for a 1-dimensional chain of electrons (nanowire), assuming the nearly-free electron model. We obtain a parabolic band with two degenerate spin states. (b) The dispersion relation under the influence of an external magnetic field. A Zeeman splitting $E_Z$ occurs
-  between $\uparrow$ and $\downarrow$ spins. (c) The dispersion relation in a material with either a Rashba or Dresselhaus spin-orbit interaction. The two spin species are shifted relative to each other by an amount $\pm k_\textrm{SO}$. Note that unlike a Zeeman field, this does not lead to any spin polarization in the material. (d) The dispersion relation in a material with spin-orbit interaction and an external magnetic field. The magnetic field creates a coupling between the split bands and opens a gap in the dispersion relation. If the chemical potential is tuned in the gap (green line) only a single band of the
-  dispersion relation is accessible, equivalent to a system of spinless fermions.}
+  {\label{fig:1dsoi}(a) The dispersion relation for a 1-dimensional chain of electrons (nanowire), assuming the nearly-free electron model. We obtain a parabolic band with two degenerate spin states. (b) The dispersion relation under the influence of an external magnetic field. A Zeeman splitting $E_Z$ occurs between $\uparrow$ and $\downarrow$ spins. (c) The dispersion relation in a material with either a Rashba or Dresselhaus spin-orbit interaction. The two spin species are shifted relative to each other by an amount $\pm k_\textrm{SO}$. Note that unlike a Zeeman field, this does not lead to any spin polarization in the material. (d) The dispersion relation in a material with spin-orbit interaction and an external magnetic field. The magnetic field creates a coupling between the split bands and opens a gap in the dispersion relation. If the chemical potential is tuned in the gap (green line) only a single band of the dispersion relation is accessible, equivalent to a system of spinless fermions.}
 \end{figure}
 
 In section~\ref{sec:majo} we went over a brief introduction to the physics that underpins quantum computation with Majorana zero modes

@@ -1,6 +1,26 @@
 \chapter{Quantum (Anomalous) Hall Effect Circulators}
 \label{sec:hall}
 
+While discussing architectural concerns in Chapter~\ref{sec:arch}, we focused a great deal on the need to reduce the complexity of interconnects,
+particlarly as 2D architectures are scaled up. In doing so we discussed the need for attenuation in the control wiring of a quantum computer in order
+to reduce the thermal population of photons at the qubit interface. In a similar way, there is a need for isolation in the readout chain, however
+as we explored in Sec.~\ref{sec:readout}, the effective noise temperature $T_\textrm{eff}$ is set by the first stage amplifier and by any attenuation
+which occurs between it and the qubit. As such, particularly for transmon-type experiments where any noise is known to limit qubit
+lifetimes~\cite{PhysRevLett.101.080502}, passive circulators with low loss must be used. These are non-reciprocal devices which route power
+in a single direction around their ports, i.e. from $1 \to 2$, $2 \to 3$ and $3 \to 1$ but not in the inverse direction $1 \not\to 3$, $3 \not\to 2$
+and $2 \not\to 1$. In addition when using quantum limited parametric amplifiers such as the travelling-wave parametric amplifier~\cite{PhysRevLett.113.157001},
+isolators are necessary to limit the action of the pump tone on our qubits.
+
+Circulators have traditionally been constructed using the Faraday effect in magnetic materials, which causes propagation to occur at different phase
+velocities in opposite directions through a magnetic material, however as these devices operate based on interference of counter-propagating
+paths, these devices must be constructed with a size on the order of the wavelength of the signal, often several tens of centimeters. It was proposed by
+Giovanni Viola and David DiVincenzo that slow, chiral charge density waves in the quantum Hall regine, called edge magnetoplasmons (EMPs), might be utilized to
+construct millimeter-scale circulators~\cite{PhysRevX.4.021019}. In the following chapter, I present work that implements this idea to form non-reciprocal devices,
+and demonstrate strong circulation (up to \SI{40}{\decibel}). The physics of EMP's is introduced originally in Sec.~\ref{sec:emp}. In Sec.~\ref{sec:hallcirc} the
+absorption of EMPs is explored in GaAs, and we use these EMPs to form a micron-scale circulator. In Sec.~\ref{sec:spinhallcirc}, we use the quantum anomalous Hall
+effect to create circulators that are able to operate at zero external field. The dissipation of power is investigated as a function of temperature and applied signal
+amplitude, although the nature of this dissipation remains an open question.
+
 \clearpage
 \section{On-chip Microwave Quantum Hall Circulator}
 \label{sec:hallcirc}

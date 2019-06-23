@@ -1,6 +1,29 @@
 \chapter{Spin Qubits and Readout}
 \label{sec:spinqubit}
 
+Up to this point, the results of my thesis have been focused on the architecture and instrumentation that surrounds a quantum
+computer. We switch tack at this point to focus on the bottom of the quantum computing stack, on the design of qubits, in
+particular the design of spin qubits in GaAs. Although, as we discussed in Sec.~\ref{sec:dotqubits}, there have been many
+successful attempts at forming spin qubits, one of the fundamental challenges facing all of the qubit designs in semiconductors
+is achieving strong two-qubit interactions. In the short range, direct exchange and capacative coupling have generated two qubit
+fidelities that exceed 98\%~\cite{PhysRevA.99.042310}, however as we discussed in Chapter ~\ref{sec:arch}, a scaleable qubit architecture
+will likely require both long-range and intermediate-range couplers in order to be feasible. The designs of progressively
+larger grids of quantum dots poses an additional challenge for the initialization of qubits located in the central regions
+of an array. Typically, initialization of a qubit is performed by loading a known spin state from proximal reservoirs~\cite{petta}, however
+for large arrays of quantum dots, such an approach is infeasible. Several recent papers suggest progressive loading of electrons
+from the center out~\cite{PhysRevApplied.6.054013,qubyte}, however such schemes require a complete reset of the entire set of qubits.
+The first part of this chapter, Sec.~\ref{sec:5dot}, explores an architecture that addresses the issue of initialization and of
+intermediate-range coupling between singlet-triplet qubits.
+
+On top of the coupling challenge, conventional charge-based readout techniques for spin qubits require bulky, proximal charge sensors, an
+approach which carries inherent challenges for a 2D qubit layout. Alternative approaches to readout based on dispersive gate
+sensing~\cite{PhysRevLett.110.046805}, while having now demonstrated single-shot readout~\cite{Nnano_dzurak}, still achieve only 73\% readout
+fidelity, well below the 99.86\% level achieved using charge sensing~\cite{Keith_2019,PhysRevX.8.021046}. Understanding the limits of gate-based
+readout, including understanding the sources of anomalous error signals, will be crucial to utilizing gate-based sensors for scaleable quantum
+computers. This is the key problem we explore in the second part of this chapter, Sec.~\ref{sec:pockets}. I will also mention that the results
+of that chapter point towards a potential source of charge noise in semiconductor-based qubits, although the degree to which they might
+be eliminated by induced-electron device structures remains an open question.
+
 \clearpage
 \section{Device Architecture for Coupling Spin Qubits Via an Intermediate Quantum State}
 \label{sec:5dot}

@@ -1226,17 +1226,17 @@ Si/SiGe \cite{nature13407}, which is presently limited by charge noise \cite{s41
 \subsection{Majorana Zero Modes}
 \label{sec:majo}
 
-While the above section runs through several techniques for building qubits using semiconductor heterostructures,
-each of them suffers from a significant amount of noise that must be corrected for these qubits to be useful
+While the above section details several techniques for building qubits using semiconductor heterostructures,
+each of them suffers from a significant amount of noise that must be corrected for in order for these qubits to be useful
 in a quantum computer. For an error rate of $1 \times 10^{-5}$, it is estimated that roughly 3,000 physical qubits
 are required to construct one logical qubit using the surface code, and close to 10,000 gates must be performed per computational gate, to correct
-errors as the occur \cite{6657074}. For spin qubits, although single qubit gate fidelities routinely exceed $99\%$\cite{Zajac439}, two-qubit
+errors as they occur \cite{6657074}. Although single qubit gate fidelities in spin qubits routinely exceed $99\%$\cite{Zajac439}, two-qubit
 gate fidelities of 98\% are the highest values the author is aware of at the time of writing \cite{PhysRevA.99.042310}.
-The source of error, as we discussed in previous sections, is caused by uncontrolled coupling to the environment, causing the information stored in the qubits
-to be lost. An alternative approach to building qubits, one that uses the topology of exotic quasiparticles called non-abelian anyons,
-was proposed by Kitaev as a method of performing quantum computation in a way that is protected from local peturbations \cite{KITAEV20032}.
+The primary sources of error is uncontrolled coupling to the environment, causing the loss of information stored in the qubits, as well
+as inprecise control and readout. An alternative approach to building qubits, one that uses the topology of exotic quasiparticles called non-abelian anyons,
+was proposed by Kitaev as a method of performing quantum computation in a way that is protected from local peturbations in the environment\cite{KITAEV20032}.
 
-A system of non-abelian anyons uses as it's computational subspace a set of degenerate ground states with a fixed number
+A system of non-abelian anyons uses as its computational subspace a set of degenerate ground states with a fixed number
 of quasiparticles, separated by a physical distance, where information is stored over multiple pairs of anyons. A result of this
 distributed storage is that any local perturbation to a quasiparticle does not
 lead to decoherence. To quote: \textquote[{\cite{RevModPhys.80.1083}}]{the only way the system can undergo a non-trivial unitary evolution ---
@@ -1244,7 +1244,7 @@ that is an evolution that takes it from one ground state to another --- is by ha
 interaction of pairs of anyons is required to change the state of the qubit. In such a way, error rates
 far below those achievable in other qubit systems may be possible. Rather than requiring many noisy qubits to form one logical qubit,
 we would be able to use a few, or even a single clean qubit instead. I will not go into further details of how such a computation
-is achieved via braiding, but will point the interested reader towards \cite{RevModPhys.80.1083}, which
+is achieved via braiding, but will point the interested reader to \cite{RevModPhys.80.1083}, which
 gives a far more thorough introduction to the physics than I can in the limited space I have available. I will, however, give a quick introduction
 into the physical origins of the Majorana zero mode, based on the material from \cite{rafael_notes}.
 
@@ -1258,7 +1258,7 @@ into the physical origins of the Majorana zero mode, based on the material from 
   topologically protected qubit.}
 \end{figure}
 
-The challenge, then, is to find a system which contains these emergent quasiparticles. Again, it was Kitaev that proposed that
+The challenge, then, is to find a system which contains these emergent quasiparticles. Again, it was Kitaev who proposed that
 a one-dimensional chain of fermions, with a specific Hamiltonian, may cause the emergence of precisely the quasiparticles we require \cite{Kitaev_2001}.
 The Hamiltonian he proposed was \cite{Alicea_2012}:
 \begin{equation}
@@ -1268,10 +1268,10 @@ The Hamiltonian he proposed was \cite{Alicea_2012}:
 \end{equation}
 Here we have a set of sites, indexed by $j$, with an onsite energy (chemical potentital) $\mu$, a hopping term $t$, and a superconducting coupling
 term $\Delta$ with phase $\phi$. The terms $\hat c_i$ and $\hat c_i^\dagger$ are the fermion annihilation and creation operators respectively.
-Let's look at a few limits of this Hamiltonian. For $\mu < 0$ and $\Delta, t = 0$, this Hamiltonian describes a wire with a single ground state containing a fixed
+Let's look at a few limits of this Hamiltonian. For $\mu < 0$, and $\Delta, t = 0$, this Hamiltonian describes a wire with a single ground state containing a fixed
 number of fermions. If we wish to add an extra electron, we must pay an energy cost $\mu$, as in Fig.~\ref{fig:majo} (a). The next case we consider is where $\mu=0$ and
-$\Delta = t \neq 0$. We can achieve the first requirement by coupling the wire strongly to a large reservoir of fermions, such that the number of
-fermions on the wire is not a good quantum number (exactly the opposite of a quantum dot). To understand the effect of the next two terms, it is
+$\Delta = t \neq 0$. We can achieve the first condition, $\mu = 0$, by coupling the wire strongly to a large reservoir of fermions, such that the number of
+fermions on the wire is not a good quantum number (exactly the opposite of a quantum dot). To understand the effect of the next condition, $\Delta = t \neq 0$, it is
 helpful to decompose the fermion annihilation and creation operators into Majorana operators:
 \begin{align}
   \gamma_+ = \hat c + \hat c^\dagger && \gamma_- = -i(\hat c - \hat c^\dagger)
@@ -1281,7 +1281,8 @@ Indeed there is nothing special about these operators; I could easily define the
 \begin{align}
   \hat c = \frac{1}{2}(\gamma_{+} + i\gamma_{-}) && \hat c^\dagger = \frac{1}{2}(\gamma_{+} - \gamma{-})
 \end{align}
-however since both operators are associated with a single wave function, they are inseparable. In fact, I have even drawn my fermions in Fig.~\ref{fig:majo} (a) as a
+however since both operators are associated with a single wave function, they are inseparable. It does not make sense to operate on a single Majorana
+operator when they are both associated with a single particle. In fact, I have even drawn my fermions in Fig.~\ref{fig:majo} (a) as a
 pair of Majorana operators. There is really only one state described by the two operators.
 The question we need to answer is how do we separate our Majoranas. Let's write down the Kitaev Hamiltonian from Equation~\ref{eq:kith}
 substituting in our Majorana operators. After some rearrangement (and the removal of a global phase) we find:
@@ -1293,34 +1294,34 @@ For $\mu < 0$ and $\Delta, t = 0$ we recover the original description of a wire 
 that $\mu = 0$ and $\Delta = t \neq 0$, we end up with a vacuum state, gapped from the next state by $\tfrac{\Delta+t}{4}$, but with two unpaired
 Majorana zero modes $\gamma_{0,+}$ and $\gamma_{N,-}$, which form a zero-energy two-level system. They are protected from local perturbations
 by their non-local nature, a situation depicted in Fig.~\ref{fig:majo}. In fact this "topological" domain extends around the region of $\Delta = t \neq 0$
-allowing us to construct fault-tolerant qubits out of 2 pairs of Majorana zero modes \cite{RevModPhys.80.1083}.
+allowing us to construct topologically protected qubits out of 2 pairs of Majorana zero modes \cite{RevModPhys.80.1083}.
 
 The experimental challenge is to find a physical system that is similar to that described by the Hamiltonian in Equation~\ref{eq:kith}. We can make a 1D chain using the principles
-we've covered up to this point, and the electron pairing is similar to that of a superconductor, the complication is that the Hamiltonian describes
+we've covered up to this point, with an electron pairing that is similar to that of a superconductor, the complication is that the Hamiltonian describes
 a set of spinless fermions. The spin of electrons would, unfortunately, prevent the pairing described above. We will cover one such method for forming
 a spinless 1D superconductor in Sec.~\ref{sec:makemajo}, which combines a superconducting 1D system with strong spin-orbit coupling and a
 parallel magnetic field to create an effective spinless system \cite{PhysRevLett.105.077001,PhysRevLett.105.177002}. At this point, such systems
-have been experimentally realized, and evidence for the existence of Majorana zero modes is mounting \cite{Mourik1003,s41578-018-0003-1}, however as of writing
+have been experimentally realized, and evidence for the existence of Majorana zero modes is mounting \cite{Mourik1003,s41578-018-0003-1}. However, at the time of writing
 a topologically protected qubit has not yet been observed.
 
 \section{Characterizing 2DEGs}
 \label{sec:char}
 In the previous sections, we went through how a 2DEG is constructed and wrote down some equations for scattering
-and conductivity in a 2DEG. These equations have all assumed that the 2DEG is purely classical, however at the temperatures
+and conductivity in a 2DEG. These equations have all assumed that the 2DEG is purely classical; however at the temperatures
 and scales that many of our devices operate, this assumption begins to break down. To explore why this is the case,
 we must revisit the scattering mechanisms and equations for conductance that we previously wrote down in Equation~\ref{eq:cond}
 and add some quantum corrections to these equations. As we do this, we can define several regimes for transport
 where various quantum corrections to transport become apparent.
 
-Before we get started, let's quickly review the scattering lengths that we originally defined in Section~\ref{sec:2deg}. We can classify
+Before we get started, let's quickly review the scattering lengths that were originally defined in Section~\ref{sec:2deg}. We can classify
 scattering into two forms, elastic scattering, which occurs when the electron changes direction but not its energy or wavevector, or
 inelastic scattering, which occurs when the scattering event changes the energy of the electron. Elastic scattering occurs at impurities, or along dislocations
 and walls, i.e. on scattering sites with a mass much larger than the electron itself. The distance between successive elastic scattering events is
 called the elastic scattering length $l_e$\footnote{This is sometimes also called the momentum relaxation length, $l_m$ or $l_{\textrm{imp}}$.}.
-Inelastic scattering occurs via time-dependent mechanisms such as phonons or electron-electron scattering. As the scatterers have energy and
-mass on the order of the electron energy and mass, the electron and the scatterer transfer energy readily. In 2DEGs, our assumption that
+Inelastic scattering occurs via time-dependent mechanisms such as phonons or electron-electron scattering that change and move between each scattering event.
+As the scatterers have energy and mass on the order of the electron energy and mass, the electron and the scatterer transfer energy readily. In 2DEGs, our assumption that
 electrons do not interact continues to hold for the effects we wish to explore, and hence, the primary inelastic scattering mechanism is electron-phonon scattering.
-As phonons are largely thermally generated, inelastic scattering, therefore, occurs on the length-scale $l_i$, set by the temperature of the sample. Since these scattering events
+As phonons are largely thermally generated, inelastic scattering occurs on a length-scale $l_i$ set by the temperature of the sample. Since these scattering events
 are each unique and time-dependent, the events effectively randomize the phase of the electron, and so
 the inelastic scattering length $l_i$ is often used interchangeably with $l_\phi$, the phase coherence length.
 
@@ -1329,7 +1330,7 @@ of the system being measured $L$, and the various length scales in our system $l
 \begin{itemize}
   \item \textbf{Classical Diffusive} ($\lambda_F < l_e, l_\phi \ll L$): This is the classical limit of transport, true for large pieces of metal or semiconductor. The system is much larger than any relevant scattering length; hence, electrons travel diffusively through the system, with no coherent effects. This is the regime in which the previously derived equations are correct, where we have implicitly assumed that each scattering event destroys all phase information.
   \item \textbf{Quantum Diffusive} ($\lambda_F < l_e \ll L, l_\phi$): At this length scale, the electron will still travel diffusively through the system, as $l_e \ll L$, however, phase coherent effects begin to appear, since correlations between the phases of different paths exist for path lengths up to $l_\phi$. Weak localization is a quantum correction we must add to Equation~\ref{eq:cond}, and appears in 2DEGs at low temperature.
-  \item \textbf{Classical Ballistic} ($\lambda_F \ll L < l_e, l_\phi$): At this length scale, electrons travel without collisions, except at the boundaries of the system. As such the energy of an electron may not be dissipated within a system. Dissipation can, therefore, be treated separately from such systems. This also implies that processes are non-local, i.e. they can be described at any point within the system. For example, the boundary of the region describes the current at all points in the system. Effects such as electron focusing, occur at this length scale.
+  \item \textbf{Classical Ballistic} ($\lambda_F \ll L < l_e, l_\phi$): At this length scale, electrons travel without collisions, except at the boundaries of the system. As such the energy of an electron may not be dissipated within a system. Dissipation can, therefore, be treated separately from such systems. This also implies that processes are non-local, i.e. they can be described at any point within the system. For example, the boundary of the region describes the current at all points in the system. Effects such as electron focusing occur at this length scale.
   \item \textbf{Quantum Ballistic} ($\lambda_F \approx L \ll l_e, l_\phi$): At this point, discrete orbital energies occur in the confining directions. In 2D, this leads to the emergence of a 2DEG, in 1D a quantum point contact and in 0D a quantum dot.
 \end{itemize}
 
@@ -1341,9 +1342,10 @@ of the system being measured $L$, and the various length scales in our system $l
 
 For this thesis, we will primarily focus on the Quantum Diffusive and the Quantum Ballistic regimes, as they describe the physics of the
 2DEG and the quantum dot, respectively. Having already described the physics of the quantum dot, let's look at the quantum corrections that occur
-in the Quantum Diffusive regime, as they will allow us to extract both the scattering length and the strength of the spin-orbit interaction. As these must be well controlled to form both quantum dots and Majorana zero modes, our understanding of the origins of
-scattering and the spin-orbit effect will be vital to our journey towards building a large-scale quantum computer. Measurements in this section
-will be made in reference to a Hall bar, shown schematically in Fig.~\ref{fig:hall}. A current $I$ is applied along the length of the Hall bar.
+in the Quantum Diffusive regime, as they will allow us to extract both the scattering length and the strength of the spin-orbit interaction.
+As these must be well controlled to form both quantum dots and Majorana zero modes, our understanding of the origins of
+scattering and the spin-orbit effect will be vital to our journey towards building a large-scale quantum computer. Characterization in this section
+will be performed in a hall bar, similar to the ones depected in Fig.~\ref{fig:hall}. A current $I$ is applied along the length of the Hall bar.
 Two quantities are extracted relative to that current, the Hall resistivity $\rho_{XY} = V_{XY}/I$ gives
 the voltage formed orthogonal to the direction of current flow, and the transverse resistivity $\rho_{XX} = V_{XX}/I$.
 This second quantity gives us an expression for the conductivity of our sample:
@@ -1358,10 +1360,13 @@ are given in the appendix, Sec.~\ref{sec:ohmics}.
 \subsection{Weak Localization}
 \label{sec:wl}
 To include the effects of phase coherence on conductivity, we will use the so-called Feynman path method to calculate
-a corrected conductivity. The basic idea of such an approach is to consider what conductivity refers to on the scale of a small number of scattering sites. Given a small sample, with a small number of elastic scattering sites within the lattice,
-we can define the conductivity as the probability that an electron reaches the end point, where it leaves the system,
-from a given starting point. A schematic of this case is shown in Fig.~\ref{fig:WL} (a). The wavefunction will give this probability at the final point, which is given by the sum of the wavefunctions corresponding
-to each path through the lattice. For example, the paths may be \{start, 1, 2, 7, end\} or \{start, 8, 7, end\} etc. The total wavefunction at the end is:
+a corrected conductivity. The basic idea of such an approach is to consider what conductivity refers to when considering
+a small number of scattering sites, in a regime where $\lambda_F < l_e \ll L, l_\phi$. Given a small sample, with a small
+number of elastic scattering sites within the lattice, we can define the conductivity as the probability that an electron
+reaches the end point, where it leaves the system, from a given starting point. A schematic of this case is shown in Fig.~\ref{fig:WL} (a).
+The wavefunction will give this probability at the final point, which is given by the sum of the wavefunctions corresponding
+to each path through the lattice. For example, the paths may be \{start, 1, 2, 7, end\} or \{start, 8, 7, end\} etc.
+The total wavefunction at the end is:
 \begin{equation}
   \Psi_{\textrm{start}\rightarrow\textrm{end}} = \sum_j \psi_j = \sum_j t_j e^{i \varphi_j}
 \end{equation}
@@ -1434,7 +1439,7 @@ Note that the diffusive approximation may not hold for high mobility GaAs sample
 Alternate forms are available in~\cite{PhysRevB.70.245311} which may be required for such samples.
 
 \subsection{The Quantum Hall Effect}
-As the field perpendicular to the sample is applied, which for brevity we will call $B$, apart from a modification to conductivity
+As the field perpendicular to the sample is applied, which for brevity we refer to as $B$, apart from a modification to conductivity
 we can also ask what occurs to the Hall (perpendicular) voltage and conductivity. As we saw in the Equation~\ref{eq:driftv},
 the application of an electric field leads to a drift velocity in the sample set by the scattering
 time $\tau$ and the effective mass of electrons $m^*$. In combination with the magnetic field $B$, this leads to a Lorentz force $F = e \vec v \times \vec B$, causing
@@ -1457,11 +1462,12 @@ and an angular frequency of:
   \omega_c = \frac{v_F}{R_c} = \frac{e B}{m^*}
   \label{eq:cycl}
 \end{equation}
-Once we are in the limit that $R_c \ll l_e$, we can write down a hamiltonian for the system:
+Once we are in the limit that $R_c \ll l_e$, we can write down a Hamiltonian for the system:
 \begin{equation}
   H = \frac{(P + eA)^2}{2m^*} + U(x, y)
 \end{equation}
-where $P$ is the momentum operator, and $A$ is the magnetic vector potential. We can choose the gauge of the vector potential such
+where $P$ is the momentum operator, $U(x, y)$ gives the confining potential (boundaries) of the sample,
+and $A$ is the magnetic vector potential. We can choose the gauge of the vector potential such
 that:
 \begin{equation}
   \vec{A} = (0, Bx, 0)
@@ -1541,8 +1547,8 @@ we alluded to in section~\ref{sec:qd}. The difference in chemical potential is r
 \end{figure}
 
 Therefore, we find the conductance of the edge will be quantized in units of the conductance quantum, with a value determined
-by the filling factor, which gives us the number of conducting 1D channels parallel to the edge in the samples. An example of this, showing both $\rho_{XX}$
-and $\rho_{XY}$ is given in Fig.~\ref{fig:hallcond}.
+by the filling factor, which gives us the number of conducting 1D channels parallel to the edge in the samples. As an example of this,
+$\rho_{XX}$ and $\rho_{XY}$ are both plotted on the same axes in Fig.~\ref{fig:hallcond}, for two samples with distinct mobilities.
 
 \subsection{Edge Magnetoplasmons (EMPs)}
 \label{sec:emp}
@@ -1552,9 +1558,10 @@ a distinct frequency and dispersion that is set purely by the properties of the 
 were first given in the 1980s, on 2DEGs formed on the surface of liquid Helium \cite{PhysRevLett.54.1706,PhysRevB.32.7676,1985ZhPmR..42..450V}.
 We can understand the existence of such modes in a semiclassical picture. Consider a 2DEG running along the $x$ direction, placed in a magnetic field,
 where the confining potential $E_y$ causes the appearance of edge states. A local perturbation, such as a gate voltage, can cause a dipole to form across
-the sample, leading to an electric field that induces a propagating current $J = \sigma_{XY}E$ around the edge. As electrons are confined to travel at an
-angle $\theta_H = \SI{90}{\degree}$ with a given directionality; this creates a self-propagating charge density wave (and hence electric current), that propagates
-around the edge, a situation sketched in Fig.~\ref{fig:EMP} (a). Substituting Equation~\ref{eq:hallsigma} and Equation~\ref{eq:nu} into our expression for current density we find:
+the plane of the sample, leading to an electric field that induces a propagating current $J = \sigma_{XY}E$ around the edge. As electrons are confined to travel at an
+angle $\theta_H = \SI{90}{\degree}$ to the edge of the sample in a single direction; this creates a charge density wave (and hence electric current) to
+propagate around the edge, which causes procession of the field around the disc, and hence a self sustaining oscillation.
+This situation is sketched in Fig.~\ref{fig:EMP} (a). Substituting Equation~\ref{eq:hallsigma} and Equation~\ref{eq:nu} into our expression for current density we find:
 \begin{equation}
   J = n_s e \frac{E}{B}
 \end{equation}
@@ -1563,7 +1570,8 @@ around the edge, a situation sketched in Fig.~\ref{fig:EMP} (a). Substituting Eq
   \includegraphics[width=0.65\linewidth]{EMP}
   \caption[Edge magnetoplasmons]
   {\label{fig:EMP}(a) Schematic of edge magnetoplasmon propagation. An external magnetic field is applied pointing into the Hall droplet.
-  (b) Frequency of the EMP $\omega_\textrm{EMP}$ mode and bulk plasmon $\omega_\textrm{bulk}$ mode in a circular quantum Hall droplet with increasing magnetic field. At a high magnetic field, the bulk mode approaches the cyclotron frequency, while the edge mode has an approximately
+  (b) Frequency of the EMP $\omega_\textrm{EMP}$ mode and bulk plasmon $\omega_\textrm{bulk}$ mode in a circular quantum Hall droplet
+  with increasing magnetic field. At a high magnetic field, the bulk mode approaches the cyclotron frequency, while the edge mode has an approximately
   $1/B$ dependance on the field.}
 \end{figure}
 
@@ -1573,8 +1581,10 @@ From \cite{1988ZhETF..94..217V}, the excitations are found to have a fundamental
 \begin{equation}
   \omega_{\textrm{EMP}} = \frac{\sigma_{XY}}{P\epsilon_0\epsilon^*}\left(\ln\left(\frac{P}{\pi w}\right) + C\right)
 \end{equation}
-where $P$ is the length of the edge, $\epsilon^*$ is the effective dielectric constant seen by the edge and C is a constant related to the geometry of the edge, which goes to $1$ for a sharply defined edge with a step-like profile. The logarithmic correction arises due to electron correlations (which has a small impact,
-unlike in other calculations), and $w$ represents the damping and physical width of the EMP from the edge:
+where $P$ is the length of the edge, $\epsilon^*$ is the effective dielectric constant of the edge and $C$ is a constant related to the
+geometry of the edge, which goes to $1$ for a sharply defined edge with a step-like potential. The logarithmic correction arises due to
+electron correlations (which in this case does cause a measurable modification to frequency), and $w$ represents the damping and physical
+width of the EMP from the edge:
 \begin{equation}
   w = i\frac{\sigma_{XX}(\omega)}{2\omega\epsilon_0\epsilon^*}
 \end{equation}
@@ -1587,16 +1597,17 @@ that $\omega_{\textrm{EMP}} \ll \omega_c$, we can approximate this term as:
 These equations collectively show that the EMP travels at a significantly reduced frequency, which decreases with field, roughly proportionally to $\tfrac{1}{B}$.
 Comparing the EMP frequency to that of a bulk plasmon in Fig.~\ref{fig:EMP} (b), one sees that while the fundamental bulk plasmon frequency $\omega_\textrm{bulk}$
 approaches the cyclotron frequency $\omega_c$, the EMP frequency $\omega_\textrm{EMP}$ decreases towards zero. This slow and directional propagation is exploited in
-Section~\ref{sec:hallcirc} and Section~\ref{sec:spinhallcirc} to construct compact circulators.
+Section~\ref{sec:hallcirc} and Section~\ref{sec:spinhallcirc} to construct compact circulators using the integer quantum Hall effect and the quantum anomalous Hall effect.
 
 \subsection{The Spin-Orbit Interaction}
 \label{sec:SOI}
 Within a solid, we've thus far assumed that the spin or an electron is independent of its motion through that semiconductor, apart from
-a tangential mention in Sec.~\ref{sec:dotqubits}, where we discussed its usefulness in controlling spins in semiconductors. In reality, the
-band structure of the semiconductor, which up to this point we've captured in a single parameter, the effective electron mass $m^*$ is shaped
-by a coupling of the motion of electrons through the lattice and around atoms. For this thesis, I will not aim to give a general description of
-the effect, which contributes to a whole host of effects such as the fine structure hydrogen and the heavy/light hole structure of GaAs,
-but rather give an intuitive understanding of its origins in a semiconductor. Hence, the terms that
+a tangential mention in Sec.~\ref{sec:dotqubits}, where we discussed its usefulness in controlling spins in semiconductors. Up to this point, we've captured
+the effects of the band structure of a semiconductor in the effective electron mass $m^*$. In reality, the band structure of a semiconductor is shaped
+in a complex way by the motion of electrons through the electric field created by atoms in the lattice of a crystal. This can cause both directional
+and spin-dependant modulation of the band structure. For this thesis, I will not aim to give a general description of
+the the spin-orbit interaction, which contributes to a whole host of effects such as the fine structure of Hydrogen and the heavy/light hole structure of GaAs,
+but rather give an intuitive understanding of its origins in the conduction band of a semiconductor. Hence, the terms that
 I introduce here should not be considered to apply generally, but rather is specific to conduction band electrons in direct band-gap semiconductors.
 This treatment is partly derived from \cite{winkler2003spin,dyakonov2017spin}.
 
@@ -1619,8 +1630,8 @@ as the momentum of the electron changes \cite{PhysRev.100.580}. The effects of t
 relation, a situation illustrated schematically in Fig.~\ref{fig:SOI} (a) and Fig.~\ref{fig:SOI} (b). As the Rashba term is set by the shape
 of the confining potential of the electrons in the 2DEG, it is also strongly tunable by the gate voltage, which can induce greater asymmetry in the confining potential.
 We should also note that although we call the effect of SOI an effective magnetic field, it is not a true magnetic field as
-it does NOT break time-reversal symmetry or introduce an asymmetry in the population of different spin species. As can be seen from an inspection of
-Fig.~\ref{fig:SOI} (a) and Fig.~\ref{fig:SOI} (b), states at each energy come in the form of Kramers pairs, such that:
+it does NOT break time-reversal symmetry or introduce an asymmetry in the population of different spin species. This can be seen in
+Fig.~\ref{fig:SOI} (a) and Fig.~\ref{fig:SOI} (b), as states at each energy come in the form of Kramers pairs, such that:
 \begin{equation}
   E_\uparrow(\vec k) = E_\downarrow(-\vec k)
 \end{equation}
@@ -1688,8 +1699,8 @@ the material, with Chern number $n$, to free space, with Chern number $0$, there
 In materials with a strong spin-orbit coupling, it is possible to find configurations with a non-zero Chern number, a topologically non-trivial band structure.
 At the boundaries of such a material, a conductive state must appear \cite{PhysRevLett.93.156804,PhysRevLett.92.126603}, and indeed for heterostructures of \ce{HgCdTe}
 the \textbf{spin quantum Hall effect} has been observed \cite{Konig766}, where two counterpropagating, spin-polarized, 1D channels lead to quantized conductance. This is
-shown in Fig.~\ref{fig:qah} (a). Unfortunately, these
-samples are sensitive to spin-scattering and thus have not been robustly demonstrated. The addition of a ferromagnetic dopant, such as chromium or vanadium lifts the
+shown in Fig.~\ref{fig:qah} (a). Unfortunately, this effect is sensitive to spin-scattering and thus is not a robust, dissipation free, effect.
+The addition of a ferromagnetic dopant, such as chromium or vanadium lifts the
 time reversal symmetry and generates leads to the formation of a spin-polarized chiral edge state, once the material has been taken past the coercive field of the
 Cr or V dopants. This is termed the \textbf{quantum anomalous Hall effect}. The total conductance is given by the sum of the top and bottom edge states,
 each contributing $e^2/2h$ of conductance, for a total Hall conductance of $\sigma = e^2/h$, as shown in Fig.~\ref{fig:qah} (b). We will use a sample that shows the
@@ -1706,9 +1717,9 @@ quantum anomalous Hall effect in Sec.~\ref{sec:spinhallcirc} to demonstrate a ci
 
 In section~\ref{sec:majo} we went over a brief introduction to the physics that underpins quantum computation with Majorana zero modes
 and left ourselves with the problem of finding a materials system that fits the model Hamiltonian given in equation~\ref{eq:kith}. I will stress
-again that this Hamiltonian represents one proposed method of forming an emergent Majorana quasiparticle, there are many techniques described
+again that while this Hamiltonian represents one proposed method of forming an emergent Majorana quasiparticle, there are many techniques described
 in the literature involving a variety of materials systems, including in several excellent reviews \cite{RevModPhys.83.1057,doi:10.1146/030212-184337,Leijnse_2012,
-RevModPhys.87.137,npjqi.2015.1,Aguado:2017ofc}. The technique of using a proximatized superconductor/semiconductor hybrid with strong SOI was reviewed
+RevModPhys.87.137,npjqi.2015.1,Aguado:2017ofc}. The technique of using a proximitized superconductor/semiconductor hybrid with strong SOI was reviewed
 recently in \cite{s41578-018-0003-1} and goes into far greater detail than I attempt to here. To briefly recap, our Hamiltonian required a 1-dimensional
 chain of spinless fermions and a superconducting pairing gap. Section~\ref{sec:2deg} covered the method by which we
 can form systems with reduced dimensions in semiconductors; the remaining challenges are to create spinless fermions and induce a superconducting pairing gap
@@ -1727,8 +1738,8 @@ potential is tuned inside the gap (green line), there is only a single band cros
 The strength of the SOI in the material sets the field required to open a pairing gap in the material, hence the requirement for a material with a large SOI, without
 which the strength of the required magnetic field would be prohibitive, particularly when considering our second requirement: superconducting pairing.
 
-The pairing term can be accomplished using the proximity effect of a superconductor, that is the hybridization of superconducting and metallic states
-between a superconducting metal and a semiconductor when a transparent interface joins the two. The is caused by the differing band structures between
+The pairing term can be accomplished using the proximity effect of a superconductor, which is the hybridization of superconducting and metallic states
+between a superconducting metal and a semiconductor when a transparent interface joins the two. The hybridization is caused by the differing band structures between
 the two materials; there must be a gradual change between the gapless band structure of the semiconductor and the gapped structure of the superconductor.
 While Cooper pairs may penetrate the semiconductor for many microns, with a distance set by the elastic scattering length which destroys the coherence
 of pairs, for a hard-gapped band structure at the 2DEG it is necessary for the heterojunction to be grown close to the 2DEG, generally within the
@@ -1739,6 +1750,8 @@ semiconductor interface have been found to contribute to significant sub-gap con
 
 The choice of materials used for the formation of a Majorana zero mode in a superconductor/semiconductor hybrid system must, therefore, meet each of these, sometimes
 conflicting, requirements. A large SOI and Land\'e g-factor calls for a heavy element III-V or II-VI semiconductor; however, the majority of high-quality growth has occurred
-in GaAs. InAs and InSb have recently shown high mobilities for buried 2DEGs \cite{PhysRevMaterials.2.104602,doi:10.1063/1.4993784}, however the requirement for a hard-gap necessitates growth close to the surface of the semiconductor where it is difficult to shield the 2DEG from scattering off surface impurities, an issue we
-tackle in Sec.~\ref{sec:inas_hb}. Nonetheless, recent experiments have demonstrated ever higher quality materials and more definitive evidence of zero bias peaks, close
+in GaAs. InAs and InSb have recently shown high mobilities for buried 2DEGs \cite{PhysRevMaterials.2.104602,doi:10.1063/1.4993784}, however the
+requirement for a hard-gap necessitates the growth of a 2DEG close to the surface of the semiconductor where it is difficult to
+shield from the effects of scattering off surface impurities, an issue we tackle in Sec.~\ref{sec:inas_hb}. Nonetheless, recent experiments
+have demonstrated ever higher quality materials and more definitive evidence of zero bias peaks, close
 to the expected value of $2e^2/h$\cite{PhysRevLett.119.136803,nature26142}, leading to a great deal of optimism for future applications using such devices.

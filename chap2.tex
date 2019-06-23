@@ -1,6 +1,6 @@
 \chapter{Architecture of a Quantum Computer}
 \label{sec:arch}
-Although the challenges of building a fault-tolerant qubit have by no means been met, the field is rapidly reaching the point where
+Although the challenges of building a fault-tolerant qubit have by no means been overcome, the field is rapidly reaching the point where
 it is possible to start running algorithms on quantum computers. While algorithms such as Shor's algorithm for prime factorization
 would require $2N + 3$ logical qubits with an arbitrarily long lifetime~\cite{Beauregard:2003,6657074}, other algorithms may
 be able to achieve a quantum speedup with a limited number of noisy qubits. Algorithms and systems operating in this regime are
@@ -24,13 +24,13 @@ particularly as the number of qubits grows beyond the limits that we might contr
 The challenge for experimentalists continues to come down to building scaleable building blocks, which balance the need for experimental
 flexibility surrounding qubits whose designs and control requirements remain in flux, but whose footprint does not explode for larger numbers
 of physical qubits. Thankfully, at least within the realm of solid-state qubits (that is superconductor and semiconductor based qubits),
-there is substantial overlap in the requirements for control and readout of qubits, that allows us to design architectures for hypothetical
-quantum machines. Let's therefore enumerate a number of requirements for a control and readout architecture controlling a solid-state qubit:
+there is substantial overlap in the requirements for control and readout of qubits, which allows us to design architectures for hypothetical
+quantum machines. Let's therefore enumerate a few of the key requirements for a control and readout architecture controlling a solid-state qubit:
 \begin{itemize}
   \item \textbf{Cryogenic operation}: Solid-state qubits must be operated in cryogenic environments, stemming from the requirement that the thermal energy should be well below the level spacing of energy levels in the qubit, as well as the need for superconducting elements in some designs. Any control and readout architecture must, therefore, be low power, and avoid carrying thermal energy or noise down to the qubit device.
-  \item \textbf{Control fidelity}: In order to reach the fault-tolerance threshold, fidelities of individual qubits must exceed $99\%$, and should ideally be well above the $(1 - 10^{-5})$ level to avoid prohibitive error correction requirements~\cite{6657074}. Depending on the rotation rate and decoherence rates of individual qubits, control lines must have bandwidths of several 10's of \si{\giga\hertz}, along with high density, low crosstalk and low noise.
-  \item \textbf{Readout fidelity}: Readout of qubits brings unique challenges, requiring low probe powers in order to avoid disturbing the state while it is being measured, and limited measurement time due to decoherence. In addition, QEC in general requires the continued measurement of ancilla qubits while nearby qubits are operational, leading to stringent crosstalk requirements. In order to obtain a sufficient signal-to-noise ratio, cryogenic amplification is generally required, which in turn limits and scaleable design to one, or a few, readout lines. As such, some form of multiplexing, either frequency-domain or time-domain, is necessary for readout.
-  \item \textbf{Space}: This requirement is particularly difficult to accomplish as it occurs over three orders of magnitude over the scale of the chip, the cryostat and at room temperature. Each of these are discussed in detail below, but we state the problem briefly here. On a chip scale, dense control lines must be fit into an area set by the distance over which we can achieve coupling between qubits, setting micron-scale limits on on-chip structures. On a cryostat level, the need to operate at \si{\milli\kelvin} in a cryostat places centimeter-scale limits on cryogenic components. Finally at room temperature, phase matching of control pulses and the need for active feedback places limits on the size of the instrumentation used to control individual qubits.
+  \item \textbf{Control fidelity}: In order to reach the fault-tolerance threshold, fidelities of individual qubits must exceed $99\%$, and should ideally be well above the $(1 - 10^{-5})$ level to avoid prohibitive error correction requirements~\cite{6657074}. Depending on the rotation rate and decoherence rates of individual qubits, control lines must have bandwidths of several 10's of \si{\giga\hertz}, as well as being high density while maintaining low crosstalk.
+  \item \textbf{Readout fidelity}: Readout of qubits brings unique challenges, requiring low probe powers in order to avoid disturbing the state while it is being measured, and limited measurement time due to decoherence. In addition, QEC in general requires the continued measurement of ancilla qubits while nearby qubits are operational, leading to stringent crosstalk requirements. In order to obtain sufficient signal-to-noise ratio, cryogenic amplification is generally required, which in turn limits scaleable designs to a small number of parallel readout lines. As such, some form of multiplexing, either frequency-domain or time-domain, is necessary for readout.
+  \item \textbf{Space}: This requirement is particularly difficult to accomplish as it occurs over three orders of magnitude over the scale of the chip, the cryostat and at room temperature. Each of these are discussed in detail below, but we state the problem briefly here. On a chip scale, dense control lines must be fit into an area set by the distance over which we can achieve coupling between qubits, setting micron-scale limits on on-chip structures. On a cryostat level, the need to operate at \si{\milli\kelvin} places centimeter-scale limits on cryogenic components. Finally at room temperature, phase matching of control pulses and the need for active feedback places limits on the size of the instrumentation used to control individual qubits.
 \end{itemize}
 
 \afterpage{
@@ -69,8 +69,8 @@ quantum machines. Let's therefore enumerate a number of requirements for a contr
 In general, qubit architectures for solid-state qubits can be classified into two categories (control and readout) at three different temperature stages
 (room temperature (RT), four Kelvin (4K) and milli Kelvin (mK)), as shown in Fig.~\ref{fig:genarch}. An
 architecture is characterized by the number of RF and DC lines that run between temperature stages $N$, and a power consumption at each stage $P$, divided between the control
-and readout block. Two architectures are presented in this this thesis, which trade off complexity and reduced experimental flexibility for reduced wiring and power consumption
-at different stages of the cryostat. The CryoCMOS architecture, presented in Sec.~\ref{sec:gooseberry} utilizes a CMOS based switching matrix at that is
+and readout block. Two architectures are presented in this thesis, which trade off complexity and reduced experimental flexibility for reduced wiring and power consumption
+at different stages of the cryostat. The CryoCMOS architecture, presented in Sec.~\ref{sec:gooseberry} utilizes a CMOS based switching matrix at milliKelvin temperatures that is
 bonded directly to the qubit chip in order to minimize the power dissipated in parasitic capacitance. The Prime-Lines architecture, presented in Sec.~\ref{sec:primelines}
 utilizes a cryogenic switching matrix near the qubit to minimize the number of high-frequency coaxial lines required to control qubits. Order of magnitude estimates
 for the number of control lines and the power consumption for each architecture is given in Table~\ref{tab:arch}, characterized by a number of qubits $N$,
@@ -87,28 +87,28 @@ power cost associated with bringing these lines down~\cite{Krinner2019}, a topic
 In the remainder of this section, I will quickly review the challenges for control and readout for a large-scale quantum computer, which very much remains
 an open question in the field. As we move through the following sections, the sources of many of the numbers in Table~\ref{tab:arch} should become clear
 as well as our vision for solving some of these problems. In general, I will progress from the qubit plane up to room temperature control, however this
-structure is by no means struct.
+structure is by no means strict.
 
 \subsection{Control Plane}
 \label{sec:control}
 A popular refrain for proponents of semiconductor-based qubits is to point to the maturity and flexibilty of modern semiconductor processing as an argument
 for the scalability of qubits based on similar processes. While it is undoubtedly true that the miniaturization of transistors has translated into an ability
-to fabricate finer devices, the scalability of quantum computers based on such an argument is by no means as clear. The problem, and indeed the main diffrentiator
-between a qubit and a transistor, it that while a transistor has the ability to drive other transistors, a qubit has no similar ability. All control of a qubit
-must come from outside. This unfortunate fact is captured in Rent's rule, which relates the number of external terminals (or pins) $T$ of an IC, to the number of
-internal components (or transistors) $g$:
+to fabricate finer devices, the scalability of quantum computers based on such an argument is by no means clear. The problem, and indeed the main diffrentiator
+between a qubit and a transistor, it that while a transistor has the ability to drive other transistors, a qubit has no similar ability. All control of a qubit,
+to initialize and to drive single and two qubit rotations, must come from outside. This unfortunate fact is captured in Rent's rule, which relates the number of
+external terminals (or pins) $T$ of an IC, to the number of internal components (or transistors) $g$:
 \begin{equation}
   T = tg^p
   \label{eq:rent}
 \end{equation}
-where t and p are constants of the system. For an integrated circuit, the value of $p$ generally ranges from 0.5 to 0.8~\cite{5388820}, however for a quantum
+where $t$ and $p$ are constants of the system. For an integrated circuit, the value of $p$ generally ranges from 0.5 to 0.8~\cite{5388820}, however for a quantum
 circuit, it is reasonably simple to see that this exponent must be 1! Each qubit must be driven by some number $t$ gates, with no qubit able to drive another
 qubit without some external control.
 
 The above statement captures the primary difficulty that we will run into when designing qubit chips. While classical ICs can rely on some fan-out to minimize
 the number of inputs required, the design of a quantum chip must be able to bring supply high density wiring with high bandwidth and low cross-talk. In addition,
-classical CMOS processes usually have only a few layers of high-density interconnect, used only for short-range connections~\cite{5424258}, while qubit
-architectures generally require several layers of high-density interconnect over the length of an entire chip~\cite{s41467-017-01905-6}. The question then is
+classical CMOS processes usually have only a few layers of high-density interconnects, used only for short-range connections~\cite{5424258}, while qubit
+architectures generally require several layers of high-density interconnects over the length of an entire chip~\cite{s41467-017-01905-6}. The question then is
 what sets the maximum pitch of a qubit on a chip, as this gives us the density of control lines that must be achieved. Then, given that pitch, how many lines could
 we bring in to such a device, given a 1D or a 2D grid of qubits?
 
@@ -119,20 +119,20 @@ Section~\ref{sec:5dot}, an approach which will likely be applicable majorana dev
 distance coupling of spins via superconducting resonators~\cite{PhysRevB.97.235409} has recently been demonstrated~\cite{2019arXiv190500776B}, enabling coupling
 over \si{\milli\meter} length scales.
 
-The next question is how many lines we can bring to a device. In a 1D device geometry, that is for a single line of qubits, the answer is limited only by the
+The next question is how many lines we can bring to a device. In a 1D array of qubits, that is for a single line of qubits, the answer is limited only by the
 physical size of the chip, and the size of pads (bond pads or bump pads) that we are able to make contact to. For example, a singlet triplet qubit which requires
 10 control lines, and pads of pitch $100\times100\si{\micro\meter}$ will require a chip with a \SI{0.01}{\square\milli\meter} area, assuming of course that we are
 able to make contact in 3D (i.e. overlapping bonds). In the case that we are only able to make contact in 2D, a chip of size $400\times400\si{\micro\meter}$ at a
 minimum is required to break pads out to the edge of a device. The situation is more difficult to evaluate in a 2D array. Firstly, a 2D array is not possible on
 a single planar grid, as control lines for inner qubits must be broken out. Therefore a sufficient distance between qubits must be possible to allow control lines
-to be brought in from upper layers. To allow fanout of a dense grid leads to a problem very similar to that of routing a BGA package. There will be a relationship
-between number of layers, track pitch and via (inter-layer contact) pitch, which will set a hard density limit on qubit devices. Therefore increasing the pitch of
-qubit devices via long distance coupling may be necessary when moving to 2D grids. Furthermore, the design of qubit layouts allowing realistic wiring schemes will
-continue to be crucial moving forwards~\cite{10.1038/s41534-018-0074-2}. Finally, I point to the potential for multiplexing the control of many qubits onto single
-control lines, which may allow the definition of a quantum analog to Rent's rule~\cite{FRANKE20191} (Equation~\ref{eq:rent}). Whether such an architecture is truly
-scaleable remains an open question at this time.
+to be brought in from upper layers. To allow fanout of a dense grid leads to a problem very similar to that of routing a ball-grid array (BGA) package. There will
+be a relationship between number of layers, track pitch and via (inter-layer contact) pitch, which will set a hard density limit on qubit devices. Therefore
+increasing the pitch of qubit devices via long distance coupling may be necessary when moving to 2D grids. Furthermore, the design of qubit layouts allowing
+realistic wiring schemes will continue to be crucial moving forwards~\cite{10.1038/s41534-018-0074-2}. Finally, I point to the potential for multiplexing the
+control of many qubits onto single control lines, which may allow the definition of a quantum analog to Rent's rule~\cite{FRANKE20191} (Equation~\ref{eq:rent}).
+Whether such an architecture is truly scaleable remains an open question at this time.
 
-While on a single qubit chip, it seems difficult to get around the problem of breaking all control lines out in order to allow qubit control, however, alluding
+On a single qubit chip it seems difficult to get around the problem of breaking all control lines out in order to allow qubit control. Alluding
 back to our generalized qubit architecture in Fig.~\ref{fig:genarch}, it should in general be possible to reduce the number of lines running between the 4K stage
 and the control plane at mK. To understand why the techniques for doing so, it is useful to separate control pulses into three general forms, microwave excitations,
 fast pulses and static confinement. The first two of these require high bandwidth rf wiring, while the latter requires only low bandwidth dc wiring. By the use of

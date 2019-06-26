@@ -9,11 +9,20 @@ which occurs between it and the qubit. As such, particularly for transmon-type e
 lifetimes~\cite{PhysRevLett.101.080502}, passive circulators with low loss must be used. These are non-reciprocal devices which route power
 in a single direction around their ports, i.e. from $1 \to 2$, $2 \to 3$ and $3 \to 1$ but not in the inverse direction $1 \not\to 3$, $3 \not\to 2$
 and $2 \not\to 1$. Furthermore, when using quantum limited parametric amplifiers such as the travelling-wave parametric amplifier~\cite{PhysRevLett.113.157001},
-isolators are necessary to limit the action of the pump tone on our qubits.
+isolators are necessary to limit the action of the pump tone on our qubits. An example of such a circuit is given in Fig.~\ref{fig:circfig} (a), showing
+four circulators used for signal routing and isolation.
+
+\begin{figure}
+    \includegraphics[width=\linewidth]{circ_fig}
+    \caption[Schematic of a standard transmon-like experiment]
+    {\label{fig:circfig}(a)Schematic of a standard transmon-like experiment. Circulators, outlined in red, are used to provide isolation between amplifiers and qubits,
+    and to route signals in the circuit. (b) A conventional circulator based on the Faraday effect.}
+\end{figure}
 
 Circulators have traditionally been constructed using the Faraday effect in magnetic materials. This causes propagation to occur at different phase
 velocities in opposite directions through a magnetic material, however, as these devices operate based on the interference of counter-propagating paths,
-these devices must be constructed with a size on the order of the wavelength of the signal, often several tens of centimetres. It was proposed by
+these devices must be constructed with a size on the order of the wavelength of the signal, often several tens of centimetres. An example of such a device is
+shown in Fig.~\ref{fig:circfig} (b). It was proposed by
 Giovanni Viola and David DiVincenzo that slow, chiral charge density waves in the quantum Hall regime, called edge magnetoplasmons (EMPs), might be utilized to
 construct millimetre-scale circulators~\cite{PhysRevX.4.021019}. In the following chapter, I present work that implements this idea to form non-reciprocal
 devices and demonstrate strong circulation (up to \SI{40}{\decibel}). The physics of EMP's is introduced originally in Sec.~\ref{sec:emp}. In Sec.~\ref{sec:hallcirc} the

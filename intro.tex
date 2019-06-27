@@ -17,20 +17,20 @@ systems have emerged that seem like contenders for building a quantum computer, 
 ions~\cite{doi:10.1063/1.5088164}, nuclear spins~\cite{acs.nanolett.8b00006}, electron spins in
 semiconductors~\cite{RevModPhys.79.1217}, excitations in superconductors~\cite{Wendin_2017},
 single photons~\cite{OBrien1567}, or a large number of other systems that are too numerous to list here.
-Each of them aims to realize a qubit, the quantum equivalent of a bit, which rather than being described as a
-single number taking the value of 0 or 1, is described by a two-dimensional vector that evolves under the rules
+Each of them aims to realize a qubit, the quantum equivalent of a bit, which rather than being described
+as a single number taking the value of 0 or 1, is represented by a two-dimensional vector that evolves under the rules
 of quantum physics. Today, many of these qubits are being realized in larger and larger numbers with error rates
-that are butting up against the fault tolerance threshold, raising the spectre of large quantum computers
+that are butting up against the fault tolerance threshold, raising the specter of large quantum computers
 in the near future.
 
 The rapid progress made in the field, while no doubt exciting, also highlights the difficulty I have in
-preparing this thesis. Between when I started my PhD in 2014 and now, the community underwent a seismic
+preparing this thesis. Between when I started my Ph.D. in 2014 and now, the community underwent a seismic
 shift in ambition, moving from trying to work on one or few-qubit systems \cite{iarpa_mqco} to trying
 to implement useful machines with hundreds of qubits \cite{Monroe440}, with a concomitant increase in
 funding. Industrial players have also
 entered the ring trying to build viable commercial quantum machines, including IBM, Intel, Google, Rigetti,
 DWave and Microsoft. Over the same period, our lab grew from one with a single dilution refrigerator (DR) and
-four other PhD students to one with 7 DRs, 2 cryostats, close to 50 people and substantial backing
+four other Ph.D. students to one with 7 DRs, 2 cryostats, close to 50 people and substantial backing
 from industry (Microsoft). It is in that context that this thesis is written. All the topics presented have the
 same aim: to build a useful quantum computer, but experiments span from exploring low-level materials challenges,
 to designing individual qubits, to scalable instrumentation design, and finally to architecture
@@ -38,8 +38,7 @@ designs for building large scale quantum machines.
 
 I have grouped results into these four broad sections, each of which presents several papers dealing
 with these results, intending to create a coherent storyline around my work, starting from the top
-level architecture and working my way down to materials science. The structure of this
-thesis then is as follows:
+level architecture and working my way down to materials science. The structure of this thesis then is as follows:
 
 \medskip
 \noindent\textbf{\hyperref[sec:quest]{Chapter 1 - The Quest for a Quantum Computer}}
@@ -50,7 +49,7 @@ the experiments that are presented in this thesis. We will start off by motivati
 computer and explore the theory that underlies the experiments. We will then look at building qubits,
 the fundamental building block of a quantum computer in various semiconductor systems, as well as taking a
 deeper dive into the materials systems that allows them to work. This includes a description of the band structure
-of common semiconductors, the 2-dimensional electron gas, scattering and the spin-orbit interaction. We discuss
+of III-V semiconductors, the 2-dimensional electron gas, scattering, and the spin-orbit interaction. We discuss
 the quantum Hall effect and the anomalous quantum Hall effect, and talk about how each element is brought together
 to form Majorana zero modes in superconductor/semiconductor hybrids.
 
@@ -58,10 +57,10 @@ to form Majorana zero modes in superconductor/semiconductor hybrids.
 \noindent\textbf{\hyperref[sec:arch]{Chapter 2 - Architecture of a Quantum Computer}}
 
 \noindent
-Chapter 2 explores how the various elements described throughout this thesis might be combined in order to form
+Chapter 2 explores how the various elements described throughout this thesis might be combined to form
 a large-scale quantum computer. Firstly, the aims for the field of quantum computing in the short and medium term are
 enumerated. A general framework for discussing architecture is presented, and, briefly, the problems surrounding control
-and readout are elucidated. Following on from this, two architectures are presented that solve various aspects of the control
+and readout are elucidated. Following this, two architectures are presented that solve various aspects of the control
 and readout challenge. First, in Section~\ref{sec:primelines}, the prime-lines architecture explores how high bandwidth
 wiring requirements for control may be reduced. Second, in Section~\ref{sec:gooseberry}, a CryoCMOS architecture for fast
 pulsing and control is described.
@@ -74,7 +73,7 @@ Chapter 3 describes the use of edge magnetoplasmons in the quantum Hall effect a
 for passive signal routing in quantum experiments. First, we discuss the challenge of isolation and signal routing
 for quantum computing applications. Second, in Section~\ref{sec:hallcirc}, we explore the microwave properties of a
 Hall droplet in \ce{GaAs}/\ce{(Al,Ga)As} in a magnetic field coupled to a transmission line, and then use these chiral
-excitations to form a circulator. Finally, in Section~\ref{sec:spinhallcirc}, we investigate a circulator formed in a topological
+excitations to form a circulator. Finally, in Section~\ref{sec:spinhallcirc}, we investigate a circulator built in a topological
 insulator (TI) \ce{Cr-(Bi,Sb)_2Te3}, which allows magnetic-field free operation. Dissipation mechanisms in this 3D-TI
 are explored.
 
@@ -86,22 +85,22 @@ Chapter 4 describes experiments on spin qubits formed in a \ce{GaAs}/\ce{(Al,Ga)
 on from high-level architecture and component development to qubit development, and although these experiments focus on
 spin qubits, many of the issues and solutions raised have applicability to any dispersive readout or quantum dot system.
 First, in Section~\ref{sec:5dot}, we scrutinize a scaleable device design for coupled singlet-triplet qubits. Using an
-extended quantum dot, we create an architecture that allows coupling over intermediate distances, and address the challenges
+extended quantum dot, we create an architecture that allows coupling over intermediate distances and addresses the challenges
 of loading large arrays of quantum dots. Second, in Section~\ref{sec:pockets}, we probe anomalous sensing signals when
 using dispersive gate sensing to read out a quantum dot. We associate these signals with the disordered potential landscape
-of the 2DEG, and explore the properties of these signals. These charge pockets are hypothesized to be a source of unexplained
+of the 2DEG and explore the properties of these signals. These charge pockets are hypothesized to be a source of unexplained
 charge noise in qubit devices.
 
 \medskip
 \noindent\textbf{\hyperref[sec:majoinas]{Chapter 5 - Majoranas and InAs}}
 
 \noindent
-Finally, in Chapter 5, we survey the nascent field of forming Majoranas zero modes to use as topologically protected qubits. While
+Finally, in Chapter 5, we survey the nascent field of forming Majorana zero modes to use as topologically protected qubits. While
 such a topologically protected qubit has not yet been demonstrated, if they are realized they may have lifetimes that far exceed those of
 any other qubit technology. While promising, the prerequisites for forming Majorana zero modes in semiconductor/superconductor hybrid structures;
 a large spin-orbit interaction, large Land\'e g-factor, high mobility, and a close, transparent interface to a superconductor, means that extensive
 materials and process development must be done to enable their formation. Furthermore, existing techniques for readout and control of semiconductor
 qubits must be adapted to this new architecture. In Section~\ref{sec:rfmajo}, we evaluate techniques for charge sensing of Majorana zero modes formed
-in proximatized InAs nanowires. Finally, in Section~\ref{sec:inas_hb}, we investigate techniques for repairing the damage done to the surface of shallow
+in proximitized InAs nanowires. Finally, in Section~\ref{sec:inas_hb}, we investigate methods for repairing the damage done to the surface of shallow
 2DEGs in InAs after processing, either using TMA to remove the dirty native oxide or an ArH plasma to passivate charged surface states, and characterize
 the quality of these materials after treatment.

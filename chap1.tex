@@ -4,10 +4,11 @@ Before delving into the question of how we might build a quantum computer, it is
 back and exploring the question of what brought us as a scientific community to the point where
 it is seen as a priority to build one. The answer to that requires us to dive briefly into
 the world of computational complexity theory, and to examine what it means to solve problems "efficiently".
-Although the genesis of computation can be traced back to pioneering works by people such as Charles Babbage
-and Ada Lovelace in the early 1800's \cite{Bowden:1953:FTS:1102044}, it was not until the early 1900's that
-machines we might recognize as computers were constructed. Based on delicate vacuum tubes and mechanical relays,
-and often taking up full rooms, their inherent fragility and bugginess posed formidable obstacles to scaling.
+
+Machines we might recognize as computers were first constructed  in the early 1900's, although the genesis
+of computation can be traced back to pioneering works by people such as Charles Babbage and Ada Lovelace
+in the early 1800's \cite{Bowden:1953:FTS:1102044}. Based on delicate vacuum tubes and mechanical relays,
+and often taking up giant rooms, their inherent fragility and bugginess posed formidable obstacles to scaling.
 It was not until the mid-1900's that the field took off with two pivotal discoveries. The first
 was the construction of the first transistor in 1947, credited to Bardeen, Brittain and Schockley and for which
 they were awarded the Nobel Prize in 1956 \cite{nobel1956}. This was followed by the creation of integrated circuits by Jack Kilby
@@ -17,21 +18,24 @@ doubling in the number of transistors that it would be possible to fit on a sing
 With this doubling came an exponential growth in the computational power that we had available to us.
 
 Along with this growth came an obvious question. What exactly can these computers do? What sorts of
-problems will we be able to solve with our ever-growing bundle of transistors? To answer this question, we need to
-think about how many steps it takes to run various algorithms. Take, for example, the question of looking
+problems will we be able to solve with our ever-growing bundle of transistors? To answer this question, we define
+the concept of an \textbf{algorithm}, a sequence of steps we run to solve a given problem. To figure out
+what problems we can solve, we need to calculate the number of steps we need to run to solve that problem,
+which tells us whether the problem can be feasibly solved. Take, for example, the question of looking
 for a single item $x_T$, in a list $L = \{x_0, x_1, ..., x_n\}$ with $n$ items in it. Assuming the list
 is in an unknown order, to find the location of the item $x_T$, we need to look at each item in the list
-in turn. If the length of the list were doubled to $2n$ items, it would take twice as many comparisons to
-look through the list. Tripled would be three times. The amount of time it takes to find an item in the
-list is \emph{linear} in the length of the list. We can write this scaling mathematically using big-$\mathcal{O}$
-notation: searching for an item in a list is $\mathcal{O}(n)$.
+in turn. If the length of the list were doubled to $2n$ items, it would take twice as many steps to
+look through the list. Tripled would be three times. The number of steps, and hence te amount of time,
+it takes to find an item in the list is \emph{linear} in the length of the list. We can write the scaling of
+the number of steps mathematically using big-$\mathcal{O}$ notation: searching for an item in a list is $\mathcal{O}(n)$.
 
 What about a slightly more complicated problem? What if we want to check whether any item $x_i$ appears
-in the list twice? To run this algorithm, we can run the above algorithm for each item in the list, setting the
+in the list twice? To solve this problem, we can run the above algorithm for each item in the list in turn, setting the
 target to $x_T = x_0$, then $x_T = x_1$ and so forth, and checking whether we find each item two or more
 times. So for $n$ items in the list, we run through the list $n$ times, so the number of steps to run
 the algorithm scales as $\mathcal{O}(n^2)$. That is, if the length of the list is doubled, it takes
 four times as long, so the scaling is \emph{quadratic}.
+
 In this way, we can classify algorithms into various complexity classes. For example, sorting a list
 of $n$ items is, in the best case, $\mathcal{O}(n \log(n))$. Solving the travelling salesman problem (TSP) is
 $\mathcal{O}(n^2 2^n)$. Ideally, we would like to group problems into various complexity classes. For example,
@@ -43,10 +47,11 @@ that grows faster than a polynomial in the size of the problem, are said to be i
 
 Of course, you might say, well what sort of operations do we allow our computers to do in a single step?
 If I say that my computer can solve the TSP in a single step, then the complexity of that problem reduces trivially to
-$\mathcal{O}(1)$. The answer is not so trivial --- it is limited by the laws of physics. What sorts
-of computation do they allow? To answer this question, Alan Turing and Alonzo Church came up with the notion of
-the Turing Machine, a universal model for a physical computational device, and with it stated the Church-Turing
-hypothesis:
+$\mathcal{O}(1)$. The answer to the question of what a computer may do in a single step is not so trivial --- it is limited
+by the laws of physics. What sorts of computation do they allow? To answer this question, Alan Turing and Alonzo Church came
+up with the notion of the Turing Machine, a universal model for a physical computational device, which defines the
+operations that a computer may perform in a single step according to the laws of physics, and with it stated
+the Church-Turing hypothesis:
 
 \begin{displayquote}[\cite{turingthesis}]
   "a function is effectively calculable if its values can be found by some purely mechanical process".
@@ -66,7 +71,7 @@ a polynomial $P(n)$ divided by another polynomial $Q(n)$ is still a polynomial, 
 than a polynomial $E(n)$ divided by a polynomial $Q(n)$ still grows faster than a polynomial, we have
 a universal definition for problems that are efficient to solve and those that aren't.
 \footnote{Of course, since we're continually coming up with better algorithms to solve hard problems,
-the set of algorithms that are efficient to solve seems to keep growing!}
+the set of problems that are efficient to solve seems to keep growing!}
 
 
 \begin{figure}
@@ -99,9 +104,9 @@ However, as long as we can manipulate quantum systems, we should also be able to
 simulator" to see how a quantum system behaves. If this turned out to be the case, then the strong
 Church-Turing hypothesis would be violated\footnote{Despite this violation, as far as we know the original
 Church-Turing hypothesis still holds. No previously uncomputable function became computable with the addition
-of quantum physics.}! Here was nature efficiently simulating a system that as far as we know, a Turing machine
+of quantum physics.}! Here was nature efficiently simulating a system that a Turing machine
 can't. It was David Deutsch who in 1985 formalized the idea of a quantum Turing machine \cite{doi:10.1098/rspa.1985.0070},
-and laid out the Deutsch-Church-Turing hypothesis, which as far as we know holds to this day:
+and laid out the Deutsch-Church-Turing hypothesis, which holds to this day:
 
 \begin{displayquote}
   A quantum Turing machine can efficiently simulate any realistic model of computation.
@@ -126,10 +131,10 @@ can build a quantum computer --- Bounded-Error Quantum Polynomial-Time or \cc{BQ
 this class includes interesting problems that a classical computer could not efficiently solve. Problems
 such as Shor's algorithm for prime factorization \cite{Shor} or estimating the ground state of molecules with
 the Variational Quantum Eigensolver algorithm \cite{ncomms5213} have no known efficient classical algorithm
-but could profoundly impact society if they are solvable. It is the promise of solutions to these problems
+but could profoundly impact society. It is the promise of solutions to these problems
 that drive the search for a quantum computer; however, the challenges of realizing one remain formidable. To close
 out our discussion of complexity classes, I've summarized the relationship between complexity classes in
-Fig.~\ref{fig:complexity}. A point I'd like to emphasize is that although \cc{BQP} is larger than \cc{P}
+Fig.~\ref{fig:complexity}. A point worth emphasizing is that although \cc{BQP} is larger than \cc{P}
 or \cc{BPP}, it certainly does not enclose all problems, especially those in \cc{EXP}. Although a
 quantum computer may offer an exponential speedup on a subset of algorithms, it will not give us an exponential
 speedup in the general case.
@@ -255,9 +260,9 @@ These three rotations (and often a global phase factor to simplify our result) a
 any single qubit operation. For completeness, we can also define some other gates that often come up in
 the context of quantum computation:
 \begin{alignat}{4}
-    H &=& \frac{1}{\sqrt{2}}\svec{1&1\\1&-1} &=& \, e^{\tfrac{i\pi}{2}} R_Y\left(\frac{\pi}{2}\right) R_Z(\pi) \, &=& \frac{\sigma_X+\sigma_Z}{\sqrt{2}} \\
-    T &=& \svec{1&0\\0&e^{\tfrac{i\pi}{4}}}  &=& \, e^{\tfrac{i\pi}{8}} R_Z\left(\frac{\pi}{4}\right)          \, &=& \sqrt[4]{\sigma_Z} \\
-    S &=& \svec{1&0\\0&i}                    &=& \, e^{\frac{i \pi}{4}} R_Z\left(\frac{\pi}{2}\right)          \, &=& \sqrt{\sigma_Z}
+    H &=& \frac{1}{\sqrt{2}}\svec{1&1\\1&-1} &=& \; e^{\tfrac{i\pi}{2}} R_Y\left(\frac{\pi}{2}\right) R_Z(\pi) \; &=& \frac{\sigma_X+\sigma_Z}{\sqrt{2}} \\
+    T &=& \svec{1&0\\0&e^{\tfrac{i\pi}{4}}}  &=& \; e^{\tfrac{i\pi}{8}} R_Z\left(\frac{\pi}{4}\right)          \; &=& \sqrt[4]{\sigma_Z} \\
+    S &=& \svec{1&0\\0&i}                    &=& \; e^{\frac{i \pi}{4}} R_Z\left(\frac{\pi}{2}\right)          \; &=& \sqrt{\sigma_Z}
 \end{alignat}
 These are the Hadamard gate, the T gate (or $\pi/8$ gate)\footnote{The $T$-gate is often
 referred to as the $\pi/8$ gate, even though it represents a $\pi/4$ rotation, a name that is derived from
@@ -280,7 +285,9 @@ different outputs:
   H\ket{+} = \ket{0} && H\ket{-} = \ket{1}
 \end{align}
 In this case, the complex probability amplitudes can interfere with each other causing the two states to
-become distinguishable, something that a classical bit could not replicate. What you see is what you get.
+become distinguishable, something that a classical bit could not replicate. In a similar way, a single measurement
+is not able to give us all the information contained within a quantum state. While with a bit, what you see is what
+you get, a qubit is a more complicated beast.
 
 \subsection{Multi-Qubit States (Qubit Registers)}
 The next additional computational resource that quantum physics gives us is \textbf{entanglement}. This
@@ -288,7 +295,7 @@ resource rears its head when we try to combine multiple qubits into a register. 
 we can define entanglement as a correlation between the states of qubits after they have interacted
 with each other. Due to this correlation, the state of a qubit that has been entangled with its partner
 can no longer be described independently, the states of the two qubits become linked. Perhaps the easiest
-way to grok the consequences of this is to give an example of how this correlation might play out.
+way to intuitively understand the consequences of this is to give an example of how this correlation might play out.
 
 Let's start with two qubits, one of which starts in the $\ket{+}$ state, and the other which starts in
 the $\ket{0}$ state. If we were to apply a gate that flips the state of the second qubit if the state of
@@ -332,7 +339,7 @@ a $\sigma_X$ gate to the 2nd qubit in a three-qubit register, we construct the o
 The consequences of the twin effects of superposition and entanglement lead to the extra computational
 power of a quantum computer, while also hinting at the difficulty of writing quantum algorithms. As we
 can prepare arbitrary superposition states, we can encode an exponentially large
-state into a quantum register, for example representing every number between 0 and $2^N-1$ in a $N$ qubit
+state into a quantum register, for example representing every state between 0 and $2^N-1$ in a $N$ qubit
 register, and operate on all of these states in parallel. However, once we measure the register, we end up
 with only one of the possible states in the register (i.e. the state collapses), and the quantum information
 that was prepared in the state is lost. Quantum algorithms must, therefore, have three properties to be useful:
@@ -446,7 +453,7 @@ of qubit that exist; rather I will focus specifically on two general designs, qu
 which in many ways share similar control and readout. As such the discussion of physics in this section will
 largely be confined to III-V materials, although I will point out that as my thesis is aimed at the general
 problem of architecting a quantum computer, many of the results presented may are extensible to quantum
-computers beyond spins and Majoranas. Before we begin a detailed discussion of qubits in semiconductors, let's first take a look
+systems beyond spins and Majoranas. Before we begin a detailed discussion of qubits in semiconductors, let's first take a look
 at the physics that underlie most of these implementations; the 2-dimensional electron gas (2DEG).
 
 \subsection{The 2-Dimensional Electron Gas}
@@ -493,7 +500,7 @@ there are no electron-electron interactions. Although this assumption may at fir
 to be sufficient to describe much of the physics that follows. Second, we assume that the potential due to the
 lattice is screened by valence band electrons, and can be treated as a small perturbation to a free electron. Solving
 this model leads to bands which are similar to free electron plane waves up to the edge of the Brillouin zone, i.e.
-up to the top of the band. In the conduction band of a semiconductor, we deal with largely empty bands, as such
+up to the top of the band. In the conduction band of a semiconductor, we deal with largely empty bands. As such,
 the dispersion relation, i.e. the energy of electrons as a function of the wave-vector, can be approximated as that of free electrons:
 \begin{equation}
   E(\vec{k}) = \frac{\hbar^2 |\vec{k}|^2}{2m^*}

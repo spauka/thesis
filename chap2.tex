@@ -19,6 +19,7 @@ To date, several experimental realizations of this algorithm have been published
 although none have yet simulated a molecule that is classically intractable~\cite{Reiher7555}.
 
 \section{Designing an Architecture}
+\label{sec:archdesign}
 Given the rapid progression of the field, the questions surrounding architecting a quantum computer have been gaining increasing attention,
 particularly as the number of qubits grows beyond the limits that we might control with an ad-hoc architecture that a single graduate student might construct.
 The challenge for experimentalists continues to come down to building scaleable building blocks, which balance the need for experimental
@@ -49,17 +50,17 @@ quantum machines. Let's therefore enumerate a few of the key requirements for a 
                                 & \multirow{3}{*}{Lines} & $L_{DC,C,RT}$ & 3                         & $N$                      & $N$ & $N$                 \\\cline{3-7}
                                 &                        & $L_{RF,C,RT}$ & 3                         & M                        & $N$ & $N$                 \\\cline{3-7}
                                 &                        & $L_{RF,R,RT}$ & 2                         & 2                        & 2   & $N$                 \\\hline
-    \multirow{5}{*}{4K} & \multirow{2}{*}{Power} & $P_{C,4K}$    & $\SI{1}{\watt}$        &$\SI{1}{\watt}$        & $N\times\SI{4}{\micro\watt}$   & $N\times\SI{4}{\micro\watt}$                   \\\cline{3-7}
+    \multirow{5}{*}{4K} & \multirow{2}{*}{Power} & $P_{C,4K}$    & $\SI{1}{\watt}$        &$\SI{1}{\watt} + M\times\SI{100}{\micro\watt}$        & $N\times\SI{100}{\micro\watt}$   & $N\times\SI{100}{\micro\watt}$                   \\\cline{3-7}
                         &                        & $P_{R,4K}$    & $\SI{50}{\milli\watt}$ &$\SI{50}{\milli\watt}$ & $\SI{50}{\milli\watt}$ & $N\times\SI{50}{\milli\watt}$\\\cline{2-7}
                         & \multirow{3}{*}{Lines} & $N_{DC,C,4K}$ & 3                         & $N$                      & $N$ & $N$                 \\\cline{3-7}
                         &                        & $L_{RF,C,4K}$ & 3                         & $M$                      & $N$ & $N$                 \\\cline{3-7}
                         &                        & $L_{RF,R,4K}$ & 2                         & 2                        & 2   & $N$                 \\\hline
-    \multirow{4}{*}{mK} & \multirow{2}{*}{Power} & $P_{C,mK}$ & $N\times\SI{0.01}{\micro\watt}$ & $ N\times\SI{1}{\micro\watt}$ & $N\times\SI{1}{\micro\watt}$   & $N\times\SI{1}{\micro\watt}$                   \\\cline{3-7}
+    \multirow{4}{*}{mK} & \multirow{2}{*}{Power} & $P_{C,mK}$ & $N\times\SI{0.01}{\micro\watt}$ & $ (N+M)\times\SI{1}{\micro\watt}$ & $N\times\SI{1}{\micro\watt}$   & $N\times\SI{1}{\micro\watt}$                   \\\cline{3-7}
                         &                        & $P_{R,mK}$ & \SI{40}{\nano\watt}     & \SI{40}{\nano\watt}           &\SI{40}{\nano\watt}   & $N\times\SI{40}{\nano\watt}$ \\\cline{2-7}
                         & \multirow{2}{*}{Lines} & $L_{C,mK}$ & $N$                     & $N$                           & $N$ & $N$                 \\\cline{3-7}
                         &                        & $L_{R,mK}$ & $N$                     & $N$                           & $N$ & $N$                 \\\hline
     \end{tabular}
-    \caption[Approximate power and wiring requirements for a QC]{Order of magnitude power $P$ and wiring $L$ requirements for the CryoCMOS architecture, the Prime-Lines architecture, frequency multiplexed readout and a Na\"ive architecture. The number of lines is split between high-bandwidth coaxial lines (RF) and low-bandwidth (DC) lines. In each case, we trade off the complexity in the setup to reduce the wiring required down the fridge. The power consumption and number of lines is given in terms of the number of qubits $N$, and in the case of the Prime-Lines architecture, the number of pulse shapes $M$. Power consumption for control lines is calculated assuming a \SI{10}{\milli\volt} pulse through a \SI{20}{\decibel} attenuator, and a \SI{100}{\mega\hertz} repetition rate. Readout power is calculated assuming a caltech-style HEMP amplifier at the 4K stage, and utilizing rf-reflectometry techniques for readout (see Sec.~\ref{sec:readout}). With a \SI{-90}{\decibel} readout power,
+    \caption[Approximate power and wiring requirements for a QC]{Order of magnitude power $P$ and wiring $L$ requirements for the CryoCMOS architecture, the Prime-Lines architecture, frequency multiplexed readout and a Na\"ive architecture. The number of lines is split between high-bandwidth coaxial lines (RF) and low-bandwidth (DC) lines. In each case, we trade off the complexity in the setup to reduce the wiring required down the fridge. The power consumption and number of lines is given in terms of the number of qubits $N$, and in the case of the Prime-Lines architecture, the number of pulse shapes $M$. Power consumption for control lines is calculated assuming a \SI{1}{\milli\volt} pulse at the qubit through a \SI{20}{\decibel} attenuator at the \SI{4}{\kelvin} and mK stage. Readout power is calculated assuming a Caltech-style HEMP amplifier at the 4K stage, and utilizing rf-reflectometry techniques for readout (see Sec.~\ref{sec:readout}). With a \SI{-90}{\decibel} readout power,
     dissipation is dominated by passive thermal conduction up to $\sim 1000$ simultaneous channels.}
     \label{tab:arch}
   \end{table}
@@ -158,9 +159,11 @@ through the use of dissipative attenuation at each stage, where the population o
 where $T_i$ is the temperature and $A_i$ is the attenuation on the $i$-th stage of the cryostat. The first term of this equation gives the attenuation of thermal photons
 from the previous stage ($n_{i-1}$), while the second term gives the thermal photon flux spectral density generated by the attenuator itself. As such, to reduce thermal photons,
 attenuation must be used at the lowest temperature stages of the order of \SI{20}{\decibel}, to achieve $n_\textrm{mK}(\SI{6}{\giga\hertz}) \sim 0.002$. Therefore,
-even without considering the heat load due to the thermal conductivity of coaxial cables, a significant portional of the power for control must be dissipated
-in the filtering of thermal photons. For Table~\ref{tab:arch}, this heat load is estimated at \SI{1}{\micro\watt} per coaxial line, comprising primarily of
-dissipation in the attenuators and assuming a \SI{10}{\milli\volt} pulse through a \SI{20}{\decibel} attenuator and a \SI{100}{\mega\hertz} repetition rate.
+even without considering the heat load due to the thermal conductivity of coaxial cables, a significant portion of our control pulse must be dissipated during the
+filtering of thermal photons from coaxial cables. In Table~\ref{tab:arch}, the power dissipated at each stage of the cryostat is estimated, assuming each control line contains
+a \SI{20}{\decibel} attenuator at both the \SI{4}{\kelvin} and the mK stage, and that each qubit requires on average a \SI{1}{\milli\volt} pulse for control. Here we've also
+assumed a repetition rate sufficiently fast that the pulses may be approximated by a continuous wave, a condition that is easily met for a repetition rate on the order of
+\SI{200}{\mega\hertz}.
 
 Finally we move up to room temperature, where two primary concerns remain: power consumption and latency (or phase matching), both of which place limits on the footprint
 of control electronics at room temperature. In particular, as the rotation rate of qubits is increased, finer tolerances for the phase match of control pulses
@@ -266,9 +269,10 @@ We must therefore account for the noise added by any given amplifier, with the t
 where $T_{0}$ is the noise temperature at the output of the qubit, and will include $T_\textrm{eff}$, the thermal noise of the qubit and any noise present on the
 probe signal, and $T_k,G_k$ are the noise temperature and gain of each stage of amplification or attenuation in the chain. For a HEMT amplifier commonly used in
 spin qubit experiments, a gain on the order of \SI{30}{\decibel} is common, with a noise temperature of $\sim \SI{3}{\kelvin}$\footnote{For example the CITLF3 amplifier
-from Cosmic Microtech}, such that the system noise temperature after the first stage of amplification is $T_\textrm{sys} \approx \SI{3000}{\kelvin}$. As long as the
-noise temperature of subsequent amplifier has $T_n \ll \SI{3000}{\kelvin}$, the first stage amplifier will set the effective system temperature. As this temperature is well in the
-classical limit, we can define the system signal-to-noise ratio, for a bandwidth of \SI{1}{\hertz}, as:
+from Cosmic Microtech: \url{https://www.cosmicmicrowavetechnology.com/citlf3}}, such that the system noise temperature after the first stage of amplification
+is $T_\textrm{sys} \approx \SI{3000}{\kelvin}$. As long as the noise temperature of subsequent amplifier has $T_n \ll \SI{3000}{\kelvin}$, the first stage amplifier
+will set the effective system temperature. As this temperature is well in the classical limit, we can define the system signal-to-noise ratio,
+for a bandwidth of \SI{1}{\hertz}, as:
 \begin{equation}
   \textrm{SNR}_\textrm{sys} = \frac{P_\textrm{probe}}{k_B T_\textrm{sys}}
 \end{equation}
@@ -315,6 +319,33 @@ reduce the wiring requirements for a large scale quantum computer, and creates a
 \import{chap2/}{arch}
 
 \clearpage
-\section{Gooseberry}
+\section{A CryoCMOS Based Control Architecture for Scaling Quantum Computers}
 \label{sec:gooseberry}
-%\import{chap2/}{arch}
+
+In Sec.~\ref{sec:control} and Sec.~\ref{sec:readout}, the requirements for control and readout of semiconductor qubits was discussed including a discussion
+of where power is unavoidably dissipated in the system. These power requirements were summarized in Table~\ref{tab:arch}. While experiments involving a single qubit, or even a few
+qubits, have been able to sidestep the issues associated with such power dissipation at the various temperatures of the cryostat, moving past as few as 20 qubits quickly
+becomes inpractical. This can be seen if one considers the typical cooling power of various stages of a cryostat. Using the BlueFors LD-400 system\footnote{
+Datasheet available at: \url{https://bluefors.com/products/ld-dilution-refrigerator/}} as an example of a typical dilution refrudgerator, and using
+a Cryomech PT420 pulse tube cryocooler\footnote{Datasheet available at: \url{https://www.cryomech.com/cryocoolers/pulse-tube-cryocoolers}} for cooling
+to \SI{4}{\kelvin}, we find a cooling power of $\sim \SI{100}{\micro\watt}$ at the mK stage and \SI{2}{\watt} at the \SI{4}{\kelvin} stage when operating at
+temperatures of \SI{40}{\mk} and \SI{4.2}{\kelvin} on the mK and \SI{4}{\kelvin} stages respectively. Under similar assumptions to those laid out in Sec.~\ref{sec:control}
+we find a maximum capacity of only 20 control lines at the \SI{4}{\kelvin} stage and 100 control lines at the mK stage. Using the Prime-Lines architecture
+presented in Sec.~\ref{sec:primelines}, the cooling requirements at \SI{4}{\kelvin} are reduced, however solutions for scaling control lines at mK remain
+open.
+
+\begin{figure}
+  \includegraphics[width=\linewidth]{GBArch_Fig1}
+  \caption[Schematic of our proposed CryoCMOS architecture]
+  {\label{fig:gbarch}(a)Schematic of our proposed CryoCMOS architecture for qubit control. A fast control multiplexing chip allows a qubit chip to be controlled
+  by a small number of digital control lines running from a microcontroller placed at \SI{4}{\kelvin}. Analog voltages are generated at room temperature using a low
+  noise, high resolution DAC, and are multiplexed by the chip. Qubit readout is multiplexed using techniques discussed in~\cite{doi:10.1063/1.4868107}. (b) Micrograph
+  of the fast control multiplexing device. The chip has dimensions $2.5\times2.5\si{\milli\meter}$. (c)Block diagram of }
+\end{figure}
+
+
+In this section, we propose a CryoCMOS based architecture to reduce the wiring requirements and power dissipation at the lowest stages of a dilution refridgerator.
+
+
+%\import{chap2/}{cmos}
+%

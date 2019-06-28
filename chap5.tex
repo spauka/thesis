@@ -1,6 +1,46 @@
 \chapter{Majoranas and InAs}
 \label{sec:majoinas}
 
+As we discussed in Sec.~\ref{sec:noise}, qubits of all forms are subject to decoherence, which leads to a loss of information
+from the quantum state. This leads to a limited lifetime for quantum states, and errors in the outputs of our quantum computations.
+The discovery of the quantum threshold theorem~\cite{1996quant.ph.11025A,doi:10.1098/rspa.1998.0167} allowed for errors to be corrected
+however, to do this, information must be spread out over many qubits, and constant error-correcting operations must be applied.
+The number of extra qubits and the number of operations that must be performed increases rapidly near the minimum error threshold for
+a given error correction algorithm, and even for state-of-the-art qubit fidelities of $10^{-5}$, up to 10,000 physical qubits are required
+to form a single logical qubit, and up to 40,000 error correction operators must be applied per logical gate operation~\cite{6657074}.
+The higher the qubit fidelity, the lower the error correcting overhead~\cite{nature23460}. Although there is continued improvement in the fidelities
+of most qubits, coupling to the environment, either via electric or magnetic fields, is inevitable, as qubits are traditionally controlled
+by electric or magnetic fields. A fundamentally different approach to building a qubit, one which distributes the qubit state over pairs of
+neutral fermions, called non-abelian anyons, was introduced in ~\cite{RevModPhys.80.1083}. The computational states are part of an extended,
+degenerate ground state and operations are performed by moving particles around each other, with the information stored in qubits insensitive
+to any local perturbations. In particular, one non-abelian anyonic system is that of Majorana zero modes (MZMs), the theory of which we covered in
+Sec.~\ref{sec:majo}.
+
+These MZMs are not fundamental particles, they don't exist in nature as far as we know\footnote{There is a theory that neutrinos may, in
+fact, be Majorana fermions. Unfortunately, even if they were, they interact so weakly that we would not be able to control them in a quantum computer.},
+hence we must engineer them as an emergent quasiparticle. The theory of forming MZMs is covered in Sec.~\ref{sec:makemajo}. Briefly, the method by
+which we find these particles in this thesis is to use semiconductor-superconductor hybrid materials, which requires:
+\begin{itemize}
+    \item Large Land\'e g-factor
+    \item Large spin-orbit interaction
+    \item High mobility
+    \item A hard superconducting gap
+\end{itemize}
+These requirements are generally met by using heavy-element III-V semiconductors, using either nanowires grown by the VLS method~\cite{nnano.2014.306,Krogstrup},
+or using shallow quantum wells~\cite{PhysRevB.93.155402}, both of which are proximitized using an epitaxially grown Aluminum layer. The use of a 2DEG allows
+for scalable device designs, however, the quality of the 2DEG is compromised by charged surface states, which, due to the shallow depth at which the quantum
+well is formed, it is highly sensitive to. In Sec.~\ref{sec:inas_hb}, we explore techniques for treatment of the surface to try and repair these surface impurities.
+
+Having formed Majorana zero modes, we must also read them out in a reliable way. One way of performing readout is to project the state of a pair of MZMs into
+a charge state, in a process termed parity-to-charge conversion~\cite{AasenPRX16}. This technique is in many ways analogous to the spin-to-charge conversion
+process discussed in Sec.~\ref{sec:readout} and in~\cite{petta,RevModPhys.79.1217}, however, requires a charge sensor, which, for nanowire-based devices cannot
+be formed in the ways previously discussed. In Sec.~\ref{sec:rfmajo}, we discuss techniques for creating charge sensors using nanowires capacitively coupled
+to qubit devices, thereby inventing a method by which a topological qubit may be read, and characterize their performance.
+
+\clearpage
+\section{Surface Treatment of Shallow, Proximitized InAs Quantum Wells}
+\label{sec:inas_hb}
+
 \clearpage
 \section{Radio-Frequency methods for {Majorana-Based} {Quantum} {Devices}}
 {\large \bf \begin{center}Fast Charge Sensing and Phase-Diagram Mapping\footnote{
@@ -9,6 +49,3 @@
 \label{sec:rfmajo}
 \import{chap5/}{majo}
 
-\clearpage
-\section{Surface Treatment of Shallow, Proximitized InAs Quantum Wells}
-\label{sec:inas_hb}

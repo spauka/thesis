@@ -45,6 +45,39 @@ an intrinsic matching effect in the edges to achieve self-matching at certain fr
 frequencies.
 
 \section{Scaleable Qubit Designs}
+Desinging scaleable gate layouts for qubit devices remains an open challenge. In Chapter~\ref{sec:spinqubit} this is exactly the challenge that we aim to
+tackle, in two ways. First is the design of a modular layout that allows for a design element to be tiled in a simple manner, and is presented in Sec.~\ref{sec:5dot}.
+A tiling of this design is shown in Fig.~\ref{fig:scaledes}. In order for such a technique to be truly scaleable, a number of additional technical developments
+must be made. The first is reliable dispersive gate sensing, as the use of proximal charge sensors in such a design is infeasible. Here such sensors are marked in green.
+There has been significant progress in the field towards use of such sensors for spin readout, with a number of demonstrations of single-shot readout using dispersive
+gate sensing appearing in the past year~\cite{Nnano_dzurak,PhysRevApplied.11.044061}, albeit with fidelities below what would be necessary for a scaleable qubit
+device. Further work to investigate sources of noise in dispersive gate sensing will be necessary to scale the technique. The work presented in Sec.~\ref{sec:pockets}
+investigates one such source of noise, however additional work will be necessary to improve the fidelity of gate-based readout techniques.
+
+As gate density is increased, there is an additional difficulty in breaking out the required control lines, as was discussed in Sec~\ref{sec:control}. The need for
+couplers that operate over intermediate and long length scales is partially solved by the use of an intermediate quantum state. Since publication of the initial work includegraphics
+Sec.~\ref{sec:5dot}, coherent manipulation of spins via the intermediate quantum state has been demonstrated~\cite{s41467-019-09194-x}, validating the concept
+and clearing the path towards large-scale devices. Over long length scales, work performed to couple spin to resonators should allow coherent coupling over
+\si{\milli\meter}-length-scales. Although preliminary results demonstrating strong coupling to resonators have been published~\cite{nature11559,2019arXiv190500776B},
+coherent manipulation of two spins over large length scales has not been demonstrated at time of publication. In a similar vein, there exists theoretical work suggesting
+coupling via quantum hall edge states~\cite{dohertyqhe}, however an experimental demonstration of such a technique has not yet been performed.
+
+\begin{figure}
+    \includegraphics[width=0.85\linewidth]{scaledes}
+    \caption[Scaleable qubit designs]{\label{fig:scaledes} (a) The design for a 5 quantum dot device, as presented in Sec~\ref{sec:5dot}, showing a path towards creating a 1D
+    chain of singlet-triplet qubits. (b) A qubit chip with 6 5-dot devices, controlled by a total of 168 control lines. Superconducting resonators are used for fast, frequency
+    multiplexed charge and gate-based readout. A total of 32 readout channels are bonded on this device.}
+\end{figure}
+
+In Fig.~\ref{fig:scaledes} (b), a chip design is shown with on-chip routing of a total of 168 control lines. The device presented there contains 6 set of two-qubit device,
+each of which is coupled by an intermediate quantum state. As devices grow larger, the requirements for on-chip routing of signals grows more acute, particularly
+while wire-bonding is used to interface to the qubit chip. On this device, routing was performed manually with the assistance of the Altium EDA tool, with readout and
+fast pulsing lines broken out to the edges of the device, to make bonding of such a device feasible, and to reduce the stray inductance and capacitance of bond wires.
+A device with the same design was used in Sec.~\ref{sec:gooseberry} to validate the design of the CryoCMOS architecture, demonstrating the feasilbility of on-chip routing
+for larger devices. Moving forward, the existance of more advanced EDA tools will allow far more of the design process to be automated, which will be crucial as the
+number of gates on single devices grows.
+
+
 
 \section{Closing Remarks}
 The field today is focussed on achieving quantum supremacy, that is to run an algorithm on a quantum computer that could not feasibly be

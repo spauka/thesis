@@ -70,12 +70,18 @@
             tablewithin=chapter]{caption}
 \usepackage{fancyhdr}
 \fancyhf{}
-\setlength{\headheight}{5mm}
+\setlength{\headheight}{10mm}
 \lhead[\small{\nouppercase\leftmark}]{}
 \rhead[]{\small{\nouppercase\rightmark}}
 \cfoot[\thepage]{\thepage}
 \addtolength{\footnotesep}{3mm}
 \pagestyle{plain}
+
+% Set hbox/vbox warnings
+\hbadness=99999
+\hfuzz=20pt
+\vbadness=\maxdimen
+\vfuzz=20pt
 
 % Handy Commands
 \newcommand{\note}[1]{{\color{red}\textbf{Note:}}~#1}

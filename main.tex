@@ -47,6 +47,7 @@
 \usepackage{braket}
 \usepackage{amsmath}
 \usepackage{unicode-math}
+\usepackage{latexsym}
 \usepackage{esdiff}
 \allowdisplaybreaks
 \usepackage[version=4]{mhchem}
@@ -80,6 +81,7 @@
 \newcommand{\note}[1]{{\color{red}\textbf{Note:}}~#1}
 \newcommand{\den}[1]{\SI{#1}{\per\square\centi\meter}}
 \newcommand{\mob}[1]{\SI[per-mode=symbol]{#1}{\square\centi\meter\per\volt\per\second}}
+\newcommand{\mobr}[2]{\SIrange[per-mode=symbol,range-units=single]{#1}{#2}{\square\centi\meter\per\volt\per\second}}
 \newcommand{\svec}[1]{\ensuremath{\begin{bmatrix}#1\end{bmatrix}}}
 \newcommand{\cc}[1]{\textsc{\MakeLowercase{#1}}}
 \sisetup{
@@ -91,6 +93,7 @@
 \DeclareSIUnit\mk{\milli\kelvin}
 \DeclareSIUnit\mv{\milli\volt}
 \DeclareSIUnit\rpm{rpm}
+\DeclareSIUnit\sq{\ensuremath{\Box}}
 
 \makeatletter
 \g@addto@macro{\figure}{\centering}%
@@ -162,6 +165,7 @@
 \import{chap3/}{qhe_sup}
 \import{chap3/}{ti_sup}
 \import{chap5/}{majo_sup}
+\import{chap5/}{surface_supp}
 \input{biblio}
 
 \endgroup

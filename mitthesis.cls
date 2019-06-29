@@ -422,8 +422,6 @@ reserved.\par\permission}}
 \uppercase\expandafter{\romannumeral\@degreeyear}.  All rights reserved.\par\permission}
 %% or just
 %%\@degreeyear}}
-\typeout{Copyright given to author,
-	permission to copy/distribute given to MIT.}
 \else \typeout{Thesis document copyright MIT unless otherwise (manually) specified}
 \fi
 

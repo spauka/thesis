@@ -492,6 +492,7 @@ at
 % but we want people to also be able to get at the more
 % basic abstract environment
 \def\abstractpage{\cleardoublepage
+\phantomsection
 \addtocontents{toc}{\protect\setcounter{tocdepth}{-1}}
 \addcontentsline{toc}{chapter}{Abstract}
 \addtocontents{toc}{\protect\setcounter{tocdepth}{2}}

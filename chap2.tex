@@ -219,6 +219,7 @@ An alternative to using a proximal charge sensor is to use the confining gates t
 of the system is measured. The polarizability of a quantum dot is given by:
 \begin{equation}
   C_Q = - \diffp[2]{E}{{V_{g}}} = -(\alpha \varepsilon)^2 \diffp[2]{E}{\varepsilon}
+  \label{eq:cq}
 \end{equation}
 where $\alpha$ is the lever arm and $\varepsilon$ is the tilt, as shown in Fig.~\ref{fig:dqd} and defined in Sec.~\ref{sec:qd}. As we can see from the above equation
 the quantum capacitance is proportional to the band curvature, which allows us not only to detect charge transitions but also the spin state (since the triplet state has no
@@ -441,8 +442,24 @@ is caused by low-frequency charge noise present in the 2DEG~\cite{PhysRevApplied
   rate is found to be unstable.}
 \end{figure}
 
-A full characterization of the leakage rate is performed following the procedure laid out in Fig.~\ref{fig:gbvc}, with a hold time of \SI{1}{\hour}, over the course of \SI{65}{\hour}. Between subsequent sweeps the QPC is retuned such that sweeps begin at the most sensitive starting point. The value of $V_\textrm{LW}$ was found to vary between \SIrange{-0.838}{-0.840}{\volt} over the course of measurements. In addition to retuning the QPC, the resting value of $V_\textrm{HOLD}$ during the hold sequence is varied to account for increased leakage when the voltage difference across the switch $G_\textrm{LOCK,LW}$ is varied. The results of this sweep are shown in Fig.~\ref{fig:gblr}. Across the operating range of \SIrange{-0.5}{-1.3}{\volt} the leakage rate was found to be \SI{-81.7}{\nano\volt\per\second} or \SI{-294}{\micro\volt\per\hour}. Despite the volatage difference across the switch $G_\textrm{LOCK,LW}$ being varied, leakage is uniformly found to be towards more negative voltages, suggesting leakage is occuring through the wells of the transistor, which are biased to \SI{-1.8}{\volt}. To our knowledge, this is the lowest leakage rate for a charge locked device reported in the literature.
+A full characterization of the leakage rate is performed following the procedure laid out in Fig.~\ref{fig:gbvc}, with a hold time of \SI{1}{\hour}, over the course of \SI{65}{\hour}. Between subsequent sweeps the QPC is retuned such that sweeps begin at the most sensitive starting point. The value of $V_\textrm{LW}$ was found to vary between \SIrange{-0.838}{-0.840}{\volt} over the course of measurements. In addition to retuning the QPC, the resting value of $V_\textrm{HOLD}$ during the hold sequence is varied to account for increased leakage when the voltage difference across the switch $G_\textrm{LOCK,LW}$ is varied. The results of this sweep are shown in Fig.~\ref{fig:gblr}. Across the operating range of \SIrange{-0.5}{-1.3}{\volt} the average leakage rate was found to be \SI{-81.7}{\nano\volt\per\second} or \SI{-294}{\micro\volt\per\hour}. Despite the volatage difference across the switch $G_\textrm{LOCK,LW}$ being varied, leakage is uniformly found to be towards more negative voltages, suggesting leakage is occuring through the wells of the transistor, which are biased to \SI{-1.8}{\volt}. To our knowledge, this is the lowest leakage rate for a charge locked device reported in the literature.
 
+\begin{figure}
+  \includegraphics[width=0.9\linewidth]{GBArch_Fig5}
+  \caption[Static corrections to Hold voltage]
+  {\label{fig:gbcorr} (a) Effect of charge injection when opening the switch $G_\textrm{LOCK}$. The charges that form the channel are pushed onto the gate, leading to an offset voltage before and after the switch is opened. This effect can equivalently be understood as a stray capacitance between the gate and drain leads of a transistor. (b) Stray capacitance across the switch, leading to a change in the voltage held on a gate as the disconnected value of $V_\textrm{HOLD}$ is swept.}
+\end{figure}
 
+Finally we highlight two sources of parasitic capacitance that must be compensated for in a real device. The first of these is the effect of charge injection~\cite{1052859}, caused by the movement of electrons that form the conductive channel in the MOSFET into the source and drain leads, shown schematically in the top panel of Fig.~\ref{fig:gbcorr} (a). When either of these leads is not driven, as is the case when a voltage is held on a gate, an offset in the voltage is held after the switch is opened. This effect may be modelled as a simple gate-drain capacitance $C_\textrm{GD}$, with a correction for the quantum capacitance built into this value to account for the density of states in the channel, as given in Eq.~\ref{eq:cq}. The offset in gate voltage caused by charge injection $\Delta V_\textrm{CI}$ is then given by:
+\begin{equation}
+  \Delta V_\textrm{CI} = \frac{C_\textrm{GD}}{C_\textrm{GD} + C_\textrm{P} + C_\textrm{PULSE}} \SI{1.8}{\volt}
+\end{equation}
+where \SI{1.8}{\volt} is the operating voltage of the MOSFETs, and $C_\textrm{P}$ and $C_\textrm{PULSE}$ are the capacitances holding the voltage of the gate, as shown in Fig.~\ref{fig:gbarch} (c). The effect of charge injection is shown in Fig.~\ref{fig:gbcorr} (a), and for a single gate is found to take a constant offset of \SI{-1.12}{\milli\volt} which can be compensated prior to the locking of a charge on a gate. We also highlight that this effect may be compensated in the design stage of the CryoCMOS through techniques known in the literature~\cite{45719}.
 
+The second source of parasitic capacitance that must be compensated is the source-drain capacitance $C_\textrm{SD}$ across the charge locking switch, as shown schematically in the top panel of Fig.~\ref{fig:gbcorr} (b). This capacitance leads to a small change $\Delta V_\textrm{SD}$ in the charge locked voltage, given by:
+\begin{equation}
+  \Delta V_\textrm{SD} = \frac{C_\textrm{SD}}{C_\textrm{SD} + C_\textrm{P} + C_\textrm{PULSE}} (V_\textrm{HOLD} - V_\textrm{GATE})
+\end{equation}
+For the left wall gate studied previously, a change of $\Delta V_\textrm{SD} = \SI{2.8}{\volt\per\volt}$ is observed, as shown in Fig.~\ref{fig:gbcorr} (b). Again, this effect may be trivially compensated prior to the locking of a charge on a gate by selecting a fixed value of $V_\textrm{HOLD}$ during the operation of the qubit device.
 
+\subsection{Fast Gating}

@@ -212,6 +212,9 @@
 \def\do@output@cclv{}
 \usepackage[hidelinks,bookmarksdepth=3]{hyperref}
 
+% Use geometry to set page sizes
+\usepackage{geometry}
+
 % Note - doublespace.sty has some float-related troubles in
 % combination with graphics or color, and is not officially compliant
 % with 2e.  setspace is a replacement which is 2e-compliant.
@@ -497,6 +500,7 @@ at
 \addcontentsline{toc}{chapter}{Abstract}
 \addtocontents{toc}{\protect\setcounter{tocdepth}{2}}
 \let\addcontentsline=\nocontentsline
+\newgeometry{top=2cm,left=3.5cm,right=3.5cm,bottom=2.8cm}
 \begin{center}{\large{\bf \@title} \\
 by \\
 \@author \\[\baselineskip]}
@@ -508,13 +512,17 @@ requirements for the \@degreeword\ of \\
 \@degree
 \end{center}
 \par
-\begin{abstract}}
+\begin{abstract}
+}
 
 %% Changed from \unvbox to \unvcopy for use with multiple copies of abstract
 %% page.
 %% Krishna Sethuraman (1990)
-\def\endabstractpage{\end{abstract}\noindent
- \unvcopy\@abstractsupervisor \newpage}
+\def\endabstractpage{\end{abstract}
+\noindent
+ \unvcopy\@abstractsupervisor
+ \restoregeometry
+ \newpage}
 
 %% This counter is used to save the page number for the second copy of
 %% the abstract.

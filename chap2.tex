@@ -55,12 +55,12 @@ quantum machines. Let's therefore enumerate a few of the key requirements for a 
                         & \multirow{3}{*}{Lines} & $N_{DC,C,4K}$ & 3                         & $N$                      & $N$ & $N$                 \\\cline{3-7}
                         &                        & $L_{RF,C,4K}$ & 3                         & $M$                      & $N$ & $N$                 \\\cline{3-7}
                         &                        & $L_{RF,R,4K}$ & 2                         & 2                        & 2   & $N$                 \\\hline
-    \multirow{4}{*}{mK} & \multirow{2}{*}{Power} & $P_{C,mK}$ & $N\times\SI{0.01}{\micro\watt}$ & $ (N+M)\times\SI{1}{\micro\watt}$ & $N\times\SI{1}{\micro\watt}$   & $N\times\SI{1}{\micro\watt}$                   \\\cline{3-7}
+    \multirow{4}{*}{mK} & \multirow{2}{*}{Power} & $P_{C,mK}$ & $N\times\SI{6}{\pico\watt} + \SI{34}{\micro\watt}$ & $ (N+M)\times\SI{1}{\micro\watt}$ & $N\times\SI{1}{\micro\watt}$   & $N\times\SI{1}{\micro\watt}$                   \\\cline{3-7}
                         &                        & $P_{R,mK}$ & \SI{40}{\nano\watt}     & \SI{40}{\nano\watt}           &\SI{40}{\nano\watt}   & $N\times\SI{40}{\nano\watt}$ \\\cline{2-7}
                         & \multirow{2}{*}{Lines} & $L_{C,mK}$ & $N$                     & $N$                           & $N$ & $N$                 \\\cline{3-7}
                         &                        & $L_{R,mK}$ & $N$                     & $N$                           & $N$ & $N$                 \\\hline
     \end{tabular}
-    \caption[Approximate power and wiring requirements for a QC]{Order of magnitude power $P$ and wiring $L$ requirements for the CryoCMOS architecture, the Prime-Lines architecture, frequency multiplexed readout and a Na\"ive architecture. The number of lines is split between high-bandwidth coaxial lines (RF) and low-bandwidth (DC) lines. In each case, we trade off the complexity in the setup to reduce the wiring required down the fridge. The power consumption and number of lines is given in terms of the number of qubits $N$, and in the case of the Prime-Lines architecture, the number of pulse shapes $M$. Power consumption for control lines is calculated assuming a \SI{1}{\milli\volt} pulse at the qubit through a \SI{20}{\decibel} attenuator at the \SI{4}{\kelvin} and mK stage. Readout power is calculated assuming a Caltech-style HEMP amplifier at the 4K stage, and utilizing rf-reflectometry techniques for readout (see Sec.~\ref{sec:readout}). With a \SI{-90}{\decibel} readout power,
+    \caption[Approximate power and wiring requirements for a QC]{Order of magnitude power $P$ and wiring $L$ requirements for the CryoCMOS architecture, the Prime-Lines architecture, frequency multiplexed readout and a Na\"ive architecture. The number of lines is split between high-bandwidth coaxial lines (RF) and low-bandwidth (DC) lines. In each case, we trade off the complexity in the setup to reduce the wiring required down the fridge. The power consumption and number of lines is given in terms of the number of qubits $N$, and in the case of the Prime-Lines architecture, the number of pulse shapes $M$. Power consumption for control lines is calculated assuming a \SI{1}{\milli\volt} pulse at the qubit through a \SI{20}{\decibel} attenuator at the \SI{4}{\kelvin} and mK stage. For the CryoCMOS architecture, a pulse frequency of \SI{10}{\mega\hertz} was used. Readout power is calculated assuming a Caltech-style HEMP amplifier at the 4K stage, and utilizing rf-reflectometry techniques for readout (see Sec.~\ref{sec:readout}). With a \SI{-90}{\decibel} readout power,
     dissipation is dominated by passive thermal conduction up to $\sim 1000$ simultaneous channels.}
     \label{tab:arch}
   \end{table}
@@ -324,133 +324,101 @@ reduce the wiring requirements for a large scale quantum computer, and creates a
 \clearpage
 \section{A CryoCMOS Based Control Architecture for Scaling Quantum Computers}
 \label{sec:gooseberry}
-
-In Sec.~\ref{sec:control} and Sec.~\ref{sec:readout}, the requirements for control and readout of semiconductor qubits was discussed, including a discussion
-of where power is unavoidably dissipated in the system. These power requirements were summarized in Table~\ref{tab:arch}. While experiments involving a single qubit, or even a few
-qubits, have been able to sidestep the issues associated with such power dissipation at the various temperature stages of the cryostat, moving past as few as 20 qubits quickly
-becomes impractical. This can be seen if one considers the typical cooling power of these stages. Using the BlueFors LD-400 system~\cite{bluefors}
-as an example of a typical dilution refrudgerator, and using a Cryomech PT420 pulse tube cryocooler~\cite{cryomech} for cooling
+In Sec.~\ref{sec:control} and Sec.~\ref{sec:readout}, the requirements for control and readout of semiconductor qubits were discussed, including a discussion
+of where power is unavoidably dissipated in the system. These power requirements were summarized in Table~\ref{tab:arch}. While experiments involving a single qubit, or even a few qubits, have been able to sidestep the issues associated with such power dissipation at the various temperature stages of the cryostat, moving past as few as 20 qubits quickly becomes impractical. This can be seen if one considers the typical cooling power of these stages. Using the BlueFors LD-400 system~\cite{bluefors}
+as an example of a typical dilution refrigerator, and using a Cryomech PT420 pulse tube cryocooler~\cite{cryomech} for cooling
 to \SI{4}{\kelvin}, we find a cooling power of $\sim \SI{100}{\micro\watt}$ at the mK stage and \SI{2}{\watt} at the \SI{4}{\kelvin} stage when operating at
-temperatures of \SI{40}{\mk} and \SI{4.2}{\kelvin} on the mK and \SI{4}{\kelvin} stages respectively. Under similar assumptions to those laid out in Sec.~\ref{sec:control}
-we find a maximum capacity of only 20 control lines at the \SI{4}{\kelvin} stage and 100 control lines at the mK stage. Using the Prime-Lines architecture
-presented in Sec.~\ref{sec:primelines}, the cooling requirements at \SI{4}{\kelvin} are reduced, however solutions for scaling control lines at mK remain
-open.
+temperatures of \SI{40}{\mk} and \SI{4.2}{\kelvin} on the mK and \SI{4}{\kelvin} stages respectively. Under similar assumptions to those laid out in Sec.~\ref{sec:control} we find a maximum capacity of only 20 control lines at the \SI{4}{\kelvin} stage and 100 control lines at the mK stage. Using the Prime-Lines architecture presented in Sec.~\ref{sec:primelines}, the cooling requirements at \SI{4}{\kelvin} are reduced. However, solutions for scaling control lines at mK remain open.
 
-In this section, we propose a CryoCMOS based architecture to reduce the wiring requirements and power dissipation at the lowest stages of a dilution refridgerator. This architecture
-fixes the number of static lines required to define a semiconductor based qubit to three, by providing a mechanism by which static voltages may be "locked" onto gate, and for
-reducing the growth of power consumption at the mK stage of the dilution refridgerator by generating fast control pulses near the qubit interface. In this way, the power
+In this section, we propose a CryoCMOS based architecture to reduce the wiring requirements and power dissipation at the lowest stages of a dilution refrigerator. This architecture
+fixes the number of static lines required to define a semiconductor-based qubit to three, by providing a mechanism by which static voltages may be "locked" onto the gate, and for
+reducing the growth of power consumption at the mK stage of the dilution refrigerator by generating fast control pulses near the qubit interface. In this way, the power
 consumption is reduced from the dissipation through filters on the coaxial lines, to a $CV^2f$ dissipation set by the length of the interconnect between the qubit and the pulse
 generator. This approach is validated using a quantum-dot based qubit device formed on a \ce{GaAs}/\ce{(Al,Ga)As} heterostructure, which is used to characterize the operation of
 our CryoCMOS architecture at a temperature of $\sim \SI{40}{\milli\kelvin}$. Bringing together the ideas of Sec.~\ref{sec:primelines} with our CryoCMOS architecture, we demonstrate
-a path for scaling to 100's of qubits within the power budget of commercially available dilution refridgerators.
+a path for scaling to 100's of qubits within the power budget of commercially available dilution refrigerators.
 
 \subsection{The CryoCMOS Architecture}
-
+\label{sec:gbarch}
 \begin{figure}
   \includegraphics[width=\linewidth]{GBArch_Fig1}
   \caption[Schematic of our proposed CryoCMOS architecture]
-  {\label{fig:gbarch}(a) Schematic of our proposed CryoCMOS architecture for qubit control. A fast control multiplexing chip allows a qubit chip to be controlled
-  by a small number of digital control lines running from a microcontroller placed at \SI{4}{\kelvin}. Analog voltages are generated at room temperature using a low
-  noise, high resolution DAC, and are multiplexed by the chip. Qubit readout is multiplexed using techniques discussed in~\cite{doi:10.1063/1.4868107}. (b) Micrograph
-  of the fast control multiplexing device. The chip has dimensions $2.5\times2.5\si{\milli\meter}$. (c) Simplified circuit schematic of a single charge-lock fast-gate
-  cell. One cell is connected to each gate of the qubit device. A description of the operation is given in the text. (d) Time trace showing the output waveform as
-  $C_\textrm{FG}$ is switched. The voltage at the output cell is pulsed between $V_\textrm{P}$ and $V_\textrm{HOLD}$, with sample period $\tau$.
-  (e) Block diagram of the control circitry inside the CryoCMOS chip.  SPI is used for digital communication to a microcontroller at 4K, which allows waveforms
-  to be loaded into memory, and pulses to be controlled. A voltage controlled oscillator is used to generate a clock on chip, and controls the rate that pulses are delivered.}
+  {\label{fig:gbarch}(a) Schematic of our proposed CryoCMOS architecture for qubit control. A fast control multiplexing chip allows a qubit chip to be controlled by a small number of digital control lines running from a microcontroller placed at \SI{4}{\kelvin}. Analog voltages are generated at room temperature using a low-noise, high-resolution DAC, and are multiplexed by the chip. Qubit readout is multiplexed using frequency multiplexing~\cite{doi:10.1063/1.4868107}. (b) Micrograph of the fast control multiplexing device. The chip has dimensions $2.5\times2.5\si{\milli\meter}$. (c) Simplified circuit schematic of a single charge-lock fast-gate cell. One cell is connected to each gate of the qubit device. A description of the operation is given in the text. (d) Time trace showing the output waveform as $G_\textrm{FG}$ is switched. The voltage at the output cell is pulsed between $V_\textrm{P}$ and $V_\textrm{HOLD}$, with sample period $\tau$. (e) Block diagram of the control circuitry inside the CryoCMOS chip.  SPI is used for digital communication to a microcontroller at 4K, which allows waveforms to be loaded into memory and pulse generation to be controlled. A voltage controlled oscillator is used to generate a clock on-chip and controls the pulse period $\tau$.}
 \end{figure}
 
 Our proposed CryoCMOS architecture is shown in Fig.~\ref{fig:gbarch} (a). Here, a CryoCMOS chip (orange) acts as an interface to the qubit chip (green), multiplexing a small number
-of low frequency DC lines to the qubit chip. Control is provided by a microcontroller at the 4K stage of the dilution refridgerator. Readout multiplexing is provided by a series of
-resonators, described in previous work~\cite{doi:10.1063/1.4868107}, following the standard techniques for rf-reflectometry~\cite{Reilly:2007ig,barthel2009rapid}. Our CryoCMOS
-chip implementing this architecture is shown in Fig.~\ref{fig:gbarch} (b), based on the \SI{28}{\nano\meter} fully depleted-silicon on insulator (FD-SOI) technology from Samsung
-Microelectronics. Bond pads around the outside of the chip are used to interface with the the microcontroller at 4K, and with
-the qubit device. Each qubit gate contains a charge-lock fast-gate cell, a simplified schematic of which is given in Fig.~\ref{fig:gbarch} (c).
+of low-frequency DC lines from room temperature to the qubit chip. Control is provided by a microcontroller at the 4K stage of the dilution refrigerator. Readout multiplexing is provided by a series of resonators~\cite{doi:10.1063/1.4868107} following standard techniques for rf-reflectometry~\cite{Reilly:2007ig,barthel2009rapid}. Our CryoCMOS chip implementing this architecture is shown in Fig.~\ref{fig:gbarch} (b), based on the \SI{28}{\nano\meter} fully depleted-silicon on insulator (FD-SOI) technology from Samsung Microelectronics. Bond pads around the outside of the chip are used to interface with the microcontroller at 4K, and with the qubit device. Each qubit gate contains a charge-lock fast-gate cell, a simplified schematic of which is given in Fig.~\ref{fig:gbarch} (c).
 
 Static voltages are provided for gates via a mechanism termed charge locking. In this technique, a high-precision room temperature DAC is used to set a voltage $V_\textrm{HOLD,N}$ on a
-gate, selected by closing the switch $G_\textrm{LOCK,N}$, shown in Fig.~\ref{fig:gbarch} (b). A capacitance, set by the parasitic capacitance of the bondwires and gates on both the
-CryoCMOS device and the qubit device, is charged and the switch $G_\textrm{LOCK,N}$ is opened. Although similar schemes for locking charges on devices have been proposed in the
-literature~\cite{PhysRevApplied.9.054016,doi:10.1063/1.4932012}, they have suffered from gate voltage leakage rates of several mV per hour, limiting the applicability
-of such schemes for multiplexing large numbers of gates, as refresh times of several ms would be required.
+gate, selected by closing the switch $G_\textrm{LOCK,N}$, shown in Fig.~\ref{fig:gbarch} (b). A capacitance $C_\Sigma$ is charged and the switch $G_\textrm{LOCK,N}$ is opened, leaving a voltage set on the gate. The total capacitance is set by the capacitance of the bond-wires and by parasitic capacitances on the gates of both the CryoCMOS device and the qubit device. Although similar schemes for locking charges on devices have been proposed in the literature~\cite{PhysRevApplied.9.054016,doi:10.1063/1.4932012}, they have suffered from gate voltage leakage rates of several mV per hour, limiting the applicability of such schemes for multiplexing large numbers of gates, as refresh times of several ms would be required.
 
-While charge locking does allow a large number of static gates on the qubit device to be operated from a small number of lines running from room temperature, the power or footprint
-required to bring down even thousands of DC lines is not prohibitive, nor is there a current limitation in connecting such a large number of lines to a qubit device. Instead,
-the key limitation at present is the dissipation of power in high-bandwidth control lines. As given in Eq.~\ref{eq:phot}, reducing the population of thermal photons
-necessarily involves attenuation or filtering at the mK stage, hence to reduce power consumption at this stage, either qubits must be built to be resilient to thermal noise, allowing
+Charge locking allows a large number of static gates on the qubit device to be operated from a minimal number of lines running from room temperature. However, the power or footprint required to bring down even thousands of DC lines is not prohibitive, nor is there a current limitation in connecting such a large number of lines to a qubit device. Instead, the principal limitation at present is the dissipation of power in high-bandwidth control lines. As given in Eq.~\ref{eq:phot}, reducing the population of thermal photons necessarily involves attenuation or filtering at the mK stage. Hence, to decrease power consumption at this stage, either qubits must be built to be resilient to thermal noise, allowing
 the magnitude of the attenuation to be reduced, or signal routing and generation must occur at the mK stage, allowing a smaller number of coaxial lines to be used. Designing qubits
-that are immune to noise is an ongoing area of research~\cite{PhysRevB.93.121410,PhysRevLett.121.177701,PhysRevB.97.155402}, however these approaches trade off insensitivity to noise
-for a requirement for large control pulses. Even for Majorana qubits, the excitation of quasiparticles in a superconductor, which act as an error mechanism in these qubits,
-places limits on a minimum amount of filtering that is necessary~\cite{PhysRevLett.106.167004}. It is therefore the second approach that we explore here, implementing a two-level
-fast pulse generator on chip.
+that are immune to noise is an ongoing area of research~\cite{PhysRevB.93.121410,PhysRevLett.121.177701,PhysRevB.97.155402}, however, these approaches trade off insensitivity for large amplitude control pulses. Even for Majorana qubits, the excitation of quasiparticles in a superconductor, which acts as an error mechanism in these qubits, places limits on a minimum amount of filtering that is necessary~\cite{PhysRevLett.106.167004}. It is, therefore, the second approach that we explore here, implementing a two-level
+fast pulse generator on-chip.
 
 Control pulses are generated on the CryoCMOS device using a method we term fast gating. A ground reference is set on the CryoCMOS chip, through the capacitor $C_\textrm{PULSE}$, referenced
 either to the voltage $V_\textrm{LOW}$ or $V_\textrm{HIGH}$. To generate a control pulse on the charge-locked output voltage, the two switches controlled by $G_\textrm{FG,N}$ are rapidly pulsed,
-pulling or pushing charges on the output gate, and causing a change in $V_\textrm{OUT,N}$. A sketch of this operating principle is shown in Fig.~\ref{fig:gbarch} (d), where the magnitude of the
-pulse $\Delta V = V_\textrm{P} - V_\textrm{HOLD}$ is given by:
+pulling or pushing charges on the output gate, and causing a change in $V_\textrm{OUT,N}$. A sketch of this operating principle is shown in Fig.~\ref{fig:gbarch} (d), where the magnitude of the pulse $\Delta V_\textrm{PULSE} = V_\textrm{P} - V_\textrm{HOLD}$ is given by:
 \begin{equation}
-  \Delta V = \frac{C_\textrm{PULSE}}{C_\textrm{P} + C_\textrm{PULSE}} (V_\textrm{HIGH} - V_\textrm{LOW})
+  \Delta V_\textrm{PULSE} = \frac{C_\textrm{PULSE}}{C_\textrm{P} + C_\textrm{PULSE}} (V_\textrm{HIGH} - V_\textrm{LOW})
 \end{equation}
 Crucially, by placing the CryoCMOS chip in close proximity to the qubit chip, such that parasitic capacitance $C_p$ is minimized, the power dissipated for a given pulse can be minimized.
-Assuming the system can be described by a lumped element model, valid in the limit that the qubit is in close proximity to the chip, the power dissipated in the system is given by:
+Assuming the system can be described by a lumped element model, valid in the limit that the qubit is near the CryoCMOS chip, the power dissipated in the system is given by:
 \begin{equation}
-  P_\textrm{diss} = \frac{C_\textrm{PULSE}C_\textrm{P}}{C_\textrm{PULSE} + C_\textrm{P}} \left(V_\textrm{HIGH} - V_\textrm{LOW}\right)^2 f
+  P_\textrm{diss} = \frac{C_\textrm{PULSE} + C_\textrm{P}}{C_\textrm{PULSE}C_\textrm{P}} \left(V_\textrm{HIGH} - V_\textrm{LOW}\right)^2 f
+  \label{eq:diss}
 \end{equation}
 where $f$ is the average rate of pulses at the device.
 
-A block diagram of the control logic for the CryoCMOS architecture is given in Fig.~\ref{fig:gbarch} (e). An on-chip waveform memory stores up to 256 time steps of a waveform. An
-on-chip voltage controlled oscillator is used to drive waveforms, which can be enabled by a small finite state machine. The waveform sampling period can be changed in two ways,
+A block diagram of the control logic for the CryoCMOS architecture is given in Fig.~\ref{fig:gbarch} (e). An on-chip waveform memory stores up to 256-time steps of a waveform. An on-chip voltage controlled oscillator is used to drive waveforms, which can be enabled by a small finite state machine. The waveform sampling period can be changed in two ways,
 the first is by varying the value of TRIM, which changes the clock speed in 6 exponential steps between roughly \SI{6}{\mega\hertz} and \SI{140}{\mega\hertz}, the second is using
-the clock divider FDIV, which may be varied in linear steps from 2 to 256. The waveform sampling period $\tau$ can therefore be changed between roughly \SI{23}{\kilo\hertz} at
-(TRIM = 1, FDIV = 255), and \SI{70}{\mega\hertz} at (TRIM = 6, FDIV = 2). The chip is by 5 digital lines, 4 used for SPI and 1 reset line.
+the clock divider FDIV, which may be varied in linear steps from 2 to 256. The waveform sampling period $\tau$ can, therefore, be changed between roughly \SI{23}{\kilo\hertz} at
+(TRIM = 1, FDIV = 255), and \SI{70}{\mega\hertz} at (TRIM = 6, FDIV = 2).
 
 \subsection{Benchmarking the CryoCMOS chip}
 
 \begin{figure}
   \includegraphics[width=\linewidth]{GBArch_Fig2}
-  \caption[Testbench for the CryoCMOS Architecture]
-  {\label{fig:gbtb}(a) Image of the test setup used to benchmark our CryoCMOS chip. A quantum-dot based qubit chip is shown in green, continaing a total of 6 five-quantum-dot devices, similar to those introduced in Sec.~\ref{sec:5dot}. For the purposes of this test, a single double quantum dot is bonded to the CryoCMOS chip, while a second double quantum dot is bonded directly to static control lines. Gooseberry is shown in orange, while readout multiplexing chips are shown in purple. (b) False color micrograph of the double quantum dot structure under test. Orange colored gates are controlled directly by a room-temperature DAC, while blue colored gates are controlled by the CryoCMOS chip. Gates are labelled in black. (c) Coulomb blockade through a single quantum dot formed using the CryoCMOS chip to control all quantum dot gates (LW, LP, C, RP, RW), with C sufficiently low that a double quantum dot does not form.}
+  \caption[Testbench for the CryoCMOS architecture]
+  {\label{fig:gbtb}(a) Image of the test setup used to benchmark our CryoCMOS chip. A quantum-dot based qubit chip is shown in green, containing a total of 6 five-quantum-dot devices, similar to those introduced in Sec.~\ref{sec:5dot}. For the purposes of this test, a single double quantum dot is bonded to the CryoCMOS chip, while a second double quantum dot is bonded directly to static control lines. The CryoCMOS chip is shown in orange, while readout multiplexing chips are shown in purple. (b) False color micrograph of the double quantum dot structure. Orange colored gates are controlled directly by a room-temperature DAC, while blue colored gates are controlled by the CryoCMOS chip. Gates are labeled in black. (c) Coulomb blockade through a single quantum dot formed using the CryoCMOS chip to control all quantum dot gates (LW, LP, C, RP, RW), with C sufficiently low that a double quantum dot does not form.}
 \end{figure}
 
 The performance of the charge locking system for static control is benchmarked using a quantum-dot based qubit device, shown in Fig.~\ref{fig:gbtb} (a).
-The qubit device (green) is a comprised of six 5-dot devices, similar to the ones presented in Sec~\ref{sec:5dot}, although for the purposes of this test,
-only a single double quantum dot is used in the top right of the chip. A scanning electron micrograph of the device is shown in Fig.~\ref{fig:gbtb} (b).
-Five of the confining gates, labelled LW, LP, C, RP and RW, are connected to the CryoCMOS chip with bondwires, while the remaining gates, SDT, SDP, SDC
-and N, are connected directly to the room temperature DAC. It is therefore possible to benchmark the CryoCMOS chip with only a single charge-locked gate,
-passing current through O1 to O2 and measuring a quantum point contact (QPC) formed with the gates SDT and LW, or to benchmark all 5 gates used to form a
-double quantum dot. As an initial validation of the concept, a single quantum dot is formed using all five CryoCMOS controlled gates, and is shown in
-Fig.~\ref{fig:gbtb} (c). To take this plot, a static voltage of \SI{-0.5}{\volt} is set on gates LP, C and RP. For each column of data, a voltage is
-set and held on gate LW by toggling the switch $G_\textrm{LOCK,LW}$, following which $G_\textrm{LOCK,RW}$ is closed and the voltage $V_\textrm{HOLD}$ on
-the right wall is swept.
+The qubit device (green) is a comprised of six 5-dot devices, similar to the ones presented in Sec~\ref{sec:5dot}, although for the purposes of this test, only a single double-quantum dot is used in the top right of the chip. A scanning electron micrograph of the device is shown in Fig.~\ref{fig:gbtb} (b).
+Five of the confining gates, labeled LW, LP, C, RP, and RW, are connected to the CryoCMOS chip with bond-wires, while the remaining gates, SDT, SDP, SDC, and N, are connected directly to the room temperature DAC. It is, therefore, possible to benchmark the CryoCMOS chip with only a single charge-locked gate, passing current through O1 to O2 and measuring a quantum point contact (QPC) formed with the gates SDT and LW, or to benchmark all 5 gates used to define a double quantum dot. As an initial validation of the concept, a single quantum dot is formed using all five CryoCMOS controlled gates and is shown in Fig.~\ref{fig:gbtb} (c). To take this plot, a static voltage of \SI{-0.5}{\volt} is set on gates LP, C, and RP. For each column of data, a voltage is
+set and held on gate LW by toggling the switch $G_\textrm{LOCK,LW}$, following which $G_\textrm{LOCK,RW}$ is closed and the voltage $V_\textrm{HOLD}$ on the right wall is swept.
 
 \begin{figure}
   \includegraphics[width=\linewidth]{GBArch_Fig3}
-  \caption[Voltage Calibration Procedure and Hold Time]
-  {\label{fig:gbvc}Calibration procedure to extract gate voltage. (a) Calibration curves taken while sweeping LW with the $G_\textrm{LOCK}$ switch closed, such that the gate is directly driven. Here four traces are overlaid, validating the stability of the device. Black arrows show how a current through the QPC is converted into a gate voltage. (b) Current through a QPC formed using the gate SDT and LW, once a voltage has been locked on the CryoCMOS controlled gate LW. (c) Extracted value for the CryoCMOS locked voltage on LW, after running the trace in (a) through the calibration curve in (b).}
+  \caption[Voltage calibration procedure and hold time]
+  {\label{fig:gbvc}Calibration procedure to extract gate voltage. (a) Calibration curves are taken while sweeping LW with the $G_\textrm{LOCK}$ switch closed, such that the gate is directly driven. Here four traces are overlaid, validating the stability of the device. Black arrows show how a current through the QPC is converted into a gate voltage. (b) Current through a QPC formed using the gate SDT and LW, once a voltage has been locked on the CryoCMOS controlled gate LW. (c) Extracted value for the CryoCMOS locked voltage on LW, after running the trace in (a) through the calibration curve in (b).}
 \end{figure}
 
 To properly characterize the leakage rate of voltages held using the CryoCMOS switches, we form a QPC between the gates SDT and LW. The voltage on SDT is set to
 a constant value, and the value of $V_\textrm{HOLD}$ is swept with $G_\textrm{LOCK,LW}$ closed, while a current between ohmics O1 and O2 is measured. This measurement is
-repeated several times to ensure the device is stable, and is shown in Fig.~\ref{fig:gbvc} (a). Following this, the voltage is tuned to the steepest point of the qpc pinch-off
+repeated several times to ensure the device is stable and is shown in Fig.~\ref{fig:gbvc} (a). Following this, the voltage is tuned to the steepest point of the QPC pinch-off
 curve, around \SI{1.1}{\nano\ampere} in Fig.~\ref{fig:gbvc} (a), and held over a 30 minute period, yielding a slow drift in current as shown in Fig.~\ref{fig:gbvc} (b).
 Combining Fig.~\ref{fig:gbvc} (a) and Fig.~\ref{fig:gbvc} (b), a value for the voltage locked on the gate is extracted in Fig.~\ref{fig:gbvc} (c). Noise in the measurement
 is caused by low-frequency charge noise present in the 2DEG~\cite{PhysRevApplied.9.034008}.
 
 \begin{figure}
-  \includegraphics[width=0.6\linewidth]{GBArch_Fig4}
-  \caption[Leakage Rate of Charge Locking]
+  \includegraphics[width=0.5\linewidth]{GBArch_Fig4}
+  \caption[Leakage rate of charge locking]
   {\label{fig:gblr}Leakage rate of charge locking as the value of $V_\textrm{HOLD}$ is varied during the hold. For each datapoint the QPC is tuned to its most sensitive point,
   which occurs around $V_\textrm{LW} = \SI{-0.83}{\volt}$, and the gate is held for 1 hour. At either extreme of the operating range (\SIrange{-0.5}{-1.3}{\volt}), the leakage
   rate is found to be unstable.}
 \end{figure}
 
-A full characterization of the leakage rate is performed following the procedure laid out in Fig.~\ref{fig:gbvc}, with a hold time of \SI{1}{\hour}, over the course of \SI{65}{\hour}. Between subsequent sweeps the QPC is retuned such that sweeps begin at the most sensitive starting point. The value of $V_\textrm{LW}$ was found to vary between \SIrange{-0.838}{-0.840}{\volt} over the course of measurements. In addition to retuning the QPC, the resting value of $V_\textrm{HOLD}$ during the hold sequence is varied to account for increased leakage when the voltage difference across the switch $G_\textrm{LOCK,LW}$ is varied. The results of this sweep are shown in Fig.~\ref{fig:gblr}. Across the operating range of \SIrange{-0.5}{-1.3}{\volt} the average leakage rate was found to be \SI{-81.7}{\nano\volt\per\second} or \SI{-294}{\micro\volt\per\hour}. Despite the volatage difference across the switch $G_\textrm{LOCK,LW}$ being varied, leakage is uniformly found to be towards more negative voltages, suggesting leakage is occuring through the wells of the transistor, which are biased to \SI{-1.8}{\volt}. To our knowledge, this is the lowest leakage rate for a charge locked device reported in the literature.
+A full characterization of the leakage rate is performed following the procedure laid out in Fig.~\ref{fig:gbvc}, with a hold time of \SI{1}{\hour}, for a period of \SI{65}{\hour}. Between subsequent sweeps, the QPC is retuned such that sweeps begin at the most sensitive starting point. The optimal value of $V_\textrm{LW}$ was found to vary between \SIrange{-0.838}{-0.840}{\volt} over the course of measurements, due to low frequency drift in the device~\cite{PhysRevApplied.9.034008}. The resting value of $V_\textrm{HOLD}$ during the hold sequence is varied to account for increased leakage when the voltage difference across the switch $G_\textrm{LOCK,LW}$ is changed. The results of this sweep are shown in Fig.~\ref{fig:gblr}. Across the operating range of \SIrange{-0.5}{-1.3}{\volt} the average leakage rate was found to be \SI{-81.7}{\nano\volt\per\second} or \SI{-294}{\micro\volt\per\hour}. Despite the voltage difference across the switch $G_\textrm{LOCK,LW}$ changing from a value less than $V_\textrm{LOCK,LW}$ to a value greater than $V_\textrm{LOCK,LW}$, the leakage is uniformly found to be negative, suggesting it is occurring via the wells of the transistor which are biased to \SI{-1.8}{\volt}. To our knowledge, this is the lowest leakage rate for a charge locked device reported in the literature.
 
 \begin{figure}
   \includegraphics[width=0.9\linewidth]{GBArch_Fig5}
-  \caption[Static corrections to Hold voltage]
+  \caption[Static corrections to hold voltage]
   {\label{fig:gbcorr} (a) Effect of charge injection when opening the switch $G_\textrm{LOCK}$. The charges that form the channel are pushed onto the gate, leading to an offset voltage before and after the switch is opened. This effect can equivalently be understood as a stray capacitance between the gate and drain leads of a transistor. (b) Stray capacitance across the switch, leading to a change in the voltage held on a gate as the disconnected value of $V_\textrm{HOLD}$ is swept.}
 \end{figure}
 
-Finally we highlight two sources of parasitic capacitance that must be compensated for in a real device. The first of these is the effect of charge injection~\cite{1052859}, caused by the movement of electrons that form the conductive channel in the MOSFET into the source and drain leads, shown schematically in the top panel of Fig.~\ref{fig:gbcorr} (a). When either of these leads is not driven, as is the case when a voltage is held on a gate, an offset in the voltage is held after the switch is opened. This effect may be modelled as a simple gate-drain capacitance $C_\textrm{GD}$, with a correction for the quantum capacitance built into this value to account for the density of states in the channel, as given in Eq.~\ref{eq:cq}. The offset in gate voltage caused by charge injection $\Delta V_\textrm{CI}$ is then given by:
+Finally, we highlight two sources of parasitic capacitance that must be compensated for in a real device. The first of these is the effect of charge injection~\cite{1052859}, caused by the movement of electrons that form the conductive channel in the MOSFET into the source and drain leads, shown schematically in the top panel of Fig.~\ref{fig:gbcorr} (a). When either of these leads is not driven, as is the case when a voltage is held on a gate, an offset in the voltage results after the switch is opened. This effect may be modeled as a simple gate-drain capacitance $C_\textrm{GD}$, with a correction for the quantum capacitance built into this value to account for the density of states in the channel, as given in Eq.~\ref{eq:cq}. The offset in gate voltage caused by charge injection $\Delta V_\textrm{CI}$ is then given by:
 \begin{equation}
   \Delta V_\textrm{CI} = \frac{C_\textrm{GD}}{C_\textrm{GD} + C_\textrm{P} + C_\textrm{PULSE}} \SI{1.8}{\volt}
 \end{equation}
@@ -460,6 +428,24 @@ The second source of parasitic capacitance that must be compensated is the sourc
 \begin{equation}
   \Delta V_\textrm{SD} = \frac{C_\textrm{SD}}{C_\textrm{SD} + C_\textrm{P} + C_\textrm{PULSE}} (V_\textrm{HOLD} - V_\textrm{GATE})
 \end{equation}
-For the left wall gate studied previously, a change of $\Delta V_\textrm{SD} = \SI{2.8}{\volt\per\volt}$ is observed, as shown in Fig.~\ref{fig:gbcorr} (b). Again, this effect may be trivially compensated prior to the locking of a charge on a gate by selecting a fixed value of $V_\textrm{HOLD}$ during the operation of the qubit device.
+For the LW gate, a change of $\Delta V_\textrm{SD} = \SI[per-mode=symbol]{2.8}{\milli\volt\per\volt}$ is observed, as shown in Fig.~\ref{fig:gbcorr} (b). Again, this effect may be trivially compensated prior to the locking of a charge on a gate by selecting a fixed value of $V_\textrm{HOLD}$ during the operation of the qubit device.
 
 \subsection{Fast Gating}
+Finally, we move on to describe the generation of fast pulses at the level of the device. Having described the method used to generate pulses in Sec.~\ref{sec:gbarch}, we utilize a quantum dot formed against the LW gate with three directly controlled gates, SDT, SDP, and SDB. In this way, we can again characterize the behavior of our CryoCMOS architecture using only a single directly controlled gate. To first extract the expected behavior of fast gating, the value of $V_\textrm{LOW}$ is set to \SI{-0.4}{\volt} and $V_\textrm{HIGH}$ is set to \SI{-0.396}{\volt}, and a 1D trace is taken and shown in Fig.~\ref{fig:gbfg} (a), sweeping $V_\textrm{SDP}$, with $C_\textrm{FG,LW}$ first set to $V_\textrm{LOW}$ in blue, followed by $V_\textrm{HIGH}$ in red. Following this, a fixed frequency square waveform is loaded into the waveform memory and run, and the 1D sweep is retaken. The results are shown in green and show a square wave pattern that switches rapidly between the trace taken against $V_\textrm{LOW}$ and taken against $V_\textrm{HIGH}$.
+
+\begin{figure}
+  \includegraphics[width=0.9\linewidth]{GBArch_Fig6}
+  \caption[Characterization of fast gating]
+  {\label{fig:gbfg} (a) Demonstration of fast gating. $V_\textrm{LOW}$ is set to \SI{-0.4}{\volt} and $V_\textrm{HIGH}$ is set to \SI{-0.396}{\volt}. Before fast gating is enabled, $G_\textrm{FG,LW}$ is set to $V_\textrm{LOW}$ (blue trace) and $V_\textrm{SDP}$ is swept on the room temperature DAC, followed by the same trace taken with $G_\textrm{FG,LW}$ set to $V_\textrm{HIGH}$. Fast gating is then enabled while $V_\textrm{SDP}$ is swept (green), showing a trace that pulses between the two slow traces. (b) Demonstration of the tunability of frequency. The top trace shows a square wave at \SI{140}{\kilo\hertz}, the middle trace at \SI{1.26}{\mega\hertz} and the bottom trace at \SI{2.45}{\mega\hertz}. (c) Tunability of the
+  pulse amplitude by sweeping $V_\textrm{HIGH} - V_\textrm{LOW}$. Here $V_\textrm{LOW}$ is held constant while $V_\textrm{HIGH}$ is varied, such that one set of coulomb peaks remains
+  horizontal, while the other moves to more negative voltages. (d) Power dissipated at the mixing chamber as $V_\textrm{HIGH} - V_\textrm{LOW}$ is swept, due to $CV^2f$ dissipation.}
+\end{figure}
+
+Having validated that pulse generation works, we now show that the frequency and amplitude of the pulses may be varied. As described in Sec.~\ref{sec:gbarch}, the pulse period may be modified in several ways, including by changing the tuning the VCO, through the clock divider and by appropriate choice of the waveform. In Fig.~\ref{fig:gbfg}, we show the variation of the frequency of a square wave from \SI{140}{\kilo\hertz}, up to \SI{2.45}{\mega\hertz} through alteration of the clock divider and waveform. Measurements above this frequency are limited by the readout setup; however, we note the potential for operation up to a pulse period of \SI{140}{\mega\hertz}.
+
+Variation of the pulse amplitude is performed by changing the difference $\Delta V$ between the voltages $V_\textrm{HIGH}$ and $V_\textrm{LOW}$. In general, as gates that are not intended to be pulsed have voltages set in reference to $V_\textrm{LOW}$, this value will remain fixed, while $V_\textrm{HIGH}$ is varied. In Fig.~\ref{fig:gbfg} (c), the value of $V_\textrm{HIGH}$ is varied on the bottom axis while $V_\textrm{SDP}$ is swept. The pulse frequency is configured to be well above the bandwidth of the readout circuit, such that an averaged trace between $V_\textrm{HOLD}$ and $V_\textrm{P}$ is returned. As such, as $\Delta V$ is increased from zero, each coulomb peak splits into two, with one remaining at the same value of $V_\textrm{SDP}$, and the other decreasing towards more negative values of $V_\textrm{SDP}$ as $V_\textrm{HIGH}$ is increased to more positive values.
+
+Combining these effects, we can extract the power dissipation of the entire circuit. The cooling power of the mixing chamber of the dilution refrigerator is first calibrated using a known resistance. Then, as various circuits on the CryoCMOS chip are enabled, the extra heating of the device is calculated. The static power dissipation for the circuit is extracted to be $\sim \SI{0.1}{\micro\watt}$ based on the current drawn on the power rails. Upon enabling the clock, an additional \SI{9}{\micro\watt} of static power dissipation and \SI[per-mode=symbol]{2.5}{\micro\watt\per\mega\hertz} of dynamic power is dissipated by the clock generation circuitry. We note that although this is a significant portion of the power budget at mK, this dissipation is static at a fixed frequency, as this clock is shared by all gates. To extract the heating due to pulses applied to gates, pulses at a known frequency are applied and $\Delta V$ is swept. As the total length of routing and bond-wires is on the order of millimeters, a lumped element model is sufficient to calculate dissipation, such that the aggregate dissipated power is given by Eq.~\ref{eq:diss}. From this, a total capacitance to ground of \SI{0.6}{\pico\farad} is extracted. The power per gate controlled, assuming a pulse amplitude of \SI{1}{\milli\volt} at \SI{10}{\mega\hertz} is therefore only \SI{6}{\pico\watt}, on top of a static power dissipation of \SI{34}{\micro\watt}, well within the cooling power of a typical dilution refridgerator.
+
+\subsection{Conclusion}
+We have proposed a CryoCMOS based architecture for scaling qubit devices up to the hundreds without a large increase in power dissipated at the mK stage of a dilution refrigerator. By placing a CryoCMOS pulse generator close to the qubit chip, the power dissipation per channel may be lowered to 10's of pico-watts. Using our CryoCMOS chip, we are also able to lock static control voltages on gates with a leakage rate of \SI{-294}{\micro\volt\per\hour}, the lowest value reported in the literature, allowing the number of static control lines to be reduced to a minimum of three. For large scale quantum machines, we anticipate that some form of cryogenic pulse generation, such as the one presented here, will be crucial to allow large numbers of qubits to be controlled without unacceptable heat dissipation in high-bandwidth control lines.

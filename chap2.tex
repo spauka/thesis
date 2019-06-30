@@ -322,8 +322,14 @@ reduce the wiring requirements for a large scale quantum computer, and creates a
 \import{chap2/}{arch}
 
 \clearpage
-\section{A CryoCMOS Based Control Architecture for Scaling Quantum Computers}
+\section[A CryoCMOS Based Control Architecture for Scaling Quantum Computers]{A CryoCMOS Based Control Architecture for Scaling Quantum Computers}
 \label{sec:gooseberry}
+\begingroup
+  \addtocounter{footnote}{-1}
+  \renewcommand\thefootnote{}
+  \footnotetext{This section is based on unpublished work, and will include the following authors: S. J. Pauka, K. Das, R. Kalra, A. Moini, Y. Yang, J. D. Watson, G. C. Gardner, S. Fallahi, M. J. Manfra, D. J. Reilly}
+\endgroup
+
 In Sec.~\ref{sec:control} and Sec.~\ref{sec:readout}, the requirements for control and readout of semiconductor qubits were discussed, including a discussion
 of where power is unavoidably dissipated in the system. These power requirements were summarized in Table~\ref{tab:arch}. While experiments involving a single qubit, or even a few qubits, have been able to sidestep the issues associated with such power dissipation at the various temperature stages of the cryostat, moving past as few as 20 qubits quickly becomes impractical. This can be seen if one considers the typical cooling power of these stages. Using the BlueFors LD-400 system~\cite{bluefors}
 as an example of a typical dilution refrigerator, and using a Cryomech PT420 pulse tube cryocooler~\cite{cryomech} for cooling
@@ -340,14 +346,15 @@ a path for scaling to 100's of qubits within the power budget of commercially av
 
 \subsection{The CryoCMOS Architecture}
 \label{sec:gbarch}
+
+Our proposed CryoCMOS architecture is shown in Fig.~\ref{fig:gbarch} (a). Here, a CryoCMOS chip (orange) acts as an interface to the qubit chip (green), multiplexing a small number
+of low-frequency DC lines from room temperature to the qubit chip. Control is provided by a microcontroller at the 4K stage of the dilution refrigerator. Readout multiplexing is provided by a series of resonators~\cite{doi:10.1063/1.4868107} following standard techniques for rf-reflectometry~\cite{Reilly:2007ig,barthel2009rapid}. Our CryoCMOS chip implementing this architecture is shown in Fig.~\ref{fig:gbarch} (b), based on the \SI{28}{\nano\meter} fully depleted-silicon on insulator (FD-SOI) technology from Samsung Microelectronics. Bond pads around the outside of the chip are used to interface with the microcontroller at 4K, and with the qubit device. Each qubit gate contains a charge-lock fast-gate cell, a simplified schematic of which is given in Fig.~\ref{fig:gbarch} (c).
+
 \begin{figure}
   \includegraphics[width=\linewidth]{GBArch_Fig1}
   \caption[Schematic of our proposed CryoCMOS architecture]
   {\label{fig:gbarch}(a) Schematic of our proposed CryoCMOS architecture for qubit control. A fast control multiplexing chip allows a qubit chip to be controlled by a small number of digital control lines running from a microcontroller placed at \SI{4}{\kelvin}. Analog voltages are generated at room temperature using a low-noise, high-resolution DAC, and are multiplexed by the chip. Qubit readout is multiplexed using frequency multiplexing~\cite{doi:10.1063/1.4868107}. (b) Micrograph of the fast control multiplexing device. The chip has dimensions $2.5\times2.5\si{\milli\meter}$. (c) Simplified circuit schematic of a single charge-lock fast-gate cell. One cell is connected to each gate of the qubit device. A description of the operation is given in the text. (d) Time trace showing the output waveform as $G_\textrm{FG}$ is switched. The voltage at the output cell is pulsed between $V_\textrm{P}$ and $V_\textrm{HOLD}$, with sample period $\tau$. (e) Block diagram of the control circuitry inside the CryoCMOS chip.  SPI is used for digital communication to a microcontroller at 4K, which allows waveforms to be loaded into memory and pulse generation to be controlled. A voltage controlled oscillator is used to generate a clock on-chip and controls the pulse period $\tau$.}
 \end{figure}
-
-Our proposed CryoCMOS architecture is shown in Fig.~\ref{fig:gbarch} (a). Here, a CryoCMOS chip (orange) acts as an interface to the qubit chip (green), multiplexing a small number
-of low-frequency DC lines from room temperature to the qubit chip. Control is provided by a microcontroller at the 4K stage of the dilution refrigerator. Readout multiplexing is provided by a series of resonators~\cite{doi:10.1063/1.4868107} following standard techniques for rf-reflectometry~\cite{Reilly:2007ig,barthel2009rapid}. Our CryoCMOS chip implementing this architecture is shown in Fig.~\ref{fig:gbarch} (b), based on the \SI{28}{\nano\meter} fully depleted-silicon on insulator (FD-SOI) technology from Samsung Microelectronics. Bond pads around the outside of the chip are used to interface with the microcontroller at 4K, and with the qubit device. Each qubit gate contains a charge-lock fast-gate cell, a simplified schematic of which is given in Fig.~\ref{fig:gbarch} (c).
 
 Static voltages are provided for gates via a mechanism termed charge locking. In this technique, a high-precision room temperature DAC is used to set a voltage $V_\textrm{HOLD,N}$ on a
 gate, selected by closing the switch $G_\textrm{LOCK,N}$, shown in Fig.~\ref{fig:gbarch} (b). A capacitance $C_\Sigma$ is charged and the switch $G_\textrm{LOCK,N}$ is opened, leaving a voltage set on the gate. The total capacitance is set by the capacitance of the bond-wires and by parasitic capacitances on the gates of both the CryoCMOS device and the qubit device. Although similar schemes for locking charges on devices have been proposed in the literature~\cite{PhysRevApplied.9.054016,doi:10.1063/1.4932012}, they have suffered from gate voltage leakage rates of several mV per hour, limiting the applicability of such schemes for multiplexing large numbers of gates, as refresh times of several ms would be required.
@@ -449,3 +456,6 @@ Combining these effects, we can extract the power dissipation of the entire circ
 
 \subsection{Conclusion}
 We have proposed a CryoCMOS based architecture for scaling qubit devices up to the hundreds without a large increase in power dissipated at the mK stage of a dilution refrigerator. By placing a CryoCMOS pulse generator close to the qubit chip, the power dissipation per channel may be lowered to 10's of pico-watts. Using our CryoCMOS chip, we are also able to lock static control voltages on gates with a leakage rate of \SI{-294}{\micro\volt\per\hour}, the lowest value reported in the literature, allowing the number of static control lines to be reduced to a minimum of three. For large scale quantum machines, we anticipate that some form of cryogenic pulse generation, such as the one presented here, will be crucial to allow large numbers of qubits to be controlled without unacceptable heat dissipation in high-bandwidth control lines.
+
+\subsubsection{Acknowledgements}
+This research was supported by the Microsoft Corporation and the Australian Research Council Centre of Excellence for Engineered Quantum Systems (EQUS, CE170100009). The authors acknowledge the facilities as well as the scientific and technical assistance of the Research \& Prototype Foundry Core Research Facility at the University of Sydney, part of the Australian National Fabrication Facility

@@ -108,8 +108,10 @@
 \babelhyphenation[english]{Quantum}
 
 \makeatletter
-\g@addto@macro{\figure}{\centering}%
-\g@addto@macro{\endfigure}{}
+\let\oldfigure\figure
+\def\figure{\@ifnextchar[\figure@i \figure@ii}
+\def\figure@i[#1]{\oldfigure[#1]\centering}
+\def\figure@ii{\oldfigure\centering}
 \makeatother
 
 %% Allow hiding of contents

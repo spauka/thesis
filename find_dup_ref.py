@@ -3,8 +3,10 @@ import os
 
 bib = re.compile(r".*\.bib$")
 expr = re.compile(r"""title\s*=\s*({)?(["'])?(.+)(?(1)}|\2)""", re.I)
+doi = re.compile(r"""doi\s*=\s*({)?(["'])?(.+)(?(1)}|\2)""", re.I)
 
 titles = []
+dois = []
 
 for f in os.listdir():
     if bib.match(f):
@@ -16,9 +18,17 @@ for f in os.listdir():
                     title = title[0][2].lower()
                     title = title.translate(str.maketrans("", "", '(){}.:/\\$_-'))
                     titles.append(title)
+                ndoi = doi.findall(line)
+                if ndoi:
+                    print(ndoi[0])
+                    ndoi = ndoi[0][2].lower()
+                    ndoi = ndoi.translate(str.maketrans("", "", '(){}.:/\\$_-'))
+                    dois.append(ndoi)
 
 stitles = set(titles)
+sdois = set(dois)
 print(f"Total defined: {len(titles)}, unique: {len(stitles)}")
+print(f"Total dois: {len(dois)}, unique: {len(dois)}")
 if len(stitles) != len(titles):
     print("Duplicated titles:")
 

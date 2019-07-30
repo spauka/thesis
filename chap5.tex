@@ -3,14 +3,14 @@
 
 As we discussed in Sec.~\ref{sec:noise}, qubits of all forms are subject to decoherence, which leads to a loss of information
 from the quantum state. This leads to a limited lifetime for quantum states, and errors in the outputs of our quantum computations.
-The discovery of the quantum threshold theorem~\cite{1996quant.ph.11025A,doi:10.1098/rspa.1998.0167} allowed for errors to be corrected
-however, to do this, information must be spread out over many qubits, and constant error-correcting operations must be applied.
-The number of extra qubits and the number of operations that must be performed increases rapidly near the minimum error threshold for
+The discovery of the quantum threshold theorem~\cite{1996quant.ph.11025A,doi:10.1098/rspa.1998.0167} allowed for errors to be theoretically corrected
+at a rate faster than they occur, however, to implement this in practice, information must be spread out over many qubits and constant error-correcting
+operations must be applied. The number of extra qubits and the number of operations that must be performed increases rapidly near the minimum error threshold for
 a given error correction algorithm, and even for state-of-the-art qubit fidelities of $10^{-5}$, up to 10,000 physical qubits are required
 to form a single logical qubit, and up to 40,000 error correction operators must be applied per logical gate operation~\cite{6657074}.
 The higher the qubit fidelity, the lower the error correcting overhead~\cite{nature23460}. Although there is continued improvement in the fidelities
 of most qubits, coupling to the environment, either via electric or magnetic fields, is inevitable, as qubits are traditionally controlled
-by electric or magnetic fields. A fundamentally different approach to building a qubit, one which distributes the qubit state over pairs of
+by either electric or magnetic fields, or both. A fundamentally different approach to building a qubit, one which distributes the qubit state over pairs of
 neutral fermions, called non-abelian anyons, was introduced in ~\cite{RevModPhys.80.1083}. The computational states are part of an extended,
 degenerate ground state and operations are performed by moving particles around each other, with the information stored in qubits insensitive
 to any local perturbations. In particular, one non-abelian anyonic system is that of Majorana zero modes (MZMs), the theory of which we covered in
@@ -32,8 +32,8 @@ for scalable device designs, however, the quality of the 2DEG is compromised by 
 well is formed, it is highly sensitive to. In Sec.~\ref{sec:inas_hb}, we explore techniques for treatment of the surface to try and repair these surface impurities.
 
 Having formed Majorana zero modes, we must also read them out in a reliable way. One way of performing readout is to project the state of a pair of MZMs into
-a charge state, in a process termed parity-to-charge conversion~\cite{AasenPRX16}. This technique is in many ways analogous to the spin-to-charge conversion
-process discussed in Sec.~\ref{sec:readout} and in~\cite{petta,RevModPhys.79.1217}, however, requires a charge sensor, which, for nanowire-based devices cannot
+a charge state in a process termed parity-to-charge conversion~\cite{AasenPRX16}. This technique is in many ways analogous to the spin-to-charge conversion
+process discussed in Sec.~\ref{sec:readout} and in~\cite{petta,RevModPhys.79.1217}. However, this requires a charge sensor, which, for nanowire-based devices cannot
 be formed in the ways previously discussed. In Sec.~\ref{sec:rfmajo}, we discuss techniques for creating charge sensors using nanowires capacitively coupled
 to qubit devices, thereby inventing a method by which a topological qubit may be read, and characterize their performance.
 

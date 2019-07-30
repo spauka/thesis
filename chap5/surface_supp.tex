@@ -13,6 +13,7 @@ For the TMA reduction treatment, TMA is pulsed for \SI{1.0}{\second}, with a \SI
 
 Oxide growth is performed \emph{in-situ} using 170 cycles of TMA and either \ce{H2O} or \ce{O3}, following a standard recipe for oxide growth.
 
+\clearpage
 \section{Measurement}
 \label{sec:surf_mulberry}
 Measurements are taken in a BlueFors LD400 dilution refridgerator, fitted with a wide-bore \SI{2}{\tesla} solenoid, with a base temperature of \SI{7}{\milli\kelvin}. A custom Cryo-CMOS based multiplexer is used to map each of 32 input DC lines to 5 outputs, for a total of 160 DC lines, and is used to allow measurement of up to 10 Hall bars in a single cool-down. The CMOS is fabricated commercially on the AMS \SI{0.35}{\micro\meter} process. A schematic of this setup is shown in Fig.~\ref{fig:surf_cmos}.
@@ -25,9 +26,19 @@ Measurements are taken in a BlueFors LD400 dilution refridgerator, fitted with a
 
 Measurements are taken with a lockin, with a \SI{10}{\nano\ampere} constant current applied across the device through a \SI{100}{\mega\ohm} resistor. The top gate voltage is applied using a Yokogawa GS200 voltage source.
 
+\clearpage
+\section{Density and Mobility for all Treatments}
+\label{sec:all_treat}
+\begin{figure}[h]
+    \includegraphics[width=\linewidth]{FigureS3}
+    \caption[Density/Mobility for all Treatments]{The density and mobility traces as gate voltage is swept for all surface treatments. The location of second subband population is marked with an arrow on each trace.}
+    \label{fig:surf_allt}
+\end{figure}
+
+\clearpage
 \section{Density at Peak Mobility}
 \label{sec:surf_mobden}
-\begin{figure}
+\begin{figure}[h]
     \includegraphics[width=0.65\linewidth]{FigureS2}
     \caption[Location in density of peak mobility]{The location in density that peak mobility occurs, for samples taken near the center of the growth wafer. Samples grown with ozone are shifted to the right relative to samples grown with water.}
     \label{fig:surf_mobden}

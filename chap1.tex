@@ -527,16 +527,16 @@ surface, effectively the size of an electron in our semiconductor. Using $k = 2\
 
 \begin{table}
   \centering
-  \begin{tabular}{|l|l|l|}
-   \hline
+  \begin{tabular}{@{}lrr@{}}
+   \toprule
    Crystal & Lattice Constant (\si{\angstrom}) & Electron Effective Mass$(m^*/m_e)$ \\
-   \hline
+   \midrule
    Si & 5.43 & - \\
    Ge & 5.658 & - \\
    GaAs & 5.65 & 0.066 \\
    InAs & 6.06 & 0.026 \\
    InSb & 6.48 & 0.015 \\
-   \hline
+   \bottomrule
   \end{tabular}
   \caption[Properties of some common semiconductors]
   {Lattice constants and effective electron masses for some common semiconductors. For Si and Ge semiconductors, which are
@@ -767,7 +767,7 @@ This is depicted schematically in Fig.~\ref{fig:QD} (c). This equation also show
 potential of the dot can be swept linearly by varying the gate voltage.
 
 \begin{figure}
-  \includegraphics[width=1.0\linewidth]{CB}
+  \includegraphics[width=0.9\linewidth]{CB}
   \caption[Coulomb blockade in a single quantum dot]
   {\label{fig:cbtrans}(a) Coulomb blockade through a single quantum dot. Current can only flow at points
   where the energy levels in the dot are in alignment with the reservoirs, which occurs as the gate voltage
@@ -795,7 +795,7 @@ and note that this is the method by which we extract electron temperatures in Se
 
 \subsubsection{Double Quantum Dots}
 \begin{figure}
-  \includegraphics[width=1.0\linewidth]{DoubleDot}
+  \includegraphics[width=0.95\linewidth]{DoubleDot}
   \caption[Schematic of a double quantum dot]
   {\label{fig:dqd}(a) Equivalent circuit model for a double quantum dot. The circuit is very similar to that of
   two single quantum dots in series, except that we must also account for cross capacitances between adjacent gates
@@ -981,17 +981,19 @@ in our discussion of singlet-triplet qubits later on.
 
 \begin{table}
   \centering
-  \begin{tabular}{|l|c|l|}
-   \hline
-   Lattice Constant (\si{\angstrom}) & $a$ & 5.65 \\ \hline
-   Dielectric Constant & $\epsilon_r = \tfrac{\epsilon}{\epsilon_0}$ & 12.9 \\ \hline
-   Land\'e g-factor & $g^*$ & -0.44 \\ \hline
-   Electron Effective Mass & $(m^*/m_e) $ & 0.066 \\ \hline
-   2DEG Depth (\si{\nano\meter}) & $d$ & 91 \\ \hline
-   Density (\si{\per\square\centi\meter}) & $n_s$ & $1.30 \times 10^{11}$ \\ \hline
-   Mobility (\si{\square\centi\meter\per\volt\per\second}) & $\mu$ & $4.8 \times 10^6$ \\ \hline
+  \begin{tabular}{@{}lcr@{}}
+   \toprule
+   Parameter & Symbol & Value \\
+   \midrule
+   Lattice Constant (\si{\angstrom}) & $a$ & 5.65 \\
+   Dielectric Constant & $\epsilon_r = \tfrac{\epsilon}{\epsilon_0}$ & 12.9 \\
+   Land\'e g-factor & $g^*$ & -0.44 \\
+   Electron Effective Mass & $(m^*/m_e) $ & 0.066 \\
+   2DEG Depth (\si{\nano\meter}) & $d$ & 91 \\
+   Density (\si{\per\square\centi\meter}) & $n_s$ & $1.30 \times 10^{11}$ \\
+   Mobility (\si{\square\centi\meter\per\volt\per\second}) & $\mu$ & $4.8 \times 10^6$ \\
    Fermi Wavelength (\si{\nano\meter}) & $\lambda_F = \sqrt{\frac{2 \pi}{n_s}}$ & 70 \\
-   \hline
+   \bottomrule
   \end{tabular}
   \caption[Representative properties of a GaAs 2DEG used for forming quantum dots]
   {Representative properties of a GaAs 2DEG used for forming quantum dots, based on material
@@ -1004,7 +1006,7 @@ describe the formation of a quantum dot in GaAs. Typical parameters for a 2DEG i
 the key properties we require are the Fermi wavelength, which will set the approximate size of the dot we wish
 to form, and the depth, which will set the sharpness of the potential that the gates provide at the 2DEG. For samples that are
 doped and have an intrinsic density of electrons, we can form quantum dots by evaporating surface gates on top of an insulating
-dielectric [usually TiAu on top of $\approx \SI{10}{\nano\meter}$ \ce{HfO2} or \ce{Al2O3}, as shown in Fig.~\ref{fig:heterostructure} (c)],
+dielectric [usually TiAu on top of $\sim \SI{10}{\nano\meter}$ \ce{HfO2} or \ce{Al2O3}, as shown in Fig.~\ref{fig:heterostructure} (c)],
 and applying negative voltages to deplete electrons below the gate in the 2DEG. Initially, we expect the gate to change
 the density at the 2DEG as per that of a parallel plate capacitor:
 \begin{equation}

@@ -41,24 +41,25 @@ quantum machines. Let's therefore enumerate a few of the key requirements for a 
   \begin{table}
     \centering
     \def\arraystretch{1.5}
-    \begin{tabular}{|l|l|l|l|l|l|l|}
-    \hline
-    \multicolumn{3}{|l|}{} & \shortstack{CryoCMOS Architecture\\(Section~\ref{sec:gooseberry})} & \shortstack{Prime-Lines Architecture\\(Section~\ref{sec:primelines})} & \shortstack{Frequency\\Multiplexed~\cite{doi:10.1063/1.4868107}} & \multicolumn{1}{|c|}{Na\"ive} \\
-    \hline
-    \multirow{5}{*}{Room Temp}  & \multirow{2}{*}{Power} & $P_{C,RT}$    & $\SI{100}{\watt}$ & $M\times\SI{1000}{\watt}$ &$N\times\SI{1000}{\watt}$ &$N\times\SI{1000}{\watt}$\\\cline{3-7}
+    \begin{tabular}{lllllll}
+    \toprule
+    \multicolumn{3}{l}{} & \shortstack{CryoCMOS Architecture\\(Section~\ref{sec:gooseberry})} & \shortstack{Prime-Lines Architecture\\(Section~\ref{sec:primelines})} & \shortstack{Frequency\\Multiplexed~\cite{doi:10.1063/1.4868107}} & \multicolumn{1}{c}{Na\"ive} \\
+    \midrule
+    \multirow{5}{*}{Room Temp}  & \multirow{2}{*}{Power} & $P_{C,RT}$    & $\SI{100}{\watt}$ & $M\times\SI{1000}{\watt}$ &$N\times\SI{1000}{\watt}$ &$N\times\SI{1000}{\watt}$\\
                                 &                        & $P_{R,RT}$    & $\SI{100}{\watt}$ & $N\times\SI{100}{\watt}$ & $N\times\SI{100}{\watt}$ & $N\times\SI{100}{\watt}$\\\cline{2-7}
-                                & \multirow{3}{*}{Lines} & $L_{DC,C,RT}$ & 3                         & $N$                      & $N$ & $N$                 \\\cline{3-7}
-                                &                        & $L_{RF,C,RT}$ & 3                         & M                        & $N$ & $N$                 \\\cline{3-7}
+                                & \multirow{3}{*}{Lines} & $L_{DC,C,RT}$ & 3                         & $N$                      & $N$ & $N$                 \\
+                                &                        & $L_{RF,C,RT}$ & 3                         & M                        & $N$ & $N$                 \\
                                 &                        & $L_{RF,R,RT}$ & 2                         & 2                        & 2   & $N$                 \\\hline
-    \multirow{5}{*}{4K} & \multirow{2}{*}{Power} & $P_{C,4K}$    & $\SI{1}{\watt}$        &$\SI{1}{\watt} + M\times\SI{100}{\micro\watt}$        & $N\times\SI{100}{\micro\watt}$   & $N\times\SI{100}{\micro\watt}$                   \\\cline{3-7}
+    \multirow{5}{*}{4K} & \multirow{2}{*}{Power} & $P_{C,4K}$    & $\SI{1}{\watt}$        &$\SI{1}{\watt} + M\times\SI{100}{\micro\watt}$        & $N\times\SI{100}{\micro\watt}$   & $N\times\SI{100}{\micro\watt}$                   \\
                         &                        & $P_{R,4K}$    & $\SI{50}{\milli\watt}$ &$\SI{50}{\milli\watt}$ & $\SI{50}{\milli\watt}$ & $N\times\SI{50}{\milli\watt}$\\\cline{2-7}
-                        & \multirow{3}{*}{Lines} & $N_{DC,C,4K}$ & 3                         & $N$                      & $N$ & $N$                 \\\cline{3-7}
-                        &                        & $L_{RF,C,4K}$ & 3                         & $M$                      & $N$ & $N$                 \\\cline{3-7}
+                        & \multirow{3}{*}{Lines} & $N_{DC,C,4K}$ & 3                         & $N$                      & $N$ & $N$                 \\
+                        &                        & $L_{RF,C,4K}$ & 3                         & $M$                      & $N$ & $N$                 \\
                         &                        & $L_{RF,R,4K}$ & 2                         & 2                        & 2   & $N$                 \\\hline
-    \multirow{4}{*}{mK} & \multirow{2}{*}{Power} & $P_{C,mK}$ & $N\times\SI{6}{\pico\watt} + \SI{34}{\micro\watt}$ & $ (N+M)\times\SI{1}{\micro\watt}$ & $N\times\SI{1}{\micro\watt}$   & $N\times\SI{1}{\micro\watt}$                   \\\cline{3-7}
+    \multirow{4}{*}{mK} & \multirow{2}{*}{Power} & $P_{C,mK}$ & $N\times\SI{6}{\pico\watt} + \SI{34}{\micro\watt}$ & $ (N+M)\times\SI{1}{\micro\watt}$ & $N\times\SI{1}{\micro\watt}$   & $N\times\SI{1}{\micro\watt}$                   \\
                         &                        & $P_{R,mK}$ & \SI{40}{\nano\watt}     & \SI{40}{\nano\watt}           &\SI{40}{\nano\watt}   & $N\times\SI{40}{\nano\watt}$ \\\cline{2-7}
-                        & \multirow{2}{*}{Lines} & $L_{C,mK}$ & $N$                     & $N$                           & $N$ & $N$                 \\\cline{3-7}
-                        &                        & $L_{R,mK}$ & $N$                     & $N$                           & $N$ & $N$                 \\\hline
+                        & \multirow{2}{*}{Lines} & $L_{C,mK}$ & $N$                     & $N$                           & $N$ & $N$                 \\
+                        &                        & $L_{R,mK}$ & $N$                     & $N$                           & $N$ & $N$                 \\
+    \bottomrule
     \end{tabular}
     \caption[Approximate power and wiring requirements for a QC]{Order of magnitude power $P$ and wiring $L$ requirements for the CryoCMOS architecture, the Prime-Lines architecture, frequency multiplexed readout and a Na\"ive architecture. The number of lines is split between high-bandwidth coaxial lines (RF) and low-bandwidth (DC) lines. In each case, we trade off the complexity in the setup to reduce the wiring required down the fridge. The power consumption and number of lines is given in terms of the number of qubits $N$, and in the case of the Prime-Lines architecture, the number of pulse shapes $M$. Power consumption for control lines is calculated assuming a \SI{1}{\milli\volt} pulse at the qubit through a \SI{20}{\decibel} attenuator at the \SI{4}{\kelvin} and mK stage. For the CryoCMOS architecture, a pulse frequency of \SI{10}{\mega\hertz} was used. Readout power is calculated assuming a Caltech-style HEMP amplifier at the 4K stage, and utilizing rf-reflectometry techniques for readout (see Sec.~\ref{sec:readout}). With a \SI{-90}{\decibel} readout power,
     dissipation is dominated by passive thermal conduction up to $\sim 1000$ simultaneous channels.}

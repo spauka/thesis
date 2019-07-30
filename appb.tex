@@ -72,14 +72,14 @@ Table~\ref{tab:filt}.
 
 \begin{table}
     \centering
-    \begin{tabular}{|l|l|l|}
-    \hline
+    \begin{tabular}{lll}
+    \toprule
      & LC Filter & RC Filter \\
-    \hline
+    \midrule
     Stage 1 & Minicircuits LFCN-5000 & Minicircuits LFCN-80\\
     Stage 2 & Minicircuits LFCN-1450 & R = \SI{500}{\ohm}, C = \SI{2200}{\pico\farad} \\
     Stage 3 & Minicircuits LFCN-80 & R = \SI{1200}{\ohm}, C = \SI{1000}{\pico\farad} \\
-    \hline
+    \bottomrule
     \end{tabular}
     \caption[Component values for DC filers]{Component values for DC filtering. The LC filter has a cutoff of \SI{80}{\mega\hertz}, while the RC filter
     has a cutoff of $\sim \SI{70}{\kilo\hertz}$.}

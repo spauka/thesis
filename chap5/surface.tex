@@ -57,20 +57,23 @@ Here we investigate the scattering mechanisms that reduce mobility in shallow In
 The devices are fabricated from a InAlAs/InAs/InGaAs quantum well grown \SI{10}{\nano\meter} below the surface on a 2'' (100) InP substrate \cite{manfra_hmob}. An \SI{8}{\nano\meter} Al layer is grown epitaxially on the surface of the heterostructure directly following the semiconductor growth. On each sample, a Hall bar geometry is defined using a dilute phosphoric acid etch, and Al is selectively removed over the Hall bar with an Aluminum wet etch (Transene type-D). Contact to the 2DEG is made using sections of un-etched Al, which forms an ohmic contact. The surface is then treated using either TMA as a reducing agent to remove the native oxide \cite{ingaas_redux,iiiv_cleanup} or with a ArH plasma to terminate charged impurity states \cite{BELL1998125}, and without breaking vacuum, a \SI{10}{\nano\meter} \ce{Al2O3} oxide is grown via ALD at \SI{200}{\celsius}, using a TMA precursor and either \ce{H2O} or \ce{O3} as an oxidizing agent. Finally, a \SI{150}{\nano\meter} Ti/Au gate is evaporated on the surface of the Hall bar to allow the electron density of the samples to be varied. Further details of the fabrication are contained in the Supplementary Information. A cross-sectional schematic of the Hall bar is given in Fig.~\ref{fig:surf_fig1} (a). For each treatment/oxidizer pair, we fabricate two samples, one taken from within 1'' of the center of the wafer (denoted `near'), the other taken from the outer 1'' ring (denoted `far'), in order to account for variation in mobility as a function of distance from the center of the wafer \cite{watson_thesis}. A full list of tested sample parameters is given in Table~\ref{tab:surf_sampparam}. We note that despite the higher quality of ALD oxides grown at higher temperatures, at temperatures higher than \SI{250}{\celsius}, diffusion of In and As occurs, and above \SI{300}{\celsius} \ce{In} begins to precipitate out of the substrate due to the desorption of \ce{As} \cite{PhysRevB.48.2807}.
 
 \begin{table}
-\caption[InAs sample treatments and growth parameters]]{\label{tab:surf_sampparam}%
-A full listing of sample growth parameters that were tested. Two surface treatments (TMA Reduction and \ce{H2} Passivation) and two oxidizers (\ce{H2O} and \ce{O3}) are tested to find their effect on sample mobility. Each treatment and oxidizer pair are measured on two chips, one taken from the center of the growth wafer, the other from near the edge, in order to account for the effect of distance from the center of the wafer on mobility.}
+\begin{centering}
 \begin{tabular}{lll}
-\textrm{Sample}&
-\textrm{Treatment}&
-\textrm{Oxide Growth}\\
-\hline\hline
+\toprule
+Sample&
+Treatment&
+Precursor/Oxidizer\\
+\midrule
 A & No Treatment & TMA/\ce{H2O} \\
 B & TMA Reduction & TMA/\ce{H2O} \\
 C & TMA Reduction & TMA/\ce{O3} \\
 D & \ce{H2} Passivation & TMA/\ce{H2O} \\
 E & \ce{H2} Passivation & TMA/\ce{O3} \\
-\hline
+\bottomrule
 \end{tabular}
+\caption[InAs sample treatments and growth parameters]{\label{tab:surf_sampparam}%
+A full listing of sample growth parameters that were tested. Two surface treatments (TMA Reduction and \ce{H2} Passivation) and two oxidizers (\ce{H2O} and \ce{O3}) are tested to find their effect on sample mobility. Each treatment and oxidizer pair are measured on two chips, one taken from the center of the growth wafer, the other from near the edge, in order to account for the effect of distance from the center of the wafer on mobility.}
+\end{centering}
 \end{table}
 
 Measurements were carried out in a dilution refrigerator with a base temperature of \SI{7}{\milli\kelvin}. Magnetotransport measurements were performed to extract electron densities and mobilities using conventional AC lock-in techniques, with a \SI{10}{\nano\ampere} constant current. A representative Hall bar is shown in Fig.~\ref{fig:surf_fig1} (b), with longitudinal ($R_{xx}$) and transverse ($R_{xy}$) resistance measured simultaneously. Three measurement points are defined around the edge of the Hall bar, indicated with blue, red and black dots, allowing multiple independent measurements of mobility and density to be made on each sample, from which statistics on each treatment are gathered. Hall bars were oriented at $\ang{45}$ to the $(011)$ and $(01\overline{1})$ plane to remove effects of any anisotropy along different crystallographic axes \cite{PhysRevB.67.045309,PhysRevB.77.235307}. For each sample, density and mobility are extracted as the top gate is swept. A representative measurement is shown for sample B, taken from near the center of the growth wafer, in Fig.~\ref{fig:surf_fig1} (c). Mobility is extracted at \SI{0.05}{\tesla}, which is a sufficiently large offset to ensure we are no longer on the weak-antilocalization peak. A peak value for mobility is extracted of \mob{33400} at a density of \den{8.73e11}, corresponding to a gate voltage of $V_{TG} = \SI{-0.27}{\volt}$, and indicated by the red point in Fig.~\ref{fig:surf_fig1} (c). We can attribute different dominant scattering mechanisms to various ranges of the density \cite{Matsumoto_1974,PhysRevB.32.8126,PhysRevB.16.4446}. As the density increases from zero, scattering is predominantly caused by scattering off background impurities distributed through the heterostructure \cite{scattering}. Increased screening of impurities as the density is increased leads to an increase in mobility. As the gate voltage and density is further increased, the mobility is seen to peak, before reducing with increasing density. Increasing top gate voltage causes the the distribution of electrons in the quantum well to shift towards the surface \cite{doi:10.1063/1.119829,PhysRevB.93.235312}, and surface scattering becomes dominant over the increased impurity screening with higher density, leading to a decrease in mobility as the density is further increased.

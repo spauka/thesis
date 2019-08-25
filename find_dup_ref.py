@@ -28,7 +28,7 @@ for f in os.listdir():
 stitles = set(titles)
 sdois = set(dois)
 print(f"Total defined: {len(titles)}, unique: {len(stitles)}")
-print(f"Total dois: {len(dois)}, unique: {len(dois)}")
+print(f"Total dois: {len(dois)}, unique: {len(sdois)}")
 if len(stitles) != len(titles):
     print("Duplicated titles:")
 

@@ -2,14 +2,14 @@
 
 The lofty goal set out at the beginning of this thesis was to develop the architecture of a quantum computer. Unfortunately,
 as I hope has become clear throughout the course of your reading, reaching the goal of a universal quantum computer
-is not yet within our grasp. However, what I have aimed to do here is to have made progress towards a general purpose quantum machine at each
+is not yet within our grasp. However, what I have aimed to do here is to have made progress towards a general-purpose quantum machine at each
 level of the quantum computing stack, from the high-level architecture in Chapter~\ref{sec:arch}, to the low level
 of designing materials for qubits in Chapter~\ref{sec:majoinas}. As I come to the close of this thesis, I will reflect on the outstanding
 challenges of realizing a quantum computer, including on areas where I think there is significant risk moving forwards.
 
 \section{Controlling Qubits}
 At the top of the stack, in Chapter~\ref{sec:arch}, I discussed the challenges of designing quantum devices that can scale up to a large number of
-control and readout lines that a useful quantum machine would require. In addition, I presented architectures that lower the
+control and readout lines that a useful quantum machine would require. I also presented architectures that lower the
 requirements on both the number of dc and rf lines and on the power dissipation required to control a quantum device. Today, the effort to build
 CryoCMOS architectures for controlling qubits has been joined by several companies and groups, including Google~\cite{gcryocmos}, Intel and Delft university~\cite{VANDIJK201990},
 who are well and truly in the race to build components for scaleable cryogenic operation of both superconducting and semiconducting qubits. The aims of each
@@ -18,8 +18,8 @@ to tame the rapid growth of power consumed at each part of the stack.
 
 In Sec.~\ref{sec:archdesign}, the requirement for control and readout fidelity was also given alongside the requirements for footprint and power. Pointedly,
 these two requirements are not listed with the above, since the reality of the modern quantum physics experiment is that the bulky room temperature readout
-and control hardware is largely superior to hardware we build for cryogenic operation. This is not surprising, much of the equipment that is currently used
-for readout and control, be it oscilloscopes, network analyzers, vector sources and so forth, trade off power and size for flexibility and performance, which
+and control hardware is mostly superior to hardware we build for cryogenic operation. This is not surprising, much of the equipment that is currently used
+for readout and control, be it oscilloscopes, network analyzers, vector sources and so forth, trade-off power and size for flexibility and performance, which
 are unfortunately not what is needed to scale quantum systems. The challenge for each of the architectures listed in Chapter~\ref{sec:arch}, and for those
 being developed externally, is to match their classical counterparts with a limited subset of the features available in room temperature hardware.
 The challenge for physicists, both theoretical and experimental, is to design the next generation of qubit architectures in such a way that they can be easily
@@ -31,17 +31,17 @@ interface. In particular, in Sec.~\ref{sec:readout}, we discussed the need to is
 adding additional losses into the circuit, as any loss between the qubit and first stage amplifier contributes directly to the SNR of our readout, as per
 Eq.~\ref{eq:r_snr}. For the qubits presented in this thesis (spin qubits and Majorana based topological qubits), the footprint problem is particularly
 stark, as readout frequencies of a few hundred \si{\mega\hertz} would require conventional circulators on to order of \SIrange{30}{70}{\centi\meter}.
-Utilizing the slow-traveling edge-magnetoplasmons (EMPs) in the quantum (anomalous) Hall effect, circulators with a size of order a few hundred \si{\micro\meter}
-were realized. While isolation of \SI{25}{\decibel} was achieved, the insertion loss of this first generation of circulators was not sufficient to
+Utilizing the slow-traveling edge-magnetoplasmons (EMPs) in the quantum (anomalous) Hall effect, circulators with a size of order a few hundred
+\si{\micro\meter} were realized. While isolation of \SI{25}{\decibel} was achieved, the insertion loss of this first generation of circulators was not sufficient to
 be generally useful in qubit experiments. The source of this loss is caused largely by the impedance mismatch between the EMP ($\sim \SI{25}{\kilo\ohm}$) and the
 \SI{50}{\ohm} transmission line.
 
 Understanding the source of this insertion loss, however, gives us several solutions towards improving these systems. One obvious, though perhaps
-not useful solution is to operate at higher filling factors, where multiple parallel paths lead to a reduction in the impedance of the edge, as
+not particularly useful answer, is to operate at higher filling factors where multiple parallel paths lead to a reduction in the impedance of the edge, as
 given by Eq.~\ref{eq:hallsigma}. This solution would require either a larger Hall droplet or operation at higher frequencies, nor would this solution
 be possible for samples using the quantum anomalous Hall effect. Alternatively, as the problem is impedance matching, we can use conventional matching
 techniques to improve the insertion loss, for example, the use of an LC matching network. A promising approach given in~\cite{bosco2016self} is to use
-an intrinsic matching effect in the edges to achieve self-matching at specific frequencies. Such a device geometry promises perfect transmission at these
+an intrinsic matching effect in the edges to achieve self-matching at specific frequencies. Such a device geometry promises nearly perfect transmission at these
 frequencies.
 
 \section{Scaleable Qubit Designs}
@@ -78,11 +78,11 @@ for larger devices. Moving forward, the existence of more advanced EDA tools wil
 number of gates on single devices grows.
 
 Built into the discussion about scaling a quantum computer is the need to error correct noisy qubits. The number of operations per gate that must be performed to correct errors,
-as well as the number of physical qubits required to form an error corrected logical qubit is a sensitive function of the qubit error rate and snowballs as the fault-tolerance
+as well as the number of physical qubits required to form an error-corrected logical qubit is a sensitive function of the qubit error rate and snowballs as the fault-tolerance
 threshold if approached~\cite{6657074,nature23460}. The construction of qubits with improved error rates is therefore highly desirable, and may, in fact, be necessary for universal
 quantum computation with as few as 1000 logical qubits. To run Shor's algorithm on a 1024-bit number, for example, would require on the order of 50-million physical qubits with
 an error rate of $10^{-5}$. The use of topologically protected qubits~\cite{RevModPhys.80.1083}, such as Majorana zero modes~\cite{s41578-018-0003-1}, is the most promising path
-to realizing qubits with a significantly improved fidelity; however the materials and techniques challenges, as laid out in Chapter~\ref{sec:majoinas} are formidable.
+to realizing qubits with a significantly improved fidelity; however, the materials and techniques challenges, as laid out in Chapter~\ref{sec:majoinas} are formidable.
 Nonetheless, continuing advances in the growth of high-quality materials with large spin-orbit interaction, and high-quality superconductivity~\cite{PhysRevLett.119.136803},
 and improved designs for scaleable Majorana-based devices~\cite{PhysRevB.95.235305,Plugge} present exciting opportunities for building truly scaleable quantum machines.
 Some of these issues are explored in Chapter~\ref{sec:majoinas}, including the design of charge sensors in Sec.~\ref{sec:rfmajo}, and the development of fabrication techniques
@@ -101,7 +101,7 @@ than expected~\cite{PhysRevX.6.021039,PhysRevLett.117.080501}, the connectivity 
 and that the number of qubits might be larger than thought~\cite{2017arXiv171005867P}.
 From the standpoint of a quantum physicist and engineer, this represents an exciting challenge, one that calls for further incremental improvement of qubits,
 for new designs that extend the connectivity of qubits and for improved methods of readout and control. From the perspective of the public and the community, however,
-there lies some danger, wherein we run the risk of hitting a "Quantum Winter". This would be a period analogous to the "AI Winter"~\cite{crevier1993ai},
+there lies some danger, wherein we run the risk of hitting a "Quantum Winter." This would be a period analogous to the "AI Winter"~\cite{crevier1993ai},
 a period in the history of artificial intelligence, where persistent hype and an over-selling of the promise of AI, followed by a failure to deliver on these promises,
 led to a period of reduced funding and interest in the field. The reason that quantum supremacy has not yet been achieved may not be surprising to those in the
 field but has regularly been a source of surprise to members of the public.
@@ -110,16 +110,16 @@ field but has regularly been a source of surprise to members of the public.
     \includegraphics[width=0.7\linewidth]{Roadmap}
     \caption[Roadmap to a quantum computer]{\label{fig:roadmap} The possible paths by which a quantum computer is achieved. (a) In the optimistic case,
     a few years after quantum supremacy is reached, an algorithm demonstrating quantum advantage is achieved, leading to continued interest in the field. (b) In the pessimistic case,
-    even though quantum supremacy is reached, the demonstration of an algorithm that shows quantum advantage doesn't occur until a general purpose quantum machine is available.}
+    even though quantum supremacy is reached, the demonstration of an algorithm that shows quantum advantage doesn't occur until a general-purpose quantum machine is available.}
 \end{figure}
 
-If we assume, however, that we reach the goal of quantum supremacy in the reasonably near future, there are two roadmaps to a general purpose quantum machine, one which
+If we assume, however, that we reach the goal of quantum supremacy in the reasonably near future, there are two roadmaps to a general-purpose quantum machine, one which
 presents great opportunities for quantum computing researchers, the other which presents a risk that we must confront to ensure that development continues sustainably.
 These two roadmaps are shown in Fig.~\ref{fig:roadmap}, and relate to the demonstration of quantum advantage, that is the solution of a problem with a quantum computer
 that would not have been possible without one. Equivalently, the question is "what is interesting in the NISQ era"~\cite{Preskill2018quantumcomputingin}? In Fig.~\ref{fig:roadmap}
-(a), the answer is "something". This may be Variational Quantum Eigensolvers (VQEs)~\cite{nature23879}, it may be some form of machine learning~\cite{PhysRevLett.121.040502},
-however there is yet every chance that even these algorithms may turn out to be classically tractable~\cite{Tang:2019:QCA:3313276.3316310,10.1038/nphys3272}, or requires
-error correction to the extent that we are pushed to the realm of needing a general purpose quantum machine~\cite{Reiher7555}. In this case, we may live in a world where
+(a), the answer is "something." This may be Variational Quantum Eigensolvers (VQEs)~\cite{nature23879}, it may be some form of machine learning~\cite{PhysRevLett.121.040502},
+however there is yet every chance that even these algorithms may turn out to be classically tractable~\cite{Tang:2019:QCA:3313276.3316310,10.1038/nphys3272}, or require
+error correction to the extent that we are pushed to the realm of needing a general-purpose quantum machine~\cite{Reiher7555}. In this case, we may live in a world where
 Fig.~\ref{fig:roadmap} (b) is true, and there is a long period where a quantum computer is simply a toy. Such a situation would require continued long term investment,
 and is not a future that we should ignore in our current push to build a quantum computer.
 

@@ -10,7 +10,7 @@ of computation can be traced back to pioneering works by people such as Charles 
 in the early 1800's \cite{Bowden:1953:FTS:1102044}. Based on delicate vacuum tubes and mechanical relays,
 and often taking up giant rooms, their inherent fragility and bugginess posed formidable obstacles to scaling.
 It was not until the mid-1900's that the field took off with two pivotal discoveries. The first
-was the construction of the first transistor in 1947, credited to Bardeen, Brittain and Schockley and for which
+was the construction of the first transistor in 1947, credited to Bardeen, Brattain and Shockley and for which
 they were awarded the Nobel Prize in 1956 \cite{nobel1956}. This was followed by the creation of integrated circuits by Jack Kilby
 in 1959, for which he was awarded the Nobel Prize in the year 2000 \cite{nobel2000}. With these two inventions, a remarkable
 surge in computational power occurred. This surge is embodied in Moore's law, which described an annual
@@ -25,7 +25,7 @@ which tells us whether the problem can be feasibly solved. Take, for example, th
 for a single item $x_T$, in a list $L = \{x_0, x_1, \dots, x_n\}$ with $n$ items in it. Assuming the list
 is in an unknown order, to find the location of the item $x_T$, we need to look at each item in the list
 in turn. If the length of the list were doubled to $2n$ items, it would take twice as many steps to
-look through the list. Tripled would be three times. The number of steps, and hence te amount of time,
+look through the list. Tripled would be three times. The number of steps, and hence the amount of time,
 it takes to find an item in the list is \emph{linear} in the length of the list. We can write the scaling of
 the number of steps mathematically using big-$\mathcal{O}$ notation: searching for an item in a list is $\mathcal{O}(n)$.
 
@@ -98,8 +98,8 @@ end as we bump up against the sizes of atoms. It seems unlikely that there is mu
 recently announced \SI{3}{\nano\meter} node, so if we want to bring more problems into the fold of the
 possible, it seems like the strong Church-Turing hypothesis must give.
 
-It was in this context that Feynmann gave his seminal address, noting that as far as we can tell, simulating
-quantum systems falls outside of the set of problems that are efficiently solveable on classical computers \cite{Feynman1982}.
+It was in this context that Feynman gave his seminal address, noting that as far as we can tell, simulating
+quantum systems falls outside of the set of problems that are efficiently solvable on classical computers \cite{Feynman1982}.
 However, as long as we can manipulate quantum systems, we should also be able to set up a "quantum
 simulator" to see how a quantum system behaves. If this turned out to be the case, then the strong
 Church-Turing hypothesis would be violated\footnote{Despite this violation, as far as we know the original
@@ -186,7 +186,7 @@ rather than getting back the value of this vector sum, we would measure the $\ke
 $|\alpha|^2$ and the $\ket{1}$ state with probability $|\beta|^2$. Since probabilities must sum to one, we also
 get a normalization condition: $|\alpha|^2 + |\beta|^2 = 1$. The quantities $\alpha$ and $\beta$ are called
 probability amplitudes, and they can take both positive and negative complex values\footnote{Interestingly, the "complex"
-  part of that state is unnessecary to get the extra computing power
+  part of that state is unnecessary to get the extra computing power
   of a quantum computer \cite{doi:10.1142/S0219749913500019}. There's a good reason that quantum mechanics
   uses complex probability amplitudes \cite{2004quant.ph..1062A}, but if they were real, it turns out
   we can still do computations in \textsc{BQP} efficiently.}
@@ -219,7 +219,7 @@ the global phase factor, which gives us the state:
 \begin{equation}
   \ket{\psi} = \cos\left(\frac{\theta}{2}\right)\ket{0} + e^{-i\phi}\sin\left(\frac{\theta}{2}\right)\ket{1}
 \end{equation}
-This representation is shown visially in Fig.~\ref{fig:bloch} and is called the Bloch sphere representation
+This representation is shown visually in Fig.~\ref{fig:bloch} and is called the Bloch sphere representation
 of a qubit\footnote{For mathematicians, this is a description of the qubit in Complex Projective Space}.
 
 Given this description, we can now start to think about what operations on a single qubit might look like.
@@ -349,7 +349,7 @@ that was prepared in the state is lost. Quantum algorithms must, therefore, have
     For example, Shor's algorithm relies on being able to prepare an equal superposition of all states
     in the register with $N$ single qubit gates \cite{PhysRevA.54.1034}.
   \item Creation of a large entangled state. Without entanglement, a quantum algorithm can be efficiently
-    simulated on a classical computer. We don't know quite how to quantuntify the role that entanglement plays in computation,
+    simulated on a classical computer. We don't know quite how to quantify the role that entanglement plays in computation,
     however, without using it, we know that quantum computers lose their advantage \cite{doi:10.1098/rspa.2002.1097}.
   \item A way of whittling down the quantum state to make the "answer" the likely outcome of any readout.
     Since coefficients in a quantum register represent probability amplitudes that measurement will yield
@@ -400,9 +400,9 @@ in a way is analogous to classical relaxation, for example of an pendulum which 
 or an atom in an excited state that decays. An equivalent circuit for such a process into a controlled environment (a second qubit) is
 shown in Fig~\ref{fig:noise} (b), where the portion of the state in $\ket{1}$ undergoes a gradual rotation $R_{y}(\theta)$
 towards the $\ket{0}$ state, where the phase $\theta$ is chosen to represent the probability of a relaxation event:
-$\sin^2(\theta/2) = \gamma$. We represent the permanent loss of the information as a projetive measurement made on the
+$\sin^2(\theta/2) = \gamma$. We represent the permanent loss of the information as a projective measurement made on the
 second qubit. This error is commonly quoted in literature as a $T_1$ time, where $T_1$ is a time constant
-that gives us the rate at which a state will decay towards the ground state. Thus the probability of a relaxation event occuring
+that gives us the rate at which a state will decay towards the ground state. Thus the probability of a relaxation event occurring
 after time $t$ is given by:
 \begin{equation}
   P(\ket{1} \rightarrow \ket{0}, t) = 1 - e^{-t/T_1}
@@ -473,7 +473,7 @@ an idea of its "size". The following introduction is based on material taken fro
    electrons (conduction band) are plane waves with a wave vector proportional to the lattice spacing $a$,
    while solutions for bound electrons (valence band) are proportional to the strength of the potential created
    by the constituent elements of the lattice. (b) Assuming there are no electron-electron interactions,
-   and the lattice may be treated as a small peturbation to plane wave solutions (the nearly-free electron model),
+   and the lattice may be treated as a small perturbation to plane wave solutions (the nearly-free electron model),
    the band structure will be parabolic, with a band gap $E_G$ between the valence and conduction bands, where there are
    available states. Electron states are filled to the Fermi energy ($E_\textrm{F}$).}
   \label{fig:blochwaves}
@@ -506,7 +506,7 @@ the dispersion relation, i.e. the energy of electrons as a function of the wave-
   E(\vec{k}) = \frac{\hbar^2 |\vec{k}|^2}{2m^*}
   \label{eqn:3ddisp}
 \end{equation}
-where $\vec{k}$ is the electron wave-vector and $m^*$ is the effective electron mass that derives from the peturbation of the lattice.
+where $\vec{k}$ is the electron wave-vector and $m^*$ is the effective electron mass that derives from the perturbation of the lattice.
 The effective electron mass in this instance is a scaling factor on the increase in energy as wave-vector changes and is
 defined as the curvature of the conduction or valence band of the semiconductor:
 \begin{equation}
@@ -514,7 +514,7 @@ defined as the curvature of the conduction or valence band of the semiconductor:
 \end{equation}
 Intuitively, we can think of it as describing a change in momentum for a given energy "kick". For a parabolic and isotropic
 band, such as for the bottom of the conduction band in a III-V semiconductor, its value is constant, however
-the form of the effective mass will be more complex for materials that have directional dependences (such as Si),
+the form of the effective mass will be more complex for materials that have directional dependencies (such as Si),
 or more complex band structures such as graphene. From Eqn.~\ref{eqn:3ddisp}, we can also give the
 formal definition for the Fermi energy. The \textbf{Fermi energy} ($E_F$) is the energy of the highest filled electron state
 at zero temperature. This situation is represented schematically in Fig.~\ref{fig:blochwaves}~(b) for a single dimension.
@@ -749,7 +749,7 @@ dot as:
 \begin{equation}
   U(N) = \frac{[-|e|(N-N_0) + C_SV_S + C_DV_D + C_GV_G]^2}{C_\Sigma} + \sum_{n=1}^{\left\lfloor\frac{N}{g_sg_v}\right\rfloor} E_n(B)
 \end{equation}
-Note that we've included the spin and valley degneracies in the filling of the orbital states of the quantum dot in
+Note that we've included the spin and valley degeneracies in the filling of the orbital states of the quantum dot in
 the summation of $E_n(B)$. We can also define the electrochemical potential $\mu(N)$ of the dot:
 \begin{multline}
   \mu(N) \equiv U(N) - U(N-1) \\
@@ -821,7 +821,7 @@ the left and right dot. Intuitively, we can understand the capacitance between d
 shifting the energy and chemical potential of the right dot or vice-versa, leading to a shift in the locations of charge
 transitions as electrons are pulled on and off each quantum dot. To characterize the effect of the two gates on a double
 quantum dot, we can plot the ground state occupancy of the quantum dots as each of the gate voltages is swept, in a plot
-called a charge stability diagram. A mockup of charge stability diagrams are shown in Fig.~\ref{fig:dqd} (c) as both interdot
+called a charge stability diagram. A mock-up of charge stability diagrams are shown in Fig.~\ref{fig:dqd} (c) as both interdot
 capacitance and gate cross-capacitance are turned on and off. The occupancy of the double quantum dots is labelled
 $(N, M)$ where $N$ represents the occupancy of the left double quantum dot and $M$ represents the occupancy of
 the right double quantum dot.
@@ -872,7 +872,7 @@ is increased. For example, in Fig.~\ref{fig:dqdenergy} (a) we see the evolution 
 quantum dot in i., to a region of intermediate tunnel coupling in ii., and finally small tunnel coupling, i.e. a wholly separated quantum dot, in iii. In the
 limit of smaller tunnel couplings (larger tunnel resistance), the bending of charge transitions will continue to be visible
 at each charge transition as in Fig~\ref{fig:dqdenergy} (b), where the transitions of the constant interaction model (grey) are compared to
-a full hubbard model (black).
+a full Hubbard model (black).
 
 We can examine in further detail a single honeycomb cell in the charge stability diagram of a dot that includes both a cross-capacitance and an inter-dot capacitance.
 In the insets of Fig~\ref{fig:dqdenergy} (b) we map out the energy levels of a quantum dot at various points according to the constant interaction model.
@@ -882,7 +882,7 @@ with the reservoirs. If we were to try and pass a current through such a system,
 current would flow. In between these triple points we find a new inter-dot transition, which comes from the fact that $\mu_{(1 \textrm{~and~} 2)}$
 is now a function of gate voltage \emph{and} the occupancy of dot $(2 \textrm{~and~} 1)$. This dependence on the
 occupancy is a result of the inter-dot capacitance and leads to an additional penalty that must be
-overcome to load an electron on both left and right dots. Hence, the point where we move to the $(1, 1)$ charge configration is
+overcome to load an electron on both left and right dots. Hence, the point where we move to the $(1, 1)$ charge configuration is
 pushed up in both $V_{G1}$ and $V_{G2}$, and a $(0, 1) \rightarrow (1, 0)$ interdot transition appears. To further analyze this charge transition,
 we rotate ourselves to align with the inter-dot transition and define two new perpendicular axes.
 Tilt ($\varepsilon$) is defined as movement perpendicular to the interdot charge transition and is shown in red. It measures the relative
@@ -959,7 +959,7 @@ change state around zero tilt, a qubit in the triplet state will not transition 
 until we can populate an excited orbital mode off to the right. This effect is visible in the current through a double
 quantum dot, which will undergo a rectification due to this spin blockade, as shown in Fig~\ref{fig:dqdenergy} (e).
 Here, we find two finite bias triangles, which are the double quantum dot equivalent of Coulomb diamonds \cite{PhysRevB.72.165308}.
-Charge transport through the quantum dots proceeds via a sequence of electron tunneling events. In the forward direction
+Charge transport through the quantum dots proceeds via a sequence of electron tunnelling events. In the forward direction
 these would be: $(2, 1) \rightarrow (2, 0) \rightarrow (1, 1) \rightarrow (2, 1)$, a sequence that transfers a single electron
 from the left to the right reservoir. Note that near zero tilt, only a singlet state may be loaded into the left dot
 in the $(1, 1) \rightarrow (2, 1)$ transition; however, since we have an effectively infinite source of electrons in the
@@ -1107,7 +1107,7 @@ single spin qubits:
         we can generate an effective oscillating magnetic field by generating a strong magnetic field gradient across a quantum dot with the use of a micromagnet.
         Again, the "wobble" of the electron wave function drives rotations of single spins in a single dot \cite{PhysRevLett.107.146801}
         or between two quantum dots \cite{2019arXiv190500346C}. This technique allows rotations on the order of $\approx \SI{10}{\nano\second}$.
-  \item \textbf{Electrically-Driven ESR in the Exchange Field of an Auxilliary Spin} The use of an auxiliary spin against
+  \item \textbf{Electrically-Driven ESR in the Exchange Field of an Auxiliary Spin} The use of an auxiliary spin against
         which we can drive rotations via the exchange interaction again  allows electric field control of spin with sub-nanosecond operation times \cite{PhysRevB.90.235311}.
         In many ways, this method of control is similar to that of the singlet-triplet qubit, described below, with the exception that we still use a single
         spin as our logical subspace. However, such control has not yet been realized.
@@ -1118,7 +1118,7 @@ reintroduce an electric field coupling, either via intrinsic material properties
 the creation of gradient magnetic fields, to allow for fast control of these qubits. Even then the effect of charge noise
 is far lower than for a charge qubit, with coherence times of hundreds of microseconds possible. Additional sources
 of noise originate from the coupling between electron spins and the nuclear spins of nearby spinful nuclei. This
-effect is termed the Hyperfine interaction, and leads to a fluctuating field, termed the Overhauser field, with magnitude:
+effect is termed the hyperfine interaction, and leads to a fluctuating field, termed the Overhauser field, with magnitude:
 \begin{equation}
   B_{\textrm{nuc}} = \frac{1}{g^* \mu_B} \sum^N_n A_nI_n
 \end{equation}
@@ -1215,7 +1215,7 @@ I arbitrarily choose to be the $-1/2$ states here:
   \ket{1} &=& \ket{\textrm{D}_{-1/2}} &= \ket{T_{l,r}}
 \end{alignat}
 
-Focussing on this subspace, the energy level diagram of the exchange-only qubit is given in Fig.~\ref{fig:eo} (c). We are able to change the exchange
+Focusing on this subspace, the energy level diagram of the exchange-only qubit is given in Fig.~\ref{fig:eo} (c). We are able to change the exchange
 energy between the left (right) and center dots by sweeping tilt ($\varepsilon$). We can largely ignore leakage states as the set of four quadruplet
 states have different principal spin, and the two remaining doublet states are rendered inaccessible by the applied Zeeman field. The exchange-only
 qubit was first experimentally realized in \cite{PhysRevB.82.075403}. In GaAs systems, rotations at rates of up to \SI{47.4}{\giga\hertz} have been measured,
@@ -1242,8 +1242,8 @@ are required to construct one logical qubit using the surface code, and close to
 errors as they occur \cite{6657074}. Although single qubit gate fidelities in spin qubits routinely exceed $99\%$\cite{Zajac439}, two-qubit
 gate fidelities of 98\% are the highest values the author is aware of at the time of writing \cite{PhysRevA.99.042310}.
 The primary sources of error is uncontrolled coupling to the environment, causing the loss of information stored in the qubits, as well
-as inprecise control and readout. An alternative approach to building qubits, one that uses the topology of exotic quasiparticles called non-abelian anyons,
-was proposed by Kitaev as a method of performing quantum computation in a way that is protected from local peturbations in the environment\cite{KITAEV20032}.
+as imprecise control and readout. An alternative approach to building qubits, one that uses the topology of exotic quasiparticles called non-abelian anyons,
+was proposed by Kitaev as a method of performing quantum computation in a way that is protected from local perturbations in the environment\cite{KITAEV20032}.
 
 A system of non-abelian anyons uses as its computational subspace a set of degenerate ground states with a fixed number
 of quasiparticles, separated by a physical distance, where information is stored over multiple pairs of anyons. A result of this
@@ -1275,7 +1275,7 @@ The Hamiltonian he proposed was \cite{Alicea_2012}:
       -\frac{\Delta}{2}\sum_j\left(e^{i\phi}\hat c_j\hat c_{j+1} + e^{-i\phi} \hat c_{j+1}^\dagger \hat c_j^\dagger\right)
   \label{eq:kith}
 \end{equation}
-Here we have a set of sites, indexed by $j$, with an onsite energy (chemical potentital) $\mu$, a hopping term $t$, and a superconducting coupling
+Here we have a set of sites, indexed by $j$, with an onsite energy (chemical potential) $\mu$, a hopping term $t$, and a superconducting coupling
 term $\Delta$ with phase $\phi$. The terms $\hat c_i$ and $\hat c_i^\dagger$ are the fermion annihilation and creation operators respectively.
 Let's look at a few limits of this Hamiltonian. For $\mu < 0$, and $\Delta, t = 0$, this Hamiltonian describes a wire with a single ground state containing a fixed
 number of fermions. If we wish to add an extra electron, we must pay an energy cost $\mu$, as in Fig.~\ref{fig:majo} (a). The next case we consider is where $\mu=0$ and
@@ -1354,7 +1354,7 @@ For this thesis, we will primarily focus on the Quantum Diffusive and the Quantu
 in the Quantum Diffusive regime, as they will allow us to extract both the scattering length and the strength of the spin-orbit interaction.
 As these must be well controlled to form both quantum dots and Majorana zero modes, our understanding of the origins of
 scattering and the spin-orbit effect will be vital to our journey towards building a large-scale quantum computer. Characterization in this section
-will be performed in a hall bar, similar to the ones depected in Fig.~\ref{fig:hall}. A current $I$ is applied along the length of the Hall bar.
+will be performed in a hall bar, similar to the ones depicted in Fig.~\ref{fig:hall}. A current $I$ is applied along the length of the Hall bar.
 Two quantities are extracted relative to that current, the Hall resistivity $\rho_{XY} = V_{XY}/I$ gives
 the voltage formed orthogonal to the direction of current flow, and the transverse resistivity $\rho_{XX} = V_{XX}/I$.
 This second quantity gives us an expression for the conductivity of our sample:
@@ -1399,9 +1399,9 @@ this second term will average to zero, and the total forward probability is give
 \begin{equation}
 P(\textrm{end}) \approx \sum_j t_j^2
 \end{equation}
-Next, let's consider paths that return to the starting point. In this case, we have both a clockwise and a counter-clockwise propogating
+Next, let's consider paths that return to the starting point. In this case, we have both a clockwise and a counter-clockwise propagating
 path (which we can label $j_+$ and $j_-$), around which, due to the symmetry of elastic scattering, we have the same transmission
-probability $t_{j_+} = t_{j_-} = t_j$, and the same acquired phase $\varphi_{j_+} = \varphi_{j_-} = \varphi_j$. This situtation is represented schematically
+probability $t_{j_+} = t_{j_-} = t_j$, and the same acquired phase $\varphi_{j_+} = \varphi_{j_-} = \varphi_j$. This situation is represented schematically
 in Fig.~\ref{fig:WL} (b). The return probability is therefore:
 \begin{equation}
   P(\textrm{start}) = \sum_j \left(t_{j_+}^2 + t_{j_-}^2 + t_{j_+}t_{j_-}\cos(\varphi_{j_+} - \varphi_{j_-}) + t_{j_-}t_{j_+}\cos(\varphi_{j_-} - \varphi_{j_+})\right) = 4 \sum_jt_j^2
@@ -1499,7 +1499,7 @@ This Hamiltonian corresponds to that of a harmonic oscillator centred at $x_0$ w
 This implies that at high field, and neglecting the effects of scattering, our density of states evolves to
 a series of discrete delta functions, where each state is highly degenerate, filled up to the state $E_n < E_F$.
 Each of these states is called a \textbf{Landau level}. This situation is described by the schematic in Fig.~\ref{fig:hall}.
-Up to this point, we've ignored the effects of scattering, however we can give a brief phonomenological description of its effect.
+Up to this point, we've ignored the effects of scattering, however we can give a brief phenomenological description of its effect.
 For the case that the quantum Hall effect is beginning to appear, and $R_c \sim l_e, l_\phi$, the Landau levels become broadened, although the exact mechanism
 by which this occurs is not yet resolved \cite{PhysRevB.90.035425, PhysRevB.82.075401}. An additional effect we have thus far ignored is spin.
 We can, however, trivially add it to our energies:
@@ -1565,7 +1565,7 @@ The edge states of the Hall effect support charge density excitations, that we t
 Such edge excitations are distinct from bulk plasmon (drum) modes and propagate with
 a distinct frequency and dispersion that is set purely by the properties of the edge. Classical descriptions for such excitations
 were first given in the 1980s, on 2DEGs formed on the surface of liquid Helium \cite{PhysRevLett.54.1706,PhysRevB.32.7676,1985ZhPmR..42..450V}.
-We can understand the existence of such modes in a semiclassical picture. Consider a 2DEG running along the $x$ direction, placed in a magnetic field,
+We can understand the existence of such modes in a semi-classical picture. Consider a 2DEG running along the $x$ direction, placed in a magnetic field,
 where the confining potential $E_y$ causes the appearance of edge states. A local perturbation, such as a gate voltage, can cause a dipole to form across
 the plane of the sample, leading to an electric field that induces a propagating current $J = \sigma_{XY}E$ around the edge. As electrons are confined to travel at an
 angle $\theta_H = \SI{90}{\degree}$ to the edge of the sample in a single direction; this creates a charge density wave (and hence electric current) to
@@ -1581,7 +1581,7 @@ This situation is sketched in Fig.~\ref{fig:EMP} (a). Substituting Equation~\ref
   {\label{fig:EMP}(a) Schematic of edge magnetoplasmon propagation. An external magnetic field is applied pointing into the Hall droplet.
   (b) Frequency of the EMP $\omega_\textrm{EMP}$ mode and bulk plasmon $\omega_\textrm{bulk}$ mode in a circular quantum Hall droplet
   with increasing magnetic field. At a high magnetic field, the bulk mode approaches the cyclotron frequency, while the edge mode has an approximately
-  $1/B$ dependance on the field.}
+  $1/B$ dependence on the field.}
 \end{figure}
 
 The resultant oscillatory modes are confined to the perimeter of the Hall sample and travel with a phase velocity $v_D$ approximated by the ratio
@@ -1692,8 +1692,8 @@ the genus $g$ of the object:
   \frac{1}{2\pi}\int_S K \mathrm{d}A = 2(1-g)
 \end{equation}
 We use a generalization of this theorem, called the Chern-Simons theorem, which allows us to map this theorem onto a band structure. We can define an
-equivalent to "curvature" along the surface of bands in a solid, termed the Berrys phase. This is the phase that a particle travelling around
-a path on the surface of a band acquires. The integral of the Berrys phase over momentum space leads to an integral quantity known as the Chern number
+equivalent to "curvature" along the surface of bands in a solid, termed the Berry's phase. This is the phase that a particle travelling around
+a path on the surface of a band acquires. The integral of the Berry's phase over momentum space leads to an integral quantity known as the Chern number
 $n$, which is an integer and characterizes the topology of the material \cite{conmatphys-011417}. In the integer quantum Hall effect, the number $n$ is the same as the filling factor $\nu$, and gives us a topological explanation for the emergence of quantized edge states. As we transition from within
 the material, with Chern number $n$, to free space, with Chern number $0$, there must be a twisting of the band structure near the edge that leads to the emergence of conductive edges. However, for the quantum Hall state, a large magnetic field is required to define the Berry's phase and hence the Chern number of the material.
 

@@ -12,7 +12,7 @@ At the top of the stack, in Chapter~\ref{sec:arch}, I discussed the challenges o
 control and readout lines that a useful quantum machine would require. I also presented architectures that lower the
 requirements on both the number of dc and rf lines and on the power dissipation required to control a quantum device. Today, the effort to build
 CryoCMOS architectures for controlling qubits has been joined by several companies and groups, including Google~\cite{gcryocmos}, Intel and Delft university~\cite{VANDIJK201990},
-who are well and truly in the race to build components for scaleable cryogenic operation of both superconducting and semiconducting qubits. The aims of each
+who are well and truly in the race to build components for scalable cryogenic operation of both superconducting and semiconducting qubits. The aims of each
 of these efforts are twofold, firstly to bring the footprint of the qubit-classical interface under control, the second being
 to tame the rapid growth of power consumed at each part of the stack.
 
@@ -44,7 +44,7 @@ techniques to improve the insertion loss, for example, the use of an LC matching
 an intrinsic matching effect in the edges to achieve self-matching at specific frequencies. Such a device geometry promises nearly perfect transmission at these
 frequencies.
 
-\section{Scaleable Qubit Designs}
+\section{Scalable Qubit Designs}
 Designing scalable gate layouts for qubit devices remains an open challenge. In Chapter~\ref{sec:spinqubit} this is exactly the challenge that we aim to
 tackle, in two ways. First is the design of a modular layout that allows for a design element to be tiled directly, and is presented in Sec.~\ref{sec:5dot}.
 A tiling of this design is shown in Fig.~\ref{fig:scaledes}. For such a technique to be genuinely scalable, several additional technical developments
@@ -64,7 +64,7 @@ coupling via quantum Hall edge states~\cite{dohertyqhe}. However, an experimenta
 
 \begin{figure}
     \includegraphics[width=0.85\linewidth]{scaledes}
-    \caption[Scaleable qubit designs]{\label{fig:scaledes} (a) The design for a 5 quantum dot device, as presented in Sec~\ref{sec:5dot}, showing a path towards creating a 1D
+    \caption[Scalable qubit designs]{\label{fig:scaledes} (a) The design for a 5 quantum dot device, as presented in Sec~\ref{sec:5dot}, showing a path towards creating a 1D
     chain of singlet-triplet qubits. (b) A qubit chip with 6 5-dot devices, controlled by a total of 168 control lines. Superconducting resonators are used for fast,
     frequency multiplexed charge and gate-based readout. A total of 32 readout channels are bonded on this device.}
 \end{figure}
@@ -84,13 +84,13 @@ quantum computation with as few as 1000 logical qubits. To run Shor's algorithm 
 an error rate of $10^{-5}$. The use of topologically protected qubits~\cite{RevModPhys.80.1083}, such as Majorana zero modes~\cite{s41578-018-0003-1}, is the most promising path
 to realizing qubits with a significantly improved fidelity; however, the materials and techniques challenges, as laid out in Chapter~\ref{sec:majoinas} are formidable.
 Nonetheless, continuing advances in the growth of high-quality materials with large spin-orbit interaction, and high-quality superconductivity~\cite{PhysRevLett.119.136803},
-and improved designs for scaleable Majorana-based devices~\cite{PhysRevB.95.235305,Plugge} present exciting opportunities for building truly scaleable quantum machines.
+and improved designs for scalable Majorana-based devices~\cite{PhysRevB.95.235305,Plugge} present exciting opportunities for building truly scalable quantum machines.
 Some of these issues are explored in Chapter~\ref{sec:majoinas}, including the design of charge sensors in Sec.~\ref{sec:rfmajo}, and the development of fabrication techniques
 in Sec.~\ref{sec:inas_hb}. Moving forward, it is clear that there are some fundamental scientific problems to solve with such devices to prove that they are indeed possible.
-Without them, however, it is difficult to see how with current error rates and control schemes, any scaleable quantum machine will be possible.
+Without them, however, it is difficult to see how with current error rates and control schemes, any scalable quantum machine will be possible.
 
 \section{Closing Remarks}
-The field today is focussed on achieving quantum supremacy, that is to run an algorithm on a quantum computer that could not feasibly be
+The field today is focused on achieving quantum supremacy, that is to run an algorithm on a quantum computer that could not feasibly be
 simulated on a classical machine. The consensus at the time of writing is that this will be some variant of Boson sampling~\cite{Aaronson:2011},
 performed on approximately 50 qubits~\cite{savage,8322045,10.1038/s41567-018-0131-y}, with companies such as Google, IBM, Rigetti and Ion-Q each having
 announced their intention to reach this goal imminently. However, even though IBM announced its 50 qubit processor in November 2017~\cite{ibmq}, Google announced

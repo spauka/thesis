@@ -22,7 +22,7 @@ although none have yet simulated a molecule that is classically intractable~\cit
 \label{sec:archdesign}
 Given the rapid progression of the field, the questions surrounding architecting a quantum computer have been gaining increasing attention,
 particularly as the number of qubits grows beyond the limits that we might control with an ad-hoc architecture that a single graduate student might construct.
-The challenge for experimentalists continues to come down to building scaleable building blocks, which balance the need for experimental
+The challenge for experimentalists continues to come down to building scalable building blocks, which balance the need for experimental
 flexibility surrounding qubits whose designs and control requirements remain in flux, but whose footprint does not explode for larger numbers
 of physical qubits. Thankfully, there is substantial overlap in the requirements for control and readout between qubit implementations
 (at least within the realm of superconductor and semiconductor based qubits), which allows us to design architectures for hypothetical
@@ -30,7 +30,7 @@ quantum machines. Let's therefore enumerate a few of the key requirements for a 
 \begin{itemize}
   \item \textbf{Cryogenic operation}: Solid-state qubits must be operated in cryogenic environments, stemming from the requirement that the thermal energy should be well below the level spacing of energy levels in the qubit, as well as the need for superconducting elements in some designs. Any control and readout architecture must, therefore, be low power, and avoid carrying thermal energy or noise down to the qubit device.
   \item \textbf{Control fidelity}: In order to reach the fault-tolerance threshold, fidelities of individual qubits must exceed $99\%$, and should ideally be well above the $(1 - 10^{-5})$ level to avoid prohibitive error correction requirements~\cite{6657074}. Depending on the rotation rate and decoherence rates of individual qubits, control lines must have bandwidths of several 10's of \si{\giga\hertz}, as well as being high density while maintaining low crosstalk.
-  \item \textbf{Readout fidelity}: Readout of qubits brings unique challenges, requiring low probe powers in order to avoid disturbing the state while it is being measured, and limited measurement time due to decoherence. In addition, QEC in general requires the continued measurement of ancilla qubits while nearby qubits are operational, leading to stringent crosstalk requirements. In order to obtain sufficient signal-to-noise ratio, cryogenic amplification is generally required, which in turn limits scaleable designs to a small number of parallel readout lines. As such, some form of multiplexing, either frequency-domain or time-domain, is necessary for readout.
+  \item \textbf{Readout fidelity}: Readout of qubits brings unique challenges, requiring low probe powers in order to avoid disturbing the state while it is being measured, and limited measurement time due to decoherence. In addition, QEC in general requires the continued measurement of ancilla qubits while nearby qubits are operational, leading to stringent crosstalk requirements. In order to obtain sufficient signal-to-noise ratio, cryogenic amplification is generally required, which in turn limits scalable designs to a small number of parallel readout lines. As such, some form of multiplexing, either frequency-domain or time-domain, is necessary for readout.
   \item \textbf{Space}: This requirement is particularly difficult to accomplish as it occurs over three orders of magnitude over the scale of the chip, the cryostat and at room temperature. Each of these are discussed in detail below, but we state the problem briefly here. On a chip scale, dense control lines must be fit into an area set by the distance over which we can achieve coupling between qubits, setting micron-scale limits on on-chip structures. On a cryostat level, the need to operate at \si{\milli\kelvin} places centimeter-scale limits on cryogenic components. Finally at room temperature, phase matching of control pulses and the need for active feedback places limits on the size of the instrumentation used to control individual qubits.
 \end{itemize}
 
@@ -69,10 +69,10 @@ quantum machines. Let's therefore enumerate a few of the key requirements for a 
 }
 
 In general, qubit architectures for solid-state qubits can be classified into two categories (control and readout) at three different temperature stages
-(room temperature (RT), four Kelvin (4K) and milliKelvin (mK)), as shown in Fig.~\ref{fig:genarch}. An
+(room temperature (RT), four Kelvin (4K) and millikelvin (mK)), as shown in Fig.~\ref{fig:genarch}. An
 architecture is characterized by the number of rf and dc lines that run between temperature stages $L$, and a power consumption at each stage $P$, divided between the control
 and readout block. Two architectures are presented in this thesis, which trade off complexity and reduced experimental flexibility for reduced wiring and power consumption
-at different stages of the cryostat. The CryoCMOS architecture, presented in Sec.~\ref{sec:gooseberry} utilizes a CMOS based switching matrix at milliKelvin temperatures that is
+at different stages of the cryostat. The CryoCMOS architecture, presented in Sec.~\ref{sec:gooseberry} utilizes a CMOS based switching matrix at millikelvin temperatures that is
 bonded directly to the qubit chip in order to minimize the power dissipated in parasitic capacitance. The Prime-Lines architecture, presented in Sec.~\ref{sec:primelines}
 utilizes a cryogenic switching matrix near the qubit to minimize the number of high-frequency coaxial lines required to control qubits. Order of magnitude estimates
 for the number of control lines and the power consumption for each architecture is given in Table~\ref{tab:arch}, characterized by a number of qubits $N$,
@@ -93,9 +93,9 @@ structure is by no means strict.
 
 \subsection{Control Plane}
 \label{sec:control}
-A popular refrain for proponents of semiconductor-based qubits is to point to the maturity and flexibilty of modern semiconductor processing as an argument
+A popular refrain for proponents of semiconductor-based qubits is to point to the maturity and flexibility of modern semiconductor processing as an argument
 for the scalability of qubits based on similar processes. While it is undoubtedly true that the miniaturization of transistors has translated into an ability
-to fabricate finer devices, the scalability of quantum computers based on such an argument is by no means clear. The problem, and indeed the main diffrentiator
+to fabricate finer devices, the scalability of quantum computers based on such an argument is by no means clear. The problem, and indeed the main differentiator
 between a qubit and a transistor, it that while a transistor has the ability to drive other transistors, a qubit has no similar ability. All control of a qubit,
 to initialize and to drive single and two qubit rotations, must come from outside. This unfortunate fact is captured in Rent's rule, which relates the number of
 external terminals (or pins) $T$ of an IC, to the number of internal components (or transistors) $g$:
@@ -117,7 +117,7 @@ we bring in to such a device, given a 1D or a 2D grid of qubits?
 The answer to the first question, the pitch of qubit devices, will be set by the length scale over which coupling can be achieved. For spin qubit devices based only
 on direct exchange for example, the pitch of qubits will be roughly the size of the qubit itself, as coupling only occurs when electrons can directly tunnel between
 neighbouring devices~\cite{PhysRevB.86.085423}. Work presented in this thesis uses elongated many-electron quantum dots to increase this to the micron-scale in
-Section~\ref{sec:5dot}, an approach which will likely be applicable majorana devices that use quantum dots as couplers~\cite{PhysRevB.95.235305}. Finally, long
+Section~\ref{sec:5dot}, an approach which will likely be applicable Majorana devices that use quantum dots as couplers~\cite{PhysRevB.95.235305}. Finally, long
 distance coupling of spins via superconducting resonators~\cite{PhysRevB.97.235409} has recently been demonstrated~\cite{2019arXiv190500776B}, enabling coupling
 over \si{\milli\meter} length scales.
 
@@ -129,12 +129,12 @@ minimum is required to break pads out to the edge of a device.
 
 The situation is more difficult to evaluate in a 2D array. Firstly, a 2D array is not possible on
 a single planar grid, as control lines for inner qubits must be broken out. Therefore a sufficient distance between qubits must be possible to allow control lines
-to be brought in from upper layers. To allow fanout of a dense grid leads to a problem very similar to that of routing a ball-grid array (BGA) package. There will
+to be brought in from upper layers. To allow fan-out of a dense grid leads to a problem very similar to that of routing a ball-grid array (BGA) package. There will
 be a relationship between number of layers, track pitch and via (inter-layer contact) pitch, which will set a hard density limit on qubit devices. Therefore
 increasing the pitch of qubit devices via long distance coupling may be necessary when moving to 2D grids. Furthermore, the design of qubit layouts allowing
 realistic wiring schemes will continue to be crucial moving forwards~\cite{10.1038/s41534-018-0074-2}. Finally, I point to the potential for multiplexing the
 control of many qubits onto single control lines, which may allow the definition of a quantum analog to Rent's rule~\cite{FRANKE20191} (Equation~\ref{eq:rent}).
-Whether such an architecture is truly scaleable remains an open question at this time.
+Whether such an architecture is truly scalable remains an open question at this time.
 
 On a single qubit chip it seems difficult to get around the problem of breaking all control lines out in order to allow qubit control. Alluding
 back to our generalized qubit architecture in Fig.~\ref{fig:genarch}, it should in general be possible to reduce the number of lines running between the 4K stage
@@ -179,8 +179,8 @@ the overall advantages of 4K control require further investigation.
 In addition to control, the high-fidelity readout of a fragile quantum state is a crucial element of a quantum computer, without which improvements
 we make to the control of our qubit are negated. This effect is particularly apparent when considering error correction schemes, which feed the results
 of measurements back into the qubits in order to correct errors, which is a futile endeavour without accurate readout results. Combining fast,
-high-fidelity readout with scaleable design complicates the requirements for a quantum computer even further, particularly when we consider
-the most common desings for readout circuits. As before, I will begin the discussion of readout at the qubit chip level, and discuss scaleability as we go.
+high-fidelity readout with scalable design complicates the requirements for a quantum computer even further, particularly when we consider
+the most common designs for readout circuits. As before, I will begin the discussion of readout at the qubit chip level, and discuss scalability as we go.
 
 \begin{figure}
   \includegraphics[width=\linewidth]{ReadoutFig}
@@ -188,7 +188,7 @@ the most common desings for readout circuits. As before, I will begin the discus
   {\label{fig:readout}(a) False color SEM of a five-dot device, similar to the one presented in Sec.~\ref{sec:5dot}. Surface gates are labelled, and
   current is shown running through the charge sensor on the left of the device. (b) Charge sensing signal when the left sensor is tuned as a QPC (1d channel).
   Each step corresponds to a change in the charge occupancy of the quantum dot by 1. (c) Multiplexed readout chip with several resonators, used for
-  performing rf readout. (d) Response of the charge sensor in current (right axis) and in reflected rf power (left axis) as the QPC is brought through pinchoff.
+  performing rf readout. (d) Response of the charge sensor in current (right axis) and in reflected rf power (left axis) as the QPC is brought through pinch-off.
   (e) Sample of a charge stability diagram taken using rf charge sensing. Each distinctly coloured region represents a unique charge configuration.}
 \end{figure}
 
@@ -301,7 +301,7 @@ chapter~\ref{sec:hall}, the use of the quantum Hall effect to form miniaturized 
   in the blue box, however in this case, all repeated elements are digital, hence require no additional hardware. Bandwidths for components used in our lab are shown.}
 \end{figure}
 
-Finally, we briefly touch on the topic of readout hardware at room temperature. The use of multiple simultaneous frequences for readout creates several challenges
+Finally, we briefly touch on the topic of readout hardware at room temperature. The use of multiple simultaneous frequencies for readout creates several challenges
 for a typical analog homodyne detection architecture, due to the higher-order non-linearity and the inherent unscalability of analog signal generators and low-bandwidth
 digitizers. A schematic of a typical analog readout chain is shown in Fig.~\ref{fig:multiread} (a). Due to the non-linearities present in the analog mixer, signals must be
 band-pass filtered and boosted prior to mixing to achieve optimal signal-to-noise. For the homodyne setup shown, an analog phase shifter is required, and does not allow
@@ -315,7 +315,7 @@ Having introduced the general structure of an architecture for a semiconductor b
 of some architectures, which progressively reduce the power dissipated and resource requirements at each stage of the architecture, at the expense of flexibility.
 Section~\ref{sec:primelines} proposes an architecture for a quantum computer that reduces the need for high-bandwidth wiring to low temperature, covers the distribution of pulses
 at the qubit interface and introduces low power cryogenic switches to accomplish that goal. Section~\ref{sec:gooseberry} proposes an architecture that utilizes CryoCMOS to drastically
-reduce the wiring requirements for a large scale quantum computer, and creates a platform for scaleable control of large numbers of qubits.
+reduce the wiring requirements for a large scale quantum computer, and creates a platform for scalable control of large numbers of qubits.
 
 \clearpage
 \section{Cryogenic Control Architecture for Large-Scale Quantum Computing}
@@ -453,10 +453,10 @@ Having validated that pulse generation works, we now show that the frequency and
 
 Variation of the pulse amplitude is performed by changing the difference $\Delta V$ between the voltages $V_\textrm{HIGH}$ and $V_\textrm{LOW}$. In general, as gates that are not intended to be pulsed have voltages set in reference to $V_\textrm{LOW}$, this value will remain fixed, while $V_\textrm{HIGH}$ is varied. In Fig.~\ref{fig:gbfg} (c), the value of $V_\textrm{HIGH}$ is varied on the bottom axis while $V_\textrm{SDP}$ is swept. The pulse frequency is configured to be well above the bandwidth of the readout circuit, such that an averaged trace between $V_\textrm{HOLD}$ and $V_\textrm{P}$ is returned. As such, as $\Delta V$ is increased from zero, each coulomb peak splits into two, with one remaining at the same value of $V_\textrm{SDP}$, and the other decreasing towards more negative values of $V_\textrm{SDP}$ as $V_\textrm{HIGH}$ is increased to more positive values.
 
-Combining these effects, we can extract the power dissipation of the entire circuit. The cooling power of the mixing chamber of the dilution refrigerator is first calibrated using a known resistance. Then, as various circuits on the CryoCMOS chip are enabled, the extra heating of the device is calculated. The static power dissipation for the circuit is extracted to be $\sim \SI{0.1}{\micro\watt}$ based on the current drawn on the power rails. Upon enabling the clock, an additional \SI{9}{\micro\watt} of static power dissipation and \SI[per-mode=symbol]{2.5}{\micro\watt\per\mega\hertz} of dynamic power is dissipated by the clock generation circuitry. We note that although this is a significant portion of the power budget at mK, this dissipation is static at a fixed frequency, as this clock is shared by all gates. To extract the heating due to pulses applied to gates, pulses at a known frequency are applied and $\Delta V$ is swept. As the total length of routing and bond-wires is on the order of millimeters, a lumped element model is sufficient to calculate dissipation, such that the aggregate dissipated power is given by Eq.~\ref{eq:diss}. From this, a total capacitance to ground of \SI{0.6}{\pico\farad} is extracted. The power per gate controlled, assuming a pulse amplitude of \SI{1}{\milli\volt} at \SI{10}{\mega\hertz} is therefore only \SI{6}{\pico\watt}, on top of a static power dissipation of \SI{34}{\micro\watt}, well within the cooling power of a typical dilution refridgerator.
+Combining these effects, we can extract the power dissipation of the entire circuit. The cooling power of the mixing chamber of the dilution refrigerator is first calibrated using a known resistance. Then, as various circuits on the CryoCMOS chip are enabled, the extra heating of the device is calculated. The static power dissipation for the circuit is extracted to be $\sim \SI{0.1}{\micro\watt}$ based on the current drawn on the power rails. Upon enabling the clock, an additional \SI{9}{\micro\watt} of static power dissipation and \SI[per-mode=symbol]{2.5}{\micro\watt\per\mega\hertz} of dynamic power is dissipated by the clock generation circuitry. We note that although this is a significant portion of the power budget at mK, this dissipation is static at a fixed frequency, as this clock is shared by all gates. To extract the heating due to pulses applied to gates, pulses at a known frequency are applied and $\Delta V$ is swept. As the total length of routing and bond-wires is on the order of millimeters, a lumped element model is sufficient to calculate dissipation, such that the aggregate dissipated power is given by Eq.~\ref{eq:diss}. From this, a total capacitance to ground of \SI{0.6}{\pico\farad} is extracted. The power per gate controlled, assuming a pulse amplitude of \SI{1}{\milli\volt} at \SI{10}{\mega\hertz} is therefore only \SI{6}{\pico\watt}, on top of a static power dissipation of \SI{34}{\micro\watt}, well within the cooling power of a typical dilution refrigerator.
 
 \subsection{Conclusion}
 We have proposed a CryoCMOS based architecture for scaling qubit devices up to the hundreds without a large increase in power dissipated at the mK stage of a dilution refrigerator. By placing a CryoCMOS pulse generator close to the qubit chip, the power dissipation per channel may be lowered to 10's of pico-watts. Using our CryoCMOS chip, we are also able to lock static control voltages on gates with a leakage rate of \SI{-294}{\micro\volt\per\hour}, the lowest value reported in the literature, allowing the number of static control lines to be reduced to a minimum of three. For large scale quantum machines, we anticipate that some form of cryogenic pulse generation, such as the one presented here, will be crucial to allow large numbers of qubits to be controlled without unacceptable heat dissipation in high-bandwidth control lines.
 
 \subsubsection{Acknowledgements}
-This research was supported by the Microsoft Corporation and the Australian Research Council Centre of Excellence for Engineered Quantum Systems (EQUS, CE170100009). The authors acknowledge the facilities as well as the scientific and technical assistance of the Research \& Prototype Foundry Core Research Facility at the University of Sydney, part of the Australian National Fabrication Facility
+This research was supported by the Microsoft Corporation and the Australian Research Council Centre of Excellence for Engineered Quantum Systems (EQuS, CE170100009). The authors acknowledge the facilities as well as the scientific and technical assistance of the Research \& Prototype Foundry Core Research Facility at the University of Sydney, part of the Australian National Fabrication Facility

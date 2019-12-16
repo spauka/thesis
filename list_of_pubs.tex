@@ -1,0 +1,167 @@
+% -*- Mode:TeX -*-
+
+%% IMPORTANT: The official thesis specifications are available at:
+%%            http://libraries.mit.edu/archives/thesis-specs/
+%%
+%%            Please verify your thesis' formatting and copyright
+%%            assignment before submission.  If you notice any
+%%            discrepancies between these templates and the
+%%            MIT Libraries' specs, please let us know
+%%            by e-mailing thesis@mit.edu
+
+%% The documentclass options along with the pagestyle can be used to generate
+%% a technical report, a draft copy, or a regular thesis.  You may need to
+%% re-specify the pagestyle after you \include  cover.tex.  For more
+%% information, see the first few lines of mitthesis.cls.
+
+%\documentclass[12pt,vi,twoside]{mitthesis}
+%%
+%%  If you want your thesis copyright to you instead of MIT, use the
+%%  ``vi'' option, as above.
+%%
+%\documentclass[12pt,twoside,leftblank]{mitthesis}
+%%
+%% If you want blank pages before new chapters to be labelled ``This
+%% Page Intentionally Left Blank'', use the ``leftblank'' option, as
+%% above.
+
+\documentclass[12pt,twoside,vi,singlespace]{mitthesis}
+\usepackage{import}
+\usepackage[numbers]{natbib}
+\usepackage[hyperpageref]{backref}
+\usepackage{graphicx}
+\graphicspath{{Figures/}}
+\usepackage{multirow}
+\usepackage{pdflscape}
+\usepackage{afterpage}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{fontspec}
+\usepackage{xcolor}
+\usepackage[english]{babel}
+\usepackage[autostyle,
+            autopunct=true,
+            english=american]{csquotes}
+\MakeOuterQuote{"}
+\renewcommand{\mkcitation}[1]{#1}
+\usepackage{braket}
+\usepackage{amsmath}
+\usepackage{unicode-math}
+\usepackage{latexsym}
+\usepackage{esdiff}
+\allowdisplaybreaks
+\usepackage[version=4]{mhchem}
+\setmainfont{Adobe Caslon Pro}[
+    Numbers = Lining,
+]
+\setsansfont{Candara}[
+    BoldFont = {HelveticaNeue-Bold},
+    ItalicFont = {Candara-Italic},
+    BoldItalicFont = {HelveticaNeue-BoldItalic}
+]
+\newfontface\DejaVuSans{DejaVu Sans}
+\def\digamma{\mbox{\DejaVuSans\char"0191}}
+\usepackage[labelfont={bf,footnotesize,sf,singlespacing},
+            textfont={sf,footnotesize,singlespacing},
+            justification={justified,RaggedRight},
+            singlelinecheck=false,
+            margin=0pt,
+            figurewithin=chapter,
+            tablewithin=chapter]{caption}
+\usepackage{fancyhdr}
+\fancyhf{}
+\setlength{\headheight}{10mm}
+\lhead[\small{\nouppercase\leftmark}]{}
+\rhead[]{\small{\nouppercase\rightmark}}
+\cfoot[\thepage]{\thepage}
+\addtolength{\footnotesep}{3mm}
+\addtolength{\voffset}{-2mm}
+\addtolength{\textheight}{-4mm}
+\pagestyle{plain}
+
+% Set hbox/vbox warnings
+\hbadness=99999
+\hfuzz=20pt
+\vbadness=\maxdimen
+\vfuzz=20pt
+
+% Handy Commands
+\def\dashsign{\xleaders\hbox to .5em{\_}\hfill\_}
+\newcommand{\note}[1]{{\color{red}\textbf{Note:}}~#1}
+\newcommand{\den}[1]{\SI{#1}{\per\square\centi\meter}}
+\newcommand{\mob}[1]{\SI[per-mode=symbol]{#1}{\square\centi\meter\per\volt\per\second}}
+\newcommand{\mobr}[2]{\SIrange[per-mode=symbol,range-units=single]{#1}{#2}{\square\centi\meter\per\volt\per\second}}
+\newcommand{\svec}[1]{\ensuremath{\begin{bmatrix}#1\end{bmatrix}}}
+\newcommand{\cc}[1]{\textsc{\MakeLowercase{#1}}}
+\sisetup{
+    math-ohm  = \char"2126
+}
+\DeclareSIUnit{\dBm}{dBm}
+\DeclareSIUnit\micron{\micro\metre}
+\DeclareSIUnit\uev{\micro\electronvolt}
+\DeclareSIUnit\mk{\milli\kelvin}
+\DeclareSIUnit\mv{\milli\volt}
+\DeclareSIUnit\rpm{rpm}
+\DeclareSIUnit\sq{\ensuremath{\Box}}
+
+% Set manual hyphenation
+\babelhyphenation[english]{Cryo-CMOS}
+\babelhyphenation[english]{Quantum}
+
+\makeatletter
+\let\oldfigure\figure
+\def\figure{\@ifnextchar[\figure@i \figure@ii}
+\def\figure@i[#1]{\oldfigure[#1]\centering}
+\def\figure@ii{\oldfigure\centering}
+\makeatother
+
+%% Allow hiding of contents
+\newcommand{\nocontentsline}[3]{}
+\newcommand{\tocless}[2]{\bgroup\let\addcontentsline=\nocontentsline#1{#2}\egroup}
+
+\begin{document}
+
+\pagenumbering{roman}
+\include{cover}
+
+\renewenvironment{abstract}{
+    \begin{center}
+    \begin{minipage}{0.9\textwidth}
+    \rule{\textwidth}{1pt}
+    \begin{center}
+        \textbf{Abstract}
+    \end{center}
+    \small
+    \begin{singlespace}
+}{
+    \par\noindent\rule{\textwidth}{1pt}
+    \end{singlespace}
+    \end{minipage}
+    \end{center}
+    \clearpage
+}
+
+% Use "thesis-style" one-half spacing
+\onehalfspace
+
+\makeatletter
+\def\frontmatter@authorformat{\centering\singlespace\normalsize\advance\baselineskip\p@\parskip11.5\p@\let\thanks\thanks@latex\let\and\and@space}%
+\def\frontmatter@authorbelow{\vskip 1em\relax}%
+\def\frontmatter@above@affiliation@script{\vskip 1em\relax}%
+\def\frontmatter@affiliationfont{\singlespace\preprintsty@sw{}{\small}\it}%
+\def\frontmatter@finalspace{\vskip 1em\relax}
+\let\@makefnmark\frontmatter@makefnmark
+\makeatother
+
+% Set Appendix Numbering
+\appto\appendix{\addtocontents{toc}{\protect\setcounter{tocdepth}{1}}}
+% reinstate the correct level for list of tables and figures
+\appto\listoffigures{\addtocontents{lof}{\protect\setcounter{tocdepth}{1}}}
+\appto\listoftables{\addtocontents{lot}{\protect\setcounter{tocdepth}{1}}}
+
+\pagestyle{plain}
+\input{contents}
+
+\endgroup
+\end{document}
+

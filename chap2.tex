@@ -69,7 +69,7 @@ quantum machines. Let's therefore enumerate a few of the key requirements for a 
 }
 
 In general, qubit architectures for solid-state qubits can be classified into two categories (control and readout) at three different temperature stages
-(room temperature (RT), four Kelvin (4K) and millikelvin (mK)), as shown in Fig.~\ref{fig:genarch}. An
+(room temperature (RT), four Kelvin (4K) and milli-Kelvin (mK)), as shown in Fig.~\ref{fig:genarch}. An
 architecture is characterized by the number of rf and dc lines that run between temperature stages $L$, and a power consumption at each stage $P$, divided between the control
 and readout block. Two architectures are presented in this thesis, which trade off complexity and reduced experimental flexibility for reduced wiring and power consumption
 at different stages of the cryostat. The CryoCMOS architecture, presented in Sec.~\ref{sec:gooseberry} utilizes a CMOS based switching matrix at millikelvin temperatures that is
@@ -178,18 +178,18 @@ the overall advantages of 4K control require further investigation.
 \label{sec:readout}
 In addition to control, the high-fidelity readout of a fragile quantum state is a crucial element of a quantum computer, without which improvements
 we make to the control of our qubit are negated. This effect is particularly apparent when considering error correction schemes, which feed the results
-of measurements back into the qubits in order to correct errors, which is a futile endeavour without accurate readout results. Combining fast,
+of measurements back into the qubits in order to correct errors, which is a futile endeavor without accurate readout results. Combining fast,
 high-fidelity readout with scalable design complicates the requirements for a quantum computer even further, particularly when we consider
 the most common designs for readout circuits. As before, I will begin the discussion of readout at the qubit chip level, and discuss scalability as we go.
 
 \begin{figure}
   \includegraphics[width=\linewidth]{ReadoutFig}
   \caption[Readout of a semiconductor quantum dot]
-  {\label{fig:readout}(a) False color SEM of a five-dot device, similar to the one presented in Sec.~\ref{sec:5dot}. Surface gates are labelled, and
+  {\label{fig:readout}(a) False color SEM of a five-dot device, similar to the one presented in Sec.~\ref{sec:5dot}. Surface gates are labeled, and
   current is shown running through the charge sensor on the left of the device. (b) Charge sensing signal when the left sensor is tuned as a QPC (1d channel).
   Each step corresponds to a change in the charge occupancy of the quantum dot by 1. (c) Multiplexed readout chip with several resonators, used for
   performing rf readout. (d) Response of the charge sensor in current (right axis) and in reflected rf power (left axis) as the QPC is brought through pinch-off.
-  (e) Sample of a charge stability diagram taken using rf charge sensing. Each distinctly coloured region represents a unique charge configuration.}
+  (e) Sample of a charge stability diagram taken using rf charge sensing. Each distinctly colored region represents a unique charge configuration.}
 \end{figure}
 
 For the majority of semiconductor qubit designs, readout is performed via sensing of the charge state of a quantum dot, or quantum dot like
@@ -284,7 +284,7 @@ for a bandwidth of \SI{1}{\hertz}, as:
 The choice of first stage amplifier is therefore critical in designing a readout chain. The use of frequency multiplexing reduces the scaling of power and high-bandwidth
 lines to \SI{4}{\kelvin}, as shown in Table~\ref{tab:arch}, however it creates additional constraints. Namely we must balance the \SI{1}{\decibel} compression point and
 the noise temperature of the amplifier to minimize the effective system temperature while maximizing the allowed probe power and the number of simultaneous channels that
-may be read. In particular for quantum limited amplifiers such as Josephson parametric amplifiers and or travelling-wave parametric amplifiers~\cite{Macklin307}
+may be read. In particular for quantum limited amplifiers such as Josephson parametric amplifiers and or traveling-wave parametric amplifiers~\cite{Macklin307}
 where the dynamic range is limited, designs which specifically take into account the bandwidth and power requirements for multi-channel readout are required. In addition
 to this, the isolation of the amplification chain from the qubits must be considered. An attenuator can be considered an element with gain $G_k < 1$, and a temperature
 set by the stage it is on, such that any attenuation between qubit and the first stage amplifier can lead to a large increase in the effective signal temperature. For this
@@ -458,5 +458,5 @@ Combining these effects, we can extract the power dissipation of the entire circ
 \subsection{Conclusion}
 We have proposed a CryoCMOS based architecture for scaling qubit devices up to the hundreds without a large increase in power dissipated at the mK stage of a dilution refrigerator. By placing a CryoCMOS pulse generator close to the qubit chip, the power dissipation per channel may be lowered to 10's of pico-watts. Using our CryoCMOS chip, we are also able to lock static control voltages on gates with a leakage rate of \SI{-294}{\micro\volt\per\hour}, the lowest value reported in the literature, allowing the number of static control lines to be reduced to a minimum of three. For large scale quantum machines, we anticipate that some form of cryogenic pulse generation, such as the one presented here, will be crucial to allow large numbers of qubits to be controlled without unacceptable heat dissipation in high-bandwidth control lines.
 
-\subsubsection{Acknowledgements}
+\subsubsection{Acknowledgments}
 This research was supported by the Microsoft Corporation and the Australian Research Council Centre of Excellence for Engineered Quantum Systems (EQuS, CE170100009). The authors acknowledge the facilities as well as the scientific and technical assistance of the Research \& Prototype Foundry Core Research Facility at the University of Sydney, part of the Australian National Fabrication Facility

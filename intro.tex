@@ -11,7 +11,7 @@ Despite these advances, many suspected that it was only a matter of time before 
 be found; a result that would say that quantum computers could not scale, or that errors in a quantum system would be uncorrectable.
 However, with the formulation of the quantum fault-tolerance theorem \cite{1996quant.ph.11025A,doi:10.1098/rspa.1998.0167}, which
 showed that for a sufficiently small error rate it is possible to correct errors faster than they occur, the last
-reasonable objection to quantum computing was overcome (my favourite reference as to why this seems true
+reasonable objection to quantum computing was overcome (my favorite reference as to why this seems true
 is in Chapter 14 of Scott Aaronson's book \cite{Aaronson:skepticism}). Since then, a plethora of physical
 systems have emerged that seem like contenders for building a quantum computer, such as trapped
 ions~\cite{doi:10.1063/1.5088164}, nuclear spins~\cite{acs.nanolett.8b00006}, electron spins in
@@ -27,8 +27,8 @@ With such a large number of physical systems to choose from, and with significan
 apparatus necessary to form and control them, I make the choice to limit the discussion in my thesis to semiconductor and superconductor
 based qubit systems. This class of qubit still encompasses a significant portion of the above systems, however, these systems
 have the advantage of sharing a number of features which will allow us to reason about the design of a large-scale quantum machine,
-despite the fact that a truly scaleable quantum chip is not yet a reality. Namely, these each have all electrical control and
-readout with bandwidths up to a few \si{\giga\hertz}, and must all be cooled to temperatures of a few mK in order to protect the delicate
+despite the fact that a truly scalable quantum chip is not yet a reality. Namely, these each have all electrical control and
+readout with bandwidths up to a few \si{\giga\hertz}, and must all be cooled to temperatures of a few \si{\milli\kelvin} in order to protect the delicate
 quantum information stored within them from thermal excitation, and for superconducting and topological variants, to form a superconducting
 state. In particular, the requirement to cool these systems introduces limitations in the power that may be dissipated proximally to the quantum device,
 with only a few micro-Watt's of cooling power available when cooling devices to \si{\milli\kelvin} in a cryostat. With this in mind,
@@ -48,7 +48,7 @@ challenges, to designing individual qubits, to scalable instrumentation design, 
 designs for building large scale quantum machines.
 
 I have grouped results into five broad chapters, each of which presents several papers dealing
-with these results, intending to create a coherent storyline around my work, starting from the top
+with these results, intending to create a coherent story-line around my work, starting from the top
 level architecture in Chapter~\ref{sec:arch} and working my way down to materials science in Chapter~\ref{sec:majoinas}.
 A brief description of the structure of this thesis is as follows.
 
@@ -60,17 +60,17 @@ not sufficiently descriptive for describing or contrasting the different archite
 Section~\ref{sec:archdesign}, by defining a new quantum-specific framework for discussing architectures used for quantum computers,
 using the three criteria (power, interconnection and latency) highlighted above. Following this, I present two new architectures,
 the prime lines architecture in Section~\ref{sec:primelines} which routes signals generated at room temperature between many qubits,
-and a CryoCMOS architecture which is able to generate pulses at mK. Each of these significantly reduces the number of interconnects necessary between
-room temperature and mK, allowing the number of qubits controlled by finite resources to be increased dramatically. Such approaches,
+and a CryoCMOS architecture which is able to generate pulses at \si{\milli\kelvin}. Each of these significantly reduces the number of interconnects necessary between
+room temperature and \si{\milli\kelvin}, allowing the number of qubits controlled by finite resources to be increased dramatically. Such approaches,
 while previously proposed in various theoretical forms~\cite{10.1038/npjqi.2015.11,s41467-017-01905-6}, are realized for the first
 time in Section~\ref{sec:gooseberry}.
 
 To enable the architectures proposed in this thesis, it is crucial to, in parallel, develop low- or no-power technologies that
 form the building blocks of the routing and interconnection in this thesis, which may be tightly integrated with the qubit
-chip at the bottom of the fridge (see Section~\ref{sec:archdesign} for the argument as to why this must be done at mK). This idea is explored
+chip at the bottom of the fridge (see Section~\ref{sec:archdesign} for the argument as to why this must be done at \si{\milli\kelvin}). This idea is explored
 in Chapters~\ref{sec:arch} and~\ref{sec:hall}. The goal of tighter integration is achieved by three methods. First, utilizing the
 technologies used to make qubits for routing and control, as is done with the reflective switches that enable the prime-lines
-architecture in Section~\ref{sec:primelines}. Second is miniturization of existing components to allow tight integration and
+architecture in Section~\ref{sec:primelines}. Second is miniaturization of existing components to allow tight integration and
 further scaling of existing designs, as is presented in the work miniaturizing circulators in Chapter~\ref{sec:hall}. Finally,
 the utilization of existing technologies, in this case CMOS, for qubit control, is described in Section~\ref{sec:gooseberry}.
 
@@ -80,7 +80,7 @@ designs for high-fidelity qubits. Two ideas are explored. Chapter~\ref{sec:spinq
 qubit. Although this platform has been studied extensively in the past~\cite{RevModPhys.75.1,RevModPhys.79.1217}, scaling
 them to useful sizes requires numerous further improvements in design, control and readout. For example, existing designs
 require complex protocols for initialization~\cite{PhysRevApplied.6.054013} or the placement of many large proximal charge
-sensors~\cite{s41467-019-09194-x}. In this thesis, I tackle these two issues, presenting an tilable design of a spin-qubit
+sensors~\cite{s41467-019-09194-x}. In this thesis, I tackle these two issues, presenting an tileable design of a spin-qubit
 device in GaAs that allows simple initialization of qubits in long chains in Section~\ref{sec:5dot}, and investigate sources
 of noise that limits the performance of dispersive gate sensing, a technique that allows the use of gate electrodes rather
 than bulky proximal charge sensors for readout of qubits, in Section~\ref{sec:pockets}. Although the experiments in this thesis

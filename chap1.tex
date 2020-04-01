@@ -37,7 +37,7 @@ the algorithm scales as $\mathcal{O}(n^2)$. That is, if the length of the list i
 four times as long, so the scaling is \emph{quadratic}.
 
 In this way, we can classify algorithms into various complexity classes. For example, sorting a list
-of $n$ items is, in the best case, $\mathcal{O}(n \log(n))$. Solving the travelling salesman problem (TSP) is
+of $n$ items is, in the best case, $\mathcal{O}(n \log(n))$. Solving the traveling salesman problem (TSP) is
 $\mathcal{O}(n^2 2^n)$. Ideally, we would like to group problems into various complexity classes. For example,
 we can group problems that have at worst a polynomial complexity, i.e. $\mathcal{O}\left(f(n)\right)$ where $f(n)$
 is a polynomial into the complexity class \cc{P} (for polynomial). We will call these problems \textbf{efficiently
@@ -119,7 +119,7 @@ and laid out the Deutsch-Church-Turing hypothesis, which holds to this day:
   \cc{BPP} includes all problems that a classical computer can solve efficiently (including
   everything that can be calculated in polynomial time). \cc{BQP} are all problems a quantum computer can
   solve efficiently (which includes everything a classical computer can do). Finally, problems that scale exponentially
-  with input size, labelled \cc{EXP}, are (almost) all other problems that are computable. The class
+  with input size, labeled \cc{EXP}, are (almost) all other problems that are computable. The class
   \cc{NP} is also included on this figure as it is one that often comes up in the context of complexity,
   if for no other reason than to emphasize that a quantum computer \emph{cannot} solve all problems in
   this class.}
@@ -444,7 +444,7 @@ DiVincenzo, criteria that are widely considered to be the standard checklist for
   \item The ability to perform measurements on individual qubits.
 \end{enumerate}
 Although these criteria set out some requirements for useful qubits, they are certainly not so prescriptive
-that there is a dearth of systems that could fulfil them. It is in this context that ion-trap qubits, photonic qubits,
+that there is a dearth of systems that could fulfill them. It is in this context that ion-trap qubits, photonic qubits,
 NMR based qubits, superconducting qubits and semiconductor-based qubits are being investigated as the base of a quantum computer, each satisfying the
 criteria to varying degrees. I will focus on semiconductor-based qubits for the remainder of this thesis. This type
 of qubit has the potential to utilize the extraordinary processing capabilities of modern semiconductor manufacturing.
@@ -481,7 +481,7 @@ an idea of its "size". The following introduction is based on material taken fro
 \end{figure}
 
 In a crystalline material, such as a metal or a semiconductor lattice, we can think
-about electrons as travelling through a periodic potential, caused by the periodic spacing of nuclei in the lattice, as
+about electrons as traveling through a periodic potential, caused by the periodic spacing of nuclei in the lattice, as
 is shown in Fig.~\ref{fig:blochwaves}~(a) for a 1D lattice. There will be two sets of solutions; one for electrons
 that are bound around nuclei which will form the valence band and one for free electrons which
 will form the conduction band. The gap between these two solutions forms a band gap of size $(E_G)$, a range
@@ -592,7 +592,7 @@ followed by a region of Si $\delta$-doping, used to pin the Fermi level in the s
 a \SI{10}{\nano\meter} GaAs cap to protect against oxidation. During processing, a protective oxide barrier
 (either \ce{HfO2} or \ce{Al2O3}) is grown, followed by surface gates which allow the density of states to be locally modified, or even depleted,
 to define structures in the 2DEG. The oxide layer, apart from serving as a passivation barrier, is also necessary to
-prevent tunnelling of electrons from the surface gates into the donor layer, where the movement of electrons is known to be a significant
+prevent tunneling of electrons from the surface gates into the donor layer, where the movement of electrons is known to be a significant
 source of charge noise \cite{PhysRevB.72.115331, PhysRevApplied.9.034008}.
 
 Having confined electrons into 2-dimensions, we can now redefine several of the parameters that we had above. First, our
@@ -727,16 +727,16 @@ in the system to be much smaller than the charging energy; otherwise, we won't h
 \begin{equation}
   k_B T \ll E_C
 \end{equation}
-Next, we want to ensure that tunnelling occurs at a slow rate relative to the Heisenberg uncertainty relation
+Next, we want to ensure that tunneling occurs at a slow rate relative to the Heisenberg uncertainty relation
 $\Delta E_C \Delta t \geq h/2$. If this condition is not met, dots can hop on and off the dot faster than we could resolve them.
-The tunnelling time is given by $\tau = R_t C$, the time constant of the system. Combining $\tau$ and $E_C$,
+The tunneling time is given by $\tau = R_t C$, the time constant of the system. Combining $\tau$ and $E_C$,
 we derive our second restriction:
 \begin{equation}
   R_t \gg h/e^2
 \end{equation}
 This quantity $h/e^2$ is called the vonKlitzing constant, or the quantum or resistance, and will show up
 throughout this thesis in several contexts; as the resistance of a 1D channel, the resistance of an edge
-state in the quantum Hall and spin quantum Hall effect and the tunnelling rate through coupled Majorana zero modes,
+state in the quantum Hall and spin quantum Hall effect and the tunneling rate through coupled Majorana zero modes,
 and has the value $R_K = \SI{25812.807}{\ohm}$.
 
 From here, we can define the total energy of the quantum dot with $N$ electrons. To do this, we will use a
@@ -757,8 +757,8 @@ the summation of $E_n(B)$. We can also define the electrochemical potential $\mu
     = \left(N - N_0 - \tfrac{1}{2}\right)E_C - \frac{E_C}{|e|}\left(C_SV_S + C_DV_D + C_GV_G\right) + E_{n}(B)
   \label{eqn:onemu}
 \end{multline}
-Note that we've assumed that we are tunnelling into the lowest unoccupied orbital energy level $E_n$. It is a reasonably
-simple modification to Equation~\ref{eqn:onemu} to calculate the chemical potential of tunnelling into an excited orbital
+Note that we've assumed that we are tunneling into the lowest unoccupied orbital energy level $E_n$. It is a reasonably
+simple modification to Equation~\ref{eqn:onemu} to calculate the chemical potential of tunneling into an excited orbital
 state. The most important difference between the chemical potential $\mu$ and the energy $E$ is the linear dependence on gate voltage,
 which allows us to draw a "ladder" of states where the gap between each state is a fixed value:
 \begin{equation}
@@ -807,12 +807,12 @@ and note that this is the method by which we extract electron temperatures in Se
   dot system as $V_{G1}$ and $V_{G2}$ are varied. As each $V_{G1}$ ($V_{G2}$) becomes more positive, more dots are
   pulled onto the left (right) quantum dot. If gate capacitance is non-zero, the lines take on a slope. If inter-dot
   capacitance is non-zero, each stable configuration splits into a hexagonal cell. Note that these drawings do
-  not include the effects of tunnelling between dots.}
+  not include the effects of tunneling between dots.}
 \end{figure}
 
 Before we move onto a discussion of how we might use these to form qubits, I will introduce the double quantum dot,
 where we couple two single dots together. Much like we can consider a single quantum dot an
-artificial atom, so too we can consider two quantum dots that allow tunnelling of electrons between each side as
+artificial atom, so too we can consider two quantum dots that allow tunneling of electrons between each side as
 an artificial molecule. The extension of the single quantum dot picture to a double quantum dot picture occurs by
 adding a tunnel junction between the left and right dots, and adding a gate to control the
 electrochemical potential of the second quantum dot, as shown in Fig.~\ref{fig:dqd} (a).
@@ -823,7 +823,7 @@ shifting the energy and chemical potential of the right dot or vice-versa, leadi
 transitions as electrons are pulled on and off each quantum dot. To characterize the effect of the two gates on a double
 quantum dot, we can plot the ground state occupancy of the quantum dots as each of the gate voltages is swept, in a plot
 called a charge stability diagram. A mock-up of charge stability diagrams are shown in Fig.~\ref{fig:dqd} (c) as both interdot
-capacitance and gate cross-capacitance are turned on and off. The occupancy of the double quantum dots is labelled
+capacitance and gate cross-capacitance are turned on and off. The occupancy of the double quantum dots is labeled
 $(N, M)$ where $N$ represents the occupancy of the left double quantum dot and $M$ represents the occupancy of
 the right double quantum dot.
 
@@ -846,7 +846,7 @@ can also be defined in a similar way:
 \begin{figure}
   \includegraphics[width=0.9\linewidth]{ddenergy}
   \caption[Energy levels and spin in a double quantum dot]
-  {\label{fig:dqdenergy}(a) Effect of varying $R_D$, the tunnelling rate between the two
+  {\label{fig:dqdenergy}(a) Effect of varying $R_D$, the tunneling rate between the two
   dots. At low resistance, the dot effectively reverts to a single quantum dot. As the resistance is increased towards
   $e^2/h$, two separated dots begin to form, although the transition between them is tunnel broadened.
   Finally, if the resistance is much larger than $e^2/h$, there are well defined transitions between left and right
@@ -862,12 +862,12 @@ can also be defined in a similar way:
   which reveal the presence of excited orbital states in the dot, as well as the effects of spin, which blocks transport through the orbital ground state of the dot.}
 \end{figure}
 
-The constant interaction model, however, has limited power to describe the effects of tunnelling between two dots,
+The constant interaction model, however, has limited power to describe the effects of tunneling between two dots,
 as it assumes that the occupancy of each dot is a good quantum number, a situation which will not hold near
-charge degeneracy points, specifically when tunnelling rates between the two dots is significant. If we wish to include a finite tunnel
+charge degeneracy points, specifically when tunneling rates between the two dots is significant. If we wish to include a finite tunnel
 rate, we must move to a Hubbard model that includes the effects of quantum fluctuations, spin and orbital states on each
 dot \cite{PhysRevB.84.115301}. In this model, and indeed in most descriptions of double quantum dots, we
-describe the strength of tunnelling between the two quantum dots as a \textbf{tunnel coupling}. This model allows us to draw a schematic
+describe the strength of tunneling between the two quantum dots as a \textbf{tunnel coupling}. This model allows us to draw a schematic
 of the continuous evolution from a single quantum dot to a double quantum dot as the strength of the inter-dot tunnel coupling
 is increased. For example, in Fig.~\ref{fig:dqdenergy} (a) we see the evolution from the case with large tunnel coupling (~zero tunnel resistance), i.e. a single
 quantum dot in i., to a region of intermediate tunnel coupling in ii., and finally small tunnel coupling, i.e. a wholly separated quantum dot, in iii. In the
@@ -896,7 +896,7 @@ Having defined the tilt axis, we can analyze in detail the inter-dot charge tran
 charge hybridization near the interdot charge transition. At these points, the charge becomes a bad quantum number and electrons become delocalized
 across the two quantum dots, leading to a blurred charge transition [as sketched in Fig~\ref{fig:dqdenergy} (a) ii.]. If we calculate the energy
 of the two charge states along the tilt axis, plotted in Fig.~\ref{fig:dqdenergy} (c), we find that a finite tunnel coupling leads to the
-formation of an avoided crossing (blue), compared to no tunnel coupling (green), which at the centre will have a gap of $2t$. As a function of
+formation of an avoided crossing (blue), compared to no tunnel coupling (green), which at the center will have a gap of $2t$. As a function of
 tilt, we find the difference in the gap between the two states is:
 \begin{equation}
   \Omega(\epsilon) = \sqrt{\varepsilon^2 + (2 t)^2}
@@ -960,7 +960,7 @@ change state around zero tilt, a qubit in the triplet state will not transition 
 until we can populate an excited orbital mode off to the right. This effect is visible in the current through a double
 quantum dot, which will undergo a rectification due to this spin blockade, as shown in Fig~\ref{fig:dqdenergy} (e).
 Here, we find two finite bias triangles, which are the double quantum dot equivalent of Coulomb diamonds \cite{PhysRevB.72.165308}.
-Charge transport through the quantum dots proceeds via a sequence of electron tunnelling events. In the forward direction
+Charge transport through the quantum dots proceeds via a sequence of electron tunneling events. In the forward direction
 these would be: $(2, 1) \rightarrow (2, 0) \rightarrow (1, 1) \rightarrow (2, 1)$, a sequence that transfers a single electron
 from the left to the right reservoir. Note that near zero tilt, only a singlet state may be loaded into the left dot
 in the $(1, 1) \rightarrow (2, 1)$ transition; however, since we have an effectively infinite source of electrons in the
@@ -1036,8 +1036,8 @@ of the ohmic contact.
 
 The design of gate structures that can confine electrons into quantum dots is an area of continued and fruitful research (see for
 example Section~\ref{sec:5dot} of this thesis), however a common and well-tested pattern for a double quantum dot is shown in Fig.~\ref{fig:dd_design} (a).
-Gates are designed to correspond to the various parameters we described in Section~\ref{sec:qd}; with the gates labelled LW (left wall)
-and RW (right wall) controlling the tunnel rates from the reservoirs to the dots, the gate labelled C (centre) controlling the tunnel coupling
+Gates are designed to correspond to the various parameters we described in Section~\ref{sec:qd}; with the gates labeled LW (left wall)
+and RW (right wall) controlling the tunnel rates from the reservoirs to the dots, the gate labeled C (center) controlling the tunnel coupling
 $t_c$, and LP (left plunger) and RP (right plunger) controlling the chemical potential of the left dot ($\mu_1$) and right dot ($\mu_2$) respectively.
 The N (nose) gate acts as a global control, and a charge sensor (discussed in Section~\ref{sec:readout}) which in this case is a third quantum dot formed
 against the left wall is placed to the left of the device. The location of ohmic contacts is marked by crosses and allows us to measure current both
@@ -1182,18 +1182,18 @@ improved materials growth, which is expected to further extend qubit coherence t
 \begin{figure}
   \includegraphics[width=0.95\linewidth]{eo}
   \caption[Energy levels and eigenstates of an Exchange-Only qubit]
-  {\label{fig:eo}(a) Schematic of a triple quantum dot, with tunable tunnel couplings between the left and centre quantum dots, and the
-  right and centre quantum dots. (b) Charge stability diagram for a triple quantum dot when sweeping the $V_{G1}$ and $V_{G3}$ around the
+  {\label{fig:eo}(a) Schematic of a triple quantum dot, with tunable tunnel couplings between the left and center quantum dots, and the
+  right and center quantum dots. (b) Charge stability diagram for a triple quantum dot when sweeping the $V_{G1}$ and $V_{G3}$ around the
   $(1,1,1)$ charge configuration. The tilt axis is marked in red and sweeps from the $(2,0,1) \rightarrow (1,1,1) \rightarrow (1,0,2)$
   charge configurations. (c) Energy levels of the exchange-only qubit. Quadruplet states or excited doublet states are not shown. The Exchange energies
-  between the left (right) and centre dots are swept as a function of tilt. The energy eigenstates change between $\ket{S/T_l}$ and $ket{S/T_r}$
+  between the left (right) and center dots are swept as a function of tilt. The energy eigenstates change between $\ket{S/T_l}$ and $ket{S/T_r}$
   at the extremes of tilt. (d) Bloch state representation of the exchange-only qubit. The exchange interaction drives rotation around two
   axes of the Bloch sphere separated by \SI{120}{\degree}.}
 \end{figure}
 
 While the singlet-triplet qubit described in the above section allows us to control our qubits with only fast pulses, they still require
 a spatially varying magnetic field for full two-axis control. The use of three electrons distributed through three quantum dots allows
-for fully electrical control of a spin qubit using only exchange interactions between the left and centre, and right and centre quantum
+for fully electrical control of a spin qubit using only exchange interactions between the left and center, and right and center quantum
 dots \cite{10.1038-35042541}, as shown in Fig~\ref{fig:eo} (a) and (b). In this case, the system has a total of eight possible spin states. These
 are one set of quadruplet states with total spin $S^2 = 3/2$ and spin projections $S_Z = \{-3/2, -1/2, +1/2, +3/2\}$, and two sets of doublet
 states corresponding to a singlet or triplet in the left (right) dot, and a third spin on the right (left) dot. The choice of placing the singlet/triplet
@@ -1394,7 +1394,7 @@ The probability of finding the election at the endpoint is, therefore:
 \begin{equation}
   P(\textrm{end}) = \left|\Psi_{\textrm{start}\rightarrow\textrm{end}}\right|^2 = \sum_j t_j^2 + \sum_{j \neq k} t_jt_k \cos(\varphi_j - \varphi_k)
 \end{equation}
-where the first term gives the probability of the electron travelling along a given path $j$, and the second term gives the
+where the first term gives the probability of the electron traveling along a given path $j$, and the second term gives the
 interference between each pair of paths through the lattice. Since the phases accumulated along each path are effectively random,
 this second term will average to zero, and the total forward probability is given by:
 \begin{equation}
@@ -1493,7 +1493,7 @@ We note that the Hamiltonian is translationally invariant in the $y$-direction a
 \end{equation}
 where we've substituted $\omega_c$ from Equation~\ref{eq:cycl} and $x_0 = \tfrac{p_x}{eB}$.
 
-This Hamiltonian corresponds to that of a harmonic oscillator centred at $x_0$ with energy levels
+This Hamiltonian corresponds to that of a harmonic oscillator centered at $x_0$ with energy levels
 \begin{equation}
   E_n = \hbar \omega_c\left(n + \frac{1}{2}\right)
 \end{equation}
@@ -1615,7 +1615,7 @@ Within a solid, we've thus far assumed that the spin or an electron is independe
 a tangential mention in Sec.~\ref{sec:dotqubits}, where we discussed its usefulness in controlling spins in semiconductors. Up to this point, we've captured
 the effects of the band structure of a semiconductor in the effective electron mass $m^*$. In reality, the band structure of a semiconductor is shaped
 in a complex way by the motion of electrons through the electric field created by atoms in the lattice of a crystal. This can cause both directional
-and spin-dependant modulation of the band structure. For this thesis, I will not aim to give a general description of
+and spin-dependent modulation of the band structure. For this thesis, I will not aim to give a general description of
 the the spin-orbit interaction, which contributes to a whole host of effects such as the fine structure of Hydrogen and the heavy/light hole structure of GaAs,
 but rather give an intuitive understanding of its origins in the conduction band of a semiconductor. Hence, the terms that
 I introduce here should not be considered to apply generally, but rather is specific to conduction band electrons in direct band-gap semiconductors.
@@ -1693,7 +1693,7 @@ the genus $g$ of the object:
   \frac{1}{2\pi}\int_S K \mathrm{d}A = 2(1-g)
 \end{equation}
 We use a generalization of this theorem, called the Chern-Simons theorem, which allows us to map this theorem onto a band structure. We can define an
-equivalent to "curvature" along the surface of bands in a solid, termed the Berry's phase. This is the phase that a particle travelling around
+equivalent to "curvature" along the surface of bands in a solid, termed the Berry's phase. This is the phase that a particle traveling around
 a path on the surface of a band acquires. The integral of the Berry's phase over momentum space leads to an integral quantity known as the Chern number
 $n$, which is an integer and characterizes the topology of the material \cite{conmatphys-011417}. In the integer quantum Hall effect, the number $n$ is the same as the filling factor $\nu$, and gives us a topological explanation for the emergence of quantized edge states. As we transition from within
 the material, with Chern number $n$, to free space, with Chern number $0$, there must be a twisting of the band structure near the edge that leads to the emergence of conductive edges. However, for the quantum Hall state, a large magnetic field is required to define the Berry's phase and hence the Chern number of the material.

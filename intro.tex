@@ -5,12 +5,12 @@ theory of reality that has been discovered so far. It was Richard Feynman who th
 seminal 1981 keynote \cite{Feynman1982} that with quantum physics we could build a quantum simulator ---
 a machine that would be able to solve a class of problem that we couldn't solve with a
 classical computer (an idea we will expand on in Section~\ref{sec:qc}). Since he delivered this keynote, the
-field of quantum computing has exploded. First came theoretical demonstrations of algorithms
+field of quantum computing has exploded. First came theoretical descriptions of algorithms
 with a quantum speedup: Deutsch's Algorithm in 1992 \cite{Deutsch} and Shor's Algorithm in 1994 \cite{Shor}.
 Despite these advances, many suspected that it was only a matter of time before a "no-go" result would
 be found; a result that would say that quantum computers could not scale, or that errors in a quantum system would be uncorrectable.
 However, with the formulation of the quantum fault-tolerance theorem \cite{1996quant.ph.11025A,doi:10.1098/rspa.1998.0167}, which
-showed that for a small error rate it is possible to correct errors faster than they occur, the last
+showed that for a sufficiently small error rate it is possible to correct errors faster than they occur, the last
 reasonable objection to quantum computing was overcome (my favourite reference as to why this seems true
 is in Chapter 14 of Scott Aaronson's book \cite{Aaronson:skepticism}). Since then, a plethora of physical
 systems have emerged that seem like contenders for building a quantum computer, such as trapped
@@ -19,88 +19,83 @@ semiconductors~\cite{RevModPhys.79.1217}, excitations in superconductors~\cite{W
 single photons~\cite{OBrien1567}, or a large number of other systems that are too numerous to list here.
 Each of them aims to realize a qubit, the quantum equivalent of a bit, which rather than being described
 as a single number taking the value of 0 or 1, is represented by a two-dimensional vector that evolves under the rules
-of quantum physics. Today, many of these qubits are being realized in larger and larger numbers with error rates
-that are butting up against the fault-tolerance threshold, raising the specter of large quantum computers
-in the near future.
+of quantum physics, an idea I expand upon in Section~\ref{sec:qubit}. Today, many of these qubits are being
+realized in larger and larger numbers with error rates that are butting up against the fault-tolerance threshold,
+raising the specter of large quantum computers in the near future.
+
+With such a large number of physical systems to choose from, and with significant differences in the experimental
+apparatus necessary to form and control them, I make the choice to limit the discussion in my thesis to semiconductor and superconductor
+based qubit systems. This class of qubit still encompasses a significant portion of the above systems, however, these systems
+have the advantage of sharing a number of features which will allow us to reason about the design of a large-scale quantum machine,
+despite the fact that a truly scaleable quantum chip is not yet a reality. Namely, these each have all electrical control and
+readout with bandwidths up to a few \si{\giga\hertz}, and must all be cooled to temperatures of a few mK in order to protect the delicate
+quantum information stored within them from thermal excitation, and for superconducting and topological variants, to form a superconducting
+state. In particular, the requirement to cool these systems introduces limitations in the power that may be dissipated proximally to the quantum device,
+with only a few micro-Watt's of cooling power available when cooling devices to \si{\milli\kelvin} in a cryostat. With this in mind,
+the design of a quantum computer must balance power, interconnection and latency between the different stages to fit within the noise,
+space and power constraints of the system.
 
 The rapid progress made in the field, while no doubt exciting, also highlights the difficulty I have in
 preparing this thesis. Between when I started my Ph.D. in 2014 and now, the community underwent a seismic
 shift in ambition, moving from trying to work on one or few-qubit systems \cite{iarpa_mqco} to trying
 to implement useful machines with hundreds of qubits \cite{Monroe440}, with a concomitant increase in
-funding. Industrial players have also
-entered the ring trying to build viable commercial quantum machines, including IBM, Intel, Google, Rigetti,
-DWave and Microsoft. Over the same period, our lab grew from one with a single dilution refrigerator (DR) and
-four other Ph.D. students to one with 7 DRs, 2 cryostats, close to 50 people and substantial backing
-from industry (Microsoft). It is in that context that this thesis is written. All the topics presented have the
-same aim: to build a useful quantum computer, but experiments span from exploring low-level materials challenges,
-to designing individual qubits, to scalable instrumentation design, and finally to architecture
+funding. Industrial players have also entered the ring trying to build viable commercial quantum machines,
+including IBM, Intel, Google, Rigetti, DWave and Microsoft. Over the same period, our lab grew from one with a
+single dilution refrigerator (DR) and four other Ph.D. students to one with 7 DRs, 2 cryostats, close to 50 people
+and substantial backing from industry (Microsoft). It is in that context that this thesis is written. All the topics
+presented have the same aim: to build a useful quantum computer; but experiments span from exploring low-level materials
+challenges, to designing individual qubits, to scalable instrumentation design, and finally to architecture
 designs for building large scale quantum machines.
 
-I have grouped results into these five broad sections, each of which presents several papers dealing
+I have grouped results into five broad chapters, each of which presents several papers dealing
 with these results, intending to create a coherent storyline around my work, starting from the top
-level architecture and working my way down to materials science. The structure of this thesis then is as follows:
+level architecture in Chapter~\ref{sec:arch} and working my way down to materials science in Chapter~\ref{sec:majoinas}.
+A brief description of the structure of this thesis is as follows.
 
-\medskip
-\noindent\textbf{\hyperref[sec:quest]{Chapter 1 - The Quest for a Quantum Computer}}
+In order to discuss how different architecture designs for a quantum computer vary, the topic of Chapter~\ref{sec:arch},
+we must first devise a system for comparing them
+based on common features of their design. Existing techniques for comparing designs, based on those used in classical computing
+such as Rent's rule~\cite{5388820}, have recently been adapted for their quantum counterparts~\cite{FRANKE20191}, however are
+not sufficiently descriptive for describing or contrasting the different architectures that have been proposed. I will therefore begin, in
+Section~\ref{sec:archdesign}, by defining a new quantum-specific framework for discussing architectures used for quantum computers,
+using the three criteria (power, interconnection and latency) highlighted above. Following this, I present two new architectures,
+the prime lines architecture in Section~\ref{sec:primelines} which routes signals generated at room temperature between many qubits,
+and a CryoCMOS architecture which is able to generate pulses at mK. Each of these significantly reduces the number of interconnects necessary between
+room temperature and mK, allowing the number of qubits controlled by finite resources to be increased dramatically. Such approaches,
+while previously proposed in various theoretical forms~\cite{10.1038/npjqi.2015.11,s41467-017-01905-6}, are realized for the first
+time in Section~\ref{sec:gooseberry}.
 
-\noindent
-Chapter 1 provides a brief introduction to the key concepts and background that is required to understand
-the experiments that are presented in this thesis. We will start off by motivating the quest to build a quantum
-computer and explore the theory that underlies the experiments. We will then look at building qubits,
-the fundamental building block of a quantum computer in various semiconductor systems, as well as taking a
-deeper dive into the materials systems that allows them to work. This includes a description of the band structure
-of III-V semiconductors, the 2-dimensional electron gas, scattering, and the spin-orbit interaction. We discuss
-the quantum Hall effect and the anomalous quantum Hall effect, and talk about how each element is brought together
-to form Majorana zero modes in superconductor/semiconductor hybrids.
+To enable the architectures proposed in this thesis, it is crucial to, in parallel, develop low- or no-power technologies that
+form the building blocks of the routing and interconnection in this thesis, which may be tightly integrated with the qubit
+chip at the bottom of the fridge (see Section~\ref{sec:archdesign} for the argument as to why this must be done at mK). This idea is explored
+in Chapters~\ref{sec:arch} and~\ref{sec:hall}. The goal of tighter integration is achieved by three methods. First, utilizing the
+technologies used to make qubits for routing and control, as is done with the reflective switches that enable the prime-lines
+architecture in Section~\ref{sec:primelines}. Second is miniturization of existing components to allow tight integration and
+further scaling of existing designs, as is presented in the work miniaturizing circulators in Chapter~\ref{sec:hall}. Finally,
+the utilization of existing technologies, in this case CMOS, for qubit control, is described in Section~\ref{sec:gooseberry}.
 
-\newpage
-\noindent\textbf{\hyperref[sec:arch]{Chapter 2 - Architecture of a Quantum Computer}}
+All the above discussion hinges on the demonstration of high-fidelity qubits, without which quantum computing will remain just
+a hypothetical idea. With that in mind, the final two chapters of this thesis deal with the development of scalable
+designs for high-fidelity qubits. Two ideas are explored. Chapter~\ref{sec:spinqubit} studies a well-established qubit platform: the spin
+qubit. Although this platform has been studied extensively in the past~\cite{RevModPhys.75.1,RevModPhys.79.1217}, scaling
+them to useful sizes requires numerous further improvements in design, control and readout. For example, existing designs
+require complex protocols for initialization~\cite{PhysRevApplied.6.054013} or the placement of many large proximal charge
+sensors~\cite{s41467-019-09194-x}. In this thesis, I tackle these two issues, presenting an tilable design of a spin-qubit
+device in GaAs that allows simple initialization of qubits in long chains in Section~\ref{sec:5dot}, and investigate sources
+of noise that limits the performance of dispersive gate sensing, a technique that allows the use of gate electrodes rather
+than bulky proximal charge sensors for readout of qubits, in Section~\ref{sec:pockets}. Although the experiments in this thesis
+focus on devices in a \ce{GaAs}/\ce{(Al,Ga)As} heterostructure, many of the issues and solutions raised have applicability to any
+dispersive readout or quantum dot system.
 
-\noindent
-Chapter 2 explores how the various elements described throughout this thesis might be combined to form
-a large-scale quantum computer. Firstly, the aims for the field of quantum computing in the short- and medium-term are
-enumerated. A general framework for discussing architecture is presented, and, briefly, the problems surrounding control
-and readout are elucidated. Following this, two architectures are presented that solve various aspects of the control
-and readout challenge. First, in Section~\ref{sec:primelines}, the prime-lines architecture explores how high bandwidth
-wiring requirements for control may be reduced. Second, in Section~\ref{sec:gooseberry}, a CryoCMOS architecture for fast
-pulsing and control is described.
-
-\medskip
-\noindent\textbf{\hyperref[sec:hall]{Chapter 3 - Quantum (Anomalous) Hall Effect Circulators}}
-
-\noindent
-Chapter 3 describes the use of edge magnetoplasmons in the quantum Hall effect and the quantum anomalous Hall effect
-for passive signal routing in quantum experiments. First, we discuss the challenge of isolation and signal routing
-for quantum computing applications. Second, in Section~\ref{sec:hallcirc}, we explore the microwave properties of a
-Hall droplet in \ce{GaAs}/\ce{(Al,Ga)As} in a magnetic field coupled to a transmission line, and then use these chiral
-excitations to form a circulator. Finally, in Section~\ref{sec:spinhallcirc}, we investigate a circulator built in a topological
-insulator (TI) \ce{Cr-(Bi,Sb)_2Te3}, which allows magnetic-field free operation. Dissipation mechanisms in this 3D-TI
-are explored.
-
-\medskip
-\noindent\textbf{\hyperref[sec:spinqubit]{Chapter 4 - Spin Qubits and Readout}}
-
-\noindent
-Chapter 4 describes experiments on spin qubits formed in a \ce{GaAs}/\ce{(Al,Ga)As} heterostructure. By this point, we've moved
-on from high-level architecture and component development to qubit development, and although these experiments focus on
-spin qubits, many of the issues and solutions raised have applicability to any dispersive readout or quantum dot system.
-First, in Section~\ref{sec:5dot}, we scrutinize a scalable device design for coupled singlet-triplet qubits. Using an
-extended quantum dot, we create an architecture that allows coupling over intermediate distances and addresses the challenges
-of loading large arrays of quantum dots. Second, in Section~\ref{sec:pockets}, we probe anomalous sensing signals when
-using dispersive gate sensing to read out a quantum dot. We associate these signals with the disordered potential landscape
-of the 2DEG and explore the properties of these signals. These charge pockets are hypothesized to be a source of unexplained
-charge noise in qubit devices.
-
-\newpage
-\noindent\textbf{\hyperref[sec:majoinas]{Chapter 5 - Majoranas and InAs}}
-
-\noindent
 Finally, in Chapter 5, we survey the nascent field of forming Majorana zero modes to use as topologically protected qubits. While
 such a topologically protected qubit has not yet been demonstrated, if they are realized they may have lifetimes that far exceed those of
-any other qubit technology. While promising, the prerequisites for forming Majorana zero modes in semiconductor/superconductor hybrid structures:
-a large spin-orbit interaction, large Land\'e g-factor, high mobility, and a close, transparent interface to a superconductor, means that extensive
-materials and process development must be performed before they are realized. Furthermore, existing techniques for readout and control of semiconductor
+any other qubit technology~\cite{s41578-018-0003-1}. While promising, the prerequisites for forming Majorana zero modes in semiconductor/superconductor
+hybrid structures: a large spin-orbit interaction, large Land\'e g-factor, high mobility, and a close, transparent interface to a superconductor, means that
+extensive materials and process development must be performed before they are realized. Furthermore, existing techniques for readout and control of semiconductor
 qubits must be adapted to this new architecture. In Section~\ref{sec:inas_hb}, we investigate methods for repairing the damage done to the surface of shallow
 2DEGs in InAs after processing, either using TMA to remove the dirty native oxide or an ArH plasma to passivate charged surface states, and characterize
-the quality of these materials after treatment. Finally, in Section~\ref{sec:rfmajo}, we evaluate techniques for charge sensing of Majorana zero modes formed
+the quality of these materials after treatment. Then, in Section~\ref{sec:rfmajo}, we evaluate techniques for charge sensing of Majorana zero modes formed
 in proximitized InAs nanowires.
+
+Before delving into new results, let's start off with a brief review of the key concepts in quantum computing and materials science necessary
+to understand the results that follow and the context in which this research is performed.

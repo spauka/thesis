@@ -407,13 +407,12 @@
 % holds the copyright.  This commands adds the copyright symbol to the
 % beginning, and puts the standard permission notice below.
 %% ``All rights reserved'' added.  Krishna Sethuraman (1990)
-\def\copyrightnotice#1{\copyrightnoticetext{\copyright\ #1.  All rights
-reserved.\par\permission}}
+\def\copyrightnotice#1{\copyrightnoticetext{\copyright\ #1.\par\permission}}
 
 % Occacionally you will need to exactly specify the text of the
 % copyright notice.  The \copyrightnoticetext command is then useful.
 \long\def\copyrightnoticetext#1{\gdef\@copyrightnotice{#1}}
-\def\@copyrightnotice{\copyright\ \Mit\ \@degreeyear.  All rights reserved.}
+\def\@copyrightnotice{\copyright\ \Mit\ \@degreeyear.}
 
 %% `vi' documentclass option: Specifying this option automatically
 %% copyrights the thesis to the author and gives MIT permission to copy and
@@ -422,7 +421,7 @@ reserved.\par\permission}}
 %% \copyrightnoticetext{stuff} to specify the exact text of the copyright
 %% notice.
 \ifodd\vithesis \copyrightnoticetext{\copyright\ \@author,
-\uppercase\expandafter{\romannumeral\@degreeyear}.  All rights reserved.\par\permission}
+\uppercase\expandafter{\romannumeral\@degreeyear}.\par\permission}
 %% or just
 %%\@degreeyear}}
 \else \typeout{Thesis document copyright MIT unless otherwise (manually) specified}
@@ -467,7 +466,7 @@ at\par
 \par
 \@prevdegrees
 \vskip 6\baselineskip
-\choosecase{A thesis submitted in partial fulfillment of} \\
+\choosecase{A thesis submitted in fulfillment of} \\
 \choosecase{the requirements for the}
 \choosecase{\@degreeword}
 \choosecase{of}
@@ -507,7 +506,7 @@ by \\
 \par
 \def\baselinestretch{1}\@normalsize
 Submitted to the \@department \\
-on \@thesisdate, in partial fulfillment of the \\
+on \@thesisdate, in fulfillment of the \\
 requirements for the \@degreeword\ of \\
 \@degree
 \end{center}
